@@ -1,0 +1,2 @@
+<h1 style="text-align:center">SGHD-VES</h1>
+Esta aplicación se encargará de Gestionar los horarios registrará a profesores como aulas, mostrará si el profesor se encuentra activo o inactivo al igual que el aula para sus respectivas asignaciones para el Horario, Imprimir un reporte completo de todos los profesores asignados en horarios con sus respectivas carreras, tendrá módulo de seguridad, con preguntas de seguridad y bitácora de acceso al Software.
