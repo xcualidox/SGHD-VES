@@ -18,7 +18,7 @@
                 <a href="#nosotros" class="hover:text-gray-400 transition-colors duration-300">Nosotros</a>
                 <a href="#footer" class="hover:text-gray-400 transition-colors duration-300">Contacto</a>
             </nav> 
-            <div class="ml-auto h-fit flex items-center gap-2 group hover:cursor-pointer text-lg">
+            <div class="ml-auto h-fit flex items-center gap-2 group hover:cursor-pointer text-lg" id="openLogin">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="group-hover:fill-gray-400 fill-black transition-colors duration-300" ><path d="m13 16 5-4-5-4v3H4v2h9z"></path><path d="M20 3h-9c-1.103 0-2 .897-2 2v4h2V5h9v14h-9v-4H9v4c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2z"></path></svg>
                 <span class="group-hover:text-gray-400 transition-colors duration-300">Acceder</span>
             </div>
@@ -26,6 +26,26 @@
         </div>
     </header>
     <main class="flex flex-col flex-1">
+        <!-- Login Section -->
+        <section id="loginModal" class="fixed left-0 top-0 bg-black w-screen h-screen z-50 bg-opacity-50  items-center justify-center opacity-0 hidden transition-opacity duration-500 ">
+            <form action="#" id="loginForm" method="post" class="p-6 bg-slate-50 max-w-[27rem] w-full rounded shadow-lg space-y-6 relative" autocomplete="off">
+                <svg id="closeLogin" aria-labelledby="close login" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" stroke-width="1.5"  class="w-6 h-6 absolute right-6 stroke-black hover:cursor-pointer hover:stroke-red-600 transition-colors duration-300 " >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                  </svg>
+                  
+                <h2 class="text-2xl font-bold text-gray-900">Iniciar sesión</h2>
+                <div>
+                    <label for="username" class="block font-medium mb-2 text-lg text-gray-900">Usuario</label>
+                    <input type="text" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="Cedúla de Identidad">
+                </div>
+                <div>
+                    <label for="password" class="block font-medium mb-2 text-lg text-gray-900">Contraseña</label>
+                    <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="••••••••••••••">
+                </div>
+                <a href="#" class="font-medium text-lg text-blue-500 hover:text-blue-800 transition-colors duration-300 w-full text-center block">¿Olvido su contraseña?</a>
+                <button class="w-full text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center focus:ring-4 focus:outline-none focus:ring-blue-300 transition-colors duration-300">Acceder</button>
+            </form>
+        </section>
         <!-- Slider section -->
         <section class=" w-full relative  
         overflow-hidden">
