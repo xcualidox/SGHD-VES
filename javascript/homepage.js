@@ -42,6 +42,7 @@ function showLogin()
     setTimeout(()=>
     {
         loginModal.classList.add("opacity-100");
+        loginModal.classList.remove("opacity-0");
     },50);
 
 }
@@ -54,9 +55,72 @@ function hideLogin()
     {
         loginModal.classList.remove("flex");
         loginModal.classList.add("hidden");
+        if (pwRecoveryForm.classList.contains("flex"))
+        {
+            // Hide and reset recovery form
+            pwRecoveryForm.classList.add("hidden");
+            pwRecoveryForm.classList.remove("flex");
+            pwRecoveryForm.querySelectorAll("div:not(.hidden)").forEach(element => 
+            {
+                element.classList.add("hidden");
+            });
+            securityQuestions.forEach(element =>
+                {
+                    element.innerHTML = "";
+                }
+            );
+            let recoveryUsername = document.getElementById("usernameRecovery");
+            let usernameParent = recoveryUsername.parentElement;
+            usernameParent.classList.remove("hidden");
+            loginForm.classList.remove("hidden");
+        }
+        else if (firstLoginForm.classList.contains("flex"))
+        {
+            // Hide and reset first login form
+            firstLoginForm.classList.add("hidden");
+            firstLoginForm.classList.remove("flex");
+            firstLoginForm.querySelectorAll("div:not(.hidden)").forEach(element => 
+            {
+                element.classList.add("hidden");
+            });
+            // Enable diabled options from first login form 
+            document.querySelectorAll("[data-security-q-option]").forEach(option =>
+                {
+                    option.disabled = false;
+                }
+            );
+            loginForm.classList.remove("hidden");
+
+        }
+        loginForm.reset();
+        pwRecoveryForm.reset();
+        firstLoginForm.reset();
     },500);
 
 }
+function hideOpMsg(){
+    let okMsg = document.getElementById("opOkMsg");
+    let errorMsg = document.getElementById("opErrorMsg");
+    if(okMsg)
+    {
+        setTimeout(()=>
+        {
+            okMsg.classList.add("hidden");
+            history.pushState({}, "", window.location.href.split("?")[0]);
+        }, 2000);
+    }
+    else if(errorMsg)
+    {
+        setTimeout(()=>
+        {
+            errorMsg.classList.add("hidden");
+            history.pushState({}, "", window.location.href.split("?")[0]);
+           
+
+        }, 2000);
+    }
+}
+hideOpMsg();
 btnSliderRight.addEventListener("click",()=>
 {
     sliderMoveRight();
@@ -82,6 +146,14 @@ loginModal.addEventListener("click", ()=>
     hideLogin();
 });
 loginForm.addEventListener("click", e=>
+{
+    e.stopImmediatePropagation();
+});
+pwRecoveryForm.addEventListener("click", e=>
+{
+    e.stopImmediatePropagation();
+});
+firstLoginForm.addEventListener("click", e=>
 {
     e.stopImmediatePropagation();
 });

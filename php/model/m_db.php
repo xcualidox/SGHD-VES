@@ -7,7 +7,7 @@ class database_connect{
     private $dbName;
     private $password;
     // Constructor de la clase
-    private function __construct()
+    protected function __construct()
     {
         $this->connection = "";
         $this->dsn = "";
@@ -19,8 +19,8 @@ class database_connect{
     // Genera la Conexión con la base de datos
     protected function connect(){
         $this->host="localhost";
-        $this->dbName="sghd-ves";
-        $this->user = "";
+        $this->dbName="db_test";
+        $this->user = "root";
         $this->password = "";
         try {
         $this->dsn = "mysql:host =$this->host;dbname=$this->dbName;charset=utf8";

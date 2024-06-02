@@ -6,8 +6,8 @@
     <title>SGHD-VES</title>
     <link rel="stylesheet" href="styles/main.css">
 </head>
-<body class="  h-screen bg-slate-50">
-    <header class="w-full shadow-2xl ">
+<body class="  h-screen bg-slate-50 relative">
+    <header class="w-full shadow-2xl z-0">
         <div class="container grid grid-cols-3 justify-center mx-auto w-full items-center">
             <div class="flex items-center max-h-32 mr-auto">
                 <img src="images/LogoBordeWhite.png" class="max-h-32" alt="logo">
@@ -25,10 +25,32 @@
 
         </div>
     </header>
+    <?php if (isset($_GET["result"]) && $_GET["result"] == "ok"):?>
+    <div id="opOkMsg" class="z-100   shadow-lg absolute top-0 w-[50%] left-1/2 -translate-x-1/2 p-6 bg-teal-100 rounded-b text-teal-900 px-4 py-3 border-t-4 border-teal-500">
+        <div class="flex">
+            <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+            <div>
+              <p class="font-bold">Operación exitosa</p>
+              <p class="text-sm">Su contraseña fue actualizada</p>
+            </div>
+          </div>
+    </div>
+    <?php elseif (isset($_GET["result"]) && $_GET["result"] == "error"): ?>
+    <div id="opErrorMsg" class="z-100  shadow-lg absolute top-0 w-[50%] left-1/2 -translate-x-1/2 p-6 bg-red-100 rounded-b text-red-900 px-4 py-3 border-t-4 border-red-500">
+        <div class="flex">
+            <div class="py-1"><svg class="fill-current h-6 w-6 text-red-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+            <div>
+              <p class="font-bold">Operación fallida</p>
+              <p class="text-sm">Hubo un error al momento de realizar la operación</p>
+            </div>
+          </div>
+    </div>
+    <?php endif;?>
     <main class="flex flex-col flex-1">
         <!-- Login Section -->
         <section id="loginModal" class="fixed left-0 top-0 bg-black w-screen h-screen z-50 bg-opacity-50  items-center justify-center opacity-0 hidden transition-opacity duration-500 ">
-            <form action="#" id="loginForm" method="post" class="p-6 bg-slate-50 max-w-[27rem] w-full rounded shadow-lg space-y-6 relative" autocomplete="off">
+            <form action="php/controller/c_login.php" id="loginForm" method="post" class="p-6 bg-slate-50 max-w-[27rem] w-full rounded shadow-lg space-y-6 relative  " autocomplete="off">
+                <span class="animate-exit"></span>
                 <svg id="closeLogin" aria-labelledby="close login" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" stroke-width="1.5"  class="w-6 h-6 absolute right-6 stroke-black hover:cursor-pointer hover:stroke-red-600 transition-colors duration-300 " >
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                   </svg>
@@ -36,19 +58,94 @@
                 <h2 class="text-2xl font-bold text-gray-900">Iniciar sesión</h2>
                 <div>
                     <label for="username" class="block font-medium mb-2 text-lg text-gray-900">Usuario</label>
-                    <input type="text" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="Cedúla de Identidad">
+                    <input type="text" data-numeric-input data-username name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="Cedúla de Identidad">
                 </div>
                 <div>
                     <label for="password" class="block font-medium mb-2 text-lg text-gray-900">Contraseña</label>
-                    <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="••••••••••••••">
+                    <input maxlength="36" type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="••••••••••••••">
                 </div>
-                <a href="#" class="font-medium text-lg text-blue-500 hover:text-blue-800 transition-colors duration-300 w-full text-center block">¿Olvido su contraseña?</a>
-                <button class="w-full text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center focus:ring-4 focus:outline-none focus:ring-blue-300 transition-colors duration-300">Acceder</button>
+                <input type="hidden" name="op" id="opLogin">
+                <div class="items-center gap-2 text-red-800 hidden" id="errorMsg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                      </svg>
+                      <span data-msg></span>
+                </div>
+                <a  class="font-medium text-lg cursor-pointer text-blue-500 hover:text-blue-800 transition-colors duration-300 w-full text-center block" id="forgotPwTrigger">¿Olvido su contraseña?</a>
+                <button id="loginBtn" class="w-full text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center focus:ring-4 focus:outline-none focus:ring-blue-300 transition-colors duration-300">Acceder</button>
             </form>
+            <!-- Password recovery form -->
+            <form action="php/controller/c_login.php" method="post" id="pwRecoveryForm" class="p-6 bg-slate-50 max-w-[27rem]  w-full rounded shadow-lg hidden flex-col gap-6 relative " autocomplete="off">
+                <span class="animate-entranceCenter"></span>
+                <span class="animate-entrance"></span>
+                <svg id="closeLoginRecovery" aria-labelledby="close login" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" stroke-width="1.5"  class="w-6 h-6 absolute right-6 stroke-black hover:cursor-pointer hover:stroke-red-600 transition-colors duration-300 " >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                  </svg>
+                  <h2 class="text-2xl font-bold text-gray-900" id="recoveryFormTitle"></h2>
+                <!-- Username look up -->
+                <div>
+                    <label for="username" class="block font-medium mb-2 text-lg text-gray-900">Usuario</label>
+                    <input type="text" data-username name="username" id="usernameRecovery" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="Cedúla de Identidad" data-numeric-input>
+                </div>
+                <!-- Security questions -->
+                <div class="hidden">
+                    <label for="security_a_1" class="block font-medium mb-2 text-lg text-gray-900" data-security-question></label>
+                    <input maxlength="36" type="text" name="security_a_1"  class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="Respuesta de seguridad" data-text-input>
+                </div>
+                <div class="hidden">
+                    <label for="security_a_2" class="block font-medium mb-2 text-lg text-gray-900" data-security-question></label>
+                    <input maxlength="36" type="text" name="security_a_2"  class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="Respuesta de seguridad" data-text-input>
+                </div>
+                <div class="hidden">
+                    <label for="security_a_3" class="block font-medium mb-2 text-lg text-gray-900" data-security-question></label>
+                    <input maxlength="36" type="text" name="security_a_3"  class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="Respuesta de seguridad" data-text-input>
+                </div>
+                <!-- Change password -->
+                <div class="hidden">
+                    <label for="newPw" class="block font-medium mb-2 text-lg text-gray-900">Ingrese su nueva contraseña</label>
+                    <input maxlength="36" type="password" id="newPw" name="newPw"  class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="••••••••••••••">
+                </div>
+                <!-- password strength -->
+                <?php
+                include("php/view/components/pw_strength.php");
+                ?>
+                <div class="hidden">
+                    <label for="newPwConfirm" class="block font-medium mb-2 text-lg text-gray-900">Confirme su nueva contraseña</label>
+                    <input maxlength="36" type="password" id="newPwConfirm" name="newPwConfirm"  class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="••••••••••••••">
+                </div>
+                <!-- operation type -->
+                <input type="hidden" name="op" id="opLoginRecovery">
+                <!-- user not found msg -->
+                <div class="items-center gap-2 text-red-800 hidden" id="errorMsgUser">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                      </svg>
+                      <span data-msg></span>
+                </div>
+                <!-- incorrect security questions answers msg -->
+                <div class="items-center gap-2 text-red-800 hidden" id="errorMsgSq">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                      </svg>
+                      <span data-msg></span>
+                </div>
+                  <!-- incorrect password msg -->
+                  <div class="items-center gap-2 text-red-800 hidden" id="errorMsgPw">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                      </svg>
+                      <span data-msg></span>
+                </div>
+                <!-- action button -->
+                <button id="pwRecoveryBtn" class="w-full text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-lg px-5 mt-6  py-2.5 text-center focus:ring-4 focus:outline-none focus:ring-blue-300 transition-colors duration-300" data-operation>Verificar</button>
+            </form>
+            <!-- first login form -->
+            <?php 
+            include_once("php/view/components/first_login_form.php");
+            ?>
         </section>
         <!-- Slider section -->
-        <section class=" w-full relative  
-        overflow-hidden">
+        <section class=" w-full relative  overflow-hidden">
             <div class="z-30 absolute top-[30%] left-1/2 -translate-x-1/2 translate-y-[-30%] text-center">
                 <h2 class="text-5xl text-white  font-[Impact] tracking-wider ">U.E.C. Vicente Emilio Sojo</h2>
                 <p class="text-gray-200 text-3xl max-w-[90%] mx-auto mt-8 ">
@@ -136,5 +233,6 @@
        </footer>
     </main>
     <script src="javascript/homepage.js"></script>
+    <script src="javascript/login.js"></script>
 </body>
 </html>
