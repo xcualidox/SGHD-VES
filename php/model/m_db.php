@@ -21,7 +21,7 @@ class database_connect{
         $this->host="localhost";
         $this->dbName="db_test";
         $this->user = "root";
-        $this->password = "root";
+        $this->password = "";
         try {
         $this->dsn = "mysql:host =$this->host;dbname=$this->dbName;charset=utf8";
         $this->connection = new PDO($this->dsn, $this->user,$this->password);
