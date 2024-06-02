@@ -5,12 +5,25 @@
   "main": "index.js",
   "scripts": {
     "build": "tailwindcss -i ./styles/input.css -o ./styles/main.css",
-    "watch": "tailwindcss -i ./styles/input.css -o ./styles/main.css --watch"
+    "watch": "tailwindcss -i ./styles/input.css -o ./styles/main.css --watch",
+    "start": "http-server src/ -p 3000 -o",
+    "gulp:imagemin": "gulp imagemin",
+    "gulp:webp": "gulp webp"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.2.0",
+    "gulp-ext-replace": "^0.3.0",
+    "gulp-imagemin": "^6.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-watch": "^5.0.1",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-pngquant": "^8.0.0",
+    "imagemin-webp": "^5.1.0",
+    "save": "^2.4.0",
     "tailwindcss": "^3.4.3"
   }
 }

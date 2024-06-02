@@ -8,10 +8,14 @@
 </head>
 <body class="  h-screen bg-slate-50 relative">
     <header class="w-full shadow-2xl z-0">
-        <div class="container grid grid-cols-3 justify-center mx-auto w-full items-center">
-            <div class="flex items-center max-h-32 mr-auto">
+        <div class="container grid grid-cols-3 gap justify-center mx-auto w-full items-center">
+            <div class=" flex items-center  max-h-32 mr-auto">
+
+                
                 <img src="images/LogoBordeWhite.png" class="max-h-32" alt="logo">
-                <h1 class="text-xl font-bold">U.E.C Vicente Emilio Sojo</h1>
+                   
+                    <h1 class="font-bold hidden sm:block ">U.E.C Vicente Emilio Sojo</h1>
+               
             </div>
             <nav class="flex gap-4 items-center flex-1 justify-center text-lg">
                 
@@ -155,16 +159,32 @@
             
             <div id="slider" class="h-[100vh] w-[400%] flex ml-[-100%] z-0  after:absolute after:z-10 after:bg-black after:opacity-[0.7] after:content-[''] after:top-0 after:bottom-0 after:left-0 after:right-0 ">
                 <div class="w-full" data-slider>
-                    <img src="images/slider_test1.jpg" class="block w-full h-full object-cover" alt="">
+                    <picture>
+                       
+                        <source srcset="images/slider_test1.webp" type="image/webp">
+                        <img src="images/slider_test1.jpg" class="block w-full h-full object-cover" alt="">
+                    </picture>
                 </div>
                 <div class="w-full" data-slider>
-                    <img src="images/slider_test2.jpg" class="block w-full h-full object-cover" alt="">
+                    <picture>
+                       
+                        <source srcset="images/slider_test2.webp" type="image/webp">
+                        <img src="images/slider_test2.jpg" class="block w-full h-full object-cover" alt="">
+                    </picture>
                 </div>
                 <div class="w-full" data-slider>
-                    <img src="images/slider_test3.jpg" class="block w-full h-full object-cover" alt="">
+                    <picture>
+                       
+                        <source srcset="images/slider_test3.webp" type="image/webp">
+                        <img src="images/slider_test3.jpg" class="block w-full h-full object-cover" alt="">
+                    </picture>
                 </div>
                 <div class="w-full" data-slider>
-                    <img src="images/slider_test4.jpg" class="block w-full h-full object-cover" alt="">
+                    <picture>
+                       
+                        <source srcset="images/slider_test4.webp" type="image/webp">
+                        <img src="images/slider_test4.jpg" class="block w-full h-full object-cover" alt="">
+                    </picture>
                 </div>
             </div>
             <svg id="btnSliderLeft" class="absolute left-[1.5rem] cursor-pointer z-30 fill-black opacity-50 hover:fill-[#eef3fa] hover:opacity-100 transition-all duration-300 top-1/2 -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" ><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm2.707 14.293-1.414 1.414L7.586 12l5.707-5.707 1.414 1.414L10.414 12l4.293 4.293z"></path></svg>
@@ -172,18 +192,27 @@
         </section>
         <section class="min-h-screen flex flex-col " id="nosotros">
             <header class="mt-20">
+            
                 <h2 class=" text-4xl font-[Impact] tracking-wider text-center">Nosotros</h2>
             </header>
             <div class="container mx-auto grid grid-cols-2 justify-center gap-8 max-w-[80rem] grow place-content-center">
                 <div data-testimonial class="flex-none order-2  w-full flex flex-col items-center p-6  shadow-2xl rounded-lg max-w-[36rem] bg-[#eef3fa] ">
-                    <img src="images/mission2.png" alt="" class="w-32 -mt-20">
+                    <picture>
+
+                        <source srcset="images/mission2.webp" type="image/webp">
+                        <img src="images/mission2.png" alt="" class="w-32 -mt-20">
+                    </picture>
                     <h5 class="text-xl my-4 font-bold">Nuestra Misión</h5>
                     <p class="text-sm  leading-relaxed text-justify">
                         <span class="font-mono font-bold  text-2xl ">“</span>Garantizar a los niños, niñas y adolescentes, reciban una educación por un equipo de profesionales con ética y moral intachable, que tiene como premisa educar con amor, respetando las necesidades básicas y los derechos de los estudiantes. En un ambiente en óptimas condiciones que le permita el desarrollo de la capacidad del ser, conocer, hacer y convivir de manera eficaz, en el proceso de trasformación social con excelente ético, consciente y solidario en la búsqueda de un buen profesional; ya que educamos para un futuro, que se desenvuelven con mejor calidad de vida. Atendiendo a los cambios permanentes que se presenten en el campo del conocimiento integral cultural en general.<span class="font-mono font-bold  text-2xl ">”</span>
                     </p>
                 </div>
                 <div data-testimonial class="flex-none order-3 w-full  flex flex-col items-center p-6 shadow-2xl  rounded-lg max-w-[36rem] bg-[#eef3fa] ">
+                  <picture>
+                   
+                    <source srcset="images/vision2.webp" type="image/webp">
                     <img src="images/vision2.png" alt="" class="w-32 -mt-20">
+                  </picture>
                     <h5 class="text-xl my-4 font-bold">Nuestra Visión</h5>
                     <p class="text-sm  leading-relaxed text-justify">
                         <span class="font-mono font-bold  text-2xl ">“</span>La unidad Educativa Colegio Vicente Emilio Sojo fomenta actividades y experiencias que propician el mantenimiento de un clima positivo y enriquecedor de convivencia, dialogo y alegría, aprovechando las fortalezas de cada estudiante y la integración de la familia en el proceso educativo. Ese trato cordial que tanto agrada a nuestra comunidad y crea un ambiente sano en que todos sienten la libertad de poder expresarse en todos los sentidos sin coartar su personalidad o pensamiento. 
@@ -194,15 +223,17 @@
             </div>
             
         </section>
+
+        <!--Iniciando Footer-->
        <footer class="w-full  bg-slate-950 text-slate-50" id="footer">
-        <div class="container mx-auto py-8 flex justify-between ">
+        <div class="container mx-auto py-8 flex justify-between  gap-3">
             <div>
                 <img src="images/LogoBordeWhite.png" class="max-h-[15rem]" alt="">
             </div>
             <div class="pt-6">
                 <h3 class="text-xl font-bold mb-8">Informacion de contacto</h3>
                 <p class="flex gap-2 text-lg  items-center" >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(248 250 252)" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
+                    <svg xmlns="" fill="rgb(248 250 252)" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
                     Calle 28, Av. Esquina 37 , Acarigua
                 </p>
                 <p class="flex gap-2 text-lg my-4 items-center">
@@ -214,10 +245,10 @@
                 </a>
             </div>
             <div class="pt-6">
-                <h3 class="text-xl font-bold mb-8">Informacion de contacto</h3>
+                <h3 class="text-xl font-bold mb-8 ">Ubicacion</h3>
                 <div id="wrapper-9cd199b9cc5410cd3b1ad21cab2e54d3">
                     <div id="map-9cd199b9cc5410cd3b1ad21cab2e54d3"></div><script>(function () {
-                    var setting = {"query":"HQ3R+8Q7 Acarigua, Portuguesa, Venezuela","width":250,"height":150,"satellite":false,"zoom":16,"placeId":"EilIUTNSKzhRNywgQWNhcmlndWEsIFBvcnR1Z3Vlc2EsIFZlbmV6dWVsYSImOiQKCg1Lt7EFFXOvv9YQCxoUChIJH__VQJ3BfY4RGr0Rfnt2MhM","cid":"0xf6ea3270a5bb709d","coords":[9.5532875,-69.2080781],"cityUrl":"/venezuela/acarigua-41784","cityAnchorText":"Map of Acarigua, Venezuela","lang":"us","queryString":"HQ3R+8Q7 Acarigua, Portuguesa, Venezuela","centerCoord":[9.5532875,-69.2080781],"id":"map-9cd199b9cc5410cd3b1ad21cab2e54d3","embed_id":"1096745"};
+                    var setting = {"query":"HQ3R+8Q7 Acarigua, Portuguesa, Venezuela","width":220,"height":150,"satellite":false,"zoom":16,"placeId":"EilIUTNSKzhRNywgQWNhcmlndWEsIFBvcnR1Z3Vlc2EsIFZlbmV6dWVsYSImOiQKCg1Lt7EFFXOvv9YQCxoUChIJH__VQJ3BfY4RGr0Rfnt2MhM","cid":"0xf6ea3270a5bb709d","coords":[9.5532875,-69.2080781],"cityUrl":"/venezuela/acarigua-41784","cityAnchorText":"Map of Acarigua, Venezuela","lang":"us","queryString":"HQ3R+8Q7 Acarigua, Portuguesa, Venezuela","centerCoord":[9.5532875,-69.2080781],"id":"map-9cd199b9cc5410cd3b1ad21cab2e54d3","embed_id":"1096745"};
                     var d = document;
                     var s = d.createElement('script');
                     s.src = 'https://1map.com/js/script-for-user.js?embed_id=1096745';
@@ -227,7 +258,11 @@
                     };
                     var to = d.getElementsByTagName('script')[0];
                     to.parentNode.insertBefore(s, to);
-                  })();</script><a href="https://1map.com/map-embed">1 Map</a></div>
+                  })();</script><a href="https://1map.com/map-embed">
+                   
+                         <img loading="lazy" width="200" height="300" src="images/MapaVES.jpg" alt="">
+             
+                  </a></div>
             </div>
         </div>
        </footer>
