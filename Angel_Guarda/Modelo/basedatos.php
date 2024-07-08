@@ -67,14 +67,22 @@ class database_connect{
         }
     }
     // Ejecuta queries SQL sencillas
-    protected function query($query , $data){
+   protected function query($query , $data){
         try{
             $this->connect();
             $query_exec = $this->connect()->prepare("$query");
-            $query_exec->execute(is_array($data)?$data:[$data]);
+            if (strpos($query, '?') !== false)
+            {
+                $query_exec->execute(is_array($data)?$data:[$data]);
+            }
+            else
+            {
+                 $query_exec->execute();
+            }
             if( $query_exec->rowCount()>0){
                 return $query_exec;
             }
+            //$query_exec->debugDumpParams();
             return false;
         }
        catch(PDOException $e){
