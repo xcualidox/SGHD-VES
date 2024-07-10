@@ -1,0 +1,96 @@
+.todo{
+	width: 100%;
+	margin:0 auto;
+	overflow: hidden;
+}
+
+.titulo{
+	width: 100%;
+	box-sizing:border-box;
+	background:rgba(255, 255, 255, 0);
+	color:rgb(255, 255, 255);
+  	font-size: 28px;
+  	margin-top: 15px;
+  	font-weight: bold;
+}
+
+body{
+	font-family: sans-serif;
+	margin:0;
+}
+
+header{
+	display: flex;
+	height: 100px;
+	background: rgba(0, 4, 255, 0.815);
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+}
+
+.fondo{
+	width: 100%;
+	height: 86vh;
+	background-image: url("../Imagen/Index/Fondo_SobreN.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+
+}
+
+.logo{
+	display: flex;
+	align-items: center;
+	font-size: 15px;
+}
+
+.logo-img{
+	height: 100px;
+	margin-right: 8px;
+}
+
+.logo-img2{
+	height: 100px;
+	margin-left: 25px;
+}
+
+a{
+	text-decoration: none;
+	color: #E5EEF5;
+}
+
+nav a{
+	font-weight: bold;
+	padding-right: 25px;
+	font-size: 13px;
+	
+}
+
+nav a:hover{
+	color: grey;
+}
+
+nav a:active{
+	color: black;
+}
+
+.area{
+	position:absolute;
+  	width: 75%;
+	height: auto;
+  	box-sizing:border-box;
+  	background:rgba(255,255,255, 0.8);
+  	color:black;
+  	position:absolute;
+  	padding:40px; 
+  	top:30%;
+  	left:15%;
+  	border:2px solid black;
+  	box-sizing: border-box;
+}
+@media screen and (max-width:600px) {
+	.area{
+		width: 100%;
+		left:0px;
+	}
+}
