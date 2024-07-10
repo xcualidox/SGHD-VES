@@ -12,27 +12,27 @@ class zona extends database_connect{
 	  }
 
     function incluye(){
-        $sql= "insert into profesores(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido) values(?,?,?,?,?)";
+        $sql= "insert into personas(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido) values(?,?,?,?,?)";
 		return $this->query($sql,[$this->cedula,$this->p_nombre,$this->s_nombre,$this->p_apellido,$this->s_apellido]);
     }
 
     function modificar($origin){
-        $sql= "UPDATE `profesores`
+        $sql= "UPDATE `personas`
                 SET `cedula`=?, `primer_nombre`=?, `segundo_nombre`=?, `primer_apellido`=?, `segundo_apellido`=?
                 WHERE `cedula`=?";
 		return $this->query($sql,[$this->cedula,$this->p_nombre,$this->s_nombre,$this->p_apellido,$this->s_apellido,$origin]);
     }
     
     function eliminar($origin) {
-      $sql= "DELETE FROM `profesores` WHERE `cedula`=?";
+      $sql= "DELETE FROM `personas` WHERE `cedula`=?";
 		return $this->query($sql,$origin);
     }
     function tabla($offset, $limit) {
-      $sql= "SELECT * from `profesores` LIMIT $offset,$limit";
+      $sql= "SELECT * from `personas` LIMIT $offset,$limit";
     return $this->fetch_all_query($this->query($sql,""));
     }
     function TotaldePagina() {
-      $sql= "SELECT * from `profesores`";
+      $sql= "SELECT * from `personas`";
       return count($this->fetch_all_query($this->query($sql,"")));
     }
 }

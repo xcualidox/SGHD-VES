@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .nav-item-border {
+        @apply hover:border-b-[#FFC436] hover:border-b-2 border-b-2 border-b-[#071952] transition-colors duration-500;
+    }
+}

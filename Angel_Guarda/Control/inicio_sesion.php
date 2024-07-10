@@ -8,14 +8,14 @@ if (isset($_SESSION["usuario"])) {
     $operacion->CrearClave($_POST["clave"], $_POST["pregunta"], $_POST["respuesta"]);
     unset($_SESSION["usuario"]);
     $_SESSION["error"]="alert('Su clave ha sido creada exitosamente. Ya puede ingresar')";
-    header("Location: ../Vista/inicio_sesion.php");
+    header("Location: ../../../index.php");
 }
 else {
     $operacion->setDatos($_POST["usuario"]);
     $validar=$operacion->validar();
     if (count($validar)==0) {
         $_SESSION["error"]="alert('La cedula que ingreso no existe, por favor intente otra vez')";
-        header("Location: ../Vista/inicio_sesion.php");
+        header("Location: ../../../index.php");
      }
      else if (count($validar)>0 && $validar[0][6]==""){
          header("Location: ../Vista/crear_clave.php");
@@ -28,7 +28,7 @@ else {
          }
          else if($validar[0][7]!=$_POST["clave"]) {
              $_SESSION["error"]="alert('La clave que ingreso es incorrecta, vuelva a intentarlo')";
-             header("Location: ../Vista/inicio_sesion.php");
+             header("Location: ../../../index.php");
          }
          else {
             $_SESSION["sesion"]="usuario";

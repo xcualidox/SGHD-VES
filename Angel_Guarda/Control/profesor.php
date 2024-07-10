@@ -19,7 +19,7 @@ function Registra()
 {
 	$cedula=$_POST['cedula'];
 	$conexion=mysqli_connect("localhost", "root", "", "proyecto");
-	$consulta="select * from profesores where cedula='$cedula'";
+	$consulta="select * from personas where cedula='$cedula'";
 	$resultado=mysqli_query($conexion, $consulta);
 	$filas=mysqli_num_rows($resultado);
 

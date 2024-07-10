@@ -48,21 +48,21 @@ class zona extends bdmysql{
       return $this->ejecutar($sql);
     }
     function BloquesHorario($ano_escolar, $seccion) {
-      $sql="SELECT aula.codigo, aula.nombre, asignatura.codigo,  asignatura.nombre, horario_estudiante.codigo_dia, horario_estudiante.grupo, profesores.cedula, profesores.primer_nombre, profesores.segundo_nombre, profesores.primer_apellido, profesores.segundo_apellido
+      $sql="SELECT aula.codigo, aula.nombre, asignatura.codigo,  asignatura.nombre, horario_estudiante.codigo_dia, horario_estudiante.grupo, personas.cedula, personas.primer_nombre, personas.segundo_nombre, personas.primer_apellido, personas.segundo_apellido
       FROM horario_estudiante
       JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
       JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 
-      JOIN profesores ON horario_estudiante.profesor= profesores.cedula
+      JOIN personas ON horario_estudiante.profesor= personas.cedula
       WHERE horario_estudiante.codigo_a_escolar='$ano_escolar' 
       AND horario_estudiante.codigo_a_y_seccion='$seccion'";
       return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
     }
     function BloquesHorarioPDF($ano_escolar, $seccion, $bloque) {
-      $sql="SELECT aula.codigo, aula.nombre, asignatura.codigo,  asignatura.nombre, horario_estudiante.codigo_dia, horario_estudiante.grupo, profesores.cedula, profesores.primer_nombre, profesores.segundo_nombre, profesores.primer_apellido, profesores.segundo_apellido
+      $sql="SELECT aula.codigo, aula.nombre, asignatura.codigo,  asignatura.nombre, horario_estudiante.codigo_dia, horario_estudiante.grupo, personas.cedula, personas.primer_nombre, personas.segundo_nombre, personas.primer_apellido, personas.segundo_apellido
       FROM horario_estudiante
       JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
       JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 
-      JOIN profesores ON horario_estudiante.profesor= profesores.cedula
+      JOIN personas ON horario_estudiante.profesor= personas.cedula
       WHERE horario_estudiante.codigo_a_escolar='$ano_escolar' 
       AND horario_estudiante.codigo_a_y_seccion='$seccion'
       AND horario_estudiante.codigo_dia='$bloque'";

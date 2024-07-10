@@ -6,6 +6,7 @@ var lista=document.querySelectorAll('.lista');
 var indice="";
 var origin_array=[];
 console.log(div);
+console.log("sss")
 for (let index = 0; index < lista.length; index++) {
     document.getElementById(lista[index].id).addEventListener("click", function () {
         for (let index = 0; index < lista.length; index++) {

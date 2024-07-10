@@ -2,7 +2,7 @@
 session_start();
 $conexion=mysqli_connect("localhost", "root", "", "proyecto");
 if ($_SESSION["sesion"]!="usuario") {
-    header("Location: ../Vista/inicio_sesion.php");
+    header("Location: ../../../index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -70,7 +70,7 @@ if ($_SESSION["sesion"]!="usuario") {
    JOIN intervalo ON horario_estudiante.intervalo = intervalo.id";
 
    $horario=mysqli_query($conexion, $consulta);
-   $consulta="SELECT profesores.cedula, profesores.primer_nombre, profesores.primer_apellido, profesores.segundo_nombre, profesores.segundo_apellido FROM profesores WHERE EXISTS ( SELECT * FROM profesores_materias WHERE profesores.cedula = profesores_materias.profesor)";
+   $consulta="SELECT personas.cedula, personas.primer_nombre, personas.primer_apellido, personas.segundo_nombre, personas.segundo_apellido FROM personas WHERE EXISTS ( SELECT * FROM profesores_materias WHERE personas.cedula = profesores_materias.profesor)";
    $profesores=mysqli_query($conexion, $consulta);
    $profesores2=mysqli_query($conexion, $consulta);
    $consulta="SELECT intervalo, id from intervalo WHERE `estado`=1";

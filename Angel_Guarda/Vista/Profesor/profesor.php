@@ -2,7 +2,7 @@
 session_start();
 include_once("../../control/profesor_tabla.php");
 if ($_SESSION["sesion"]!="admin") {
-    header("Location: ../Vista/inicio_sesion.php");
+    header("Location: ../../../index.php");
 }
 ?>
 
@@ -105,7 +105,7 @@ if ($_SESSION["sesion"]!="admin") {
             </li>
 
             <li>
-                <a href="..\..\index.html">
+                <a href="..\..\..\php\controller\c_login.php?op=logout">
                 <i class='bx bxs-left-arrow-alt'></i>
                     <span class="nav-item">Inicio</span>
                 </a>

@@ -2,7 +2,7 @@
 session_start();
 include_once("../../control/a_seccion_tabla.php");
 if ($_SESSION["sesion"]!="admin") {
-    header("Location: ../Vista/inicio_sesion.php");
+    header("Location: ../../../index.php");
 }
 ?>
 

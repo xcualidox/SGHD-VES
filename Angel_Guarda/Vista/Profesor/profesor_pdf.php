@@ -14,7 +14,7 @@ if (!$conn) {
 }
 
 // Ejecuta una consulta SQL para obtener los datos de la tabla
-$sql = "SELECT * FROM profesores";
+$sql = "SELECT * FROM personas";
 $result = mysqli_query($conn, $sql);
 
 // Crea un nuevo archivo PDF

@@ -22,23 +22,23 @@ class zona extends database_connect{
       return $this->fetch_all_query($this->query($sql,$cedula)); 
     }
     function tabla($offset, $limit) {
-      $sql= "SELECT DISTINCT profesores.cedula, profesores.primer_nombre, profesores.segundo_nombre, 
-      profesores.primer_apellido, profesores.segundo_apellido
-      FROM profesores
-      INNER JOIN profesores_materias ON profesores.cedula = profesores_materias.profesor LIMIT $offset,$limit";
+      $sql= "SELECT DISTINCT personas.cedula, personas.primer_nombre, personas.segundo_nombre, 
+      personas.primer_apellido, personas.segundo_apellido
+      FROM personas
+      INNER JOIN profesores_materias ON personas.cedula = profesores_materias.profesor LIMIT $offset,$limit";
 		return $this->fetch_all_query($this->query($sql,""));
     }
     function Profesores_Materias() {
       $sql= "SELECT *
-      FROM profesores
-      LEFT JOIN profesores_materias ON profesores.cedula = profesores_materias.profesor
+      FROM personas
+      LEFT JOIN profesores_materias ON personas.cedula = profesores_materias.profesor
       WHERE profesores_materias.profesor IS NULL";
 		return $this->fetch_all_query($this->query($sql,""));
     }
     function TotaldePagina() {
-      $sql= "SELECT profesores.cedula, profesores.primer_nombre, profesores.primer_apellido
-      FROM profesores
-      INNER JOIN profesores_materias ON profesores.cedula = profesores_materias.profesor";
+      $sql= "SELECT personas.cedula, personas.primer_nombre, personas.primer_apellido
+      FROM personas
+      INNER JOIN profesores_materias ON personas.cedula = profesores_materias.profesor";
 		return count($this->fetch_all_query($this->query($sql,"")));
     }
     function ListadeAsignaturas() {

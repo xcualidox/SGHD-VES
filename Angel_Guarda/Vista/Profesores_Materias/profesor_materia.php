@@ -2,7 +2,7 @@
 session_start();
 include_once("../../control/profesor_materia_tabla.php");
 if ($_SESSION["sesion"]!="admin") {
-    header("Location: ../Vista/inicio_sesion.php");
+    header("Location: ../../../index.php");
 }
 ?>
 
@@ -15,6 +15,7 @@ if ($_SESSION["sesion"]!="admin") {
     <link rel="stylesheet" type="text/css" href="../Css/a_escolar.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
 </head>
 <body>
 <div class="sidebar">
@@ -105,7 +106,7 @@ if ($_SESSION["sesion"]!="admin") {
             </li>
 
             <li>
-                <a href="..\..\index.html">
+                <a href="..\..\..\php\controller\c_login.php?op=logout">
                 <i class='bx bxs-left-arrow-alt'></i>
                     <span class="nav-item">Inicio</span>
                 </a>
@@ -142,10 +143,11 @@ if ($_SESSION["sesion"]!="admin") {
                 $numFilas =$objeto->TotalPaginas();
                 $asignaturas=$objeto->ListAsignaturas();
                 $profesores=$objeto->ProfesoresMaterias();
-                print_r($profesores);
+                // print_r($profesores);
+                // var_dump(count($resultado));
                 for ($i=0; $i < count($resultado); $i++) { 
                 ?>
-
+            
                 <tr>
     			    <td class="limitado1"><?php echo $resultado[$i]["cedula"]?></td>
     			    <td class="limitado2"><?php echo $resultado[$i]["primer_nombre"]." ".$resultado[$i]["primer_apellido"]?></td>
@@ -208,7 +210,7 @@ if ($_SESSION["sesion"]!="admin") {
             <div class="boton2" style="display: none;" id="boton2">
                 <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="form">
             </div>
-
+            <!-- <script type="text/javascript" src="../Js/profesor_materia.js"></script> -->
         <div class="formulario">
             <form id="form" style="display: none;" name="pantalla" class='pantalla' method="POST" action="../../Control/profesor_materia.php">
                 <input type='text' id="add" name="add" hidden>
@@ -219,10 +221,14 @@ if ($_SESSION["sesion"]!="admin") {
                 <input type="text" id='datos' style='display:none;' class="formulario__input" disabled>
                 <select name="profesor" id="profesor">
                     <option value="">Selecione el profesor</option>
-                    <?php 
-                   for ($i=0; $i < count($profesores); $i++) { 
-                       echo "<option value='".$profesores[$i]["cedula"]."'>".$profesores[$i]["primer_nombre"]." ".$profesores[$i]["segundo_nombre"]." ".$profesores[$i]["primer_apellido"]." ".$profesores[$i]["segundo_apellido"]."</option>";
-                    }
+                    <?php
+                    if($profesores)
+                    {
+
+                        for ($i=0; $i < count($profesores); $i++) { 
+                            echo "<option value='".$profesores[$i]["cedula"]."'>".$profesores[$i]["primer_nombre"]." ".$profesores[$i]["segundo_nombre"]." ".$profesores[$i]["primer_apellido"]." ".$profesores[$i]["segundo_apellido"]."</option>";
+                         }
+                    } 
                     ?>
                 </select>
     
