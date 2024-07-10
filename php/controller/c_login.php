@@ -1,29 +1,9 @@
 <?php
+if (isset($_POST["op"]))
+{
 require_once("../model/m_login.php");
 $login = new Login();
 $loginOp = $_POST["op"];
-switch ($loginOp) {
-    case "check":
-    case "login":
-        login($_POST["username"], $_POST["password"], $_POST["op"]);
-        break;
-    case "logout":
-        logout();
-        break;
-    case "securityQ":
-        getSecurityQuestions($_POST["username"]);
-        break;
-    case "validateSecurityA":
-        validateSecurityA($_POST["username"], $_POST["security_a_1"], $_POST["security_a_2"], $_POST["security_a_3"]);
-        break;
-    case "changePw":
-        changePw($_POST["username"], $_POST["newPw"]);
-        break;
-    case "firstLogin":
-        setFirstLogin($_POST["username"]);
-        break;
-}
-
 function setFirstLogin($username)
 {
     $GLOBALS["login"]->setUsername($username);
@@ -233,9 +213,15 @@ function login($username, $pw, $op)
                 exit();
             }
             session_start();
-            $_SESSION['username'] = getUserData($username)["fullname"];
-            $_SESSION['rol'] = $loginResult[1];
-            header("Location: ../view/v_test.php");
+            // $_SESSION['username'] = getUserData($username)["fullname"];
+            $_SESSION['sesion'] = $loginResult[1];
+            if ($_SESSION['sesion'] == "admin"){
+                header("Location: ../../Angel_guarda/Vista/Asignatura/asignatura.php");
+                // echo "angel";
+            }
+            else if ($_SESSION['sesion'] == "usuario"){
+                header("Location: ../..//Angel_guarda/Vista/Horario/horario_usuario.php");
+            }
             exit();
         }
         else if($loginResult[0] && $loginResult[2] == "new")
@@ -259,9 +245,44 @@ function login($username, $pw, $op)
 function logout()
 {
     session_start();
-    $_SESSION['username'] = "";
-    $_SESSION['rol'] = "";
+    // $_SESSION['username'] = "";
+    $_SESSION['sesion'] = "";
     session_destroy();
     header("Location: ../../index.php");
     exit();
+}
+switch ($loginOp) {
+    case "check":
+    case "login":
+        login($_POST["username"], $_POST["password"], $_POST["op"]);
+        break;
+    case "logout":
+        logout();
+        break;
+    case "securityQ":
+        getSecurityQuestions($_POST["username"]);
+        break;
+    case "validateSecurityA":
+        validateSecurityA($_POST["username"], $_POST["security_a_1"], $_POST["security_a_2"], $_POST["security_a_3"]);
+        break;
+    case "changePw":
+        changePw($_POST["username"], $_POST["newPw"]);
+        break;
+    case "firstLogin":
+        setFirstLogin($_POST["username"]);
+        break;
+}
+}
+if (isset($_GET["op"]))
+{
+    function logout()
+{
+    session_start();
+    // $_SESSION['username'] = "";
+    $_SESSION['sesion'] = "";
+    session_destroy();
+    header("Location: ../../index.php");
+    exit();
+}
+logout();
 }

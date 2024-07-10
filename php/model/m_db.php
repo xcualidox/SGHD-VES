@@ -19,7 +19,7 @@ class database_connect{
     // Genera la Conexión con la base de datos
     protected function connect(){
         $this->host="localhost";
-        $this->dbName="db_test";
+        $this->dbName="proyecto";
         $this->user = "root";
         $this->password = "";
         try {

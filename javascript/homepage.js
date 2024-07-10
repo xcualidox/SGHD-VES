@@ -141,10 +141,10 @@ closeLoginBtn.addEventListener("click", ()=>
 {
     hideLogin();
 });
-loginModal.addEventListener("click", ()=>
-{
-    hideLogin();
-});
+// loginModal.addEventListener("click", ()=>
+// {
+//     hideLogin();
+// });
 loginForm.addEventListener("click", e=>
 {
     e.stopImmediatePropagation();
