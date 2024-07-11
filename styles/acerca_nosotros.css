@@ -31,7 +31,7 @@ header{
 .fondo{
 	width: 100%;
 	height: 86vh;
-	background-image: url("../Imagen/Index/Fondo_MiVi.png");
+	background-image: url("../Imagen/Index/Fondo_SobreN.png");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
@@ -63,6 +63,7 @@ nav a{
 	font-weight: bold;
 	padding-right: 25px;
 	font-size: 13px;
+	
 }
 
 nav a:hover{
@@ -75,14 +76,21 @@ nav a:active{
 
 .area{
 	position:absolute;
-  	width: 70%;
+  	width: 75%;
+	height: auto;
   	box-sizing:border-box;
   	background:rgba(255,255,255, 0.8);
   	color:black;
+  	position:absolute;
   	padding:40px; 
-  	top:40%;
+  	top:30%;
   	left:15%;
-	right:15%;
   	border:2px solid black;
-  	font-weight: bold;
+  	box-sizing: border-box;
+}
+@media screen and (max-width:600px) {
+	.area{
+		width: 100%;
+		left:0px;
+	}
 }

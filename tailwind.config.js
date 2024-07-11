@@ -1,30 +1,28 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./*.php'],
+  content: ['./**/*.php'], // Busca archivos PHP en todas las subcarpetas
   theme: {
     extend: {
       keyframes: {
         entrance: {
-          '0%':{
+          '0%': {
             opacity: '0',
             transform: 'translateY(-50px)'
           },
-          '100%':{
+          '100%': {
             opacity: '1',
             transform: 'translateY(0)'
           }
-
         },
         exit: {
-          '0%':{
+          '0%': {
             opacity: '1',
             transform: 'translateY(0)'
           },
-          '100%':{
+          '100%': {
             opacity: '0',
             transform: 'translateY(-50px)'
           }
-
         },
         entranceCenter: {
           '0%': {
@@ -44,4 +42,3 @@ module.exports = {
   },
   plugins: [],
 }
-

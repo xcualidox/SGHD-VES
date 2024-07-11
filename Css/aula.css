@@ -75,7 +75,30 @@
     align-items: center;
     margin: 1rem 0;
 }
-
+.desactivar {
+    border: none;
+    background-color: royalblue;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    transition: all .5s ease;
+    cursor: pointer;
+}
+.desactivar:hover {
+    background-color: rgb(225, 65, 65);
+}
+.activar {
+    border: none;
+    background-color: rgb(179, 179, 179);
+    padding: 8px;
+    border-radius: 5px;
+    transition: all .5s ease;
+    cursor: pointer;
+}
+.activar:hover {
+    background-color: royalblue;
+    color: white;
+}
 .user p{
     color: #fff;
     opacity: 1;
@@ -86,82 +109,16 @@
     font-weight: 600;
 }
 
-.sidebar p{
-    opacity:0;
-}
-
-.sidebar.active p{
-    opacity: 1;
-}
-
-.sidebar ul li{
-    position: relative;
-    list-style: none;
-    height: 50px;
-    width: 95%;
-    margin: 0.8rem auto;
-    line-height: 50px;
-}
-
-.sidebar ul li a{
-    color: #fff;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    border-radius: 0.8rem;
-}
-
-.sidebar ul li a:hover{
-    background-color: #fff;
-    color: #12171e;
-}
-
-.sidebar ul li a i{
-    min-width: 60px;
-    text-align: center;
-    height: 50px;
-    border-radius: 12px;
-    line-height: 50px;
-}
-
-.sidebar .nav-item{
-    opacity: 0;
-}
-
-.sidebar.active .nav-item{
-    opacity: 1;
-}
-
-.sidebar ul li .tooltip{
-    position: absolute;
-    left: 125px;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
-    border-radius: .6rem;
-    padding: .4rem 1.2rem;
-    line-height: 1.8rem;
-    z-index: 20;
-    opacity: 0;
-}
-
-.sidebar ul li:hover .tooltip{
-    opacity: 1;
-}
-
-.sidebar.active ul li .tooltip{
-    display: none;
-}
 
 .main-content{
     position: relative;
-    background-color: #fff;
+    background-color: #ffffff;
     min-height: 100vh;
     top: 0;
-    left: 100px;
+    left: 90px;
     transition: all 0.5s ease;
     width: calc(100% - 80px);
-    padding: 1.2rem;
+    padding: 1rem;
 }
 
 .error{
@@ -172,13 +129,13 @@
 .formulario{
     box-sizing:border-box;
     position:absolute;
-    left: 50%;
+    left: 70%;
     top: 35%;
     transform: translate(-50%,-50%);
     padding-left: 50px;
     padding-top: 7px;
     box-sizing: border-box;
-    width: 270px;
+    width: 400px;
     z-index: 4000;
 }
 
@@ -195,6 +152,25 @@
 }
 
 .formulario__input:focus{
+    border:3px solid #12171e;
+    outline: none;
+    box-shadow: 3px 0px 30px rgba(163,163,163,0.4);
+}
+
+textarea{
+    width: 100%;
+    background: white;
+    border:none;
+    border:3px solid transparent;
+    border-radius: 3px;
+    height: 67px;
+    line-height: 20px;
+    padding:0 0 0 15px;
+    transition: .3s ease all;
+    resize: none;
+}
+
+textarea:focus{
     border:3px solid #12171e;
     outline: none;
     box-shadow: 3px 0px 30px rgba(163,163,163,0.4);
@@ -261,14 +237,21 @@ th, td{
 }
 
 .limitado2{
-    width: 50px;
-    max-width: 50px;
+    width: 300px;
+    max-width: 300px;
     word-wrap: break-word;
 }
 
 .limitado1{
-    width: 65px;
-    max-width: 65px;
+    width: 120px;
+    max-width: 120px;
+    word-wrap: break-word;
+}
+
+.no_style{
+    border: none;
+    background: #fff;
+    border-bottom: #fff;
 }
 
 
@@ -327,16 +310,7 @@ thead{
     color: white;
 }
 
-tr:nth-child(even){
-    background: #ddd;
-}
-
 H4{
     color: red;
 }
 
-.no_style{
-    border: none;
-    background: #fff;
-    border-bottom: #fff;
-}
