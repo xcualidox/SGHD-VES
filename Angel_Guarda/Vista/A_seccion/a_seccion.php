@@ -12,7 +12,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 <link rel="stylesheet" href="../../../styles/a_seccion.css">
 
-    <script type="text/javascript" src="../Js/a_seccion.js"></script>
+    <script type="text/javascript" src="../../../javascript/horario/a_seccion.js"></script>
 
     <div class="main-content">
         <div class="container">

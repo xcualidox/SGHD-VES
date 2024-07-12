@@ -13,8 +13,8 @@ if ($_SESSION["sesion"]!="usuario") {
     <link rel="stylesheet" type="text/css" href="../../../Css/a_escolar.css">
     <link rel="stylesheet" type="text/css" href="../../../Css/horario.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script type="text/javascript" src="../../../Js/a_escolar.js"></script>
-    <script type="text/javascript" src="../../../Js/horario_usuario.js"></script>
+    <script type="text/javascript" src="../../../javascript/horario/a_escolar.js"></script>
+    <script type="text/javascript" src="../../../javascript/horario/horario_usuario.js"></script>
     <title>Horarios Estudiantiles</title>
 </head>
 <body>

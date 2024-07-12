@@ -9,7 +9,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 ?>
 
     <link rel="stylesheet" href="../../../styles/a_escolar.css">
-    <script type="text/javascript" src="../Js/a_escolar.js"></script>
+    <script type="text/javascript" src="../../../javascript/horario/a_escolar.js"></script>
 
     <div class="main-content">
         <div class="container">

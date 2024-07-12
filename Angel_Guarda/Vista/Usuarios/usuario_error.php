@@ -12,7 +12,7 @@ $conexion=mysqli_connect("localhost", "root", "", "proyecto");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../../Css/a_escolar.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script type="text/javascript" src="../../../Js/profesor.js"></script>
+    <script type="text/javascript" src="../../../javascript/horario/profesor.js"></script>
 </head>
 <body>
     <div class="sidebar">

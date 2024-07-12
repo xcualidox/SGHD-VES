@@ -9,7 +9,7 @@ $title = 'Profesor';
 include_once('../v_Sidebar/v_Sidebar.php');
 ?>
 <!--Aqui se el css se toma del Padre que es Sidebar-->
-<script type="text/javascript" src="../Js/profesor.js"></script>
+<script type="text/javascript" src="../../../javascript/horario/profesor.js"></script>
 
     <div class="main-content">
         <div class="container">

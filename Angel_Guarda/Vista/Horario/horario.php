@@ -10,8 +10,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
     <link rel="stylesheet" type="text/css" href="../../../styles/a_escolar.css">
     <link rel="stylesheet" type="text/css" href="../../../styles/horario.css">
  
-    <script type="text/javascript" src="../Js/a_escolar.js"></script>
-    <script type="text/javascript" src="../Js/horario.js"></script>
+    <script type="text/javascript" src="../../../javascript/horario/a_escolar.js"></script>
+    <script type="text/javascript" src="../../../javascript/horario/horario.js"></script>
 
     <?php 
     $consulta="SELECT `codigo`, `nombre` from ano_escolar";

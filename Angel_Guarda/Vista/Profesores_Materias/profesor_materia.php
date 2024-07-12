@@ -108,7 +108,6 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <div class="boton2" style="display: none;" id="boton2">
              
             </div>
-            <!-- <script type="text/javascript" src="../Js/profesor_materia.js"></script> -->
         <div class="formulario">
             <form id="form" style="display: none;" name="pantalla" class='pantalla' method="POST" action="../../Control/profesor_materia.php">
                 <input type='text' id="add" name="add" hidden>
@@ -159,6 +158,6 @@ include_once('../v_Sidebar/v_Sidebar.php');
 </body>
 
 
-<script type="text/javascript" src="../Js/profesor_materia.js"></script>
+<script type="text/javascript" src="../../../javascript/horario/profesor_materia.js"></script>
 
 </html>

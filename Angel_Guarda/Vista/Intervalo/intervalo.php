@@ -11,7 +11,7 @@ include_once('../v_Sidebar/v_Sidebar.php')
 
 
     <link rel="stylesheet" type="text/css" href="../../../styles/aula.css">
-    <script type="text/javascript" src="../Js/intervalo.js"></script>
+    <script type="text/javascript" src="../../../javascript/horario/intervalo.js"></script>
 
     <div class="main-content">
         <div class="container">

@@ -12,7 +12,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 ?>
 <!-- Hereda del Padre Sidebar -->
 
-<script type="text/javascript" src="../Js/asignatura.js"></script>
+<script type="text/javascript" src="../../../javascript/horario/asignatura.js"></script>
 
     <div class="main-content">
         <div class="container">

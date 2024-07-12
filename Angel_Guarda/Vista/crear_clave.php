@@ -9,7 +9,7 @@ $resultado=mysqli_query($conexion, $consulta);
 	<title>Iniciar sesion</title>
 	<link rel="stylesheet" type="text/css" href="Css/inicioses.css">
 	<link rel="shortcut icon" type="image/x-icon" href="Imagen/Icon/Inicio_sesion.ico">
-	<script type="text/javascript" src="JS/inicio_ses.js"></script>
+	<script type="text/javascript" src="../javascript/horario/inicio_ses.js"></script>
 	<meta name="viewport" content="width=decive-width, user-scalable=no, initial-scale=0.7, maximun-scale=1.0, minimun-scale=1.0">
 </head>
 <body>
