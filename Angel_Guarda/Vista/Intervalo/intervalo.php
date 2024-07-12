@@ -8,21 +8,29 @@ $title='Intervalo de Clase';
 include_once('../v_Sidebar/v_Sidebar.php');
 ?>
 
-<link rel="stylesheet" type="text/css" href="../../../styles/aula.css">
+
 <script type="text/javascript" src="../Js/intervalo.js"></script>
 
 <div class="main-content">
-    <div class="container">
-        <h1>Intervalo de Bloques</h1>
+<div class="flex flex-row justify-end items-center md:space-x-2 p-4 md:p-0">
+        <h1 class="text-xl font-semibold mb-2 md:mb-0">Intervalos Entre Horarios</h1>
+
+        <!-- Este DIV es para ocultar la tabla -->
+        <div class="boton2" style="display: none;" id="boton2"></div>
+        <img src="../../../images/icons/añadir.svg" class="w-10 bg-green-500 hover:bg-green-400  rounded-full cursor-pointer" alt="Añadir" id="boton1" onclick="Mostrar()">
+     
+       
+       
     </div>
-    <a href="intervalo_pdf.php"><button class='table_button'>PDF</button></a>
-    <div class="table-wrapper">
+  
+    <div class="table-wrapper min-w-full">
         <table class="fl-table">
-            <thead>
+        <thead>
                 <tr>
-                    <th>Intervalo</th>
-                    <th class='no_style'></th>
+                    <td>Intervalo</td>
+                    <td></td>
                 </tr>
+              
             </thead>
             <tbody>
             <?php
@@ -40,7 +48,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
             foreach ($resultado as $fila) {
             ?>
                 <tr>
-                    <td><?php echo $fila["intervalo"]; ?></td>
+                    <td><?php echo $fila["intervalo"]; ?> Minutos</td>
                     <td>
                         <button onclick='Eliminar(`<?php echo $fila["intervalo"]; ?>`)' class='table_button'>Eliminar</button>
                         <button onclick='Modificar(`<?php echo $fila["intervalo"]; ?>`,`<?php echo $fila["estado"]; ?>`)' class='table_button'>Modificar</button>
@@ -89,7 +97,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
     <div class="formulario">
         <form id="form" style="display: none;" name="pantalla" class='pantalla' method="POST" action="../../Control/intervalo.php">
             <label for="nom">Tiempo de Intervalo: </label><br>
-            <input type="text" id="nom" name="nom" maxlength="25" placeholder="Intervalo de tiempo para el Horario" class="formulario__input"> 
+            <input type="text" id="nom" name="nom" maxlength="3" placeholder="Intervalo de tiempo para el Horario" class="formulario__input"> 
             <input type="hidden" name="ope" id='ope'>
             <input type="hidden" name="origin" id='origin'>
             <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button">

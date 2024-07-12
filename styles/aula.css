@@ -75,30 +75,7 @@
     align-items: center;
     margin: 1rem 0;
 }
-.desactivar {
-    border: none;
-    background-color: royalblue;
-    color: white;
-    padding: 8px;
-    border-radius: 5px;
-    transition: all .5s ease;
-    cursor: pointer;
-}
-.desactivar:hover {
-    background-color: rgb(225, 65, 65);
-}
-.activar {
-    border: none;
-    background-color: rgb(179, 179, 179);
-    padding: 8px;
-    border-radius: 5px;
-    transition: all .5s ease;
-    cursor: pointer;
-}
-.activar:hover {
-    background-color: royalblue;
-    color: white;
-}
+
 .user p{
     color: #fff;
     opacity: 1;
@@ -221,11 +198,7 @@ input[type=button]:active{
 
 
 
-.limitado2{
-    width: 300px;
-    max-width: 300px;
-    word-wrap: break-word;
-}
+
 
 .limitado1{
     width: 120px;

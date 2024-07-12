@@ -8,10 +8,10 @@ $title='Horario';
 include_once('../v_Sidebar/v_Sidebar.php');
 ?>
 
-    <link rel="stylesheet" type="text/css" href="../../../styles/a_escolar.css">
+   
     <link rel="stylesheet" type="text/css" href="../../../styles/horario.css">
  
-    <script type="text/javascript" src="../Js/a_escolar.js"></script>
+   
     <script type="text/javascript" src="../Js/horario.js"></script>
 
     <?php 
@@ -44,34 +44,61 @@ include_once('../v_Sidebar/v_Sidebar.php');
     ?>
   
 
+  <div class="main-content">
+  <div class="flex flex-row justify-end items-center md:space-x-2 p-4 md:p-0">
+    <h1 class="text-xl font-semibold mb-2 md:mb-0">Profesores</h1>
 
-    <button type='button' class='button_crear' onclick='CalcularHora(<?php echo $tiempo.",".$id?>)'>Crear Horario</button>
+    
+    <img src="../../../images/icons/añadir.svg" class="w-10 bg-green-500 hover:bg-green-400 rounded-full cursor-pointer" onclick='CalcularHora(<?php echo $tiempo . "," . $id ?>)' >
+    <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
+    <select name="selectListar" id="selectListar" class="border rounded px-2 py-1 w-auto">
+        <option value="">Todos</option>
+        <option value="1">DatoxD</option>
+        <option value="0">Prueba</option>
+    </select>
+</div>
 
+<button type='button' class='button_crear' onclick='CalcularHora(<?php echo $tiempo . "," . $id ?>)'>Crear Horario</button>
 
-
-
-
-
-    <div class='tabla'>
-
-        <div style='background-color:rgb(65, 105, 225);font-size:20px;color:white;border: 1px solid black;'>Año Escolar</div>
-        <div style='background-color:rgb(65, 105, 225);font-size:20px;color:white;border: 1px solid black;'>Año</div>
-        <div style='background-color:rgb(65, 105, 225);font-size:20px;color:white;border: 1px solid black;'>Seccion</div>
-        <span></span>
-        <span></span>
-        <span></span>
-        <?php 
-        while ($mostrar=mysqli_fetch_array($horario)) { 
-            echo "<div>".$mostrar["nombre"]."</div>";
-            echo "<div>".$mostrar["ano"]."</div>";
-            echo "<div>".$mostrar["seccion"]."</div>";
-            echo " <button type='button' onclick='ModificarBloques(`".$mostrar["codigo_a_escolar"].
-            "`,`".$mostrar["codigo_a_y_seccion"]."`,`".$mostrar["nombre"]."`,`".$mostrar["ano"]." ".$mostrar["seccion"]."`,".$mostrar["intervalo"].")'>Mostrar</button>";
-            echo " <button type='button' onclick='EliminarHorario(`".$mostrar["codigo_a_escolar"].
-            "`,`".$mostrar["codigo_a_y_seccion"]."`)'>Eliminar</button>";
-            echo "<a href='horario_pdf.php?codigo_escolar=".$mostrar["codigo_a_escolar"]."&codigo_seccion=".$mostrar["codigo_a_y_seccion"]."&nombre=".$mostrar["nombre"]."&ano=".$mostrar["ano"]."&seccion=".$mostrar["seccion"]."&intervalo=".$mostrar["intervalo"]."'><button type='button'>PDF</button></a>";
-        }
-        ?>
+<div class='table-wrapper min-w-full'>
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <td>Año Escolar</td>
+                <td>Año</td>
+                <td>Seccion</td>
+                <td>Acciones</td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($mostrar = mysqli_fetch_array($horario)) { ?>
+                <tr>
+                    <td><?php echo $mostrar["nombre"]; ?></td>
+                    <td><?php echo $mostrar["ano"]; ?></td>
+                    <td><?php echo $mostrar["seccion"]; ?></td>
+                    <td>
+                        <button type='button' 
+                            class='table_button' 
+                            onclick='ModificarBloques("<?php echo $mostrar["codigo_a_escolar"]; ?>", 
+                            "<?php echo $mostrar["codigo_a_y_seccion"]; ?>", 
+                            "<?php echo $mostrar["nombre"]; ?>", 
+                            "<?php echo $mostrar["ano"]." 
+                            ".$mostrar["seccion"]; ?>", 
+                        <?php echo $mostrar["intervalo"]; ?>)'>Mostrar</button>
+                        <button type='button' 
+                            class='table_button' 
+                            onclick='EliminarHorario("<?php echo $mostrar["codigo_a_escolar"]; ?>", 
+                            "<?php echo $mostrar["codigo_a_y_seccion"]; ?>")'>
+                        Eliminar</button>
+                        <a href='horario_pdf.php?codigo_escolar=<?php echo $mostrar["codigo_a_escolar"]; 
+                        ?>&codigo_seccion=<?php echo $mostrar["codigo_a_y_seccion"]; 
+                        ?>&nombre=<?php echo $mostrar["nombre"]; ?>&ano=<?php echo $mostrar["ano"]; ?>&seccion=<?php echo $mostrar["seccion"]; ?>&intervalo=<?php echo $mostrar["intervalo"]; ?>'><button type='button' class='table_button'>PDF</button></a>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
 
         
     </div>
@@ -205,6 +232,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         </span>
         <button type="button" onclick='RegistrarBloque()'>Guardar</button>
         <button type="button" onclick='LimpiarBloque()' style='background-color: rgb(255, 30, 30);margin-left:50px;'>Limpiar</button>
+    </div>
     </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

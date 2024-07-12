@@ -2,25 +2,38 @@
     /* Definir los colores */
     --color-primary: #058671;  /* Verde oscuro */
     --color-secondary: #00796b;  /* Verde */
+    --color-tertiary: #7fccc3;  /* Fondo claro */
     --color-highlight: #b6e0e5;  /* Azul verdoso */
+    --color--active:#5f7577;
+   
     --color-background: #e0f2f1;  /* Fondo claro */
     --color-text: #ffffff;  /* Texto blanco */
     --color-text-dark: #004d40;  /* Texto verde oscuro */
 }
 
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
+@keyframes hoverAnimation {
+    0% {
+        background-color: var(--color-tertiary);
+        transform: scale(1);
+    }
+    50% {
+        background-color: var(--color-secondary);
+        transform: scale(1.1);
+    }
+    100% {
+        background-color: var(--color-secondary);
+        transform: scale(1.5);
+    }
 }
 
-thead{
-    background-color:  var( --color-highlight);
+/* Estilos generales */
+
+
+thead {
+    background-color: var(--color-highlight);
     color: black;
     text-align: center;
 }
-
-
-
 
 .table-wrapper {
     max-width: 100%;
@@ -40,11 +53,9 @@ thead{
 }
 
 .fl-table th, .fl-table td {
-    
     text-align: center;
     padding: 12px 15px;
     background: transparent;
-  
 }
 
 .fl-table thead td {
@@ -57,8 +68,6 @@ thead{
     background-color: var(--color-highlight);
 }
 
-
-
 .table_button {
     background-color: var(--color-primary);
     color: var(--color-text);
@@ -70,6 +79,7 @@ thead{
     text-transform: uppercase;
 }
 
+
 .table_button:hover {
     background-color: var(--color-secondary);
 }
@@ -77,31 +87,65 @@ thead{
 .desactivar {
     background-color: #e57373;  /* Color rojo */
     color: var(--color-text);
+    border: none;
+    padding: 8px 16px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: transform 0.3s ease-in-out;
+}
+
+.desactivar:hover {
+    transform: scale(1.1);
 }
 
 .activar {
-    background-color: #81c784;  /* Color verde claro */
-    color: var(--color-text-dark);
+    background-color: var(--color--active); 
+    color: var(--color-text);
+    border: none;
+    padding: 8px 16px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: transform 0.3s ease-in-out;
 }
 
-.paginacion {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
+.activar:hover {
+    transform: scale(1.1);
 }
+
+
+.paginacion {
+  
+    padding: 8px;
+    border-radius: 8px;
+    max-width: 100%;
+    text-align: center;
+    margin: 20px auto; /* Centramos con auto */
+}
+
+
+
 
 .paginacion a {
     margin: 0 5px;
     padding: 8px 16px;
     text-decoration: none;
-    background-color: var(--color-primary);
+    background-color: var(--color-tertiary);
     color: var(--color-text);
     border-radius: 4px;
+    transition: all 0.5s ease;
+}
+
+.paginacion a:not(.seleccionado):hover {
+    animation: hoverAnimation 0.5s forwards;
 }
 
 .paginacion a.seleccionado {
-    background-color: var(--color-highlight);
-    color: var(--color-text-dark);
+    background-color: var(--color-secondary);
+    color: var(--color-text);
 }
 
 .formulario__input {
@@ -110,4 +154,12 @@ thead{
     margin: 10px 0;
     border: 1px solid var(--color-primary);
     border-radius: 4px;
+}
+
+/* Estilos para manejar texto largo en celdas */
+.fl-table td.long-text {
+    white-space: pre-wrap; /* Mantiene los saltos de línea */
+    word-wrap: break-word; /* Rompe palabras largas */
+    max-width: 200px; /* Ajusta según tus necesidades */
+    text-align: left; /* Alinea el texto a la izquierda para mejor legibilidad */
 }
