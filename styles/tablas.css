@@ -1,0 +1,113 @@
+:root {
+    /* Definir los colores */
+    --color-primary: #058671;  /* Verde oscuro */
+    --color-secondary: #00796b;  /* Verde */
+    --color-highlight: #b6e0e5;  /* Azul verdoso */
+    --color-background: #e0f2f1;  /* Fondo claro */
+    --color-text: #ffffff;  /* Texto blanco */
+    --color-text-dark: #004d40;  /* Texto verde oscuro */
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+}
+
+thead{
+    background-color:  var( --color-highlight);
+    color: black;
+    text-align: center;
+}
+
+
+
+
+.table-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-primary);
+    padding: 1rem;
+    border-radius: 2px;
+    border-color: transparent;
+}
+
+.fl-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9rem;
+    min-width: 600px;
+}
+
+.fl-table th, .fl-table td {
+    
+    text-align: center;
+    padding: 12px 15px;
+    background: transparent;
+  
+}
+
+.fl-table thead td {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    text-transform: uppercase;
+}
+
+.fl-table tbody tr:nth-of-type(even) {
+    background-color: var(--color-highlight);
+}
+
+
+
+.table_button {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    border: none;
+    padding: 8px 16px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.table_button:hover {
+    background-color: var(--color-secondary);
+}
+
+.desactivar {
+    background-color: #e57373;  /* Color rojo */
+    color: var(--color-text);
+}
+
+.activar {
+    background-color: #81c784;  /* Color verde claro */
+    color: var(--color-text-dark);
+}
+
+.paginacion {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.paginacion a {
+    margin: 0 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    border-radius: 4px;
+}
+
+.paginacion a.seleccionado {
+    background-color: var(--color-highlight);
+    color: var(--color-text-dark);
+}
+
+.formulario__input {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+}

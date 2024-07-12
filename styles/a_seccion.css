@@ -178,22 +178,7 @@ input[type=button]:active{
     background:#3360a3;
 }
 
-table{
-    position: relative;
-    Color: black;
-    text-align: left;
-    left: 15px;
-    background-color: white;
-    border-collapse: collapse;
-    z-index: 100;
-    table-layout: fixed;
-}
 
-th, td{
-    border: solid 2px black;
-    padding: 15px;
-    font-weight: bold;
-}
 
 .limitado2{
     width: 50px;
@@ -221,10 +206,7 @@ th, td{
     transform: scale(1.1);
 }
 
-td{
-    max-width: 400px;
-    height: 50px;
-}
+
 
 .paginacion {
     background: rgb(212,212,212);
@@ -257,10 +239,7 @@ td{
     transform: scale(1.1);
     color:white;
 }
-thead{
-    background: #4169E1;
-    color: white;
-}
+
 
 tr:nth-child(even){
     background: #ddd;

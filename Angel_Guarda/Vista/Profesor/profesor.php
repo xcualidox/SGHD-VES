@@ -15,16 +15,16 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <div class="container">
             <h1>Profesores</h1>
         </div>
-        <a href="profesor_pdf.php"><button class='table_button' style='margin-left:20px;'>PDF</button></a>
-        <div class="tabla"> 
-            <table>
-                <thead>
-    				<td align="center">Cedula</td>
-    				<td align="center">Primer Nombre</td>
+        
+        <div class="table-wrapper"> 
+            <table class="fl-table ">
+                <thead >
+    				<td >Cedula</td>
+    				<td >Primer Nombre</td>
                     <td align="center">Segundo Nombre</td>
     				<td align="center">Primer Apellido</td>
                     <td align="center">Segundo Apellido</td>
-                    <td class='no_style'></td>
+                    <td class='no_style'> <a href="profesor_pdf.php"><button class='table_button' >PDF</button></a></td>
     			</thead>
 
                 <?php
@@ -101,10 +101,14 @@ include_once('../v_Sidebar/v_Sidebar.php');
         </div>
         <br>
 
-        <div class="boton1" id="boton1">
-                <input type="button" id="btn" onclick="Mostrar()" value="Agregar" class="form">
-            </div>
+     
 
+            <img src="../../../images/icons/añadir.svg" 
+            class=" w-10   bg-green-500 hover:bg-green-400 rounded-full cursor-pointer" 
+             alt="Añadir" 
+             id="boton1" 
+             onclick="Mostrar()">
+            <!-- No borrar Display None Deja de funcionar el Modificar al borrarlo -->
             <div class="boton2" style="display: none;" id="boton2">
                 
             </div>

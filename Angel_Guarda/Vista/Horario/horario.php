@@ -4,6 +4,7 @@ $conexion=mysqli_connect("localhost", "root", "", "proyecto");
 if ($_SESSION["sesion"]!="admin") {
     header("Location: ../../../index.php");
 }
+$title='Horario';
 include_once('../v_Sidebar/v_Sidebar.php');
 ?>
 
@@ -41,8 +42,18 @@ include_once('../v_Sidebar/v_Sidebar.php');
         $id=$mostrar["id"];
     }
     ?>
+  
+
+
     <button type='button' class='button_crear' onclick='CalcularHora(<?php echo $tiempo.",".$id?>)'>Crear Horario</button>
+
+
+
+
+
+
     <div class='tabla'>
+
         <div style='background-color:rgb(65, 105, 225);font-size:20px;color:white;border: 1px solid black;'>Año Escolar</div>
         <div style='background-color:rgb(65, 105, 225);font-size:20px;color:white;border: 1px solid black;'>Año</div>
         <div style='background-color:rgb(65, 105, 225);font-size:20px;color:white;border: 1px solid black;'>Seccion</div>
@@ -61,6 +72,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
             echo "<a href='horario_pdf.php?codigo_escolar=".$mostrar["codigo_a_escolar"]."&codigo_seccion=".$mostrar["codigo_a_y_seccion"]."&nombre=".$mostrar["nombre"]."&ano=".$mostrar["ano"]."&seccion=".$mostrar["seccion"]."&intervalo=".$mostrar["intervalo"]."'><button type='button'>PDF</button></a>";
         }
         ?>
+
+        
     </div>
     <form action="../../Control/horario.php" method="post" name='guardar_horario' id='guardar_horario'>
     <div class='container_horario'>

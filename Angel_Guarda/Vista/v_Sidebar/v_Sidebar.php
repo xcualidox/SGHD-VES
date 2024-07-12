@@ -14,6 +14,9 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="../../../styles/main.css">
+
+    <link rel="stylesheet" href="../../../styles/tablas.css">
+
 </head>
 <body>
 <div class="sidebar active ">
@@ -22,9 +25,6 @@
             </div>
             <i class="bx bx-menu " id="btn"></i>
         </div>
-
-      
-
         <div class="user">
             <img src="../../../images/LogoWhite.jpg" alt="Logo" class="user-img">
             <div>
@@ -108,9 +108,9 @@
             <li>
                 <a href="..\..\..\php\controller\c_login.php?op=logout">
                 <i class='bx bxs-left-arrow-alt'></i>
-                    <span class="nav-item">Inicio</span>
+                    <span class="nav-item">Cerrar Sesión</span>
                 </a>
-                <span class="tooltip">Inicio</span>
+                <span class="tooltip">Cerrar Sesión</span>
             </li>
         </ul>
       
