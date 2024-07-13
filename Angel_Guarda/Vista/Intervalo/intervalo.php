@@ -9,11 +9,14 @@ include_once('../v_Sidebar/v_Sidebar.php');
 ?>
 
 
-<script type="text/javascript" src="../Js/intervalo.js"></script>
+<script type="text/javascript" src="../../../javascript/horario/intervalo.js"></script>
 
 <div class="main-content">
 <div class="flex flex-row justify-end items-center md:space-x-2 p-4 md:p-0">
-        <h1 class="text-xl font-semibold mb-2 md:mb-0">Intervalos Entre Horarios</h1>
+<h1 class="text-xl font-semibold mb-2 md:mb-0">Intervalos Entre Horarios</h1>
+
+   
+   
 
         <!-- Este DIV es para ocultar la tabla -->
         <div class="boton2" style="display: none;" id="boton2"></div>
@@ -90,9 +93,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         }
     ?>
     </div>
-    <div class="boton1" id="boton1">
-        <input type="button" id="btn" onclick="Mostrar()" value="Agregar" class="form">
-    </div>
+   
     <div class="boton2" style="display: none;" id="boton2"></div>
     <div class="formulario">
         <form id="form" style="display: none;" name="pantalla" class='pantalla' method="POST" action="../../Control/intervalo.php">

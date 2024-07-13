@@ -142,7 +142,7 @@ include_once('../v_Sidebar/v_Sidebar.php')
     
     </div>
 </body>
-<script type="text/javascript" src="../Js/aula.js"></script>
+<script type="text/javascript" src="../../../javascript/horario/aula.js"></script>
 
 
 </html>

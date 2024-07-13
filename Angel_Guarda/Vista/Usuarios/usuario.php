@@ -11,7 +11,7 @@ include_once('../v_Sidebar/v_Sidebar.php')
 
 
     <link rel="stylesheet" type="text/css" href="../../../styles/a_escolar.css">
-    <script type="text/javascript" src="../Js/usuario.js"></script>
+    <script type="text/javascript" src="../../../javascript/horario/usuario.js"></script>
 
     <div class="main-content">
         <div class="container">
