@@ -92,9 +92,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
     </div>
     <br>
 
-    <div class="boton1" id="boton1">
-        <input type="button" id="btn" onclick="Mostrar()" value="Agregar" class="form">
-    </div>
+
 
     <div class="boton2" style="display: none;" id="boton2"></div>
     <!-- <script type="text/javascript" src="../Js/profesor_materia.js"></script> -->
