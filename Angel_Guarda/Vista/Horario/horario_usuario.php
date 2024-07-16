@@ -1,6 +1,6 @@
 <?php
 session_start();
-$conexion=mysqli_connect("localhost", "root", "", "proyecto");
+include_once("../../control/horario_tabla.php");
 if ($_SESSION["sesion"]!="usuario") {
     header("Location: ../../../index.php");
 }
@@ -53,6 +53,7 @@ if ($_SESSION["sesion"]!="usuario") {
         </ul>
     </div>
     <?php 
+    $objeto = new query();
    $consulta="SELECT `codigo`, `nombre` from ano_escolar";
    $ano_escolar=mysqli_query($conexion, $consulta);
    $consulta="SELECT * from ano_seccion";
