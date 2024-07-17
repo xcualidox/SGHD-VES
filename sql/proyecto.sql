@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 10, 2024 at 04:07 AM
+-- Generation Time: Jul 17, 2024 at 12:32 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -105,6 +105,29 @@ CREATE TABLE `aula` (
 INSERT INTO `aula` (`codigo`, `nombre`, `descripcion`, `disponibilidad`) VALUES
 (25, 'Sexo', 'se encuentra cuando lo buscas', 1),
 (26, 'Puta madre bart', 'sexo tilin\r\n', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bitacora`
+--
+
+CREATE TABLE `bitacora` (
+  `id` int NOT NULL,
+  `fecha_hora` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `cedula` bigint NOT NULL,
+  `type` enum('login','error','eliminar','actualizar','insertar') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `description` text COLLATE utf8mb3_spanish_ci NOT NULL,
+  `user_computer` varchar(45) COLLATE utf8mb3_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Dumping data for table `bitacora`
+--
+
+INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `user_computer`) VALUES
+(1, '2024-07-16 20:22:23', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-D2HTI36'),
+(2, '2024-07-16 20:23:43', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-D2HTI36');
 
 -- --------------------------------------------------------
 
@@ -358,6 +381,12 @@ ALTER TABLE `aula`
   ADD KEY `disponibilidad` (`disponibilidad`);
 
 --
+-- Indexes for table `bitacora`
+--
+ALTER TABLE `bitacora`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `dias_semana`
 --
 ALTER TABLE `dias_semana`
@@ -434,6 +463,12 @@ ALTER TABLE `ano_seccion`
 --
 ALTER TABLE `aula`
   MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `bitacora`
+--
+ALTER TABLE `bitacora`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `horario_estudiante`
