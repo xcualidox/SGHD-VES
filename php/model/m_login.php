@@ -1,6 +1,6 @@
 <?php
 require_once("m_db.php");
-class Login extends database_connect
+class Login extends db_connect
 {
     private $username;
     private $password;

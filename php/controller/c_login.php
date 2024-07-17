@@ -215,11 +215,17 @@ function login($username, $pw, $op)
             session_start();
             // $_SESSION['username'] = getUserData($username)["fullname"];
             $_SESSION['sesion'] = $loginResult[1];
+            // Destruye la instancia login
+            $GLOBALS["login"] = null;
             if ($_SESSION['sesion'] == "admin"){
+                require_once("../../Angel_Guarda/Control/c_bitacora.php");
+                insertBitacora($username, "login", "$username ha ingresado al sistema.");
                 header("Location: ../../Angel_guarda/Vista/Asignatura/asignatura.php");
                 // echo "angel";
             }
             else if ($_SESSION['sesion'] == "usuario"){
+                require_once("../../Angel_Guarda/Control/c_bitacora.php");
+                insertBitacora($username, "login", "$username ha ingresado al sistema.");
                 header("Location: ../..//Angel_guarda/Vista/Horario/horario_usuario.php");
             }
             exit();
@@ -273,6 +279,7 @@ switch ($loginOp) {
         break;
 }
 }
+// Acomodar el cerrar sesion 
 if (isset($_GET["op"]))
 {
     function logout()

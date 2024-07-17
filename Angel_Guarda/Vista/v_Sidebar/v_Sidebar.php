@@ -104,6 +104,13 @@
                 </a>
                 <span class="tooltip">Usuarios</span>
             </li>
+            <li>
+                <a href="../bitacora/v_bitacora.php" title='Historial de Sistema'>
+                    <i class='bx bxs-cog'></i>
+                    <span class="nav-item">Historial de Sistema</span>
+                </a>
+                <span class="tooltip">Historial de Sistema<</span>
+            </li>
 
             <li>
                 <a href="..\..\..\php\controller\c_login.php?op=logout">
