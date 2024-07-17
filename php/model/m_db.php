@@ -1,5 +1,5 @@
 <?php
-class database_connect{
+class db_connect{
     private $connection;
     private $dsn;
     private $host;
