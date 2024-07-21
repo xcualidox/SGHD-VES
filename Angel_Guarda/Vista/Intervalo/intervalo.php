@@ -37,17 +37,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
             </thead>
             <tbody>
             <?php
-            if (!isset($_GET["pag_asig"])) {
-                $paginaActual = 1;
-            } else {
-                $paginaActual = $_GET["pag_asig"];
-            }
-
-            $limit = $paginaActual * 5;
-            $offset = $limit - 5;
-            $objeto = new query();
-            $resultado = $objeto->GenerarTabla($offset, $limit);
-            $numFilas = $objeto->TotalPaginas();
+                include_once("../v_paginado/v_paginadoConsulta.php");
+                //Variable de la Consulta del Paginado
+             
+             
             foreach ($resultado as $fila) {
             ?>
                 <tr>
@@ -68,31 +61,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
             </tbody>
         </table>
     </div>
-    <div class='paginacion'>
-    <?php
-        $totalpag = ceil($numFilas / 5);
-        if ($totalpag <= 10) {
-            for ($i = 1; $i <= $totalpag; $i++) {
-                if ($paginaActual == $i) {
-                    echo "<a href=?pag_asig=$i class='seleccionado'>$i</a>";
-                } else {
-                    echo "<a href=?pag_asig=$i>$i</a>";
-                }
-            }
-        } else {
-            for ($i = max(1, $paginaActual - 4); $i <= min($totalpag, $paginaActual + 6); $i++) {
-                if ($paginaActual == $i) {
-                    echo "<a href=?pag_asig=$i class='seleccionado'>$i</a>";
-                } else {
-                    echo "<a href=?pag_asig=$i>$i</a>";
-                }
-            }
-            if ($paginaActual + 6 < $totalpag) {
-                echo "...";
-            }
-        }
-    ?>
-    </div>
+   <!-- Mostrando El total de Paginas -->
+   <?php 
+        include_once("../v_paginado/v_PaginadoTotal.php");
+         ?>
    
     <div class="boton2" style="display: none;" id="boton2"></div>
     <div class="formulario">

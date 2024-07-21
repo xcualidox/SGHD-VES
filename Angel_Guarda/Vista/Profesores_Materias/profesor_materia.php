@@ -37,27 +37,22 @@ include_once('../v_Sidebar/v_Sidebar.php');
             </thead>
             <tbody>
                 <?php
-                if (!isset($_GET["pag_asig"])) {
-                    $paginaActual = 1;
-                } else {
-                    $paginaActual = $_GET["pag_asig"];
-                }
 
-                $limit = 5;
-                $offset = ($paginaActual - 1) * $limit;
 
-                $objeto = new query();
-                $resultado = $objeto->GenerarTabla($offset, $limit);
-                $numFilas = $objeto->TotalPaginas();
+                include_once("../v_paginado/v_paginadoConsulta.php");
                 $asignaturas = $objeto->ListAsignaturas();
                 $profesores = $objeto->ProfesoresMaterias();
 
+             
                 if (is_array($resultado) && count($resultado) > 0) {
                     foreach ($resultado as $row) {
+               
                 ?>
                         <tr>
                             <td class="border px-4 py-2"><?php echo $row["cedula"]; ?></td>
                             <td class="border px-4 py-2"><?php echo $row["primer_nombre"] . " " . $row["primer_apellido"]; ?></td>
+                          
+                    
                             <td>
                                 <button onclick='Eliminar(`<?php echo $row["cedula"]; ?>`)' class='table_button'>Eliminar</button>
                                 <button onclick='enviarRequest(`<?php echo $row["cedula"] . "`,`" . $row["primer_nombre"] . "`,`" . $row["segundo_nombre"] . "`,`" . $row["primer_apellido"] . "`,`" . $row["segundo_apellido"]; ?>`)' class='table_button'>Modificar</button>
@@ -65,30 +60,15 @@ include_once('../v_Sidebar/v_Sidebar.php');
                         </tr>
                 <?php
                     }
-                } else {
-                    echo "<tr><td colspan='3' class='border px-4 py-2'>No se encontraron resultados.</td></tr>";
-                }
+                } 
                 ?>
             </tbody>
         </table>
 
-        <?php
-        $totalPaginas = ceil($numFilas / $limit);
-        echo "<div class='paginacion'>";
-        if ($totalPaginas <= 10) {
-            for ($i = 1; $i <= $totalPaginas; $i++) {
-                echo "<a href='?pag_asig=$i' class='" . ($paginaActual == $i ? "seleccionado" : "") . "'>$i</a>";
-            }
-        } else {
-            for ($i = max(1, $paginaActual - 4); $i <= min($totalPaginas, $paginaActual + 5); $i++) {
-                echo "<a href='?pag_asig=$i' class='" . ($paginaActual == $i ? "seleccionado" : "") . "'>$i</a>";
-            }
-            if ($paginaActual + 5 < $totalPaginas) {
-                echo "... <a href='?pag_asig=$totalPaginas'>$totalPaginas</a>";
-            }
-        }
-        echo "</div>";
-        ?>
+         <!-- Mostrando El total de Paginas -->
+         <?php 
+        include_once("../v_paginado/v_PaginadoTotal.php");
+         ?>
     </div>
     <br>
 

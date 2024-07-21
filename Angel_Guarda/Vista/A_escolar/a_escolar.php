@@ -38,22 +38,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
                 <tbody>
                 <?php
-                // Determina la página actual
-                if (!isset($_GET["pag_asig"])) {
-                    $paginaActual = 1; // Página predeterminada es la primera
-                } else {
-                    $paginaActual = $_GET["pag_asig"]; // Página actual obtenida de la URL
-                }
-
-                    $limit = $paginaActual * 5; // Límite de registros por página
-                    $offset = $limit - 5; // Offset para la consulta SQL
-                    $objeto = new query();
-                    $resultado = $objeto->GenerarTabla($offset, $limit); // Obtener los registros de la página actual
-                    $numFilas = $objeto->TotalPaginas(); // Obtener el número total de registros
-
-                // Iterar sobre los resultados y mostrarlos en la tabla
-                for ($i = 0; $i < count($resultado); $i++) {
-                ?>
+                    include_once("../v_paginado/v_paginadoConsulta.php");
+                    //Variable de la Consulta del Paginado
+                    for ($i = 0; $i < count($resultado); $i++) {
+            ?>
 
                 <tr>
     			    <td class="border px-4 py-2"><?php echo $resultado[$i]["nombre"]?></td>
@@ -67,41 +55,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <?php } ?>
             </tbody>
                 </table>
-
-                <?php
-                // Calcular el total de páginas
-                $totalpag = ceil($numFilas / 5);
-                echo "<div class='paginacion'>";
-
-                // Si el total de páginas es menor o igual a 10, mostrar todas las páginas
-                if ($totalpag <= 10) {
-                    for ($i = 1; $i < $totalpag + 1; $i++) {
-                        if ($paginaActual == $i) {
-                            echo "<a href=?pag_asig=" . $i . " class='seleccionado'>" . $i . "</a>";
-                        } else {
-                            echo "<a href=?pag_asig=" . $i . ">" . $i . "</a>";
-                        }
-                    }
-                } else {
-                    // Mostrar un rango de páginas alrededor de la página actual
-                    for ($i = $paginaActual - 4; $i < $paginaActual + 7; $i++) {
-                        if ($i <= 0) {
-                            $i = 1; // Asegurarse de no mostrar números negativos o cero
-                        }
-                        if ($i > $totalpag) {
-                            break; // Romper el bucle si el índice supera el total de páginas
-                        }
-                        if ($paginaActual == $i) {
-                            echo "<a href=?pag_asig=" . $i . " class='seleccionado'>" . $i . "</a>";
-                        } else {
-                            echo "<a href=?pag_asig=" . $i . ">" . $i . "</a>";
-                        }
-                    }
-                    if ($paginaActual + 7 < $totalpag) {
-                        echo "...";
-                    }
-                }
-                echo "</div>";
+                <?php 
+                include_once("../v_paginado/v_PaginadoTotal.php");
                 ?>
             </div>
      
