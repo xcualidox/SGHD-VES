@@ -12,15 +12,17 @@ include_once('../v_Sidebar/v_Sidebar.php');
 <script type="text/javascript" src="../../../javascript/horario/intervalo.js"></script>
 
 <div class="main-content">
-<div class="flex flex-row justify-end items-center md:space-x-2 p-4 md:p-0">
-<h1 class="text-xl font-semibold mb-2 md:mb-0">Intervalos Entre Horarios</h1>
+<div class="flex flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
+    <h1 class="text-xl font-semibold mb-2 md:mb-0">Intervalos Entre Horarios</h1>
 
    
    
 
         <!-- Este DIV es para ocultar la tabla -->
         <div class="boton2" style="display: none;" id="boton2"></div>
-        <img src="../../../images/icons/añadir.svg" class="w-10 bg-green-500 hover:bg-green-400  rounded-full cursor-pointer" alt="Añadir" id="boton1" onclick="Mostrar()">
+        <div class="  bg-gray-100 rounded-full ">
+            <img src="../../../images/icons/añadir.svg" class="w-10 filtro-verde" alt="Añadir" id="boton1" onclick="Mostrar()">
+        </div>
      
        
        

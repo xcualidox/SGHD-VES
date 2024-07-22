@@ -12,20 +12,9 @@ include_once('../v_Sidebar/v_Sidebar.php');
 <script type="text/javascript" src="../../../javascript/horario/profesor.js"></script>
 
 <div class="main-content">
-    <div class="flex flex-row justify-end items-center md:space-x-2 p-4 md:p-0">
-        <h1 class="text-xl font-semibold mb-2 md:mb-0">Profesores</h1>
-
-        <!-- Este DIV es para ocultar la tabla -->
-        <div class="boton2" style="display: none;" id="boton2"></div>
-        <img src="../../../images/icons/añadir.svg" class="w-10 bg-green-500 hover:bg-green-400  rounded-full cursor-pointer" alt="Añadir" id="boton1" onclick="Mostrar()">
-        <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
-        <select name="selectListar" id="selectListar" class="border rounded px-2 py-1 w-auto">
-            <option value="">Todos</option>
-            <option value="1">DatoxD</option>
-            <option value="0">Prueba</option>
-        </select>
-       
-    </div>
+    <?php
+    include_once("../v_Buscar/v_BuscarHeader.php");
+    ?>
 
     <div class="table-wrapper min-w-full">
         <table class="fl-table">

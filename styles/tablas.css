@@ -5,7 +5,8 @@
     --color-tertiary: #7fccc3;  /* Fondo claro */
     --color-highlight: #b6e0e5;  /* Azul verdoso */
     --color--active:#5f7577;
-   
+    --filtroPrimario: brightness(0) saturate(100%) invert(18%) sepia(86%) saturate(4958%) hue-rotate(168deg) brightness(94%) contrast(101%);
+    --filtroSecundario:filter: brightness(0) saturate(100%) invert(87%) sepia(79%) saturate(292%) hue-rotate(161deg) brightness(93%) contrast(93%);
     --color-background: #e0f2f1;  /* Fondo claro */
     --color-text: #ffffff;  /* Texto blanco */
     --color-text-dark: #004d40;  /* Texto verde oscuro */
@@ -28,6 +29,16 @@
 
 /* Estilos generales */
 
+
+
+.filtro-verde  {
+    filter: var(  --filtroPrimario);
+    cursor: pointer;
+    transition: 0.5s; /* Aplicar transición al img también si es necesario */
+}
+.filtro-verde:hover{
+    transform: scale(1.1);
+}
 
 thead {
     background-color: var(--color-highlight);
