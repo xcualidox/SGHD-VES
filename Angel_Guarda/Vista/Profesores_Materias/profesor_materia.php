@@ -57,23 +57,9 @@ include_once('../v_Sidebar/v_Sidebar.php');
         </table>
 
          <!-- Mostrando El total de Paginas -->
-         <?php
-        $totalPaginas = ceil($numFilas / $limit);
-        echo "<div class='paginacion'>";
-        if ($totalPaginas <= 10) {
-            for ($i = 1; $i <= $totalPaginas; $i++) {
-                echo "<a href='?pag_asig=$i' class='" . ($paginaActual == $i ? "seleccionado" : "") . "'>$i</a>";
-            }
-        } else {
-            for ($i = max(1, $paginaActual - 4); $i <= min($totalPaginas, $paginaActual + 5); $i++) {
-                echo "<a href='?pag_asig=$i' class='" . ($paginaActual == $i ? "seleccionado" : "") . "'>$i</a>";
-            }
-            if ($paginaActual + 5 < $totalPaginas) {
-                echo "... <a href='?pag_asig=$totalPaginas'>$totalPaginas</a>";
-            }
-        }
-        echo "</div>"; 
-        ?>
+         <?php 
+        include_once("../v_paginado/v_PaginadoTotal.php");
+         ?>
     </div>
     <br>
 

@@ -36,7 +36,7 @@ class zona extends database_connect{
 		return $this->fetch_all_query($this->query($sql,""));
     }
     function TotaldePagina() {
-      $sql= "SELECT personas.cedula, personas.primer_nombre, personas.primer_apellido
+      $sql= "SELECT DISTINCT personas.cedula, personas.primer_nombre, personas.primer_apellido
       FROM personas
       INNER JOIN profesores_materias ON personas.cedula = profesores_materias.profesor";
 		return count($this->fetch_all_query($this->query($sql,"")));
