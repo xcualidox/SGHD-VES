@@ -1,3 +1,4 @@
+
 :root {
     /* Definir los colores */
     --color-primary: #058671;  /* Verde oscuro */
@@ -27,9 +28,10 @@
     }
 }
 
+
 /* Estilos generales */
 
-
+/* Inicio Filtro SVG*/
 
 .filtro-verde  {
     filter: var(  --filtroPrimario);
@@ -39,6 +41,10 @@
 .filtro-verde:hover{
     transform: scale(1.1);
 }
+
+/* Fin  Filtro para SVG */
+
+/* Iniciando Tablas*/
 
 thead {
     background-color: var(--color-highlight);
@@ -88,11 +94,13 @@ thead {
     cursor: pointer;
     border-radius: 4px;
     text-transform: uppercase;
+    transition: all .5s ease;
 }
 
 
 .table_button:hover {
     background-color: var(--color-secondary);
+    transform: scale(1.1);
 }
 
 .desactivar {
@@ -127,7 +135,7 @@ thead {
     transform: scale(1.1);
 }
 
-
+/* Inicio Paginado */
 .paginacion {
   
     padding: 8px;
@@ -159,6 +167,18 @@ thead {
     color: var(--color-text);
 }
 
+/* Fin Paginado */
+
+/* Estilos para manejar texto largo en celdas */
+.fl-table td.long-text {
+    white-space: pre-wrap; /* Mantiene los saltos de línea */
+    word-wrap: break-word; /* Rompe palabras largas */
+    max-width: 200px; /* Ajusta según tus necesidades */
+    text-align: left; /* Alinea el texto a la izquierda para mejor legibilidad */
+}
+
+/* Lo de  Arriba  es para las tablas */
+
 .formulario__input {
     width: 100%;
     padding: 8px;
@@ -167,10 +187,65 @@ thead {
     border-radius: 4px;
 }
 
-/* Estilos para manejar texto largo en celdas */
-.fl-table td.long-text {
-    white-space: pre-wrap; /* Mantiene los saltos de línea */
-    word-wrap: break-word; /* Rompe palabras largas */
-    max-width: 200px; /* Ajusta según tus necesidades */
-    text-align: left; /* Alinea el texto a la izquierda para mejor legibilidad */
+
+
+.formulario {
+    display: none;
+    box-sizing: border-box;
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 30px;
+    width: 400px;
+    background: var(--color-background);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 4000;
+ 
+}
+
+.formulario__input {
+    width: 100%;
+    background: white;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+.formulario__input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+}
+
+label {
+    font-size: 14px;
+    color: var(--color-text-dark);
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+
+textarea{
+    width: 100%;
+    background: white;
+    border:none;
+    border:3px solid transparent;
+    border-radius: 3px;
+   height: 100%;
+    line-height: 20px;
+    padding:0 0 0 15px;
+    transition: .3s ease all;
+    resize: none;
+}
+
+textarea:focus{
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
 }

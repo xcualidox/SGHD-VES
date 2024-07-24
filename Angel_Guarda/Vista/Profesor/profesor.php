@@ -9,7 +9,9 @@ $title = 'Profesor';
 include_once('../v_Sidebar/v_Sidebar.php');
 ?>
 <!--Aqui se el css se toma del Padre que es Sidebar-->
+<script type="text/javascript" src="../../../javascript/horario/mostrarModal.js"></script>
 <script type="text/javascript" src="../../../javascript/horario/profesor.js"></script>
+
 
 <div class="main-content">
     <?php
@@ -59,26 +61,26 @@ include_once('../v_Sidebar/v_Sidebar.php');
    
    
 
-    <div class="formulario">
-        <form id="form" style="display: none;" name="pantalla" class='pantalla' method="POST" action="../../Control/profesor.php">
+         
+        <form id="form" style="display: none;" class="formulario" name="pantalla" class='pantalla' method="POST" action="../../Control/profesor.php">
+       
+
+            <label for="cedula">Cedula: </label>
+            <input type="text" id="cedula" name="cedula" placeholder="Cedula del Profesor" class="formulario__input" maxlength="25">
             <br>
 
-            <label for="cedula">Cedula: </label><br>
-            <input type="text" id="cedula" name="cedula" placeholder="Cedula del Profesor" class="formulario__input" maxlength="25">
-            <br><br>
-
-            <label for="primer_nombre">Primer Nombre: </label><br>
+            <label for="primer_nombre">Primer Nombre: </label>
             <input type="input" name="primer_nombre" id="primer_nombre" placeholder="Primer Nombre" class="formulario__input" maxlength="30">
             <br><br>
 
-            <label for="segundo_nombre">Segundo Nombre: </label><br>
+            <label for="segundo_nombre">Segundo Nombre: </label>
             <input type="input" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo Nombre" class="formulario__input" maxlength="30">
             <br><br>
-            <label for="primer_apellido">Primer Apellido: </label><br>
+            <label for="primer_apellido">Primer Apellido: </label>
             <input type="input" name="primer_apellido" id="primer_apellido" class="formulario__input" placeholder="Primer Apellido" maxlength="30">
             <br><br>
 
-            <label for="segundo_apellido">Segundo Apellido: </label><br>
+            <label for="segundo_apellido">Segundo Apellido: </label>
             <input type="input" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo Apellido" class="formulario__input" maxlength="30">
             <br><br>
 
@@ -87,7 +89,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button">
             <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
         </form>
-    </div>
+ 
 </div>
 
 </body>

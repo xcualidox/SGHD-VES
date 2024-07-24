@@ -2,32 +2,14 @@ var dato1="";
 var dato2="";
 var dato3="";
 
-function Mostrar(){
-    const btn = document.getElementById('boton1');
-    const btn2 = document.getElementById('boton2');
-    const form = document.getElementById('form');
-    const inputs= form.querySelectorAll('input');
-    inputs[0].value="";
-    inputs[1].value="";
-    if (form.style.display === 'none') {
-    // 👇️ this SHOWS the form
-        form.style.display = 'block';
-        btn2.style.display = 'block';
-        btn.style.display = 'none';
-    } else {
-    // 👇️ this HIDES the form
-        form.style.display = 'none';
-        btn2.style.display = 'none';
-        btn.style.display = 'block';
-    }
-}
+
 
 function Modificar(nombre, fechaI, fechaF) {
     var div=document.querySelector('#form');
     var inputs=div.querySelectorAll('input');
 
-    document.getElementById('boton1').style.display='none';
-    document.getElementById('boton2').style.display='block';
+    document.getElementById('boton1').style.display='block';
+    document.getElementById('boton2').style.display='none';
     div.style.display='block';
     inputs[0].value=nombre;
     inputs[1].value=fechaI;

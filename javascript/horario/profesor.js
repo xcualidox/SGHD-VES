@@ -4,32 +4,14 @@ var dato3="";
 var dato4="";
 var dato5="";
 
-function Mostrar(){
-    const btn = document.getElementById('boton1');
-    const btn2 = document.getElementById('boton2');
-    const form = document.getElementById('form');
-    const inputs= form.querySelectorAll('input');
-    inputs[0].value="";
-    inputs[1].value="";
-    if (form.style.display === 'none') {
-    // 👇️ this SHOWS the form
-        form.style.display = 'block';
-        btn2.style.display = 'block';
-        btn.style.display = 'none';
-    } else {
-    // 👇️ this HIDES the form
-        form.style.display = 'none';
-        btn2.style.display = 'none';
-        btn.style.display = 'block';
-    }
-}
+
 
 function Modificar(cedula, p_nombre, s_nombre, p_apellido, s_apellido) {
     var div=document.querySelector('#form');
     var inputs=div.querySelectorAll('input');
 
-    document.getElementById('boton1').style.display='none';
-    document.getElementById('boton2').style.display='block';
+    document.getElementById('boton1').style.display='block';
+    document.getElementById('boton2').style.display='none';
     div.style.display='block';
     inputs[0].value=cedula;
     inputs[1].value=p_nombre;

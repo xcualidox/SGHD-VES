@@ -9,7 +9,7 @@ include_once('../v_Sidebar/v_Sidebar.php')
 ?>
 
 
-
+<script type="text/javascript" src="../../../javascript/horario/mostrarModal.js"></script>
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <div class="main-content">
     <?php
@@ -58,20 +58,18 @@ include_once('../v_Sidebar/v_Sidebar.php')
        
         </div>
 
-        <br>
     
 
 
-        <div class="formulario">
-            <form id="form" style="display: none;" name="pantalla" class='pantalla' method="POST" action="../../Control/aula.php">
+            <form id="form" style="display: none;"  name="pantalla" class='formulario' method="POST" action="../../Control/aula.php">
                 <br>
 
-                <label for="nom">Nombre: </label><br>
+                <label for="nom">Nombre: </label>
                 <input type="text" id="nom" name="nom" maxlength="25" placeholder="Nombre del aula" class="formulario__input"> 
     
                 <br><br>
-                <label for="des">Descripcion: </label><br>
-                <textarea name="des" id="des" cols="30" rows="10" class="input" maxlength="100" placeholder="Descripcion de la aula (nombre, donde se encuentra, etc)"></textarea>
+                <label for="des">Descripcion: </label>
+                <textarea name="des" id="des" rows="4" class="input" maxlength="150" placeholder="Actividad a Desarrollar en el Aula"></textarea>
 
                 <input type="hidden" name="dis">
                 <br><br>
@@ -81,7 +79,7 @@ include_once('../v_Sidebar/v_Sidebar.php')
                 <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button">
                 <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
             </form>
-        </div>
+     
     </div>
 
     

@@ -12,6 +12,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 ?>
 <!-- Hereda del Padre Sidebar -->
 
+<script type="text/javascript" src="../../../javascript/horario/mostrarModal.js"></script>
 <script type="text/javascript" src="../../../javascript/horario/asignatura.js"></script>
 
     <div class="main-content">
@@ -50,16 +51,12 @@ include_once('../v_Sidebar/v_Sidebar.php');
          ?>
         </div>
 
-        <br>
-  
-
+ 
       
-        <div class="formulario">
-            
+    
 
-            <br>
-
-            <form id="form" style="display: none;" name="pantalla" class='pantalla' method="POST" action="../../Control/asignatura.php">
+            <form id="form" style="display: none;" class="formulario" name="pantalla" class='pantalla' method="POST" action="../../Control/asignatura.php">
+                
                 <br>
 
                 <label for="cod">Codigo: </label><br>
@@ -76,7 +73,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button">
                 <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
             </form>
-        </div>
+    
     </div>
 
 </body>

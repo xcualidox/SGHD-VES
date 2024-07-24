@@ -11,7 +11,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
 
-
+<script type="text/javascript" src="../../../javascript/horario/mostrarModal.js"></script>
     <script type="text/javascript" src="../../../javascript/horario/a_seccion.js"></script>
 
     <div class="main-content">
@@ -59,13 +59,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
       
 
-        <div class="formulario">
-            <br>
+            <form id="form" style="display: none;" name="pantalla" class='formulario pantalla' method="POST" action="../../Control/a_seccion.php">
+              
 
-            <form id="form" style="display: none;" name="pantalla" class='pantalla' method="POST" action="../../Control/a_seccion.php">
-                <br>
-
-                <label for="a">Año: </label><br>
+                <label for="a">Año: </label>
                 <select name="a" id="a" class="">
                     <option value="" hidden selected>Año del salon</option>
                     <option value="1ero">1er Año</option>
@@ -75,9 +72,9 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <option value="5to">5to Año</option>
                 </select>
     
-            
+            <br>
 
-                <label for="sec">Seccion: </label><br>
+                <label for="sec">Seccion: </label>
                 <select name="sec" id="sec" class="t">
                     <option value="" hidden selected>Seccion del salon</option>
                     <option value="A">A</option>
@@ -85,16 +82,19 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <option value="C">C</option>
                     <option value="D">D</option>
                     </select>
-
+           
+                    <br>
+                    <br>
              
 
                 <input type="hidden" name="ope" id='ope'>
                 <input type="hidden" name="origin" id='origin'>
                 <input type="hidden" name="origin2" id='origin2'>
+              
                 <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button">
                 <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
             </form>
-        </div>
+   
     </div>
 </body>
 </html>

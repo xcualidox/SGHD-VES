@@ -9,6 +9,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 ?>
 
    
+<script type="text/javascript" src="../../../javascript/horario/mostrarModal.js"></script>
     <script type="text/javascript" src="../../../javascript/horario/a_escolar.js"></script>
 
     <div class="main-content">
@@ -52,8 +53,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
        
 
-        <div class="formulario">
-            <form id="form" style="display: none;" name="pantalla" class='pantalla' method="POST" action="../../Control/a_escolar.php">
+            <form id="form" style="display: none;" name="pantalla" class='formulario' method="POST" action="../../Control/a_escolar.php">
                 <br>
 
                 <label for="nom">Nombre: </label><br>
@@ -76,7 +76,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button">
                 <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
             </form>
-        </div>
+      
     </div>
 
 </body>

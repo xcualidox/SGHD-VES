@@ -33,9 +33,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 $asignaturas = $objeto->ListAsignaturas();
                 $profesores = $objeto->ProfesoresMaterias();
 
-             
+           
                 if (is_array($resultado) && count($resultado) > 0) {
                     foreach ($resultado as $row) {
+                       
                
                 ?>
                         <tr>
@@ -56,9 +57,23 @@ include_once('../v_Sidebar/v_Sidebar.php');
         </table>
 
          <!-- Mostrando El total de Paginas -->
-         <?php 
-        include_once("../v_paginado/v_PaginadoTotal.php");
-         ?>
+         <?php
+        $totalPaginas = ceil($numFilas / $limit);
+        echo "<div class='paginacion'>";
+        if ($totalPaginas <= 10) {
+            for ($i = 1; $i <= $totalPaginas; $i++) {
+                echo "<a href='?pag_asig=$i' class='" . ($paginaActual == $i ? "seleccionado" : "") . "'>$i</a>";
+            }
+        } else {
+            for ($i = max(1, $paginaActual - 4); $i <= min($totalPaginas, $paginaActual + 5); $i++) {
+                echo "<a href='?pag_asig=$i' class='" . ($paginaActual == $i ? "seleccionado" : "") . "'>$i</a>";
+            }
+            if ($paginaActual + 5 < $totalPaginas) {
+                echo "... <a href='?pag_asig=$totalPaginas'>$totalPaginas</a>";
+            }
+        }
+        echo "</div>"; 
+        ?>
     </div>
     <br>
 
@@ -66,8 +81,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
     <div class="boton2" style="display: none;" id="boton2"></div>
     <!-- <script type="text/javascript" src="../Js/profesor_materia.js"></script> -->
-    <div class="formulario">
-        <form id="form" style="display: none;" name="pantalla" class='pantalla' method="POST" action="../../Control/profesor_materia.php">
+  
+        <form id="form" style="display: none;" name="pantalla" class='formulario' method="POST" action="../../Control/profesor_materia.php">
             <input type='text' id="add" name="add" hidden>
             <input type='text' id="origin" name="origin" hidden>
             <br>
@@ -108,7 +123,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <button type="button" id="btn3" onclick="Enviar()" class="table_button">Incluir</button>
             <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
         </form>
-    </div>
+   
 </div>
 
 <script type="text/javascript" src="../../../javascript/horario/profesor_materia.js"></script>

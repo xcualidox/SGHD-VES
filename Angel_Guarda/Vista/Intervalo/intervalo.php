@@ -9,6 +9,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 ?>
 
 
+<script type="text/javascript" src="../../../javascript/horario/mostrarModal.js"></script>
 <script type="text/javascript" src="../../../javascript/horario/intervalo.js"></script>
 
 <div class="main-content">
@@ -69,16 +70,16 @@ include_once('../v_Sidebar/v_Sidebar.php');
          ?>
    
     <div class="boton2" style="display: none;" id="boton2"></div>
-    <div class="formulario">
-        <form id="form" style="display: none;" name="pantalla" class='pantalla' method="POST" action="../../Control/intervalo.php">
-            <label for="nom">Tiempo de Intervalo: </label><br>
+ 
+        <form id="form" style="display: none;"class="formulario" name="pantalla"  method="POST" action="../../Control/intervalo.php">
+            <label for="nom">Tiempo de Intervalo: </label>
             <input type="text" id="nom" name="nom" maxlength="3" placeholder="Intervalo de tiempo para el Horario" class="formulario__input"> 
             <input type="hidden" name="ope" id='ope'>
             <input type="hidden" name="origin" id='origin'>
             <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button">
             <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
         </form>
-    </div>
+ 
 </div>
 </body>
 </html>

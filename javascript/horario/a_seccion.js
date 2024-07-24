@@ -1,25 +1,7 @@
 var dato1="";
 var dato2="";
 
-function Mostrar(){
-    const btn = document.getElementById('boton1');
-    const btn2 = document.getElementById('boton2');
-    const form = document.getElementById('form');
-    const inputs= form.querySelectorAll('input');
-    inputs[0].value="";
-    inputs[1].value="";
-    if (form.style.display === 'none') {
-    // 👇️ this SHOWS the form
-        form.style.display = 'block';
-        btn2.style.display = 'block';
-        btn.style.display = 'none';
-    } else {
-    // 👇️ this HIDES the form
-        form.style.display = 'none';
-        btn2.style.display = 'none';
-        btn.style.display = 'block';
-    }
-}
+
 
 function Eliminar(ano, seccion) {
     document.getElementById('origin').value=ano;
@@ -35,8 +17,8 @@ function Modificar(ano, seccion) {
     var div=document.querySelector('#form');
     var inputs1=div.querySelectorAll('#a');
     var inputs2=div.querySelectorAll('#sec');
-    document.getElementById('boton1').style.display='none';
-    document.getElementById('boton2').style.display='block';
+    document.getElementById('boton1').style.display='block';
+    document.getElementById('boton2').style.display='none';
     div.style.display='block';
     inputs1[0].value=ano;
     inputs2[0].value=seccion;

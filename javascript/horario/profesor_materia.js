@@ -14,7 +14,7 @@ for (let index = 0; index < lista.length; index++) {
             document.getElementById(lista[index].id).style.color='';
             
         }
-        document.getElementById(lista[index].id).style.backgroundColor='rgb(60, 87, 236)';
+        document.getElementById(lista[index].id).style.backgroundColor='#00796b';
         document.getElementById(lista[index].id).style.color='white';
         indice=lista[index].id;
     })
@@ -49,8 +49,8 @@ function Mostrar(){
     if (form.style.display === 'none') {
     // 👇️ this SHOWS the form
         form.style.display = 'block';
-        btn2.style.display = 'block';
-        btn.style.display = 'none';
+        btn2.style.display = 'none';
+        btn.style.display = 'block';
     } else {
     // 👇️ this HIDES the form
         form.style.display = 'none';
