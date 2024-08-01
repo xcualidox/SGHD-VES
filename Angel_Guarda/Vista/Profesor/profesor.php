@@ -44,8 +44,14 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <td class="border px-4 py-2"><?php echo $resultado[$i]["primer_apellido"] ?></td>
             <td class="border px-4 py-2"><?php echo $resultado[$i]["segundo_apellido"] ?></td>
             <td class="border px-4 py-2 text-center">
-                <button onclick='Eliminar(`<?php echo $resultado[$i]["cedula"]; ?>`)' class='table_button'>Eliminar</button>
-                <button onclick='Modificar(`<?php echo $resultado[$i]["cedula"]; ?>`,`<?php echo $resultado[$i]["primer_nombre"]; ?>`,`<?php echo $resultado[$i]["segundo_nombre"]; ?>`,`<?php echo $resultado[$i]["primer_apellido"]; ?>`,`<?php echo $resultado[$i]["segundo_apellido"]; ?>`)' class='table_button'>Modificar</button>
+
+            <div class=" flex justify-center">
+                    <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" onclick='Eliminar(`<?php echo $resultado[$i]["cedula"]; ?>`)' >
+                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"onclick='Modificar(`<?php echo $resultado[$i]["cedula"]; ?>`,`<?php echo $resultado[$i]["primer_nombre"]; ?>`,`<?php echo $resultado[$i]["segundo_nombre"]; ?>`,`<?php echo $resultado[$i]["primer_apellido"]; ?>`,`<?php echo $resultado[$i]["segundo_apellido"]; ?>`)' >
+                </div>
+             
+              
+            
             </td>
         </tr>
         <?php } ?>
@@ -63,7 +69,11 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
          
         <form id="form" style="display: none;" class="formulario" name="pantalla" class='pantalla' method="POST" action="../../Control/profesor.php">
-       
+        <div class=" flex justify-end ">
+                <div class="  bg-red-500  w-10  rounded-full ">
+                    <img src="../../../images/icons/error.svg" class=" filtro-blanco" alt="Añadir" title="Cerrar" id="boton1" onclick="Mostrar()">
+                </div>
+            </div>
 
             <label for="cedula">Cedula: </label>
             <input type="text" id="cedula" name="cedula" placeholder="Cedula del Profesor" class="formulario__input" maxlength="25">
@@ -86,8 +96,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
             <input type="hidden" name="ope" id='ope'>
             <input type="hidden" name="origin" id='origin'>
-            <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button">
-            <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
+            <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button w-full">
+          
         </form>
  
 </div>

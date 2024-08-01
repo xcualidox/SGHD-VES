@@ -42,8 +42,16 @@ include_once('../v_Sidebar/v_Sidebar.php');
     			    <td class="border px-4 py-2"><?php echo $resultado[$i]["ano"]?></td>
     			    <td class="border px-4 py-2"><?php echo $resultado[$i]["seccion"]?></td>
                     <td class="">
-                        <button onclick='Eliminar(`<?php echo $resultado[$i]["ano"]; ?>`,`<?php echo $resultado[$i]["seccion"];?>`)' class='table_button'>Eliminar</button>
-                        <button onclick='Modificar(`<?php echo $resultado[$i]["ano"]; ?>`,`<?php echo $resultado[$i]["seccion"];?>`)' class='table_button'>Modificar</button>
+
+
+                    <div class=" flex justify-center">
+                    <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" 
+                    onclick='Eliminar(`<?php echo $resultado[$i]["ano"]; ?>`,`<?php echo $resultado[$i]["seccion"];?>`)' >
+                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"
+                    onclick='Modificar(`<?php echo $resultado[$i]["ano"]; ?>`,`<?php echo $resultado[$i]["seccion"];?>`)'  >
+                </div>
+                    
+                  
                     </td>
                     </tr>
                 <?php } ?>
@@ -60,9 +68,14 @@ include_once('../v_Sidebar/v_Sidebar.php');
       
 
             <form id="form" style="display: none;" name="pantalla" class='formulario pantalla' method="POST" action="../../Control/a_seccion.php">
-              
+            <div class=" flex justify-end ">
+                <div class="  bg-red-500  w-10  rounded-full ">
+                    <img src="../../../images/icons/error.svg" class=" filtro-blanco" alt="Añadir" title="Cerrar" id="boton1" onclick="Mostrar()">
+                </div>
+            </div>
 
                 <label for="a">Año: </label>
+                <br>
                 <select name="a" id="a" class="">
                     <option value="" hidden selected>Año del salon</option>
                     <option value="1ero">1er Año</option>
@@ -72,9 +85,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <option value="5to">5to Año</option>
                 </select>
     
-            <br>
+            <br><br>
 
                 <label for="sec">Seccion: </label>
+                <br>
                 <select name="sec" id="sec" class="t">
                     <option value="" hidden selected>Seccion del salon</option>
                     <option value="A">A</option>
@@ -91,8 +105,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <input type="hidden" name="origin" id='origin'>
                 <input type="hidden" name="origin2" id='origin2'>
               
-                <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button">
-                <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
+                <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button w-full">
+              
             </form>
    
     </div>

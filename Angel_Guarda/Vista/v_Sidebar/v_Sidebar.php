@@ -11,8 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../../styles/a_escolar.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
     <link rel="stylesheet" href="../../../styles/main.css">
 
     <link rel="stylesheet" href="../../../styles/tablas.css">
@@ -52,7 +51,7 @@
             <li>
                 <a href="../Profesores_Materias/profesor_materia.php" title='Profesor PENSUM'>
                     <i class='bx bxs-bookmark-star'></i>
-                    <span class="nav-item">Clases</span>
+                    <span class="nav-item">PEMSUN</span>
                 </a>
                 <span class="tooltip">PENSUM</span>
             </li>

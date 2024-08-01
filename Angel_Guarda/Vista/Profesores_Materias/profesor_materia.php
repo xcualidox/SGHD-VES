@@ -45,8 +45,14 @@ include_once('../v_Sidebar/v_Sidebar.php');
                           
                     
                             <td>
-                                <button onclick='Eliminar(`<?php echo $row["cedula"]; ?>`)' class='table_button'>Eliminar</button>
-                                <button onclick='enviarRequest(`<?php echo $row["cedula"] . "`,`" . $row["primer_nombre"] . "`,`" . $row["segundo_nombre"] . "`,`" . $row["primer_apellido"] . "`,`" . $row["segundo_apellido"]; ?>`)' class='table_button'>Modificar</button>
+
+                                 <div class=" flex justify-center">
+                    <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" onclick='Eliminar(`<?php echo $row["cedula"]; ?>`)'  >
+                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1" onclick='enviarRequest(`<?php echo $row["cedula"] . "`,`" . $row["primer_nombre"] . "`,`" . $row["segundo_nombre"] . "`,`" . $row["primer_apellido"] . "`,`" . $row["segundo_apellido"]; ?>`)'  >
+                </div>
+             
+                               
+                           
                             </td>
                         </tr>
                 <?php
@@ -69,6 +75,12 @@ include_once('../v_Sidebar/v_Sidebar.php');
     <!-- <script type="text/javascript" src="../Js/profesor_materia.js"></script> -->
   
         <form id="form" style="display: none;" name="pantalla" class='formulario' method="POST" action="../../Control/profesor_materia.php">
+        <div class=" flex justify-end ">
+                <div class="  bg-red-500  w-10  rounded-full ">
+                    <img src="../../../images/icons/error.svg" class=" filtro-blanco" alt="Añadir" title="Cerrar" id="boton1" onclick="Mostrar()">
+                </div>
+            </div>
+        
             <input type='text' id="add" name="add" hidden>
             <input type='text' id="origin" name="origin" hidden>
             <br>
@@ -106,8 +118,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <button type='button' style='cursor:pointer;text-align:center;' onclick="Del()">Quitar</button>
             <br><br>
 
-            <button type="button" id="btn3" onclick="Enviar()" class="table_button">Incluir</button>
-            <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
+            <button type="button" id="btn3" onclick="Enviar()" class="table_button w-full">Guardar</button>
+          
         </form>
    
 </div>

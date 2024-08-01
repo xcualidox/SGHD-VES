@@ -49,14 +49,21 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <tr>
                     <td><?php echo $fila["intervalo"]; ?> Minutos</td>
                     <td>
-                        <button onclick='Eliminar(`<?php echo $fila["intervalo"]; ?>`)' class='table_button'>Eliminar</button>
-                        <button onclick='Modificar(`<?php echo $fila["intervalo"]; ?>`,`<?php echo $fila["estado"]; ?>`)' class='table_button'>Modificar</button>
+
+                <div class=" flex justify-center">
+                    <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" 
+                    onclick='Eliminar(`<?php echo $fila["intervalo"]; ?>`)' >
+                    <img src="../../../images/icons/modificar.svg"  class="w-10  mr-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"
+                    onclick='Modificar(`<?php echo $fila["intervalo"]; ?>`,`<?php echo $fila["estado"]; ?>`)'  >
+            
+                     
                         <?php if ($fila["estado"] == 1) { ?>
                             <button type='button' class='desactivar' onclick='Disponibilidad(`Desactivar`,`<?php echo $fila["id"]; ?>`)'>Desactivar</button>
                         <?php } else { ?>
                             <button type='button' class='activar' onclick='Disponibilidad(`Activar`,`<?php echo $fila["id"]; ?>`)'>Activar</button>
                         <?php } ?>
                     </td>
+                    </div>
                 </tr>
             <?php
             }
@@ -72,12 +79,18 @@ include_once('../v_Sidebar/v_Sidebar.php');
     <div class="boton2" style="display: none;" id="boton2"></div>
  
         <form id="form" style="display: none;"class="formulario" name="pantalla"  method="POST" action="../../Control/intervalo.php">
+
+        <div class=" flex justify-end ">
+                <div class="  bg-red-500  w-10  rounded-full ">
+                    <img src="../../../images/icons/error.svg" class=" filtro-blanco" alt="Añadir" title="Cerrar" id="boton1" onclick="Mostrar()">
+                </div>
+            </div>
             <label for="nom">Tiempo de Intervalo: </label>
             <input type="text" id="nom" name="nom" maxlength="3" placeholder="Intervalo de tiempo para el Horario" class="formulario__input"> 
             <input type="hidden" name="ope" id='ope'>
             <input type="hidden" name="origin" id='origin'>
-            <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button">
-            <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
+            <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button w-full">
+           
         </form>
  
 </div>

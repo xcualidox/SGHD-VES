@@ -10,7 +10,7 @@ include_once('../v_Sidebar/v_Sidebar.php')
 
 
 <script type="text/javascript" src="../../../javascript/horario/mostrarModal.js"></script>
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <div class="main-content">
     <?php
     include_once("../v_Buscar/v_BuscarHeader.php");
@@ -35,8 +35,11 @@ include_once('../v_Sidebar/v_Sidebar.php')
     			<td class="border px-4 py-2"><?php echo $resultado[$i]["nombre"]?></td>
                 <td class="border px-4 py-2"><?php echo $resultado[$i]["descripcion"]?></td>
                 <td class="">
-                    <button onclick='Eliminar(`<?php echo $resultado[$i]["nombre"]; ?>`)' class='table_button'>Eliminar</button>
-                    <button onclick='Modificar(`<?php echo $resultado[$i]["nombre"]; ?>`,`<?php echo $resultado[$i]["descripcion"];?>`)' class='table_button'>Modificar</button>
+
+                <div class=" flex justify-center">
+                    <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" onclick='Eliminar(`<?php echo $resultado[$i]["nombre"]; ?>`)'>
+                    <img src="../../../images/icons/modificar.svg"  class="w-10 mr-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"onclick='Modificar(`<?php echo $resultado[$i]["nombre"]; ?>`,`<?php echo $resultado[$i]["descripcion"];?>`)'  >
+             
                     <?php 
                     if ($resultado[$i]["disponibilidad"]==1) {
                         echo "<button type='button' class='desactivar' onclick='Disponibilidad(`Desactivar`,`".$resultado[$i]["nombre"]."`)'>Desactivar</button>";
@@ -46,6 +49,7 @@ include_once('../v_Sidebar/v_Sidebar.php')
                     }
                     ?>
                     </td>
+                    </div>    
                 </tr>
                 <?php } ?>
             </tbody>
@@ -62,6 +66,11 @@ include_once('../v_Sidebar/v_Sidebar.php')
 
 
             <form id="form" style="display: none;"  name="pantalla" class='formulario' method="POST" action="../../Control/aula.php">
+            <div class=" flex justify-end ">
+                <div class="  bg-red-500  w-10  rounded-full ">
+                    <img src="../../../images/icons/error.svg" class=" filtro-blanco" alt="Añadir" title="Cerrar" id="boton1" onclick="Mostrar()">
+                </div>
+            </div>
                 <br>
 
                 <label for="nom">Nombre: </label>
@@ -76,8 +85,8 @@ include_once('../v_Sidebar/v_Sidebar.php')
 
                 <input type="hidden" name="ope" id='ope'>
                 <input type="hidden" name="origin" id='origin'>
-                <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button">
-                <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
+                <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button w-full">
+        
             </form>
      
     </div>

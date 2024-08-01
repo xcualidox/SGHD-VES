@@ -38,8 +38,16 @@ include_once('../v_Sidebar/v_Sidebar.php');
     			    <td class="border px-4 py-2"><?php echo $resultado[$i]["fecha_inicio"]?></td>
                     <td class="border px-4 py-2"><?php echo $resultado[$i]["fecha_fin"]?></td>
                     <td >
-                        <button onclick='Eliminar(`<?php echo $resultado[$i]["nombre"]; ?>`)' class='table_button'>Eliminar</button>
-                        <button onclick='Modificar(`<?php echo $resultado[$i]["nombre"]; ?>`,`<?php echo $resultado[$i]["fecha_inicio"];?>`,`<?php echo $resultado[$i]["fecha_fin"];?>`)' class='table_button'>Modificar</button>
+
+                    
+                <div class=" flex justify-center">
+                    <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" 
+                    onclick='Eliminar(`<?php echo $resultado[$i]["nombre"]; ?>`)'  >
+                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"
+                    onclick='Modificar(`<?php echo $resultado[$i]["nombre"]; ?>`,`<?php echo $resultado[$i]["fecha_inicio"];?>`,`<?php echo $resultado[$i]["fecha_fin"];?>`)'  >
+                </div>
+                    
+                      
                     </td>
     			</tr>
                 <?php } ?>
@@ -54,7 +62,13 @@ include_once('../v_Sidebar/v_Sidebar.php');
        
 
             <form id="form" style="display: none;" name="pantalla" class='formulario' method="POST" action="../../Control/a_escolar.php">
-                <br>
+
+            <div class=" flex justify-end ">
+                <div class="  bg-red-500  w-10  rounded-full ">
+                    <img src="../../../images/icons/error.svg" class=" filtro-blanco" alt="Añadir" title="Cerrar" id="boton1" onclick="Mostrar()">
+                </div>
+            </div>
+    
 
                 <label for="nom">Nombre: </label><br>
                 <input type="text" id="nom" name="nom" placeholder="Nombre del año escolar" class="formulario__input"> 
@@ -73,8 +87,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
                 <input type="hidden" name="ope" id='ope'>
                 <input type="hidden" name="origin" id='origin'>
-                <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button">
-                <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
+                <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button w-full">
+              
             </form>
       
     </div>

@@ -37,8 +37,17 @@ include_once('../v_Sidebar/v_Sidebar.php');
     			    <td class="limitado1"><?php echo $resultado[$i]["codigo"]?></td>
     			    <td class="limitado2"><?php echo $resultado[$i]["nombre"]?></td>
                     <td class="no_style">
-                        <button onclick='Eliminar(`<?php echo $resultado[$i]["codigo"]; ?>`)' class='table_button'>Eliminar</button>
-                        <button onclick='Modificar(`<?php echo $resultado[$i]["codigo"]; ?>`,`<?php echo $resultado[$i]["nombre"];?>`)' class='table_button'>Modificar</button>
+
+                  
+             
+            </div>
+                <div class=" flex justify-center">
+                    <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" onclick='Eliminar(`<?php echo $resultado[$i]["codigo"]; ?>`)' >
+                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"onclick='Modificar(`<?php echo $resultado[$i]["codigo"]; ?>`,`<?php echo $resultado[$i]["nombre"];?>`)' >
+                </div>
+             
+                   
+                  
                     </td>
                     <?php } ?>
                     </tbody>
@@ -54,15 +63,20 @@ include_once('../v_Sidebar/v_Sidebar.php');
  
       
     
-
+                    <div>
+                        
             <form id="form" style="display: none;" class="formulario" name="pantalla" class='pantalla' method="POST" action="../../Control/asignatura.php">
-                
-                <br>
+
+            <div class=" flex justify-end ">
+                <div class="  bg-red-500  w-10  rounded-full ">
+                    <img src="../../../images/icons/error.svg" class=" filtro-blanco" alt="Añadir" title="Cerrar" id="boton1" onclick="Mostrar()">
+                </div>
+            </div>
+          
 
                 <label for="cod">Codigo: </label><br>
                 <input type="text" id="cod" name="cod" placeholder="Codigo de asignatura" class="formulario__input"> 
     
-                <br><br>
                 <label for="nom">Nombre: </label><br>
                 <input type="text" id="nom" name="nom" placeholder="Nombre de asignatura" class="formulario__input">
 
@@ -70,9 +84,11 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
                 <input type="hidden" name="ope" id='ope'>
                 <input type="hidden" name="origin" id='origin'>
-                <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button">
-                <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
+                <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button w-full">
+               
             </form>
+
+                    </div>
     
     </div>
 
