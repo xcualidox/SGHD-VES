@@ -22,7 +22,16 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <tr>
                     <td>Cedula</td>
                     <td>Nombre y Apellido</td>
-                    <td class='no_style'><a href="profesor_pdf.php"><button class='table_button'>PDF</button></a></td>
+                    <td class='no_style'>  
+                        <!-- No tiene Reporte el Pemsun -->
+                    <!-- <div class="flex justify-center ">
+                        
+                        <a href="profesor.pdf.php">
+                            <img src="../../../images/icons/pdf.svg" class="w-10  filtro-blanco "  alt="Reporte" title="Reporte" id="boton1" >
+                        </a>
+              
+                    </div> -->
+                </td>
                 </tr>
             </thead>
             <tbody>

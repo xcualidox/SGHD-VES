@@ -20,7 +20,15 @@ include_once('../v_Sidebar/v_Sidebar.php')
             <thead>
     			<td align="center">Nombre</td>
     			<td align="center">Descripcion</td>
-                <td class='no_style'></td>
+                <td class='no_style'>
+                <div class="flex justify-center ">
+                        
+                        <a href="aula_pdf.php">
+                            <img src="../../../images/icons/pdf.svg" class="w-10  filtro-blanco "  alt="Reporte" title="Reporte" id="boton1" >
+                        </a>
+                  
+                    </div>
+                </td>
     		</thead>
 
            
@@ -42,10 +50,16 @@ include_once('../v_Sidebar/v_Sidebar.php')
              
                     <?php 
                     if ($resultado[$i]["disponibilidad"]==1) {
-                        echo "<button type='button' class='desactivar' onclick='Disponibilidad(`Desactivar`,`".$resultado[$i]["nombre"]."`)'>Desactivar</button>";
+
+                        echo"";
+                        echo '<img src="../../../images/icons/check.svg" class="w-10 mr-10  filtro-verde" alt="Borrar" title="Desactivar" id="boton1" onclick="Disponibilidad(\'Desactivar\', \'' . $resultado[$i]["nombre"] . '\')">';
+
+
+                     
                     }
                     else {
-                        echo "<button type='button' class='activar' onclick='Disponibilidad(`Activar`,`".$resultado[$i]["nombre"]."`)'>Activar</button>";
+                        
+                        echo '<img src="../../../images/icons/checkbox.svg" class="w-10 mr-10 filtro-gris" alt="Borrar" title="Activar" id="boton1" onclick="Disponibilidad(\'Activar\', \'' . $resultado[$i]["nombre"] . '\')">';
                     }
                     ?>
                     </td>

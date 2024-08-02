@@ -235,7 +235,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
     </div>
     </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../../../javascript/libquery.js"></script>
 <script>
     let btn = document.querySelector('#btn');
     let sidebar = document.querySelector('.sidebar');

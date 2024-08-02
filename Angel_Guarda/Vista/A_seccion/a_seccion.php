@@ -28,7 +28,15 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <thead>
     				<td >Año</td>
     				<td >Seccion</td>
-                    <td class=''> <a href="a_seccion_pdf.php"><button class='table_button' style='margin-left:20px;'>PDF</button></a></td>
+                    <td class=''> <a href="a_seccion_pdf.php">
+                    <div class="flex justify-center ">
+                        
+                        <a href="a_seccion_pdf.php">
+                            <img src="../../../images/icons/pdf.svg" class="w-10  filtro-blanco "  alt="Reporte" title="Reporte" id="boton1" >
+                        </a>
+                  
+                    </div>
+                    </td>
     			</thead>
                 <tbody>
 
@@ -44,7 +52,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <td class="">
 
 
-                    <div class=" flex justify-center">
+                <div class=" flex justify-center">
                     <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" 
                     onclick='Eliminar(`<?php echo $resultado[$i]["ano"]; ?>`,`<?php echo $resultado[$i]["seccion"];?>`)' >
                     <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"

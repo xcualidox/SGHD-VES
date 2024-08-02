@@ -6,12 +6,16 @@
         <div class="  bg-gray-100 rounded-full ">
             <img src="../../../images/icons/añadir.svg" class="w-10 filtro-verde" alt="Añadir" title="Añadir" id="boton1" onclick="Mostrar()">
         </div>
-        <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
+    
         <select name="selectListar" id="selectListar" class="border rounded px-2 py-1 w-auto">
             <option value="">Todos</option>
             <option value="1">DatoxD</option>
             <option value="0">Prueba</option>
         </select>
-        <button class="table_button">Buscar</button>
+        <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
+        <!-- <button class="table_button">Buscar</button> -->
+        <div class="  bg-gray-100 rounded-full ">
+            <img src="../../../images/icons/buscar.svg" class="w-10 filtro-verde" alt="Buscar" title="Buscar" id="boton1" onclick="Mostrar()">
+        </div>
        
     </div>

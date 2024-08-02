@@ -56,11 +56,25 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <img src="../../../images/icons/modificar.svg"  class="w-10  mr-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"
                     onclick='Modificar(`<?php echo $fila["intervalo"]; ?>`,`<?php echo $fila["estado"]; ?>`)'  >
             
+                     <!-- 
+                    
+                      if ($resultado[$i]["disponibilidad"]==1) {
+
+                        echo"";
+                        echo '<img src="../../../images/icons/check.svg" class="w-10 mr-10  filtro-verde" alt="Borrar" title="Desactivar" id="boton1" onclick="Disponibilidad(\'Desactivar\', \'' . $resultado[$i]["nombre"] . '\')">';
+
+
                      
+                    }
+                    else {
+                        
+                        echo '<img src="../../../images/icons/checkbox.svg" class="w-10 mr-10 filtro-gris" alt="Borrar" title="Activar" id="boton1" onclick="Disponibilidad(\'Activar\', \'' . $resultado[$i]["nombre"] . '\')">';
+                    } -->
                         <?php if ($fila["estado"] == 1) { ?>
-                            <button type='button' class='desactivar' onclick='Disponibilidad(`Desactivar`,`<?php echo $fila["id"]; ?>`)'>Desactivar</button>
+                           
+                            <img src="../../../images/icons/check.svg" class="w-10 mr-10  filtro-verde" alt="Borrar" title="Desactivar" id="boton1"  onclick='Disponibilidad(`Desactivar`,`<?php echo $fila["id"]; ?>`)'>
                         <?php } else { ?>
-                            <button type='button' class='activar' onclick='Disponibilidad(`Activar`,`<?php echo $fila["id"]; ?>`)'>Activar</button>
+                            <img src="../../../images/icons/checkbox.svg" class="w-10 mr-10 filtro-gris" alt="Borrar" title="Activar" id="boton1" onclick='Disponibilidad(`Activar`,`<?php echo $fila["id"]; ?>`)'>
                         <?php } ?>
                     </td>
                     </div>

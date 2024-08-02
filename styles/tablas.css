@@ -5,14 +5,19 @@
     --color-secondary: #00796b;  /* Verde */
     --color-tertiary: #7fccc3;  /* Fondo claro */
     --color-highlight: #b6e0e5;  /* Azul verdoso */
+    --color-gris:#919494; /* Gris Claro */
     --color-rojo:#df0c0c; 
     --color-Azul:#0a47f0; 
+    --color-celeste:#18a2e2; 
     --color--active:#5f7577;
     --filtroPrimario: brightness(0) saturate(100%) invert(18%) sepia(86%) saturate(4958%) hue-rotate(168deg) brightness(94%) contrast(101%);
     --filtroSecundario:brightness(0) saturate(100%) invert(87%) sepia(79%) saturate(292%) hue-rotate(161deg) brightness(93%) contrast(93%);
     --filtroBlanco: brightness(0) saturate(100%) invert(100%) sepia(16%) saturate(0%) hue-rotate(165deg) brightness(103%) contrast(104%);
     --filtroRojo: brightness(0) saturate(100%) invert(15%) sepia(98%) saturate(3714%) hue-rotate(359deg) brightness(92%) contrast(113%);
     --filtroAzul: brightness(0) saturate(100%) invert(23%) sepia(79%) saturate(7298%) hue-rotate(229deg) brightness(95%) contrast(99%);
+    --filtroCeleste:brightness(0) saturate(100%) invert(57%) sepia(12%) saturate(7414%) hue-rotate(167deg) brightness(94%) contrast(89%);
+    --filtro-Gris: brightness(0) saturate(100%) invert(71%) sepia(6%) saturate(93%) hue-rotate(131deg) brightness(82%) contrast(83%);
+
 
     --color-background: #e0f2f1;  /* Fondo claro */
     --color-text: #ffffff;  /* Texto blanco */
@@ -71,6 +76,22 @@
     transition: 0.5s; /* Aplicar transición al img también si es necesario */
 }
 .filtro-azul:hover{
+    transform: scale(1.1);
+}
+.filtro-gris{
+    filter: var( --filtro-gris);
+    cursor: pointer;
+    transition: 0.5s; /* Aplicar transición al img también si es necesario */
+}
+.filtro-gris:hover{
+    transform: scale(1.1);
+}
+.filtro-celeste{
+    filter: var( --filtro-Celeste);
+    cursor: pointer;
+    transition: 0.5s; /* Aplicar transición al img también si es necesario */
+}
+.filtro-celeste:hover{
     transform: scale(1.1);
 }
 

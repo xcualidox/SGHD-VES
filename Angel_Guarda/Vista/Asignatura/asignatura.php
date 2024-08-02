@@ -25,7 +25,17 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <thead>
     				<td align="center">Codigo</td>
     				<td align="center">Nombre</td>
-                    <td class=''><a href="asignatura_pdf.php"><button class='table_button' >PDF</button></a></td>
+
+                 
+                    <td class=''>   
+                        <div class="flex justify-center ">
+                        
+                            <a href="asignatura_pdf.php">
+                                <img src="../../../images/icons/pdf.svg" class="w-10  filtro-blanco "  alt="Reporte" title="Reporte" id="boton1" >
+                            </a>
+                      
+                        </div>
+                    </td>
     			</thead>
                 <tbody>
                 <?php
