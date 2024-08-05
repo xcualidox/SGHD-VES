@@ -4,13 +4,18 @@ var dato2="";
 
 
 function Eliminar(ano, seccion) {
-    document.getElementById('origin').value=ano;
-    document.getElementById('origin2').value=seccion;
 
-    document.pantalla.ope.value = "Borrar";
 
-    alert('Este dato ha sido eliminado exitosamente');
-    document.pantalla.submit();
+    showConfirm("¿Está seguro de que desea eliminar este dato?", () => {
+        document.getElementById('origin').value=ano;
+        document.getElementById('origin2').value=seccion;
+
+        document.pantalla.ope.value = "Borrar";
+      
+        document.pantalla.submit();
+    });
+ 
+
 }
 
 function Modificar(ano, seccion) {
@@ -47,11 +52,17 @@ function Enviar(valor){
         var sec = document.getElementById('sec').value;
 
         if(a == "" || sec == ""){
-            alert("No puede dejar los campos vacios");
+        
+
+            showToast("No puede dejar los campos vacios", false);
         }
         else{
-            alert("El dato ha sido registrado exitosamente");
-            document.pantalla.submit();
+        
+            showToast("El dato ha sido registrado exitosamente", true);
+            setTimeout(() => {
+                document.pantalla.submit();
+            }, 1000);
+            
         }
     }
     else if(x=="Modificar"){
@@ -60,11 +71,11 @@ function Enviar(valor){
         var inp2 = inputs2[0].value;
 
         if(inp1 == "" || inp2 == ""){
-            alert("No puede dejar los campos vacios");
+            showToast("No puede dejar los campos vacios",false);
         }
 
         else if (inp1 == dato1 && inp2 == dato2){
-            alert("Los datos modificados no pueden quedar igual");
+            showToast("Los datos modificados no pueden quedar igual",true);
         }
 
         else{
@@ -74,8 +85,10 @@ function Enviar(valor){
             document.getElementById('origin').value=dato1;
             document.getElementById('origin2').value=dato2;
 
-            alert("Este dato ha sido modificado exitosamente");
-            div.submit();
+            showToast("Este dato ha sido modificado exitosamente",true);
+            setTimeout(() => {
+                div.submit();
+            }, 1000);
         }
     }
 }

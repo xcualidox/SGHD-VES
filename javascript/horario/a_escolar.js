@@ -24,10 +24,15 @@ function Modificar(nombre, fechaI, fechaF) {
 }
 
 function Eliminar(nombre) {
-    document.getElementById('origin').value=nombre;
-    document.querySelector('#ope').value="Borrar";
-    alert('Este dato ha sido eliminado exitosamente');
-    document.querySelector('#form').submit();
+
+
+
+    showConfirm("¿Está seguro de que desea eliminar este dato?", () => {
+        document.getElementById('origin').value=nombre;
+        document.querySelector('#ope').value="Borrar";
+       
+        document.querySelector('#form').submit();
+    });
 }
 
 function Enviar(valor){
@@ -47,23 +52,30 @@ function Enviar(valor){
         var fecF = document.querySelector('#fecF').value;
 
         if (nom == "" || fecI == "" || fecF == ""){
-            alert("No puede dejar los campos vacios");
+        
+            showToast("No puede dejar los campos vacio",false);
         }
     
         else if (document.getElementById('fecF').value < document.getElementById('fecI').value){
-            alert("La fecha final debe de ser mayor que la fecha inicial");
+           
+            showToast("La fecha final debe de ser mayor que la fecha inicial",false);
         }
     
         else if(document.getElementById('fecF').value == document.getElementById('fecI').value){
-            alert("Las fechas no pueden ser iguales");
+          
+            showToast("Las fechas no pueden ser iguales",false);
         }
     
         else{
             var nom2 = nom.toLowerCase();
             document.querySelector('#nom').value = nom2;
     
-            alert("Los datos han sido introducidos exitosamente");
-            document.pantalla.submit();
+            
+            showToast("Los datos han sido introducidos exitosamente",true);
+          
+            setTimeout(() => {
+                document.pantalla.submit();
+            }, 1000);
         }
     }
 
@@ -74,20 +86,24 @@ function Enviar(valor){
         var inp3 = inputs[2].value;
         
         if(inp1 == ""){
-            alert("Los datos no pueden estar vacios");
+ 
+            showToast("Los datos no pueden estar vacios",false);
         }
 
         else if (inp1 == dato1 && inp2 == dato2 && inp3 == dato3){
-            alert("Los datos no pueden ser iguales");
+           
+            showToast("Los datos no pueden ser iguales",false);
             console.log(inp2);
         }
 
         else if(inp3<inp2){
-            alert("La fecha final debe de ser mayor que la fecha inicial");
+          
+            showToast("La fecha final debe de ser mayor que la fecha inicial",false);
         }
 
         else if (inp3 == inp2){
-            alert("Las fechas no pueden ser iguales");
+          
+            showToast("Las fechas no pueden ser iguales",false);
         }
 
         else{
@@ -100,8 +116,11 @@ function Enviar(valor){
 
             document.getElementById('origin').value=dato1;
 
-            alert("Este dato ha sido modificado exitosamente");
-            document.pantalla.submit();
+          
+            showToast("Este dato ha sido modificado exitosamente",true);
+            setTimeout(() => {
+                document.pantalla.submit();
+            }, 1000);
         }
     }
 }

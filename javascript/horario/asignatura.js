@@ -20,7 +20,7 @@ function Eliminar(codigo) {
     showConfirm("¿Está seguro de que desea eliminar este dato?", () => {
         document.getElementById('origin').value = codigo;
         document.querySelector('#ope').value = "Borrar";
-        showToast('Este dato ha sido eliminado exitosamente', true);
+      
         document.querySelector('#form').submit();
     });
 }
@@ -47,11 +47,11 @@ function Enviar(valor) {
         } else if (nom.length > 25) {
             showToast("El nombre de la asignatura es muy largo", false);
         } else {
-            var cod2 = cod.toLowerCase();
+            var cod2 = cod.toUpperCase();
             var primL = nom.charAt(0);
             var primLM = primL.toUpperCase();
             var rest = nom.slice(1);
-            var restM = rest.toLowerCase();
+            var restM = rest.toUpperCase();
 
             var nom2 = primLM + restM;
 
@@ -60,7 +60,7 @@ function Enviar(valor) {
             showToast("Los datos han sido introducidos exitosamente", true);
             setTimeout(() => {
                 document.pantalla.submit();
-            }, 1500); // Espera 2.5 segundos antes de enviar el formulario
+            }, 1000); // Espera 1 segundos antes de enviar el formulario
         }
     } else if (x == "Modificar") {
         var inp1 = inputs[0].value;
@@ -74,25 +74,31 @@ function Enviar(valor) {
             var cod = document.querySelector('#cod').value;
             var nom = document.querySelector('#nom').value;
 
-            if (cod.length > 3) {
+            if (cod.length > 5) {
                 showToast("El codigo de la asignatura no puede tener mas de 3 letras", false);
             } else if (nom.length > 25) {
                 showToast("El nombre de la asignatura es muy largo", false);
             } else {
-                var cod2 = cod.toLowerCase();
+                var cod2 = cod.toUpperCase();
                 var primL = nom.charAt(0);
                 var primLM = primL.toUpperCase();
                 var rest = nom.slice(1);
-                var restM = rest.toLowerCase();
+                var restM = rest.toUpperCase();
 
                 var nom2 = primLM + restM;
 
                 document.querySelector('#cod').value = cod2;
                 document.querySelector('#nom').value = nom2;
 
+                
+
                 showToast("Este dato ha sido modificado exitosamente", true);
                 document.getElementById('origin').value = dato1;
-                div.submit();
+
+                setTimeout(() => {
+                    div.submit();
+                }, 1000);
+             
             }
         }
     }

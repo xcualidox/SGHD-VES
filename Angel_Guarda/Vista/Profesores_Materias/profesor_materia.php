@@ -132,7 +132,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         </form>
    
 </div>
-
+<script type="text/javascript" src="../../../javascript/horario/mostrarModal.js"></script>
 <script type="text/javascript" src="../../../javascript/horario/profesor_materia.js"></script>
 </body>
 </html>

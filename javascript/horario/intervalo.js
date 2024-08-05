@@ -17,10 +17,13 @@ function Modificar(nombre) {
 }
 
 function Eliminar(nombre) {
+
+    showConfirm('¿Desea Eliminar Este dato?',()=>{
     document.getElementById('origin').value=nombre;
     document.querySelector('#ope').value="Borrar";
-    alert('Este dato ha sido eliminado exitosamente');
+    
     document.querySelector('#form').submit();
+    });
 }
 function Disponibilidad(valor, nombre) {
     document.getElementById('ope').value=valor;
@@ -46,7 +49,8 @@ function Enviar(valor){
         var nom = document.querySelector('#nom').value; 
 
         if (nom == ""){
-            alert("No puede dejar los campos vacios");
+           
+            showToast("No puede dejar los campos vacios", false);
         }
 
         else{
@@ -59,8 +63,11 @@ function Enviar(valor){
 
             document.querySelector('#nom').value = nom2;
 
-            alert("Los datos han sido introducidos exitosamente");
-            document.pantalla.submit();
+            
+            showToast("Los datos han sido introducidos exitosamente", true);
+            setTimeout(() => {
+                document.pantalla.submit();
+            }, 1000);
         }    
     }
 
@@ -68,11 +75,14 @@ function Enviar(valor){
         var inp1 = inputs[0].value;
 
         if (inp1 == ""){
-            alert("No puede dejar los campos vacios");
+          
+            showToast("No puede dejar los campos vacios", false);
         }
 
         else if (inp1 == dato1){
-            alert("No puede dejar los mismos datos");
+          
+            
+            showToast("No puede dejar los mismos datos", false);
         }
 
         else{
@@ -87,9 +97,17 @@ function Enviar(valor){
 
             document.querySelector('#nom').value = nom2;
 
-            alert("Este dato ha sido modificado exitosamente");
+            showToast("Este dato ha sido modificado exitosamente", true);
             document.getElementById('origin').value=dato1;
-            div.submit();
+           
+            setTimeout(() => {
+                div.submit();
+            },1000);
+
+          
+            
+
+
         }
     }
 }
