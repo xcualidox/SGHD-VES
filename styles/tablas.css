@@ -6,7 +6,7 @@
     --color-tertiary: #7fccc3;  /* Fondo claro */
     --color-highlight: #b6e0e5;  /* Azul verdoso */
     --color-gris:#919494; /* Gris Claro */
-    --color-rojo:#df0c0c; 
+    --color-rojo:#b81414; 
     --color-Azul:#0a47f0; 
     --color-celeste:#18a2e2; 
     --color--active:#5f7577;
@@ -97,6 +97,73 @@
 
 
 /* Fin  Filtro para SVG */
+
+/* Inicio Toast (Ventanas emergentes) */
+
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: var(--color-text);
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    opacity: 0;
+    transition: opacity 0.5s, bottom 0.5s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
+
+/* Final Toast, Ventana Emergente*/
+
+
+/* Ventana de Confirmar Inicio  */
+
+.confirm-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.confirm-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.confirm-button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirm-button:hover {
+    background-color: #ddd;
+}
+
+
+/* Fin de Ventana de Confirmar */
 
 /* Iniciando Tablas*/
 
