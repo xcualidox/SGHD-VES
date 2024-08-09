@@ -300,13 +300,6 @@ thead {
 
 /* Lo de  Arriba  es para las tablas */
 
-.formulario__input {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    border: 1px solid var(--color-primary);
-    border-radius: 4px;
-}
 
 
 
@@ -344,6 +337,59 @@ thead {
     border-color: var(--color-primary);
     outline: none;
     box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+}
+
+.formulario-extenso {
+    display: none;
+    box-sizing: border-box;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    width: 90%; /* Aumentado para pantallas pequeñas */
+    max-width: 600px; /* Ajusta el ancho máximo */
+    background: var(--color-background);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 4000;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.formulario-extenso__input {
+    width: 100%;
+    background: white;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: border 0.3s ease;
+}
+
+.formulario-extenso__input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+}
+
+.formulario-extenso__row {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    gap: 20px; /* Espacio entre los elementos de la fila */
+}
+
+.formulario-extenso__column {
+    flex: 1;
+    min-width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+}
+
+@media (min-width: 768px) {
+    .formulario-extenso__column {
+        min-width: 48%; /* Dos columnas en pantallas medianas y grandes */
+    }
 }
 
 label {

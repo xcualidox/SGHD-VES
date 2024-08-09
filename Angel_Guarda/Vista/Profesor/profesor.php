@@ -82,49 +82,63 @@ include_once('../v_Sidebar/v_Sidebar.php');
    
 
          
-        <form id="form" style="display: none;" class="formulario" name="pantalla" class='pantalla' method="POST" action="../../Control/profesor.php">
-        <div class=" flex justify-end ">
-                <div class="  bg-red-500  w-10  rounded-full ">
-                    <img src="../../../images/icons/error.svg" class=" filtro-blanco" alt="Añadir" title="Cerrar" id="boton1" onclick="Mostrar()">
-                </div>
-            </div>
+        <form id="form" style="display: none;" class="formulario-extenso" name="pantalla" method="POST" action="../../Control/profesor.php">
+    <div class="flex justify-end">
+        <div class="bg-red-500 w-10 rounded-full">
+            <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar" id="boton1" onclick="Mostrar()">
+        </div>
+    </div>
 
+    <div class="formulario-extenso__row">
+        <div class="formulario-extenso__column">
             <label for="cedula">Cedula: </label>
-            <input type="text" id="cedula" name="cedula" placeholder="Cedula del Profesor" class="formulario__input" maxlength="25">
-            <br>
-
+            <input type="text" id="cedula" name="cedula" placeholder="Cedula del Profesor" class="formulario-extenso__input" maxlength="25">
+        </div>
+        <div class="formulario-extenso__column">
             <label for="primer_nombre">Primer Nombre: </label>
-            <input type="input" name="primer_nombre" id="primer_nombre" placeholder="Primer Nombre" class="formulario__input" maxlength="30">
-            <br><br>
+            <input type="input" name="primer_nombre" id="primer_nombre" placeholder="Primer Nombre" class="formulario-extenso__input" maxlength="30">
+        </div>
+    </div>
 
+    <div class="formulario-extenso__row">
+        <div class="formulario-extenso__column">
             <label for="segundo_nombre">Segundo Nombre: </label>
-            <input type="input" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo Nombre" class="formulario__input" maxlength="30">
-            <br><br>
+            <input type="input" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo Nombre" class="formulario-extenso__input" maxlength="30">
+        </div>
+        <div class="formulario-extenso__column">
             <label for="primer_apellido">Primer Apellido: </label>
-            <input type="input" name="primer_apellido" id="primer_apellido" class="formulario__input" placeholder="Primer Apellido" maxlength="30">
-            <br><br>
+            <input type="input" name="primer_apellido" id="primer_apellido" class="formulario-extenso__input" placeholder="Primer Apellido" maxlength="30">
+        </div>
+    </div>
 
+    <div class="formulario-extenso__row">
+        <div class="formulario-extenso__column">
             <label for="segundo_apellido">Segundo Apellido: </label>
-            <input type="input" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo Apellido" class="formulario__input" maxlength="30">
-            <br><br>
-
+            <input type="input" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo Apellido" class="formulario-extenso__input" maxlength="30">
+        </div>
+        <div class="formulario-extenso__column">
             <label for="direccion">Dirección: </label>
-            <input type="input" name="direccion" id="direccion" placeholder="Direccion" class="formulario__input" maxlength="150">
-            <br><br>
+            <input type="input" name="direccion" id="direccion" placeholder="Direccion" class="formulario-extenso__input" maxlength="150">
+        </div>
+    </div>
 
+    <div class="formulario-extenso__row">
+        <div class="formulario-extenso__column">
             <label for="telefono">Telefono: </label>
-            <input type="input" name="telefono" id="telefono" placeholder="Telefono" class="formulario__input" maxlength="14">
-            <br><br>
-
+            <input type="input" name="telefono" id="telefono" placeholder="Telefono" class="formulario-extenso__input" maxlength="14">
+        </div>
+        <div class="formulario-extenso__column">
             <label for="correo">Correo: </label>
-            <input type="input" name="correo" id="correo" placeholder="Correo" class="formulario__input" maxlength="255">
-            <br><br>
+            <input type="input" name="correo" id="correo" placeholder="Correo" class="formulario-extenso__input" maxlength="255">
+        </div>
+    </div>
 
-            <input type="hidden" name="ope" id='ope'>
-            <input type="hidden" name="origin" id='origin'>
-            <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button w-full">
-          
-        </form>
+    <input type="hidden" name="ope" id='ope'>
+    <input type="hidden" name="origin" id='origin'>
+    <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button w-full">
+</form>
+
+
  
 </div>
 
