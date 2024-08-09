@@ -3,10 +3,11 @@ var dato2="";
 var dato3="";
 var dato4="";
 var dato5="";
+var dato6="";
+var dato7="";
+var dato8="";
 
-
-
-function Modificar(cedula, p_nombre, s_nombre, p_apellido, s_apellido) {
+function Modificar(cedula, p_nombre, s_nombre, p_apellido, s_apellido, direccion, telefono, correo) {
     var div=document.querySelector('#form');
     var inputs=div.querySelectorAll('input');
 
@@ -18,6 +19,9 @@ function Modificar(cedula, p_nombre, s_nombre, p_apellido, s_apellido) {
     inputs[2].value=s_nombre;
     inputs[3].value=p_apellido;
     inputs[4].value=s_apellido;
+    inputs[5].value=direccion;
+    inputs[6].value=telefono;
+    inputs[7].value=correo;
 
     document.getElementById("ope").value='Modificar';
     
@@ -26,6 +30,9 @@ function Modificar(cedula, p_nombre, s_nombre, p_apellido, s_apellido) {
     dato3=s_nombre;
     dato4=p_apellido;
     dato5=s_apellido;
+    dato6=direccion;
+    dato7=telefono;
+    dato8=correo;
     console.log(dato1);
 }
 
@@ -54,8 +61,11 @@ function Enviar(valor){
         var s_nombre = inputs[2].value;
         var p_apellido = inputs[3].value;
         var s_apellido = inputs[4].value;
+        var direccion = inputs[5].value;
+        var telefono = inputs[6].value;
+        var correo = inputs[7].value;
 
-        if (cedula == "" || p_nombre == "" || s_nombre == ""|| p_apellido == "" || s_apellido == ""){
+        if (cedula == "" || p_nombre == "" || s_nombre == ""|| p_apellido == "" || s_apellido == "" || direccion == "" || telefono == "" || correo == ""){
             alert("No puede dejar los campos vacios");
         }
     
@@ -76,12 +86,15 @@ function Enviar(valor){
         var inp3 = inputs[2].value;
         var inp4 = inputs[3].value;
         var inp5 = inputs[4].value;
+        var inp6 = inputs[5].value;
+        var inp7 = inputs[6].value;
+        var inp8 = inputs[7].value;
 
-        if(inp1 == "" || inp2=="" || inp3=="" || inp4=="" || inp5==""){
+        if(inp1 == "" || inp2=="" || inp3=="" || inp4=="" || inp5=="" || inp6=="" || inp7=="" || inp8==""){
             alert("Los datos no pueden estar vacios");
         }
 
-        else if (inp1 == dato1 && inp2 == dato2 && inp3 == dato3 && inp4 == dato4 && inp5 == dato5){
+        else if (inp1 == dato1 && inp2 == dato2 && inp3 == dato3 && inp4 == dato4 && inp5 == dato5 && inp6 == dato6 && inp7 == dato7 && inp8 == dato8){
             alert("Los datos no pueden ser iguales");
         }
 

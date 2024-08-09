@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `proyecto`
 --
+
 CREATE DATABASE IF NOT EXISTS `proyecto` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci;
 USE `proyecto`;
 
@@ -264,20 +265,22 @@ CREATE TABLE `personas` (
   `primer_nombre` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `segundo_nombre` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `primer_apellido` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `segundo_apellido` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
+  `segundo_apellido` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `direccion` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `telefono` varchar(14) NOT NULL,
+  `correo` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
 -- Dumping data for table `personas`
 --
 
-INSERT INTO `personas` (`id`, `cedula`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`) VALUES
-(4, '11716900', 'JOHN', 'ENMANUEL', 'RAMIREZ', 'VALERO'),
-(5, '27564672', 'NIRETCIA', 'INMACULADA', 'RAMIREZ', 'VALERO'),
-(7, '332323', 'DSFDSF', 'DEFDSF', 'DSFDSF', 'DSFDS'),
-(8, '123', 'D', 'D', 'D', 'D'),
-(9, '321', 'A', 'A', 'A', 'A'),
-(10, '29629080', 'VICTOR', 'JULIO', 'GONZALES', 'MENDOZA');
+INSERT INTO `personas` (`id`, `cedula`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `direccion`, `telefono`,`correo`) VALUES
+(4, '11716900', 'JOHN', 'ENMANUEL', 'RAMIREZ', 'VALERO', 'Enrique Segoviano','+584169919122','cojggeo@equisde.com'),
+(5, '27564672', 'NIRETCIA', 'INMACULADA', 'RAMIREZ', 'VALERO', 'Venezuela, Portuguesa, Guanare Urbanizacion la Verguisa entre la calle 13 y 2 , casa numero 10','04161234567', 'equisde@gmail.com'),
+(7, '332323', 'DSFDSF', 'DEFDSF', 'DSFDSF', 'DSFDS', '.....................................................................................................................................................', '02556623425', 'test@test.test'),
+(8, '123', 'D', 'D', 'D', 'D','Direksion','04246646364','lol@lol.com');
 
 -- --------------------------------------------------------
 

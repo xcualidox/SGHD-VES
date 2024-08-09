@@ -27,6 +27,9 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <td >Segundo Nombre</td>
                     <td>Primer Apellido</td>
                     <td >Segundo Apellido</td>
+                    <td >Direccion</td>
+                    <td >Telefono</td>
+                    <td >Correo</td>
                     <td class='no_style'>   
                         <div class="flex justify-center ">
                         
@@ -51,11 +54,14 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <td class="border px-4 py-2"><?php echo $resultado[$i]["segundo_nombre"] ?></td>
             <td class="border px-4 py-2"><?php echo $resultado[$i]["primer_apellido"] ?></td>
             <td class="border px-4 py-2"><?php echo $resultado[$i]["segundo_apellido"] ?></td>
+            <td class="border px-4 py-2"><?php echo $resultado[$i]["direccion"] ?></td>
+            <td class="border px-4 py-2"><?php echo $resultado[$i]["telefono"] ?></td>
+            <td class="border px-4 py-2"><?php echo $resultado[$i]["correo"] ?></td>
             <td class="border px-4 py-2 text-center">
 
             <div class=" flex justify-center">
                     <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" onclick='Eliminar(`<?php echo $resultado[$i]["cedula"]; ?>`)' >
-                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"onclick='Modificar(`<?php echo $resultado[$i]["cedula"]; ?>`,`<?php echo $resultado[$i]["primer_nombre"]; ?>`,`<?php echo $resultado[$i]["segundo_nombre"]; ?>`,`<?php echo $resultado[$i]["primer_apellido"]; ?>`,`<?php echo $resultado[$i]["segundo_apellido"]; ?>`)' >
+                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"onclick='Modificar(`<?php echo $resultado[$i]["cedula"]; ?>`,`<?php echo $resultado[$i]["primer_nombre"]; ?>`,`<?php echo $resultado[$i]["segundo_nombre"]; ?>`,`<?php echo $resultado[$i]["primer_apellido"]; ?>`,`<?php echo $resultado[$i]["segundo_apellido"]; ?>`,`<?php echo $resultado[$i]["direccion"];?>`,`<?php echo $resultado[$i]["telefono"];?>`,`<?php echo $resultado[$i]["correo"];?>`)' >
                 </div>
              
               
@@ -100,6 +106,18 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
             <label for="segundo_apellido">Segundo Apellido: </label>
             <input type="input" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo Apellido" class="formulario__input" maxlength="30">
+            <br><br>
+
+            <label for="direccion">Dirección: </label>
+            <input type="input" name="direccion" id="direccion" placeholder="Direccion" class="formulario__input" maxlength="150">
+            <br><br>
+
+            <label for="telefono">Telefono: </label>
+            <input type="input" name="telefono" id="telefono" placeholder="Telefono" class="formulario__input" maxlength="14">
+            <br><br>
+
+            <label for="correo">Correo: </label>
+            <input type="input" name="correo" id="correo" placeholder="Correo" class="formulario__input" maxlength="255">
             <br><br>
 
             <input type="hidden" name="ope" id='ope'>
