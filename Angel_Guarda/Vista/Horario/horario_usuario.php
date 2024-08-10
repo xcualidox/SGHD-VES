@@ -1,7 +1,7 @@
 <?php
 session_start();
 $conexion=mysqli_connect("localhost", "root", "", "proyecto");
-if ($_SESSION["sesion"]!="usuario") {
+if ($_SESSION["sesion"]!="profesor") {
     header("Location: ../../../index.php");
 }
 ?>

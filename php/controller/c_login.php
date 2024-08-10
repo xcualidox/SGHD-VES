@@ -1,4 +1,8 @@
 <?php
+function passwordEncrypt($pw)
+{
+    return password_hash($pw, PASSWORD_DEFAULT);
+}
 if (isset($_POST["op"]))
 {
 require_once("../model/m_login.php");
@@ -181,10 +185,6 @@ function changePw($username, $pw)
     exit;
 }
 
-function passwordEncrypt($pw)
-{
-    return password_hash($pw, PASSWORD_DEFAULT);
-}
 function validateInput($username, $pw)
 {
     $pwRegex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_])[A-Za-z\d!@#$%^&*()\-_]{8,20}$/';
@@ -223,7 +223,7 @@ function login($username, $pw, $op)
                 header("Location: ../../Angel_guarda/Vista/Asignatura/asignatura.php");
                 // echo "angel";
             }
-            else if ($_SESSION['sesion'] == "usuario"){
+            else if ($_SESSION['sesion'] == "profesor"){
                 require_once("../../Angel_Guarda/Control/c_bitacora.php");
                 insertBitacora($username, "login", "$username ha ingresado al sistema.");
                 header("Location: ../..//Angel_guarda/Vista/Horario/horario_usuario.php");
@@ -248,6 +248,7 @@ function login($username, $pw, $op)
         exit();
     }
 }
+
 function logout()
 {
     session_start();
@@ -292,4 +293,15 @@ if (isset($_GET["op"]))
     exit();
 }
 logout();
+}
+// Crea un nuevo usuario 
+function createLogin($username, $rol)
+{
+    require_once(dirname(__DIR__)."/model/m_login.php");
+    $login = new Login();
+    $login->setUsername($username);
+    $login->setPassword(passwordEncrypt($username));
+    $login->setRol($rol);
+    return  $login->createLogin();
+
 }

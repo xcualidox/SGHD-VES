@@ -132,6 +132,17 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <input type="input" name="correo" id="correo" placeholder="Correo" class="formulario-extenso__input" maxlength="255">
         </div>
     </div>
+    <div class="formulario-extenso__row">
+        <div class="formulario-extenso__column">
+            <label for="profesorRol">Rol: </label>
+            <select name="rol" id="profesorRol">
+                <option value="" default selected disabled>Selecione un rol</option>
+                <option value="coordinador">Coordinador</option>
+                <option value="administrador">Administrador</option>
+                <option value="profesor">Profesor</option>
+            </select>
+        </div>
+    </div>
 
     <input type="hidden" name="ope" id='ope'>
     <input type="hidden" name="origin" id='origin'>
