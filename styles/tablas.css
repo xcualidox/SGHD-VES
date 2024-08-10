@@ -1,14 +1,28 @@
+
 :root {
     /* Definir los colores */
     --color-primary: #058671;  /* Verde oscuro */
     --color-secondary: #00796b;  /* Verde */
     --color-tertiary: #7fccc3;  /* Fondo claro */
     --color-highlight: #b6e0e5;  /* Azul verdoso */
+    --color-gris:#919494; /* Gris Claro */
+    --color-rojo:#b81414; 
+    --color-Azul:#0a47f0; 
+    --color-celeste:#18a2e2; 
     --color--active:#5f7577;
-   
+    --filtroPrimario: brightness(0) saturate(100%) invert(18%) sepia(86%) saturate(4958%) hue-rotate(168deg) brightness(94%) contrast(101%);
+    --filtroSecundario:brightness(0) saturate(100%) invert(87%) sepia(79%) saturate(292%) hue-rotate(161deg) brightness(93%) contrast(93%);
+    --filtroBlanco: brightness(0) saturate(100%) invert(100%) sepia(16%) saturate(0%) hue-rotate(165deg) brightness(103%) contrast(104%);
+    --filtroRojo: brightness(0) saturate(100%) invert(15%) sepia(98%) saturate(3714%) hue-rotate(359deg) brightness(92%) contrast(113%);
+    --filtroAzul: brightness(0) saturate(100%) invert(23%) sepia(79%) saturate(7298%) hue-rotate(229deg) brightness(95%) contrast(99%);
+    --filtroCeleste:brightness(0) saturate(100%) invert(57%) sepia(12%) saturate(7414%) hue-rotate(167deg) brightness(94%) contrast(89%);
+    --filtro-Gris: brightness(0) saturate(100%) invert(71%) sepia(6%) saturate(93%) hue-rotate(131deg) brightness(82%) contrast(83%);
+
+
     --color-background: #e0f2f1;  /* Fondo claro */
     --color-text: #ffffff;  /* Texto blanco */
     --color-text-dark: #004d40;  /* Texto verde oscuro */
+
 }
 
 @keyframes hoverAnimation {
@@ -26,8 +40,132 @@
     }
 }
 
+
 /* Estilos generales */
 
+/* Inicio Filtro SVG*/
+
+.filtro-verde  {
+    filter: var(  --filtroPrimario);
+    cursor: pointer;
+    transition: 0.5s; /* Aplicar transición al img también si es necesario */
+}
+.filtro-verde:hover{
+    transform: scale(1.1);
+}
+
+.filtro-blanco{
+    filter: var(  --filtroBlanco);
+    cursor: pointer;
+    transition: 0.5s; /* Aplicar transición al img también si es necesario */
+}
+.filtro-blanco:hover{
+    transform: scale(1.1);
+}
+.filtro-rojo{
+    filter: var( --filtroRojo);
+    cursor: pointer;
+    transition: 0.5s; /* Aplicar transición al img también si es necesario */
+}
+.filtro-rojo:hover{
+    transform: scale(1.1);
+}
+.filtro-azul{
+    filter: var( --filtroAzul);
+    cursor: pointer;
+    transition: 0.5s; /* Aplicar transición al img también si es necesario */
+}
+.filtro-azul:hover{
+    transform: scale(1.1);
+}
+.filtro-gris{
+    filter: var( --filtro-gris);
+    cursor: pointer;
+    transition: 0.5s; /* Aplicar transición al img también si es necesario */
+}
+.filtro-gris:hover{
+    transform: scale(1.1);
+}
+.filtro-celeste{
+    filter: var( --filtro-Celeste);
+    cursor: pointer;
+    transition: 0.5s; /* Aplicar transición al img también si es necesario */
+}
+.filtro-celeste:hover{
+    transform: scale(1.1);
+}
+
+
+/* Fin  Filtro para SVG */
+
+/* Inicio Toast (Ventanas emergentes) */
+
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: var(--color-text);
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    opacity: 0;
+    transition: opacity 0.5s, bottom 0.5s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
+
+/* Final Toast, Ventana Emergente*/
+
+
+/* Ventana de Confirmar Inicio  */
+
+.confirm-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.confirm-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.confirm-button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirm-button:hover {
+    background-color: #ddd;
+}
+
+
+/* Fin de Ventana de Confirmar */
+
+/* Iniciando Tablas*/
 
 thead {
     background-color: var(--color-highlight);
@@ -77,11 +215,13 @@ thead {
     cursor: pointer;
     border-radius: 4px;
     text-transform: uppercase;
+    transition: all .5s ease;
 }
 
 
 .table_button:hover {
     background-color: var(--color-secondary);
+    transform: scale(1.1);
 }
 
 .desactivar {
@@ -116,7 +256,7 @@ thead {
     transform: scale(1.1);
 }
 
-
+/* Inicio Paginado */
 .paginacion {
   
     padding: 8px;
@@ -148,13 +288,7 @@ thead {
     color: var(--color-text);
 }
 
-.formulario__input {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    border: 1px solid var(--color-primary);
-    border-radius: 4px;
-}
+/* Fin Paginado */
 
 /* Estilos para manejar texto largo en celdas */
 .fl-table td.long-text {
@@ -162,4 +296,126 @@ thead {
     word-wrap: break-word; /* Rompe palabras largas */
     max-width: 200px; /* Ajusta según tus necesidades */
     text-align: left; /* Alinea el texto a la izquierda para mejor legibilidad */
+}
+
+/* Lo de  Arriba  es para las tablas */
+
+
+
+
+.formulario {
+    display: none;
+    box-sizing: border-box;
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 30px;
+    width: 400px;
+    background: var(--color-background);
+    border-radius: 8px;
+    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 4000;
+ 
+}
+
+
+
+.formulario__input {
+    width: 100%;
+    background: white;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+.formulario__input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+}
+
+.formulario-extenso {
+    display: none;
+    box-sizing: border-box;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    width: 90%; /* Aumentado para pantallas pequeñas */
+    max-width: 600px; /* Ajusta el ancho máximo */
+    background: var(--color-background);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 4000;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.formulario-extenso__input {
+    width: 100%;
+    background: white;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: border 0.3s ease;
+}
+
+.formulario-extenso__input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+}
+
+.formulario-extenso__row {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    gap: 20px; /* Espacio entre los elementos de la fila */
+}
+
+.formulario-extenso__column {
+    flex: 1;
+    min-width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+}
+
+@media (min-width: 768px) {
+    .formulario-extenso__column {
+        min-width: 48%; /* Dos columnas en pantallas medianas y grandes */
+    }
+}
+
+label {
+    font-size: 14px;
+    color: var(--color-text-dark);
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+
+textarea{
+    width: 100%;
+    background: white;
+    border:none;
+    border:3px solid transparent;
+    border-radius: 3px;
+   height: 100%;
+    line-height: 20px;
+    padding:0 0 0 15px;
+    transition: .3s ease all;
+    resize: none;
+}
+
+textarea:focus{
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
 }

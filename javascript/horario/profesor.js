@@ -3,39 +3,25 @@ var dato2="";
 var dato3="";
 var dato4="";
 var dato5="";
+var dato6="";
+var dato7="";
+var dato8="";
 
-function Mostrar(){
-    const btn = document.getElementById('boton1');
-    const btn2 = document.getElementById('boton2');
-    const form = document.getElementById('form');
-    const inputs= form.querySelectorAll('input');
-    inputs[0].value="";
-    inputs[1].value="";
-    if (form.style.display === 'none') {
-    // 👇️ this SHOWS the form
-        form.style.display = 'block';
-        btn2.style.display = 'block';
-        btn.style.display = 'none';
-    } else {
-    // 👇️ this HIDES the form
-        form.style.display = 'none';
-        btn2.style.display = 'none';
-        btn.style.display = 'block';
-    }
-}
-
-function Modificar(cedula, p_nombre, s_nombre, p_apellido, s_apellido) {
+function Modificar(cedula, p_nombre, s_nombre, p_apellido, s_apellido, direccion, telefono, correo) {
     var div=document.querySelector('#form');
     var inputs=div.querySelectorAll('input');
 
-    document.getElementById('boton1').style.display='none';
-    document.getElementById('boton2').style.display='block';
+    document.getElementById('boton1').style.display='block';
+    document.getElementById('boton2').style.display='none';
     div.style.display='block';
     inputs[0].value=cedula;
     inputs[1].value=p_nombre;
     inputs[2].value=s_nombre;
     inputs[3].value=p_apellido;
     inputs[4].value=s_apellido;
+    inputs[5].value=direccion;
+    inputs[6].value=telefono;
+    inputs[7].value=correo;
 
     document.getElementById("ope").value='Modificar';
     
@@ -44,14 +30,19 @@ function Modificar(cedula, p_nombre, s_nombre, p_apellido, s_apellido) {
     dato3=s_nombre;
     dato4=p_apellido;
     dato5=s_apellido;
+    dato6=direccion;
+    dato7=telefono;
+    dato8=correo;
     console.log(dato1);
 }
 
 function Eliminar(nombre) {
+    showConfirm("¿Está seguro de que desea eliminar este dato?",()=>{
     document.getElementById('origin').value=nombre;
     document.querySelector('#ope').value="Borrar";
-    alert('Este dato ha sido eliminado exitosamente');
+
     document.querySelector('#form').submit();
+    });
 }
 
 function Enviar(valor){
@@ -72,18 +63,25 @@ function Enviar(valor){
         var s_nombre = inputs[2].value;
         var p_apellido = inputs[3].value;
         var s_apellido = inputs[4].value;
+        var direccion = inputs[5].value;
+        var telefono = inputs[6].value;
+        var correo = inputs[7].value;
 
-        if (cedula == "" || p_nombre == "" || s_nombre == ""|| p_apellido == "" || s_apellido == ""){
-            alert("No puede dejar los campos vacios");
+        if (cedula == "" || p_nombre == "" || s_nombre == ""|| p_apellido == "" || s_apellido == "" || direccion == "" || telefono == "" || correo == ""){
+            showToast("No puede dejar los campos vacios", false);
         }
     
         else if (regex.test(cedula)==false){
-            alert("La cedula no es correcta deben ser solo numeros");
+          
+            showToast("La cedula no es correcta deben ser solo numeros",false);
         }
     
         else{
-            alert("Los datos han sido introducidos exitosamente");
+            showToast("Los datos han sido introducidos exitosamente",true);
+            
+           setTimeout(() => {
             document.pantalla.submit();
+           }, 1000);
         }
     }
 
@@ -94,19 +92,28 @@ function Enviar(valor){
         var inp3 = inputs[2].value;
         var inp4 = inputs[3].value;
         var inp5 = inputs[4].value;
+        var inp6 = inputs[5].value;
+        var inp7 = inputs[6].value;
+        var inp8 = inputs[7].value;
 
-        if(inp1 == "" || inp2=="" || inp3=="" || inp4=="" || inp5==""){
-            alert("Los datos no pueden estar vacios");
+        if(inp1 == "" || inp2=="" || inp3=="" || inp4=="" || inp5=="" || inp6=="" || inp7=="" || inp8==""){
+          
+            showToast("No puede dejar los campos vacios", false);
         }
 
-        else if (inp1 == dato1 && inp2 == dato2 && inp3 == dato3 && inp4 == dato4 && inp5 == dato5){
-            alert("Los datos no pueden ser iguales");
+        else if (inp1 == dato1 && inp2 == dato2 && inp3 == dato3 && inp4 == dato4 && inp5 == dato5 && inp6 == dato6 && inp7 == dato7 && inp8 == dato8){
+       
+            showToast("Los datos no pueden ser iguales", false);
         }
 
         else{
+
+            
             document.getElementById('origin').value=dato1;
-            alert("Este dato ha sido modificado exitosamente");
-            document.pantalla.submit();
+            showToast("Este dato ha sido modificado exitosamente", true);
+            setTimeout(() => {
+                document.pantalla.submit();
+            }, 1000);
         }
     }
 }

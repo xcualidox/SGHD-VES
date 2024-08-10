@@ -169,47 +169,9 @@
     font-weight: bolder;
 }
 
-.formulario{
-    box-sizing:border-box;
-    position:absolute;
-    left: 30%;
-    top: 35%;
-    transform: translate(-50%,-50%);
-    padding-left: 50px;
-    padding-top: 7px;
-    box-sizing: border-box;
-    width: 370px;
-    z-index: 4000;
-}
 
-.formulario__input {
-    width: 100%;
-    background: white;
-    border:none;
-    border:3px solid transparent;
-    border-radius: 3px;
-    height: 30px;
-    line-height: 45px;
-    padding:0 0 0 15px;
-    transition: .3s ease all;
-}
 
-.formulario__input:focus{
-    border:3px solid #12171e;
-    outline: none;
-    box-shadow: 3px 0px 30px rgba(163,163,163,0.4);
-}
 
-.pantalla{
-    background-color:rgba(215,215,215);
-    color:black;
-    border:2px solid black;
-    padding:15px;
-    position: relative;
-    left: 230px;
-    top: 50px;
-    z-index: 4000; 
-}
 
 label{
     margin:0;
@@ -234,14 +196,7 @@ label{
     transition: all .5s ease;
 }
 
-input[type=button]:hover{
-    background-color: rgb(89, 131, 255);
-    transform: scale(1.1);
-}
 
-input[type=button]:active{
-    background:#3360a3;
-}
 
 
 
@@ -254,7 +209,7 @@ input[type=button]:active{
 
 .table_button {
     border: none;
-    background-color: royalblue;
+    background-color: #00796b;
     color: white;
     padding: 8px;
     border-radius: 5px;
@@ -262,10 +217,9 @@ input[type=button]:active{
 }
 
 .table_button:hover {
-    background-color: rgb(89, 131, 255);
+    background-color: #058671;
     transform: scale(1.1);
 }
-
 
 
 
@@ -312,6 +266,6 @@ select {
     transition: .5s ease all;
 }
 .lista:hover {
-    background-color: rgb(60, 87, 236);
+    background-color: #058671;
     color: white;
 }

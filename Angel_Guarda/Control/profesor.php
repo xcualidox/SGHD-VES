@@ -29,7 +29,7 @@ function Registra()
 	
 	else{
 		$objeto = new zona();
-		$objeto->setDatos($_POST["cedula"], $_POST["primer_nombre"], $_POST["segundo_nombre"], $_POST["primer_apellido"], $_POST["segundo_apellido"]);
+		$objeto->setDatos($_POST["cedula"], $_POST["primer_nombre"], $_POST["segundo_nombre"], $_POST["primer_apellido"], $_POST["segundo_apellido"], $_POST["direccion"], $_POST["telefono"], $_POST["correo"]);
 		$objeto->incluye();
 		header("Location: ../Vista/Profesor/profesor.php");
 	}
@@ -38,7 +38,7 @@ function Registra()
 function Modifica()
 {
 	$objeto = new zona();
-	$objeto->setDatos($_POST["cedula"], $_POST["primer_nombre"], $_POST["segundo_nombre"], $_POST["primer_apellido"], $_POST["segundo_apellido"]);
+	$objeto->setDatos($_POST["cedula"], $_POST["primer_nombre"], $_POST["segundo_nombre"], $_POST["primer_apellido"], $_POST["segundo_apellido"], $_POST["direccion"], $_POST["telefono"], $_POST["correo"]);
 	$objeto->modificar($_POST["origin"]);
 	header("Location: ../Vista/Profesor/profesor.php");
 }

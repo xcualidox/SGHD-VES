@@ -2,32 +2,14 @@ var dato1="";
 var dato2="";
 var dato3="";
 
-function Mostrar(){
-    const btn = document.getElementById('boton1');
-    const btn2 = document.getElementById('boton2');
-    const form = document.getElementById('form');
-    const inputs= form.querySelectorAll('input');
-    inputs[0].value="";
-    inputs[1].value="";
-    if (form.style.display === 'none') {
-    // 👇️ this SHOWS the form
-        form.style.display = 'block';
-        btn2.style.display = 'block';
-        btn.style.display = 'none';
-    } else {
-    // 👇️ this HIDES the form
-        form.style.display = 'none';
-        btn2.style.display = 'none';
-        btn.style.display = 'block';
-    }
-}
+
 
 function Modificar(nombre, fechaI, fechaF) {
     var div=document.querySelector('#form');
     var inputs=div.querySelectorAll('input');
 
-    document.getElementById('boton1').style.display='none';
-    document.getElementById('boton2').style.display='block';
+    document.getElementById('boton1').style.display='block';
+    document.getElementById('boton2').style.display='none';
     div.style.display='block';
     inputs[0].value=nombre;
     inputs[1].value=fechaI;
@@ -42,10 +24,15 @@ function Modificar(nombre, fechaI, fechaF) {
 }
 
 function Eliminar(nombre) {
-    document.getElementById('origin').value=nombre;
-    document.querySelector('#ope').value="Borrar";
-    alert('Este dato ha sido eliminado exitosamente');
-    document.querySelector('#form').submit();
+
+
+
+    showConfirm("¿Está seguro de que desea eliminar este dato?", () => {
+        document.getElementById('origin').value=nombre;
+        document.querySelector('#ope').value="Borrar";
+       
+        document.querySelector('#form').submit();
+    });
 }
 
 function Enviar(valor){
@@ -65,23 +52,30 @@ function Enviar(valor){
         var fecF = document.querySelector('#fecF').value;
 
         if (nom == "" || fecI == "" || fecF == ""){
-            alert("No puede dejar los campos vacios");
+        
+            showToast("No puede dejar los campos vacio",false);
         }
     
         else if (document.getElementById('fecF').value < document.getElementById('fecI').value){
-            alert("La fecha final debe de ser mayor que la fecha inicial");
+           
+            showToast("La fecha final debe de ser mayor que la fecha inicial",false);
         }
     
         else if(document.getElementById('fecF').value == document.getElementById('fecI').value){
-            alert("Las fechas no pueden ser iguales");
+          
+            showToast("Las fechas no pueden ser iguales",false);
         }
     
         else{
             var nom2 = nom.toLowerCase();
             document.querySelector('#nom').value = nom2;
     
-            alert("Los datos han sido introducidos exitosamente");
-            document.pantalla.submit();
+            
+            showToast("Los datos han sido introducidos exitosamente",true);
+          
+            setTimeout(() => {
+                document.pantalla.submit();
+            }, 1000);
         }
     }
 
@@ -92,20 +86,24 @@ function Enviar(valor){
         var inp3 = inputs[2].value;
         
         if(inp1 == ""){
-            alert("Los datos no pueden estar vacios");
+ 
+            showToast("Los datos no pueden estar vacios",false);
         }
 
         else if (inp1 == dato1 && inp2 == dato2 && inp3 == dato3){
-            alert("Los datos no pueden ser iguales");
+           
+            showToast("Los datos no pueden ser iguales",false);
             console.log(inp2);
         }
 
         else if(inp3<inp2){
-            alert("La fecha final debe de ser mayor que la fecha inicial");
+          
+            showToast("La fecha final debe de ser mayor que la fecha inicial",false);
         }
 
         else if (inp3 == inp2){
-            alert("Las fechas no pueden ser iguales");
+          
+            showToast("Las fechas no pueden ser iguales",false);
         }
 
         else{
@@ -118,8 +116,11 @@ function Enviar(valor){
 
             document.getElementById('origin').value=dato1;
 
-            alert("Este dato ha sido modificado exitosamente");
-            document.pantalla.submit();
+          
+            showToast("Este dato ha sido modificado exitosamente",true);
+            setTimeout(() => {
+                document.pantalla.submit();
+            }, 1000);
         }
     }
 }

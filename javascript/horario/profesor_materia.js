@@ -14,7 +14,7 @@ for (let index = 0; index < lista.length; index++) {
             document.getElementById(lista[index].id).style.color='';
             
         }
-        document.getElementById(lista[index].id).style.backgroundColor='rgb(60, 87, 236)';
+        document.getElementById(lista[index].id).style.backgroundColor='#00796b';
         document.getElementById(lista[index].id).style.color='white';
         indice=lista[index].id;
     })
@@ -49,8 +49,8 @@ function Mostrar(){
     if (form.style.display === 'none') {
     // 👇️ this SHOWS the form
         form.style.display = 'block';
-        btn2.style.display = 'block';
-        btn.style.display = 'none';
+        btn2.style.display = 'none';
+        btn.style.display = 'block';
     } else {
     // 👇️ this HIDES the form
         form.style.display = 'none';
@@ -81,9 +81,12 @@ function Modificar(cedula, array, primer_nombre, segundo_nombre, primer_apellido
 };
 
 function Eliminar(cedula) {
+
+    showConfirm('¿Está seguro de que desea eliminar este datos?',() =>{
     document.getElementById('origin').value=cedula;
-    alert('Este dato ha sido eliminado exitosamente');
+   
     document.querySelector('#form').submit();
+    });
 }
 function Enviar() {
     document.getElementById('add').value="";
@@ -92,7 +95,12 @@ function Enviar() {
         for (let index = 0; index < span.length; index++) {
             document.getElementById('add').value=document.getElementById('add').value+","+span[index].id;
         }
-        document.getElementById('form').submit()
+
+        showToast("Se Añadieron Materias Exitosamente", true);
+        setTimeout(() => {
+            document.getElementById('form').submit()
+        }, 1000);
+     
     }
     else if (document.querySelector("#origin").value!="") {
         for (let index = 0; index < span.length; index++) {
@@ -108,15 +116,20 @@ function Enviar() {
             }
         }
         if (ValidarCambio || origin_array.length+1!=array.length) {
-            document.getElementById('form').submit()
+            showToast("Se Modificaron Materias Exitosamente", true);
+            setTimeout(() => {
+                document.getElementById('form').submit()
+            }, 1000);
         }
         else {
-            alert("Tienes que hacer algun cambio para poder guardar")
+          
+            showToast("Tienes que hacer algun cambio para poder guarda", false);
         }
         console.log(array);
     }
     else {
-        alert("Existen campos vacios");
+       
+        showToast("Existen campos vacios", false);
     }
 }
 function enviarRequest(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido) {
@@ -132,6 +145,7 @@ function enviarRequest(cedula, primer_nombre, segundo_nombre, primer_apellido, s
         var datos = JSON.parse(response);
         origin_array=datos;
         Modificar(cedula,datos, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido)
+        
         // Ahora puedes manipular la matriz de datos según tus necesidades
       },
       error: function(xhr, status, error) {

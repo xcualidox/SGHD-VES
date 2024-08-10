@@ -12,19 +12,9 @@ include_once('../v_Sidebar/v_Sidebar.php');
 <!--Aqui se el css se toma del Padre que es Sidebar-->
 
 <div class="main-content">
-    <div class="flex flex-row justify-end items-center md:space-x-2 p-4 md:p-0">
-        <h1 class="text-xl font-semibold mb-2 md:mb-0">Asignar Materias</h1>
-
-        <!-- Este DIV es para ocultar la tabla -->
-        <div class="boton2" style="display: none;" id="boton2"></div>
-        <img src="../../../images/icons/añadir.svg" class="w-10 bg-green-500 hover:bg-green-400  rounded-full cursor-pointer" alt="Añadir" id="boton1" onclick="Mostrar()">
-        <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
-        <select name="selectListar" id="selectListar" class="border rounded px-2 py-1 w-auto">
-            <option value="">Todos</option>
-            <option value="1">DatoxD</option>
-            <option value="0">Prueba</option>
-        </select>
-    </div>
+        <?php
+            include_once("../v_Buscar/v_BuscarHeader.php");
+        ?>
 
     <div class="table-wrapper min-w-full">
         <table class="fl-table">
@@ -32,63 +22,59 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <tr>
                     <td>Cedula</td>
                     <td>Nombre y Apellido</td>
-                    <td class='no_style'><a href="profesor_pdf.php"><button class='table_button'>PDF</button></a></td>
+                    <td class='no_style'>  
+                        <!-- No tiene Reporte el Pemsun -->
+                    <!-- <div class="flex justify-center ">
+                        
+                        <a href="profesor.pdf.php">
+                            <img src="../../../images/icons/pdf.svg" class="w-10  filtro-blanco "  alt="Reporte" title="Reporte" id="boton1" >
+                        </a>
+              
+                    </div> -->
+                </td>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                if (!isset($_GET["pag_asig"])) {
-                    $paginaActual = 1;
-                } else {
-                    $paginaActual = $_GET["pag_asig"];
-                }
 
-                $limit = 5;
-                $offset = ($paginaActual - 1) * $limit;
 
-                $objeto = new query();
-                $resultado = $objeto->GenerarTabla($offset, $limit);
-                $numFilas = $objeto->TotalPaginas();
+                include_once("../v_paginado/v_paginadoConsulta.php");
                 $asignaturas = $objeto->ListAsignaturas();
                 $profesores = $objeto->ProfesoresMaterias();
 
+           
                 if (is_array($resultado) && count($resultado) > 0) {
                     foreach ($resultado as $row) {
+                       
+               
                 ?>
                         <tr>
                             <td class="border px-4 py-2"><?php echo $row["cedula"]; ?></td>
                             <td class="border px-4 py-2"><?php echo $row["primer_nombre"] . " " . $row["primer_apellido"]; ?></td>
+                          
+                    
                             <td>
-                                <button onclick='Eliminar(`<?php echo $row["cedula"]; ?>`)' class='table_button'>Eliminar</button>
-                                <button onclick='enviarRequest(`<?php echo $row["cedula"] . "`,`" . $row["primer_nombre"] . "`,`" . $row["segundo_nombre"] . "`,`" . $row["primer_apellido"] . "`,`" . $row["segundo_apellido"]; ?>`)' class='table_button'>Modificar</button>
+
+                                 <div class=" flex justify-center">
+                    <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" onclick='Eliminar(`<?php echo $row["cedula"]; ?>`)'  >
+                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1" onclick='enviarRequest(`<?php echo $row["cedula"] . "`,`" . $row["primer_nombre"] . "`,`" . $row["segundo_nombre"] . "`,`" . $row["primer_apellido"] . "`,`" . $row["segundo_apellido"]; ?>`)'  >
+                </div>
+             
+                               
+                           
                             </td>
                         </tr>
                 <?php
                     }
-                } else {
-                    echo "<tr><td colspan='3' class='border px-4 py-2'>No se encontraron resultados.</td></tr>";
-                }
+                } 
                 ?>
             </tbody>
         </table>
 
-        <?php
-        $totalPaginas = ceil($numFilas / $limit);
-        echo "<div class='paginacion'>";
-        if ($totalPaginas <= 10) {
-            for ($i = 1; $i <= $totalPaginas; $i++) {
-                echo "<a href='?pag_asig=$i' class='" . ($paginaActual == $i ? "seleccionado" : "") . "'>$i</a>";
-            }
-        } else {
-            for ($i = max(1, $paginaActual - 4); $i <= min($totalPaginas, $paginaActual + 5); $i++) {
-                echo "<a href='?pag_asig=$i' class='" . ($paginaActual == $i ? "seleccionado" : "") . "'>$i</a>";
-            }
-            if ($paginaActual + 5 < $totalPaginas) {
-                echo "... <a href='?pag_asig=$totalPaginas'>$totalPaginas</a>";
-            }
-        }
-        echo "</div>";
-        ?>
+         <!-- Mostrando El total de Paginas -->
+         <?php 
+        include_once("../v_paginado/v_PaginadoTotal.php");
+         ?>
     </div>
     <br>
 
@@ -96,8 +82,14 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
     <div class="boton2" style="display: none;" id="boton2"></div>
     <!-- <script type="text/javascript" src="../Js/profesor_materia.js"></script> -->
-    <div class="formulario">
-        <form id="form" style="display: none;" name="pantalla" class='pantalla' method="POST" action="../../Control/profesor_materia.php">
+  
+        <form id="form" style="display: none;" name="pantalla" class='formulario' method="POST" action="../../Control/profesor_materia.php">
+        <div class=" flex justify-end ">
+                <div class="  bg-red-500  w-10  rounded-full ">
+                    <img src="../../../images/icons/error.svg" class=" filtro-blanco" alt="Añadir" title="Cerrar" id="boton1" onclick="Mostrar()">
+                </div>
+            </div>
+        
             <input type='text' id="add" name="add" hidden>
             <input type='text' id="origin" name="origin" hidden>
             <br>
@@ -135,12 +127,12 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <button type='button' style='cursor:pointer;text-align:center;' onclick="Del()">Quitar</button>
             <br><br>
 
-            <button type="button" id="btn3" onclick="Enviar()" class="table_button">Incluir</button>
-            <input type="button" id="btn2" onclick="Mostrar()" value="Cerrar" class="table_button">
+            <button type="button" id="btn3" onclick="Enviar()" class="table_button w-full">Guardar</button>
+          
         </form>
-    </div>
+   
 </div>
-
+<script type="text/javascript" src="../../../javascript/horario/mostrarModal.js"></script>
 <script type="text/javascript" src="../../../javascript/horario/profesor_materia.js"></script>
 </body>
 </html>
