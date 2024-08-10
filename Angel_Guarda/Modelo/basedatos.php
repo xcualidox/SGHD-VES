@@ -60,6 +60,7 @@ class database_connect{
         $this->connection = new PDO($this->dsn, $this->user,$this->password);
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->connection->exec("SET NAMES 'utf8'");
+        $this->connection->exec("SET time_zone = '-04:00'");
         return $this->connection;}
         catch( PDOException $e){
             echo "Connection failed: ".$e->getMessage(); 
