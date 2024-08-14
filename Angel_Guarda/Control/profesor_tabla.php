@@ -7,5 +7,9 @@ class query extends zona {
     function TotalPaginas() {
         return $this->TotaldePagina();
     }
+    function obtenerDatosProfesores() {
+        $zona = new zona();
+        return $zona->tabla(0, 100); // Reemplaza los parámetros por los adecuados
+    }
 }
 ?>
