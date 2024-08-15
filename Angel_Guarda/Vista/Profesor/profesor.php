@@ -90,13 +90,15 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <label for="cedula">Cedula: </label>
             <input type="text" id="cedula" name="cedula" placeholder="Cedula del Profesor" class="formulario-extenso__input" maxlength="25">
         </div>
+   
+    </div>
+
+    <div class="formulario-extenso__row">
+     
         <div class="formulario-extenso__column">
             <label for="nombres">Nombres: </label>
             <input type="input" name="nombres" id="nombres" placeholder="Nombres" class="formulario-extenso__input" maxlength="30">
         </div>
-    </div>
-
-    <div class="formulario-extenso__row">
         <div class="formulario-extenso__column">
             <label for="apellidos">Apellidos: </label>
             <input type="input" name="apellidos" id="apellidos" class="formulario-extenso__input" placeholder="Apellidos" maxlength="30">
@@ -104,10 +106,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
     </div>
 
     <div class="formulario-extenso__row">
-        <div class="formulario-extenso__column">
-            <label for="segundo_apellido">Segundo Apellido: </label>
-            <input type="input" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo Apellido" class="formulario-extenso__input" maxlength="30">
-        </div>
+    
         <div class="formulario-extenso__column">
             <label for="direccion">Dirección: </label>
             <input type="input" name="direccion" id="direccion" placeholder="Direccion" class="formulario-extenso__input" maxlength="150">
