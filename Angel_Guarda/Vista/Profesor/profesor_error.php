@@ -125,10 +125,8 @@ $conexion=mysqli_connect("localhost", "root", "", "proyecto");
             <table>
                 <thead>
     				<td align="center">Cedula</td>
-    				<td align="center">Primer Nombre</td>
-                    <td align="center">Segundo Nombre</td>
-    				<td align="center">Primer Apellido</td>
-                    <td align="center">Segundo Apellido</td>
+    				<td align="center">Nombres</td>
+    				<td align="center">Apellidos</td>
                     <td class='no_style'></td>
     			</thead>
 
@@ -142,10 +140,10 @@ $conexion=mysqli_connect("localhost", "root", "", "proyecto");
 
                 $limit=$paginaActual*5;
                 $offset=$limit-5;
-                $consulta="SELECT `cedula`,`primer_nombre`,`segundo_nombre`,`primer_apellido`,`segundo_apellido` from profesores LIMIT $offset,$limit";
+                $consulta="SELECT `cedula`,`nombres`,`apellidos` from profesores LIMIT $offset,$limit";
                 $resultado=mysqli_query($conexion, $consulta);
 
-                $paginas="SELECT `cedula`,`primer_nombre`,`segundo_nombre`,`primer_apellido`,`segundo_apellido` from profesores";
+                $paginas="SELECT `cedula`,`nombres`,`apellidos` from profesores";
                 $paginado=mysqli_query($conexion, $paginas);
                 $numFilas = mysqli_num_rows($paginado);
                 while ($mostrar=mysqli_fetch_array($resultado)) {
@@ -153,13 +151,11 @@ $conexion=mysqli_connect("localhost", "root", "", "proyecto");
 
                 <tr>
     			    <td class="limitado1"><?php echo $mostrar["cedula"]?></td>
-    			    <td class="limitado2"><?php echo $mostrar["primer_nombre"]?></td>
-                    <td class="limitado2"><?php echo $mostrar["segundo_nombre"]?></td>
-                    <td class="limitado2"><?php echo $mostrar["primer_apellido"]?></td>
-                    <td class="limitado2"><?php echo $mostrar["segundo_apellido"]?></td>
+    			    <td class="limitado2"><?php echo $mostrar["nombres"]?></td>
+                    <td class="limitado2"><?php echo $mostrar["apellidos"]?></td>
                     <td class="no_style">
                         <button onclick='Eliminar(`<?php echo $mostrar["cedula"]; ?>`)' class='table_button'>Eliminar</button>
-                        <button onclick='Modificar(`<?php echo $mostrar["cedula"]; ?>`,`<?php echo $mostrar["primer_nombre"];?>`,`<?php echo $mostrar["segundo_nombre"];?>`,`<?php echo $mostrar["primer_apellido"];?>`,`<?php echo $mostrar["segundo_apellido"];?>`)' class='table_button'>Modificar</button>
+                        <button onclick='Modificar(`<?php echo $mostrar["cedula"]; ?>`,`<?php echo $mostrar["nombres"];?>`,`<?php echo $mostrar["apellidos"];?>`)' class='table_button'>Modificar</button>
                     </td>
     			</tr>
                 
@@ -226,22 +222,13 @@ $conexion=mysqli_connect("localhost", "root", "", "proyecto");
     
                 <br><br>
 
-                <label for="primer_nombre">Primer Nombre: </label><br>
-                <input type="input" name="primer_nombre" id="primer_nombre" placeholder= "Primer Nombre" class="formulario__input" maxlength="30">
+                <label for="nombres">Nombres: </label><br>
+                <input type="input" name="nombres" id="nombres" placeholder= "Nombres" class="formulario__input" maxlength="30">
 
                 <br><br>
 
-                <label for="segundo_nombre">Segundo Nombre: </label><br>
-                <input type="input" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo Nombre" class="formulario__input" maxlength="30">
-
-                <br><br>
-                <label for="primer_apellido">Primer Apellido: </label><br>
-                <input type="input" name="primer_apellido" id="primer_apellido" class="formulario__input" placeholder="Primer Apellido" maxlength="30">
-
-                <br><br>
-
-                <label for="segundo_apellido">Segundo Apellido: </label><br>
-                <input type="input" name="segundo_apellido" id="segundo_apellido" placeholder="Segundo Apellido" class="formulario__input" maxlength="30">
+                <label for="apellidos">Apellidos: </label><br>
+                <input type="input" name="apellidos" id="apellidos" class="formulario__input" placeholder="Primer Apellido" maxlength="30">
 
                 <br><br>
 

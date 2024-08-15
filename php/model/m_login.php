@@ -68,7 +68,7 @@ class Login extends db_connect
     }
     public function getUserData()
     {
-        $query = "SELECT CONCAT(p.`primer_nombre`,' ', p.`apellido`) as fullname, l.`status` FROM persona AS p INNER JOIN login AS l ON p.cedula = l.username WHERE p.`cedula` = ? ";
+        $query = "SELECT CONCAT(p.`nombres`,' ', p.`apellidos`) as fullname, l.`status` FROM persona AS p INNER JOIN login AS l ON p.cedula = l.username WHERE p.`cedula` = ? ";
         $result = $this->query($query, $this->username);
         return $result ? $this->fetch_query($result) : false;
     }

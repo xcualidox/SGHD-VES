@@ -23,10 +23,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <thead>
                 <tr>
                     <td>Cedula</td>
-                    <td>Primer Nombre</td>
-                    <td >Segundo Nombre</td>
-                    <td>Primer Apellido</td>
-                    <td >Segundo Apellido</td>
+                    <td>Nombres</td>
+                    <td>Apellidos</td>
                     <td >Direccion</td>
                     <td >Telefono</td>
                     <td >Correo</td>
@@ -50,10 +48,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
             ?>
         <tr>
             <td class="border px-4 py-2"><?php echo $resultado[$i]["cedula"] ?></td>
-            <td class="border px-4 py-2"><?php echo $resultado[$i]["primer_nombre"] ?></td>
-            <td class="border px-4 py-2"><?php echo $resultado[$i]["segundo_nombre"] ?></td>
-            <td class="border px-4 py-2"><?php echo $resultado[$i]["primer_apellido"] ?></td>
-            <td class="border px-4 py-2"><?php echo $resultado[$i]["segundo_apellido"] ?></td>
+            <td class="border px-4 py-2"><?php echo $resultado[$i]["nombres"] ?></td>
+            <td class="border px-4 py-2"><?php echo $resultado[$i]["apellidos"] ?></td>
             <td class="border px-4 py-2"><?php echo $resultado[$i]["direccion"] ?></td>
             <td class="border px-4 py-2"><?php echo $resultado[$i]["telefono"] ?></td>
             <td class="border px-4 py-2"><?php echo $resultado[$i]["correo"] ?></td>
@@ -61,7 +57,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
             <div class=" flex justify-center">
                     <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" onclick='Eliminar(`<?php echo $resultado[$i]["cedula"]; ?>`)' >
-                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"onclick='Modificar(`<?php echo $resultado[$i]["cedula"]; ?>`,`<?php echo $resultado[$i]["primer_nombre"]; ?>`,`<?php echo $resultado[$i]["segundo_nombre"]; ?>`,`<?php echo $resultado[$i]["primer_apellido"]; ?>`,`<?php echo $resultado[$i]["segundo_apellido"]; ?>`,`<?php echo $resultado[$i]["direccion"];?>`,`<?php echo $resultado[$i]["telefono"];?>`,`<?php echo $resultado[$i]["correo"];?>`)' >
+                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"onclick='Modificar(`<?php echo $resultado[$i]["cedula"]; ?>`,`<?php echo $resultado[$i]["nombres"]; ?>`,`<?php echo $resultado[$i]["apellidos"]; ?>`,`<?php echo $resultado[$i]["direccion"];?>`,`<?php echo $resultado[$i]["telefono"];?>`,`<?php echo $resultado[$i]["correo"];?>`)' >
                 </div>
              
               
@@ -95,19 +91,15 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <input type="text" id="cedula" name="cedula" placeholder="Cedula del Profesor" class="formulario-extenso__input" maxlength="25">
         </div>
         <div class="formulario-extenso__column">
-            <label for="primer_nombre">Primer Nombre: </label>
-            <input type="input" name="primer_nombre" id="primer_nombre" placeholder="Primer Nombre" class="formulario-extenso__input" maxlength="30">
+            <label for="nombres">Nombres: </label>
+            <input type="input" name="nombres" id="nombres" placeholder="Nombres" class="formulario-extenso__input" maxlength="30">
         </div>
     </div>
 
     <div class="formulario-extenso__row">
         <div class="formulario-extenso__column">
-            <label for="segundo_nombre">Segundo Nombre: </label>
-            <input type="input" name="segundo_nombre" id="segundo_nombre" placeholder="Segundo Nombre" class="formulario-extenso__input" maxlength="30">
-        </div>
-        <div class="formulario-extenso__column">
-            <label for="primer_apellido">Primer Apellido: </label>
-            <input type="input" name="primer_apellido" id="primer_apellido" class="formulario-extenso__input" placeholder="Primer Apellido" maxlength="30">
+            <label for="apellidos">Apellidos: </label>
+            <input type="input" name="apellidos" id="apellidos" class="formulario-extenso__input" placeholder="Apellidos" maxlength="30">
         </div>
     </div>
 

@@ -50,14 +50,14 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 ?>
                         <tr>
                             <td class="border px-4 py-2"><?php echo $row["cedula"]; ?></td>
-                            <td class="border px-4 py-2"><?php echo $row["primer_nombre"] . " " . $row["primer_apellido"]; ?></td>
+                            <td class="border px-4 py-2"><?php echo $row["nombres"] . " " . $row["apellidos"]; ?></td>
                           
                     
                             <td>
 
                                  <div class=" flex justify-center">
                     <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" onclick='Eliminar(`<?php echo $row["cedula"]; ?>`)'  >
-                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1" onclick='enviarRequest(`<?php echo $row["cedula"] . "`,`" . $row["primer_nombre"] . "`,`" . $row["segundo_nombre"] . "`,`" . $row["primer_apellido"] . "`,`" . $row["segundo_apellido"]; ?>`)'  >
+                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1" onclick='enviarRequest(`<?php echo $row["cedula"] . "`,`" . $row["nombres"] . "`,`" . $row["apellidos"] ; ?>`)'  >
                 </div>
              
                                
@@ -101,7 +101,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <?php
                 if ($profesores) {
                     foreach ($profesores as $profesor) {
-                        echo "<option value='" . $profesor["cedula"] . "'>" . $profesor["primer_nombre"] . " " . $profesor["segundo_nombre"] . " " . $profesor["primer_apellido"] . " " . $profesor["segundo_apellido"] . "</option>";
+                        echo "<option value='" . $profesor["cedula"] . "'>" . $profesor["nombres"] . " " . $profesor["apellidos"] . "</option>";
                     }
                 }
                 ?>
