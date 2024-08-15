@@ -65,7 +65,7 @@ foreach ($profesores as $profesor) {
     $html .= '
         <tr class="highlight">
             <td>' . $profesor['cedula'] . '</td>
-            <td>' . $profesor['primer_nombre']  . $espacio . $profesor['primer_apellido'] . '</td>
+            <td>' . $profesor['nombres']  . $espacio . $profesor['apellidos'] . '</td>
         
             <td class="secondary">' . $profesor['direccion'] . '</td>
             <td>' . $profesor['telefono'] . '</td>

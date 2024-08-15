@@ -48,7 +48,7 @@ class zona extends bdmysql{
       return $this->ejecutar($sql);
     }
     function BloquesHorario($ano_escolar, $seccion) {
-      $sql="SELECT aula.codigo, aula.nombre, asignatura.codigo,  asignatura.nombre, horario_estudiante.codigo_dia, horario_estudiante.grupo, personas.cedula, personas.primer_nombre, personas.segundo_nombre, personas.primer_apellido, personas.segundo_apellido
+      $sql="SELECT aula.codigo, aula.nombre, asignatura.codigo,  asignatura.nombre, horario_estudiante.codigo_dia, horario_estudiante.grupo, personas.cedula, personas.nombres, personas.apellidos
       FROM horario_estudiante
       JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
       JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 
@@ -58,7 +58,7 @@ class zona extends bdmysql{
       return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
     }
     function BloquesHorarioPDF($ano_escolar, $seccion, $bloque) {
-      $sql="SELECT aula.codigo, aula.nombre, asignatura.codigo,  asignatura.nombre, horario_estudiante.codigo_dia, horario_estudiante.grupo, personas.cedula, personas.primer_nombre, personas.segundo_nombre, personas.primer_apellido, personas.segundo_apellido
+      $sql="SELECT aula.codigo, aula.nombre, asignatura.codigo,  asignatura.nombre, horario_estudiante.codigo_dia, horario_estudiante.grupo, personas.cedula, personas.nombres, personas.apellidos
       FROM horario_estudiante
       JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
       JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 

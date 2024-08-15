@@ -22,8 +22,7 @@ class zona extends database_connect{
       return $this->fetch_all_query($this->query($sql,$cedula)); 
     }
     function tabla($offset, $limit) {
-      $sql= "SELECT DISTINCT personas.cedula, personas.primer_nombre, personas.segundo_nombre, 
-      personas.primer_apellido, personas.segundo_apellido
+      $sql= "SELECT DISTINCT personas.cedula, personas.nombres, personas.apellidos
       FROM personas
       INNER JOIN profesores_materias ON personas.cedula = profesores_materias.profesor LIMIT $offset,$limit";
 		return $this->fetch_all_query($this->query($sql,""));
@@ -36,7 +35,7 @@ class zona extends database_connect{
 		return $this->fetch_all_query($this->query($sql,""));
     }
     function TotaldePagina() {
-      $sql= "SELECT DISTINCT personas.cedula, personas.primer_nombre, personas.primer_apellido
+      $sql= "SELECT DISTINCT personas.cedula, personas.nombres, personas.apellidos
       FROM personas
       INNER JOIN profesores_materias ON personas.cedula = profesores_materias.profesor";
 		return count($this->fetch_all_query($this->query($sql,"")));
