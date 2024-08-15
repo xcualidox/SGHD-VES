@@ -32,7 +32,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
     JOIN intervalo ON horario_estudiante.intervalo = intervalo.id";
 
     $horario=mysqli_query($conexion, $consulta);
-    $consulta="SELECT personas.cedula, personas.primer_nombre, personas.primer_apellido, personas.segundo_nombre, personas.segundo_apellido FROM personas WHERE EXISTS ( SELECT * FROM profesores_materias WHERE personas.cedula = profesores_materias.profesor)";
+    $consulta="SELECT personas.cedula, personas.nombres, personas.apellidos FROM personas WHERE EXISTS ( SELECT * FROM profesores_materias WHERE personas.cedula = profesores_materias.profesor)";
     $profesores=mysqli_query($conexion, $consulta);
     $profesores2=mysqli_query($conexion, $consulta);
     $consulta="SELECT intervalo, id from intervalo WHERE `estado`=1";
@@ -188,7 +188,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <option value="">Selecione</option>
                 <?php 
                 while ($mostrar=mysqli_fetch_array($profesores)) {
-                       echo "<option value='".$mostrar["cedula"]."' hidden>".$mostrar["primer_nombre"]." ".$mostrar["segundo_nombre"]." ".$mostrar["primer_apellido"]." ".$mostrar["segundo_apellido"]."</option>";
+                       echo "<option value='".$mostrar["cedula"]."' hidden>".$mostrar["nombres"]." ".$mostrar["apellidos"]."</option>";
                 }
                 ?>
         </select>
@@ -224,7 +224,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                         <option value="">Selecione</option>
                         <?php 
                         while ($mostrar=mysqli_fetch_array($profesores2)) {
-                            echo "<option value='".$mostrar["cedula"]."' hidden>".$mostrar["primer_nombre"]." ".$mostrar["segundo_nombre"]." ".$mostrar["primer_apellido"]." ".$mostrar["segundo_apellido"]."</option>";
+                            echo "<option value='".$mostrar["cedula"]."' hidden>".$mostrar["nombres"]." ".$mostrar["apellidos"]."</option>";
                         }
                         ?>
                 </select>

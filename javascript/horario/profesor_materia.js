@@ -69,15 +69,15 @@ function ResetDiv() {
     }
     document.querySelector("#origin").value="";
 }
-function Modificar(cedula, array, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido) {
+function Modificar(cedula, array, nombres, apellidos) {
     for (let index = 0; index < array.length; index++) {
         div[1].appendChild(document.getElementById(array[index].materia));
     }
     document.getElementById("profesor").style.display="none";
     document.getElementById("datos").style.display="block";
-    document.getElementById("datos").value=primer_nombre+" "+segundo_nombre+" "+primer_apellido+" "+segundo_apellido;
+    document.getElementById("datos").value=nombres+" "+apellidos;
     document.getElementById("origin").value=cedula;
-    Mostrar()
+    Mostrar();
 };
 
 function Eliminar(cedula) {
@@ -132,7 +132,7 @@ function Enviar() {
         showToast("Existen campos vacios", false);
     }
 }
-function enviarRequest(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido) {
+function enviarRequest(cedula, nombres, apellidos) {
     $.ajax({
       url: '../../Control/profesor_materia.php',
       type: 'POST',
@@ -144,7 +144,7 @@ function enviarRequest(cedula, primer_nombre, segundo_nombre, primer_apellido, s
         // Si deseas trabajar con los datos recibidos, puedes hacerlo aquí
         var datos = JSON.parse(response);
         origin_array=datos;
-        Modificar(cedula,datos, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido)
+        Modificar(cedula,datos, nombres, apellidos)
         
         // Ahora puedes manipular la matriz de datos según tus necesidades
       },

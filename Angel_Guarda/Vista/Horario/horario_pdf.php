@@ -72,7 +72,7 @@ $dias= ["L","M","MM","J","V"];
                     $resultado="<b>GRUPO ".$array[0][5]."</b><br><b>AULA:</b> ".$array[0][1]."<br><b>MATERIA:</b> ".$array[0][3]."<br><b>GRUPO ".$array[1][5]."</b><br><b>AULA:</b> ".$array[1][1]."<br><b>MATERIA:</b> ".$array[1][3]."<br>";
                 }
                 else if (count($array)>0) {
-                    $resultado="<b>AULA:</b> ".$array[0][1]."<br><b>MATERIA:</b> ".$array[0][3]."<br><b>PROF:</b> ".$array[0][7]." ".$array[0][9];
+                    $resultado="<b>AULA:</b> ".$array[0][1]."<br><b>MATERIA:</b> ".$array[0][3]."<br><b>PROF:</b> ".$array[0][7]." ".$array[0][8];
                 }
                 echo "<td style='height:80px;border:1px solid black;font-size:14px;width:30px;'>".$resultado."</td>";
             }

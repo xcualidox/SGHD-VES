@@ -15,13 +15,13 @@ class zona extends database_connect{
 	  }
 
     function incluye(){
-        $sql= "insert into personas(cedula, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, direccion, telefono, correo) values(?,?,?,?,?,?,?,?)";
+        $sql= "insert into personas(cedula, nombres, apellidos, direccion, telefono, correo) values(?,?,?,?,?,?,?,?)";
 		return $this->query($sql,[$this->cedula,$this->p_nombre,$this->s_nombre,$this->p_apellido,$this->s_apellido,$this->direccion,$this->telefono,$this->correo]);
     }
 
     function modificar($origin){
         $sql= "UPDATE `personas`
-                SET `cedula`=?, `primer_nombre`=?, `segundo_nombre`=?, `primer_apellido`=?, `segundo_apellido`=?, `direccion`=?, `telefono`=?, `correo`=?
+                SET `cedula`=?, `nombres`=?, `apellidos`=?, `direccion`=?, `telefono`=?, `correo`=?
                 WHERE `cedula`=?";
 		return $this->query($sql,[$this->cedula,$this->p_nombre,$this->s_nombre,$this->p_apellido,$this->s_apellido,$this->direccion,$this->telefono,$this->correo,$origin]);
     }
