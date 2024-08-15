@@ -84,7 +84,7 @@ $dias= ["L","M","MM","J","V"];
     ?>
 </table>
 <?php
-include_once("../dompdf/autoload.inc.php");
+include_once("../../../libraries/vendor/autoload.php");
 use Dompdf\Dompdf;
 $dompdf= new Dompdf();
 $html=ob_get_clean();
