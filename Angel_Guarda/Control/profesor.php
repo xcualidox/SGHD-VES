@@ -31,6 +31,8 @@ function Registra()
 		$objeto = new zona();
 		$objeto->setDatos($_POST["cedula"], $_POST["nombres"], $_POST["apellidos"], $_POST["direccion"], $_POST["telefono"], $_POST["correo"]);
 		$objeto->incluye();
+		require_once("../../php/controller/c_login.php");
+		createLogin($_POST["cedula"], $_POST["rol"]);
 		header("Location: ../Vista/Profesor/profesor.php");
 	}
 	}

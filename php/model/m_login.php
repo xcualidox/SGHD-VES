@@ -10,6 +10,7 @@ class Login extends db_connect
     private $security_a_1;
     private $security_a_2;
     private $security_a_3;
+    private $rol;
     private $status;
 
     public function __construct() {
@@ -21,6 +22,7 @@ class Login extends db_connect
         $this->security_a_1 = "";
         $this->security_a_2 = "";
         $this->security_a_3 = "";
+        $this->rol = "";
         $this->status = "";
     }
     public function setData($username, $password, $security_q_1, $security_q_2, $security_q_3, $security_a_1, $security_a_2, $security_a_3, $status) {
@@ -42,11 +44,23 @@ class Login extends db_connect
     {
         $this->password = $password;
     }
+    public function setRol($rol)
+    {
+        $this->rol = $rol;
+    }
     public function checkLogin()
     {
         $query = "SELECT `username`, `password`, `rol`, `status` FROM login WHERE `username` = ? ";
         $result = $this->query($query, $this->username);
         return $result ? $this->fetch_query($result) : false;
+    }
+
+    public function createLogin()
+    {
+        $query = "INSERT INTO `login`(`username`, `password`, `security_q_1`, `security_q_2`, `security_q_3`, `security_a_1`, `security_a_2`, `security_a_3`, `rol`, `status`) VALUES
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $params = [$this->username, $this->password, '', '', '', '', '', '', $this->rol, "new"];   
+        return $this->query($query, $params);
     }
     public function getStatus()
     {
@@ -68,7 +82,7 @@ class Login extends db_connect
     }
     public function getUserData()
     {
-        $query = "SELECT CONCAT(p.`nombres`,' ', p.`apellidos`) as fullname, l.`status` FROM persona AS p INNER JOIN login AS l ON p.cedula = l.username WHERE p.`cedula` = ? ";
+        $query = "SELECT CONCAT(p.`nombres`,' ', p.`apellidos`)  as fullname, l.`status` FROM personas AS p INNER JOIN login AS l ON p.cedula = l.username WHERE p.`cedula` = ? ";
         $result = $this->query($query, $this->username);
         return $result ? $this->fetch_query($result) : false;
     }
