@@ -10,16 +10,44 @@
     border: 1px solid #eee;
 }
 
-.sidebar{
+.sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    height: 1000%;
+    height: 100vh; /* Ajustado para la altura total de la ventana */
     width: 95px;
     background-color: #12171e;
     padding: .4rem .8rem;
     transition: all 0.5s ease;
+    overflow-y: auto; /* Habilita el scroll vertical */
+
+    scrollbar-width: thin; /* Ancho del scrollbar (para Firefox) */
+    scrollbar-color: #4e5d75 #2e3a4d; /* Colores del thumb y track (para Firefox) */
 }
+.sidebar::-webkit-scrollbar {
+    width: 8px; /* Ancho del scrollbar */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #4e5d75; /* Color del thumb */
+    border-radius: 4px; /* Bordes redondeados */
+}
+.sidebar::-webkit-scrollbar-track {
+    background-color: #2e3a4d; /* Color del track */
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        overflow-y: auto; /* Permite el scroll en pantallas pequeñas */
+    }
+    .sidebar.active {
+        width: 100%;
+    }
+}
+
+
 
 .sidebar.active ~ .main-content{
     left: 250px;
@@ -49,8 +77,8 @@
     color:#fff;
     display: flex;
     height: 50px;
-    width: 100%;
-    align-items: center;
+
+    align-items: justify;
     pointer-events: none;
     opacity: 0;
 }
@@ -65,10 +93,7 @@
     opacity: 1;
 }
 
-.top .logo .bxs-institution{
-    font-size: 2rem;
-    margin-right: 5px;
-}
+
 
 .user{
     display: flex;
@@ -86,9 +111,7 @@
     font-weight: 600;
 }
 
-.sidebar p{
-    opacity:0;
-}
+
 
 .sidebar.active p{
     opacity: 1;
@@ -96,16 +119,13 @@
 
 .sidebar ul li{
     position: relative;
-    list-style: none;
-  
-   
-    margin: 0.8rem auto;
     line-height: 50px;
 }
 
 .sidebar ul li a{
     color: #fff;
     display: flex;
+    padding: 0.2rem;
 
  
    
@@ -133,21 +153,10 @@
 }
 
 .sidebar ul li .tooltip{
-    position: absolute;
-    left: 125px;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
-    border-radius: .6rem;
-    padding: .4rem 1.2rem;
-    line-height: 1.8rem;
-    z-index: 20;
-    opacity: 0;
+  display: none;
 }
 
-.sidebar ul li:hover .tooltip{
-    opacity: 1;
-}
+
 
 .sidebar.active ul li .tooltip{
     display: none;
