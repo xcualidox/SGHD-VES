@@ -16,7 +16,7 @@
     <div class="top">
         <div class="logo"></div>
         
-            <img src="../../../images/icons/menu.svg" id="btn" class=" w-10  w-8  filtro-blanco">
+            <img src="../../../images/icons/menu.svg" id="btn" class=" w-10  filtro-blanco">
      
     </div>
     <div class="user">
@@ -39,7 +39,7 @@
             <a href="../Profesor/profesor.php" title="Profesor">
                 <i class="flex  justify-center  items-center ">
                
-                    <img src="../../../images/icons/persona.svg" class=" w-8 w-8  filtro-blanco">
+                    <img src="../../../images/icons/persona.svg" class=" w-8 filtro-blanco">
              
                 </i>
                 <span class="nav-item">Profesor</span>
