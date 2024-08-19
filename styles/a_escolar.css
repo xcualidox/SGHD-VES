@@ -97,8 +97,8 @@
 .sidebar ul li{
     position: relative;
     list-style: none;
-    height: 50px;
-    width: 95%;
+  
+   
     margin: 0.8rem auto;
     line-height: 50px;
 }
@@ -106,14 +106,14 @@
 .sidebar ul li a{
     color: #fff;
     display: flex;
-    align-items: center;
-    text-decoration: none;
-    border-radius: 0.8rem;
+
+ 
+   
+     transition: transform 0.5s ease;
 }
 
 .sidebar ul li a:hover{
-    background-color: #fff;
-    color: #12171e;
+ transform: scale(1.1);
 }
 
 .sidebar ul li a i{

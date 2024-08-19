@@ -10,6 +10,7 @@
     --color-Azul:#0a47f0; 
     --color-celeste:#18a2e2; 
     --color--active:#5f7577;
+    --color--negro:rgb(0, 0, 0);
     --filtroPrimario: brightness(0) saturate(100%) invert(18%) sepia(86%) saturate(4958%) hue-rotate(168deg) brightness(94%) contrast(101%);
     --filtroSecundario:brightness(0) saturate(100%) invert(87%) sepia(79%) saturate(292%) hue-rotate(161deg) brightness(93%) contrast(93%);
     --filtroBlanco: brightness(0) saturate(100%) invert(100%) sepia(16%) saturate(0%) hue-rotate(165deg) brightness(103%) contrast(104%);
@@ -17,6 +18,7 @@
     --filtroAzul: brightness(0) saturate(100%) invert(23%) sepia(79%) saturate(7298%) hue-rotate(229deg) brightness(95%) contrast(99%);
     --filtroCeleste:brightness(0) saturate(100%) invert(57%) sepia(12%) saturate(7414%) hue-rotate(167deg) brightness(94%) contrast(89%);
     --filtro-Gris: brightness(0) saturate(100%) invert(71%) sepia(6%) saturate(93%) hue-rotate(131deg) brightness(82%) contrast(83%);
+    --filtro--negro:brightness(0) saturate(100%);
 
 
     --color-background: #e0f2f1;  /* Fondo claro */
@@ -57,10 +59,11 @@
 .filtro-blanco{
     filter: var(  --filtroBlanco);
     cursor: pointer;
-    transition: 0.5s; /* Aplicar transición al img también si es necesario */
+
 }
 .filtro-blanco:hover{
     transform: scale(1.1);
+   
 }
 .filtro-rojo{
     filter: var( --filtroRojo);

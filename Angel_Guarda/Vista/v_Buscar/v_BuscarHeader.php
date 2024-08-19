@@ -1,4 +1,4 @@
-<div class="flex flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
+<div class="flex flex-col sm:flex-row   justify-end items-center md:space-x-2 p-4 md:py-2">
         <h1 class="text-xl font-semibold mb-2 md:mb-0"><?php echo $title; ?></h1>
 
         <!-- Este DIV es para ocultar la tabla -->
