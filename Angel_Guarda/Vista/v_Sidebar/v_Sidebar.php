@@ -16,7 +16,7 @@
     <div class="top">
         <div class="logo"></div>
         
-            <img src="../../../images/icons/menu.svg" id="btn" class=" w-10  filtro-blanco">
+            <img src="../../../images/icons/menu.svg" id="btn" class=" w-10  w-8  filtro-blanco">
      
     </div>
     <div class="user">
@@ -28,8 +28,8 @@
     <ul>
         <li>
             <a href="../Asignatura/asignatura.php" class="flex items-center" title="Asignatura">
-                <i class="w-10 p-2">
-                    <img src="../../../images/icons/documento.svg" class="filtro-blanco">
+                 <i class="flex  justify-center  items-center ">
+                    <img src="../../../images/icons/documento.svg" class="w-8  filtro-blanco">
                 </i>
                 <span class="nav-item">Asignatura</span>
             </a>
@@ -37,8 +37,10 @@
         </li>
         <li>
             <a href="../Profesor/profesor.php" title="Profesor">
-                <i class="w-10 p-2">
-                    <img src="../../../images/icons/persona.svg" class="filtro-blanco">
+                <i class="flex  justify-center  items-center ">
+               
+                    <img src="../../../images/icons/persona.svg" class=" w-8 w-8  filtro-blanco">
+             
                 </i>
                 <span class="nav-item">Profesor</span>
             </a>
@@ -46,8 +48,8 @@
         </li>
         <li>
             <a href="../Profesores_Materias/profesor_materia.php" title="Profesor PENSUM">
-                <i class="w-10 p-2">
-                    <img src="../../../images/icons/pensum3.svg" class="filtro-blanco">
+                 <i class="flex  justify-center  items-center ">
+                    <img src="../../../images/icons/pensum3.svg" class="w-8  filtro-blanco">
                 </i>
                 <span class="nav-item">PEMSUN</span>
             </a>
@@ -55,8 +57,8 @@
         </li>
         <li>
             <a href="../Aula/aula.php" title="Aula">
-                <i class="w-10 p-2">
-                    <img src="../../../images/icons/classroom.svg" class="filtro-blanco">
+                 <i class="flex  justify-center  items-center ">
+                    <img src="../../../images/icons/classroom.svg" class="w-8  filtro-blanco">
                 </i>
                 <span class="nav-item">Aula</span>
             </a>
@@ -64,8 +66,8 @@
         </li>
         <li>
             <a href="../A_seccion/a_seccion.php" title="Año Seccion">
-                <i class="w-10 p-2">
-                    <img src="../../../images/icons/seccion.svg" class="filtro-blanco">
+                 <i class="flex  justify-center  items-center ">
+                    <img src="../../../images/icons/seccion.svg" class="w-8  filtro-blanco">
                 </i>
                 <span class="nav-item">Grado</span>
             </a>
@@ -73,8 +75,8 @@
         </li>
         <li>
             <a href="../A_escolar/a_escolar.php" title="Año Escolar">
-                <i class="w-10 p-2">
-                    <img src="../../../images/icons/calendario.svg" class="filtro-blanco">
+                 <i class="flex  justify-center  items-center ">
+                    <img src="../../../images/icons/calendario.svg" class="w-8  filtro-blanco">
                 </i>
                 <span class="nav-item">Periodo</span>
             </a>
@@ -82,8 +84,8 @@
         </li>
         <li>
             <a href="../Intervalo/intervalo.php" title="Intervalo">
-                <i class="w-10 p-2">
-                    <img src="../../../images/icons/intervalo.svg" class="filtro-blanco">
+                 <i class="flex  justify-center  items-center ">
+                    <img src="../../../images/icons/intervalo.svg" class="w-8  filtro-blanco">
                 </i>
                 <span class="nav-item">Intervalo</span>
             </a>
@@ -91,8 +93,8 @@
         </li>
         <li>
             <a href="../Horario/horario.php" title="Horario">
-                <i class="w-10 p-2">
-                    <img src="../../../images/icons/calendariolapiz.svg" class="filtro-blanco">
+                 <i class="flex  justify-center  items-center ">
+                    <img src="../../../images/icons/calendariolapiz.svg" class="w-8  filtro-blanco">
                 </i>
                 <span class="nav-item">Horario</span>
             </a>
@@ -100,8 +102,8 @@
         </li>
         <li>
             <a href="../bitacora/v_bitacora.php" title="Historial de Sistema">
-                <i class="w-10 p-2">
-                    <img src="../../../images/icons/logs.svg" class="filtro-blanco">
+                 <i class="flex  justify-center  items-center ">
+                    <img src="../../../images/icons/logs.svg" class="w-8  filtro-blanco">
                 </i>
                 <span class="nav-item">Historial</span>
             </a>
@@ -109,8 +111,8 @@
         </li>
         <li>
             <a href="../../../php/controller/c_login.php?op=logout">
-                <i class="w-10 p-2">
-                    <img src="../../../images/icons/logOut.svg" class="filtro-blanco">
+                 <i class="flex  justify-center  items-center ">
+                    <img src="../../../images/icons/logOut.svg" class="w-8  filtro-blanco">
                 </i>
                 <span class="nav-item">Cerrar</span>
             </a>

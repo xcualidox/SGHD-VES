@@ -55,10 +55,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <td class="border px-4 py-2"><?php echo $resultado[$i]["correo"] ?></td>
             <td class="border px-4 py-2 text-center">
 
-            <div class=" flex justify-center">
-                    <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" onclick='Eliminar(`<?php echo $resultado[$i]["cedula"]; ?>`)' >
-                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"onclick='Modificar(`<?php echo $resultado[$i]["cedula"]; ?>`,`<?php echo $resultado[$i]["nombres"]; ?>`,`<?php echo $resultado[$i]["apellidos"]; ?>`,`<?php echo $resultado[$i]["direccion"];?>`,`<?php echo $resultado[$i]["telefono"];?>`,`<?php echo $resultado[$i]["correo"];?>`)' >
-                </div>
+            <div class="flex justify-center items-center space-x-4">
+    <img src="../../../images/icons/papelera.svg" class="w-8 h-8 filtro-rojo cursor-pointer" alt="Borrar" title="Borrar" id="boton1" onclick='Eliminar(`<?php echo $resultado[$i]["cedula"]; ?>`)' >
+    <img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar" id="boton2" onclick='Modificar(`<?php echo $resultado[$i]["cedula"]; ?>`, `<?php echo $resultado[$i]["nombres"]; ?>`, `<?php echo $resultado[$i]["apellidos"]; ?>`, `<?php echo $resultado[$i]["direccion"];?>`, `<?php echo $resultado[$i]["telefono"];?>`, `<?php echo $resultado[$i]["correo"];?>`)' >
+</div>
              
               
             
