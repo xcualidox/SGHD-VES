@@ -127,10 +127,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <div class="formulario-extenso__column">
             <label for="profesorRol">Rol: </label>
             <select name="rol" id="profesorRol">
-                <option value="" default selected disabled>Selecione un rol</option>
+               
                 <option value="coordinador">Coordinador</option>
                 <option value="administrador">Administrador</option>
-                <option value="profesor">Profesor</option>
+                <option value="profesor" selected>Profesor</option>
             </select>
         </div>
     </div>

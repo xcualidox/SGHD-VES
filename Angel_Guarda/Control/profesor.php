@@ -1,5 +1,6 @@
 <?php
 include_once("../Modelo/profesor.php");
+
 $operacion = $_POST["ope"];
 switch ($operacion) {
 	case 'Incluir':
@@ -18,9 +19,8 @@ switch ($operacion) {
 function Registra()
 {
 
+	$personasModel = new personas();
 	$cedula = $_POST['cedula'];
-	$personasModel = new zona();
-
     // Verificar si la cédula existe
     $resultado = $personasModel->verificarCedula($cedula);
 
@@ -31,7 +31,7 @@ function Registra()
     }
 	
 	else{
-		$objeto = new zona();
+		$objeto = new personas();
 		$objeto->setDatos($_POST["cedula"], $_POST["nombres"], $_POST["apellidos"], $_POST["direccion"], $_POST["telefono"], $_POST["correo"]);
 		$objeto->incluye();
 		require_once("../../php/controller/c_login.php");
@@ -40,17 +40,40 @@ function Registra()
 	}
 	}
 
-function Modifica()
-{
-	$objeto = new zona();
-	$objeto->setDatos($_POST["cedula"], $_POST["nombres"], $_POST["apellidos"], $_POST["direccion"], $_POST["telefono"], $_POST["correo"]);
-	$objeto->modificar($_POST["origin"]);
-	header("Location: ../Vista/Profesor/profesor.php");
-}
+	function Modifica()
+	{
+		$objeto = new personas();
+		$cedula = $_POST['cedula'];
+		$cedulaOriginal = $_POST['origin']; // Cédula antes de la modificación
+	
+		// Si la cédula no ha cambiado, no es necesario verificarla
+		if ($cedula === $cedulaOriginal) {
+			// Actualiza sin necesidad de verificar duplicados
+			$objeto->setDatos($_POST["cedula"], $_POST["nombres"], $_POST["apellidos"], $_POST["direccion"], $_POST["telefono"], $_POST["correo"]);
+			$objeto->modificar($cedulaOriginal);
+			header("Location: ../Vista/Profesor/profesor.php");
+			exit();
+		}
+	
+		// Si la cédula ha cambiado, verifica si ya está en uso
+		$resultado = $objeto->verificarCedula($cedula);
+	
+		if ($resultado) {
+			// Redirigir al profesor si se encuentra la cédula en otro registro
+			header("Location: ../Vista/Profesor/profesor.php");
+			exit();
+		} else {
+		
+			$objeto->setDatos($_POST["cedula"], $_POST["nombres"], $_POST["apellidos"], $_POST["direccion"], $_POST["telefono"], $_POST["correo"]);
+			$objeto->modificar($cedulaOriginal);
+			header("Location: ../Vista/Profesor/profesor.php");
+			exit();
+		}
+	}
 
 function Elimina()
 {	
-	$objeto = new zona();
+	$objeto = new personas();
 	$objeto->eliminar($_POST["origin"]);
 	header("Location: ../Vista/Profesor/profesor.php");
 }

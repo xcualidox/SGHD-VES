@@ -1,6 +1,6 @@
 <?php
 include_once("basedatos.php");
-class zona extends database_connect{
+class personas extends database_connect{
     private $cedula;
     private $nombres;
     private $apellidos;

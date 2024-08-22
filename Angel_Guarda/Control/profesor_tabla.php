@@ -1,6 +1,6 @@
 <?php 
 include_once("../../Modelo/profesor.php");
-class query extends zona {
+class query extends personas {
     function GenerarTabla($offset,$limit)  {
         return $this->tabla($offset,$limit);
     }
@@ -8,7 +8,7 @@ class query extends zona {
         return $this->TotaldePagina();
     }
     function obtenerDatosProfesores() {
-        $zona = new zona();
+        $zona = new personas();
         return $zona->tabla(0, 100); // Reemplaza los parámetros por los adecuados
     }
 }
