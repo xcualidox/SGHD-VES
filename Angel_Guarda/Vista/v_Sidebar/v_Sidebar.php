@@ -27,6 +27,15 @@
     </div>
     <ul>
         <li>
+            <a href="#" class="flex items-center" title="Asignatura">
+                 <i class="flex  justify-center  items-center ">
+                    <img src="../../../images/icons/usuariocliente.svg" class="w-8  filtro-blanco">
+                </i>
+                <span class="nav-item">Representante</span>
+            </a>
+            <span class="tooltip">Representante</span>
+        </li>
+        <li>
             <a href="../Asignatura/asignatura.php" class="flex items-center" title="Asignatura">
                  <i class="flex  justify-center  items-center ">
                     <img src="../../../images/icons/documento.svg" class="w-8  filtro-blanco">

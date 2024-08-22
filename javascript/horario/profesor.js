@@ -42,6 +42,7 @@ function Eliminar(nombre) {
 
 function Enviar(valor){
     const regex = /^[0-9]*$/;
+    
     var div=document.querySelector('#form');
     var inputs=div.querySelectorAll('input');
     console.log(dato1);

@@ -307,8 +307,7 @@ thead {
 
 
 .formulario {
-    display: none;
-    box-sizing: border-box;
+
     position: absolute;
     left: 45%;
     top: 50%;
@@ -320,6 +319,12 @@ thead {
     
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 4000;
+    opacity: 1;
+    transition: opacity .3s ease-in-out ;
+    @starting-style{
+        opacity:0
+      
+    }
  
 }
 
@@ -343,7 +348,7 @@ thead {
 }
 
 .formulario-extenso {
-    display: none;
+ 
     box-sizing: border-box;
     position: absolute;
     left: 50%;
@@ -358,6 +363,12 @@ thead {
     z-index: 4000;
     overflow-y: auto;
     max-height: 80vh;
+    opacity: 1;
+    transition: opacity .3s ease-in-out ;
+    @starting-style{
+        opacity:0
+      
+    }
 }
 
 .formulario-extenso__input {

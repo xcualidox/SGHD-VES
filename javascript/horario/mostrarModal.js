@@ -69,11 +69,11 @@ function Mostrar(){
     // 👇️ this SHOWS the form
         form.style.display = 'block';
         btn2.style.display = 'block';
-        btn.style.display = 'none';
+        btn.style.display = 'block';
     } else {
     // 👇️ this HIDES the form
         form.style.display = 'none';
-        btn2.style.display = 'none';
+        btn2.style.display = 'block';
         btn.style.display = 'block';
     }
 }

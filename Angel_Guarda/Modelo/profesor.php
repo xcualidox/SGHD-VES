@@ -1,7 +1,12 @@
 <?php
 include_once("basedatos.php");
 class zona extends database_connect{
-    private $nom, $fecI, $fechaF;
+    private $cedula;
+    private $nombres;
+    private $apellidos;
+    private $direccion;
+    private $telefono;
+    private $correo;
 
     function setDatos($cedula, $nombres, $apellidos, $direccion, $telefono, $correo){
 		$this->cedula=$cedula;
@@ -24,9 +29,13 @@ class zona extends database_connect{
 		return $this->query($sql,[$this->cedula,$this->nombres,$this->apellidos,$this->direccion,$this->telefono,$this->correo,$origin]);
     }
     
+    
     function eliminar($origin) {
-      $sql= "DELETE FROM `personas` WHERE `cedula`=?";
-		return $this->query($sql,$origin);
+      $sql=  "
+      DELETE FROM `personas` WHERE `cedula` = ?;
+      DELETE FROM `login` WHERE `username` = ?
+      ";
+	  return $this->query($sql, [$origin, $origin]);
     }
     function tabla($offset, $limit) {
       $sql= "SELECT * from `personas` LIMIT $offset,$limit";

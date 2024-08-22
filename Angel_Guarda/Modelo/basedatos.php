@@ -68,28 +68,33 @@ class database_connect{
         }
     }
     // Ejecuta queries SQL sencillas
-   protected function query($query , $data){
-        try{
+    protected function query($query , $data){
+        try {
             $this->connect();
             $query_exec = $this->connect()->prepare("$query");
-            if (strpos($query, '?') !== false)
-            {
-                $query_exec->execute(is_array($data)?$data:[$data]);
+    
+            // Si hay placeholders en la consulta, ejecuta con los datos
+            if (strpos($query, '?') !== false) {
+                $query_exec->execute(is_array($data) ? $data : [$data]);
+            } else {
+                $query_exec->execute();
             }
-            else
-            {
-                 $query_exec->execute();
+    
+            // Verifica si hay errores en la ejecución de la consulta
+            if ($query_exec->errorCode() != '00000') {
+                throw new PDOException("Error en la consulta: " . implode(", ", $query_exec->errorInfo()));
             }
-            if( $query_exec->rowCount()>0){
+    
+            // Verifica si se encontraron resultados
+            if($query_exec->rowCount() > 0){
                 return $query_exec;
             }
-            //$query_exec->debugDumpParams();
+    
+            return false;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
             return false;
         }
-       catch(PDOException $e){
-        return false;
-       }
-
     }
     // Ejecuta queries SQL en forma de transacción
     protected function queryTransaction($data){

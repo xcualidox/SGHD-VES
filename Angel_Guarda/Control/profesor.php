@@ -24,7 +24,7 @@ function Registra()
 	$filas=mysqli_num_rows($resultado);
 
 	if($filas>0){
-		header("Location: ../Vista/Profesor/profesor_error.php");
+		header("Location: ../Vista/Profesor/profesor.php");
 	}
 	
 	else{
