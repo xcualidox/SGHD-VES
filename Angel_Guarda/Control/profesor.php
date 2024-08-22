@@ -17,15 +17,18 @@ switch ($operacion) {
 	
 function Registra()
 {
-	$cedula=$_POST['cedula'];
-	$conexion=mysqli_connect("localhost", "root", "", "proyecto");
-	$consulta="select * from personas where cedula='$cedula'";
-	$resultado=mysqli_query($conexion, $consulta);
-	$filas=mysqli_num_rows($resultado);
 
-	if($filas>0){
-		header("Location: ../Vista/Profesor/profesor.php");
-	}
+	$cedula = $_POST['cedula'];
+	$personasModel = new zona();
+
+    // Verificar si la cédula existe
+    $resultado = $personasModel->verificarCedula($cedula);
+
+	if ($resultado ) {
+        // Redirigir al profesor si se encuentra la cédula
+        header("Location: ../Vista/Profesor/profesor.php");
+        exit();
+    }
 	
 	else{
 		$objeto = new zona();

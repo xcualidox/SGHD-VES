@@ -28,6 +28,20 @@ class zona extends database_connect{
                 WHERE `cedula`=?";
 		return $this->query($sql,[$this->cedula,$this->nombres,$this->apellidos,$this->direccion,$this->telefono,$this->correo,$origin]);
     }
+    function verificarCedula($cedula) {
+      $sql = "SELECT * FROM `personas` WHERE `cedula` = ?";
+      
+  
+      $resultado = $this->query($sql, [$cedula]);
+
+      // Verificar si hubo algún resultado
+      if ($resultado) {
+          // Retorna los datos obtenidos
+          return $this->fetch_query($resultado); // Retorna el primer registro encontrado
+      } else {
+          return false;
+      }
+  }
     
     
     function eliminar($origin) {
