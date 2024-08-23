@@ -1,11 +1,11 @@
 <?php
 include_once("../../../libraries/vendor/autoload.php"); 
-include_once("../../Control/c_profesor.php");
+include_once("../../Control/c_asignatura.php");
 
 use Dompdf\Dompdf;
 
 $query = new query();
-$profesores = $query->obtenerDatosProfesores();
+$asignatura = $query->obtenerDatosAsignaturas();
 $espacio = " ";
 
 $html = '
@@ -35,6 +35,7 @@ $html = '
          max-width: 100px; 
         color: black;
         padding: 8px;
+        text:center;
     }
     .email {
         max-width: 150px; /* Limita el ancho */
@@ -48,28 +49,22 @@ $html = '
     }
 </style>
 
-<h1>Lista de Profesores</h1>
+<h1>Lista de Materias</h1>
 <table>
     <thead>
         <tr>
-            <th>Cédula</th>
-            <th>Nombre Completo</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
+            <th>Codigo</th>
+            <th>AREAS   DE FORMACION</th>
         </tr>
     </thead>
     <tbody>';
 
-foreach ($profesores as $profesor) {
+foreach ($asignatura as $asignaturas) {
     $html .= '
         <tr class="highlight">
-            <td>' . $profesor['cedula'] . '</td>
-            <td>' . $profesor['nombres']  . $espacio . $profesor['apellidos'] . '</td>
+            <td>' . $asignaturas['codigo'] . '</td>
+            <td>' . $asignaturas['nombre']  . '</td>
         
-            <td class="secondary">' . $profesor['direccion'] . '</td>
-            <td>' . $profesor['telefono'] . '</td>
-            <td class="email">' . $profesor['correo'] . '</td>
         </tr>';
 }
 

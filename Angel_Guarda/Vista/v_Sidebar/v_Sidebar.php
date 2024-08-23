@@ -36,7 +36,7 @@
             <span class="tooltip">Representante</span>
         </li>
         <li>
-            <a href="../Asignatura/asignatura.php" class="flex items-center" title="Asignatura">
+            <a href="../Asignatura/v_asignatura.php" class="flex items-center" title="Asignatura">
                  <i class="flex  justify-center  items-center ">
                     <img src="../../../images/icons/documento.svg" class="w-8  filtro-blanco">
                 </i>
@@ -45,7 +45,7 @@
             <span class="tooltip">Asignatura</span>
         </li>
         <li>
-            <a href="../Profesor/profesor.php" title="Profesor">
+            <a href="../profesor/v_profesor.php" title="Profesor">
                 <i class="flex  justify-center  items-center ">
                
                     <img src="../../../images/icons/persona.svg" class=" w-8 filtro-blanco">
@@ -65,7 +65,7 @@
             <span class="tooltip">PENSUM</span>
         </li>
         <li>
-            <a href="../Aula/aula.php" title="Aula">
+            <a href="../aula/v_aula.php" title="Aula">
                  <i class="flex  justify-center  items-center ">
                     <img src="../../../images/icons/classroom.svg" class="w-8  filtro-blanco">
                 </i>
@@ -74,7 +74,7 @@
             <span class="tooltip">Aula</span>
         </li>
         <li>
-            <a href="../A_seccion/a_seccion.php" title="Año Seccion">
+            <a href="../seccion/v_seccion.php" title="Año Seccion">
                  <i class="flex  justify-center  items-center ">
                     <img src="../../../images/icons/seccion.svg" class="w-8  filtro-blanco">
                 </i>
@@ -83,7 +83,7 @@
             <span class="tooltip">Grado</span>
         </li>
         <li>
-            <a href="../A_escolar/a_escolar.php" title="Año Escolar">
+            <a href="../escolar/v_escolar.php" title="Año Escolar">
                  <i class="flex  justify-center  items-center ">
                     <img src="../../../images/icons/calendario.svg" class="w-8  filtro-blanco">
                 </i>
@@ -92,7 +92,7 @@
             <span class="tooltip">Periodo</span>
         </li>
         <li>
-            <a href="../Intervalo/intervalo.php" title="Intervalo">
+            <a href="../intervalo/v_intervalo.php" title="Intervalo">
                  <i class="flex  justify-center  items-center ">
                     <img src="../../../images/icons/intervalo.svg" class="w-8  filtro-blanco">
                 </i>
