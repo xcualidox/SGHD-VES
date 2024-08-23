@@ -96,8 +96,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
             <label for="">Profesor:</label>
             <input type="text" id='datos' style='display:none;' class="formulario__input" disabled>
-            <select name="profesor" id="profesor">
-                <option value="">Seleccione el profesor</option>
+          <!-- Cambiado a input con datalist -->
+            <input type="text" name="profesor" id="profesor" list="profesoresList" class="formulario__input" placeholder="Seleccione el profesor" autocomplete="off">
+
+            <datalist id="profesoresList">
                 <?php
                 if ($profesores) {
                     foreach ($profesores as $profesor) {
@@ -105,7 +107,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     }
                 }
                 ?>
-            </select>
+            </datalist>
 
             <br><br>
 
