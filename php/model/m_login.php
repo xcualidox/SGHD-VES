@@ -86,6 +86,12 @@ class Login extends db_connect
         $result = $this->query($query, $this->username);
         return $result ? $this->fetch_query($result) : false;
     }
+
+    public function modificarRol($username, $rol) {
+        $query = "UPDATE `login` SET `rol` = ? WHERE `username` = ?";
+        return $this->query($query, [$rol, $username]);
+    }
+    
     public function changePw()
     {
         $query = "UPDATE login SET `password` = ? WHERE `username` = ?";

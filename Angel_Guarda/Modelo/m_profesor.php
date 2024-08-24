@@ -22,12 +22,12 @@ class personas extends database_connect{
 		return $this->query($sql,[$this->cedula,$this->nombres,$this->apellidos,$this->direccion,$this->telefono,$this->correo]);
     }
 
-    function modificar($origin){
-        $sql= "UPDATE `personas`
-                SET `cedula`=?, `nombres`=?, `apellidos`=?, `direccion`=?, `telefono`=?, `correo`=?
-                WHERE `cedula`=?";
-		return $this->query($sql,[$this->cedula,$this->nombres,$this->apellidos,$this->direccion,$this->telefono,$this->correo,$origin]);
-    }
+    function modificar($cedulaOriginal) {
+      $sql = "UPDATE `personas`
+              SET `cedula`=?, `nombres`=?, `apellidos`=?, `direccion`=?, `telefono`=?, `correo`=?
+              WHERE `cedula`=?";
+      return $this->query($sql, [$this->cedula, $this->nombres, $this->apellidos, $this->direccion, $this->telefono, $this->correo, $cedulaOriginal]);
+  }
     function verificarCedula($cedula) {
       $sql = "SELECT * FROM `personas` WHERE `cedula` = ?";
       
