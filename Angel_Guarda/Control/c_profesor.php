@@ -102,49 +102,28 @@ function Elimina()
 }
 
 //Añadiendo el Nombre de las Columnas
+
+
+
+
+// Inicializar el objeto de nombre de columnas
 $nombre_Columnas = new personas();
 
-$NombreColumnas=$nombre_Columnas ->nombreColumna($nombre_Columnas );
-$soloNombresColumnas = array_map(function($columna) {
-    return $columna['Field'];
-}, $NombreColumnas);
-
-
-
-
-
- //#Paginado
+// #Paginado
 // Determina la página actual
-if (!isset($_GET["pag_asig"])) {
-    $paginaActual = 1; // Página predeterminada es la primera
-} else {
-    $paginaActual = (int)$_GET["pag_asig"]; // Página actual obtenida de la URL
-}
+$paginaActual = isset($_GET["pag_asig"]) ? (int)$_GET["pag_asig"] : 1;
 
-$limit = 10; // Número de registros por página
+// Número de registros por página
+$limit = 10;
 $offset = ($paginaActual - 1) * $limit; // Offset para la consulta SQL
 
 $objeto = new query();
 $contador = $objeto->GenerarTabla($offset, $limit); // Obtener los registros de la página actual
 $numFilas = $objeto->TotalPaginas(); // Obtener el número total de registros
 
-// Crear el arreglo de datos
-$tablaDatos = array_map(function($fila) {
-    return [
-        'cedula' => $fila["cedula"],
-        'nombres' => $fila["nombres"],
-        'apellidos' => $fila["apellidos"],
-        'direccion' => $fila["direccion"],
-        'telefono' => $fila["telefono"],
-        'correo' => $fila["correo"]
-    ];
-}, $contador);
-
-
-
 // Función para obtener las columnas de la tabla
 function obtenerNombreColumnas() {
-    $nombre_Columnas = new personas();
+    global $nombre_Columnas; // Usar el objeto global
     $NombreColumnas = $nombre_Columnas->nombreColumna($nombre_Columnas);
     return array_map(function($columna) {
         return $columna['Field'];
@@ -188,16 +167,18 @@ function contarPaginas($campo, $buscar, $limit) {
 }
 
 // Función para crear los datos de la tabla
-function crearArregloDatos($contador) {
-    return array_map(function($fila) {
-        return [
-            'cedula' => $fila["cedula"],
-            'nombres' => $fila["nombres"],
-            'apellidos' => $fila["apellidos"],
-            'direccion' => $fila["direccion"],
-            'telefono' => $fila["telefono"],
-            'correo' => $fila["correo"]
-        ];
+function crearArregloDatos($contador, $nombre_Columnas) {
+    $NombreColumnas = $nombre_Columnas->nombreColumna($nombre_Columnas);
+    $soloNombresColumnas = array_map(function($columna) {
+        return $columna['Field'];
+    }, $NombreColumnas);
+
+    return array_map(function($fila) use ($soloNombresColumnas) {
+        $resultado = [];
+        foreach ($soloNombresColumnas as $columna) {
+            $resultado[$columna] = isset($fila[$columna]) ? $fila[$columna] : null;
+        }
+        return $resultado;
     }, $contador);
 }
 
@@ -207,22 +188,15 @@ function generarPaginacionHTML($paginaActual, $totalpag, $campo, $buscar) {
 
     if ($totalpag <= 10) {
         for ($i = 1; $i <= $totalpag; $i++) {
-            if ($paginaActual == $i) {
-                $paginacionHTML .= "<a href='?pag_asig={$i}&campo={$campo}&listar={$buscar}' class='seleccionado'>" . $i . "</a>";
-            } else {
-                $paginacionHTML .= "<a href='?pag_asig={$i}&campo={$campo}&listar={$buscar}'>" . $i . "</a>";
-            }
+            $paginacionHTML .= $paginaActual == $i
+                ? "<a href='?pag_asig={$i}&campo={$campo}&listar={$buscar}' class='seleccionado'>{$i}</a>"
+                : "<a href='?pag_asig={$i}&campo={$campo}&listar={$buscar}'>{$i}</a>";
         }
     } else {
-        for ($i = $paginaActual - 4; $i <= $paginaActual + 6; $i++) {
-            if ($i <= 0) continue;
-            if ($i > $totalpag) break;
-
-            if ($paginaActual == $i) {
-                $paginacionHTML .= "<a href='?pag_asig={$i}&campo={$campo}&listar={$buscar}' class='seleccionado'>" . $i . "</a>";
-            } else {
-                $paginacionHTML .= "<a href='?pag_asig={$i}&campo={$campo}&listar={$buscar}'>" . $i . "</a>";
-            }
+        for ($i = max(1, $paginaActual - 4); $i <= min($totalpag, $paginaActual + 6); $i++) {
+            $paginacionHTML .= $paginaActual == $i
+                ? "<a href='?pag_asig={$i}&campo={$campo}&listar={$buscar}' class='seleccionado'>{$i}</a>"
+                : "<a href='?pag_asig={$i}&campo={$campo}&listar={$buscar}'>{$i}</a>";
         }
     }
     $paginacionHTML .= "</div>";
@@ -231,16 +205,17 @@ function generarPaginacionHTML($paginaActual, $totalpag, $campo, $buscar) {
 
 // Controlador principal
 function controladorPaginado() {
+    global $nombre_Columnas; // Usar el objeto global
     $soloNombresColumnas = obtenerNombreColumnas();
     $paginaActual = obtenerPaginaActual();
-    $limit = 10; // Número de registros por página
-    $offset = ($paginaActual - 1) * $limit; // Offset para la consulta SQL
+    $limit = 10;
+    $offset = ($paginaActual - 1) * $limit;
     list($campo, $buscar) = obtenerParametrosBusqueda();
 
     $contador = generarTabla($campo, $buscar, $offset, $limit);
     $totalpag = contarPaginas($campo, $buscar, $limit);
 
-    $tablaDatos = crearArregloDatos($contador);
+    $tablaDatos = crearArregloDatos($contador, $nombre_Columnas);
     $paginacionHTML = generarPaginacionHTML($paginaActual, $totalpag, $campo, $buscar);
 
     return [$soloNombresColumnas, $tablaDatos, $paginacionHTML];
@@ -248,7 +223,6 @@ function controladorPaginado() {
 
 // Llamada al controlador
 list($soloNombresColumnas, $tablaDatos, $paginacionHTML) = controladorPaginado();
-
 ?>
 
 
