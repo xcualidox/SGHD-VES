@@ -9,6 +9,7 @@
     <script src="../../../javascript/libquery.js"></script>
     <link rel="stylesheet" href="../../../styles/main.css">
     <link rel="stylesheet" href="../../../styles/tablas.css">
+    <link rel="stylesheet" href="../../../styles/pagination.css">
 </head>
 <body>
 

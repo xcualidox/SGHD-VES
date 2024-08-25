@@ -89,9 +89,10 @@ class database_connect{
             if($query_exec->rowCount() > 0){
                 return $query_exec;
             }
-    
+            
             return false;
         } catch (PDOException $e) {
+            echo $query;
             echo "Error: " . $e->getMessage();
             return false;
         }

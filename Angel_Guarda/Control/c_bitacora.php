@@ -15,20 +15,20 @@ if ($_SESSION["sesion"])
         $bitacora->insertBitacora();
 
     }
-    if(isset($_POST["op"]))
+    if(isset($_GET["op"]))
     {
-        $bitacoraOp = $_POST["op"];
+        $bitacoraOp = $_GET["op"];
         switch ($bitacoraOp) 
         {
             case "get_all":
                 include_once("utilities/pagination.php");
-                $op_type = $_POST["op_type"];
-                $date_filter = (empty($_POST["initial_date"]) && empty($_POST["final_date"]) ? "" : 
-                (empty($_POST["final_date"]) ? ["inicio" => $_POST["initial_date"]] : 
-                (empty($_POST["initial_date"] ? ["final" => $_POST["final_date"]] : 
-                ["inicio" => $_POST["initial_date"], "final" => $_POST["final_date"]]))));
-                $input_filter = $_POST["input_filter"];
-                echo pagination($bitacora = new Bitacora(), 1, ["op_type" => $op_type , "date"=>  $date_filter , "input_filter"=> $input_filter ]);
+                $op_type = $_GET["op_type"];
+                $date_filter = (empty($_GET["initial_date"]) && empty($_GET["final_date"])) ? "" : 
+               (empty($_GET["final_date"]) ? ["inicio" => $_GET["initial_date"]] : 
+               (empty($_GET["initial_date"]) ? ["final" => $_GET["final_date"]] : 
+               ["inicio" => $_GET["initial_date"], "final" => $_GET["final_date"]]));
+                $input_filter = $_GET["input_filter"];
+                echo pagination($bitacora = new Bitacora(), $_GET["pageNumber"], ["op_type" => $op_type , "date"=>  $date_filter , "input_filter"=> $input_filter ]);
                 exit();
                 break;
         }

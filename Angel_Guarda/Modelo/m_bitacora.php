@@ -62,7 +62,7 @@ class Bitacora extends database_connect
             {
                 if(count($this->filter_date) > 1)
                 {
-                    $query.= " DATE(bitacora.fecha_hora) BETWEEN '?' AND '?'";
+                    $query.= " DATE(bitacora.fecha_hora) BETWEEN ? AND ?";
                     array_push($params, $this->filter_date["inicio"], $this->filter_date["final"]);
                 }
                 else
@@ -75,7 +75,7 @@ class Bitacora extends database_connect
             }
             if (!empty($this->filter_input))
             {
-                $query.= " CONCAT(personas.primer_nombre,' ',personas.primer_apellido) LIKE CONCAT('%', ?, '%')
+                $query.= " CONCAT(personas.nombres,' ',personas.apellidos) LIKE CONCAT('%', ?, '%')
                 OR bitacora.cedula = ?";
                 array_push($params, $this->filter_input, $this->filter_input);
             }
@@ -89,7 +89,7 @@ class Bitacora extends database_connect
     }
     public function getAll()
     {
-        $query = "SELECT bitacora.fecha_hora, bitacora.type, bitacora.cedula, CONCAT(personas.primer_nombre,' ',personas.primer_apellido) AS full_name, bitacora.description, bitacora.user_computer
+        $query = "SELECT bitacora.fecha_hora, bitacora.type, bitacora.cedula, CONCAT(personas.nombres,' ',personas.apellidos) AS full_name, bitacora.description, bitacora.user_computer
                     FROM bitacora 
                     INNER JOIN personas ON bitacora.cedula = personas.cedula";
         $params = [];
@@ -106,7 +106,7 @@ class Bitacora extends database_connect
             {
                 if(count($this->filter_date) > 1)
                 {
-                    $query.= " DATE(bitacora.fecha_hora) BETWEEN '?' AND '?'";
+                    $query.= " DATE(bitacora.fecha_hora) BETWEEN ? AND ?";
                     array_push($params, $this->filter_date["inicio"], $this->filter_date["final"]);
                 }
                 else
@@ -119,7 +119,7 @@ class Bitacora extends database_connect
             }
             if (!empty($this->filter_input))
             {
-                $query.= " CONCAT(personas.primer_nombre,' ',personas.primer_apellido) LIKE CONCAT('%', ?, '%')
+                $query.= " CONCAT(personas.nombres,' ',personas.apellidos) LIKE CONCAT('%', ?, '%')
                 OR bitacora.cedula = ?";
                 array_push($params, $this->filter_input, $this->filter_input);
             }
@@ -128,6 +128,7 @@ class Bitacora extends database_connect
         else{
             $params = "";
         }
+        $query .= " LIMIT ".$this->offset;
         $result = $this->query($query, $params);
         return $result ? $this->fetch_all_query($result) : false;
     }
