@@ -26,7 +26,8 @@
         </div>
     </div>
     <ul>
-        <li>
+        <!-- Representante -->
+        <!-- <li>
             <a href="#" class="flex items-center" title="Asignatura">
                  <i class="flex  justify-center  items-center ">
                     <img src="../../../images/icons/usuariocliente.svg" class="w-8  filtro-blanco">
@@ -34,7 +35,7 @@
                 <span class="nav-item">Representante</span>
             </a>
             <span class="tooltip">Representante</span>
-        </li>
+        </li> -->
         <li>
             <a href="../Asignatura/v_asignatura.php" class="flex items-center" title="Asignatura">
                  <i class="flex  justify-center  items-center ">
