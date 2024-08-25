@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<div class="sidebar active">
+<div class="sidebar ">
     <div class="top">
         <div class="logo"></div>
         
