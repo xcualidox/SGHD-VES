@@ -110,16 +110,7 @@ function Elimina()
 $nombre_Columnas = new personas();
 
 // #Paginado
-// Determina la página actual
-$paginaActual = isset($_GET["pag_asig"]) ? (int)$_GET["pag_asig"] : 1;
 
-// Número de registros por página
-$limit = 10;
-$offset = ($paginaActual - 1) * $limit; // Offset para la consulta SQL
-
-$objeto = new query();
-$contador = $objeto->GenerarTabla($offset, $limit); // Obtener los registros de la página actual
-$numFilas = $objeto->TotalPaginas(); // Obtener el número total de registros
 
 // Función para obtener las columnas de la tabla
 function obtenerNombreColumnas() {
