@@ -5,18 +5,6 @@ require_once(__DIR__ . "/../Modelo/m_profesor.php");
 require_once(__DIR__ . "/../../php/model/m_login.php");
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 if (isset($_POST["ope"])) {
     $operacion = $_POST["ope"];
     switch ($operacion) {
@@ -133,7 +121,7 @@ if (!isset($_GET["pag_asig"])) {
     $paginaActual = (int)$_GET["pag_asig"]; // Página actual obtenida de la URL
 }
 
-$limit = 5; // Número de registros por página
+$limit = 10; // Número de registros por página
 $offset = ($paginaActual - 1) * $limit; // Offset para la consulta SQL
 
 $objeto = new query();
@@ -154,40 +142,112 @@ $tablaDatos = array_map(function($fila) {
 
 
 
-// Calcular el total de páginas
-$totalpag = ceil($numFilas / $limit);
+// Función para obtener las columnas de la tabla
+function obtenerNombreColumnas() {
+    $nombre_Columnas = new personas();
+    $NombreColumnas = $nombre_Columnas->nombreColumna($nombre_Columnas);
+    return array_map(function($columna) {
+        return $columna['Field'];
+    }, $NombreColumnas);
+}
 
-// Inicializa una variable para almacenar el HTML de la paginación
-$paginacionHTML = "<div class='paginacion'>";
+// Función para obtener la página actual
+function obtenerPaginaActual() {
+    return isset($_GET["pag_asig"]) ? (int)$_GET["pag_asig"] : 1;
+}
 
-// Si el total de páginas es menor o igual a 10, mostrar todas las páginas
-if ($totalpag <= 10) {
-    for ($i = 1; $i <= $totalpag; $i++) {
-        if ($paginaActual == $i) {
-            $paginacionHTML .= "<a href=?pag_asig=" . $i . " class='seleccionado'>" . $i . "</a>";
-        } else {
-            $paginacionHTML .= "<a href=?pag_asig=" . $i . ">" . $i . "</a>";
-        }
-    }
-} else {
-    // Mostrar un rango de páginas alrededor de la página actual
-    for ($i = $paginaActual - 4; $i <= $paginaActual + 6; $i++) {
-        if ($i <= 0) {
-            continue; // Asegurarse de no mostrar números negativos o cero
-        }
-        if ($i > $totalpag) {
-            break; // Romper el bucle si el índice supera el total de páginas
-        }
-        if ($paginaActual == $i) {
-            $paginacionHTML .= "<a href=?pag_asig=" . $i . " class='seleccionado'>" . $i . "</a>";
-        } else {
-            $paginacionHTML .= "<a href=?pag_asig=" . $i . ">" . $i . "</a>";
-        }
+// Función para obtener los parámetros de búsqueda
+function obtenerParametrosBusqueda() {
+    $campo = isset($_GET['campo']) ? $_GET['campo'] : '';
+    $buscar = isset($_GET['listar']) ? $_GET['listar'] : '';
+    return [$campo, $buscar];
+}
+
+// Función para generar los datos de la tabla
+function generarTabla($campo, $buscar, $offset, $limit) {
+    $objeto = new query();
+    
+    if ($buscar !== '' && $campo !== '') {
+        return $objeto->GenerarTablaFiltrada($campo, $buscar, $offset, $limit);
+    } else {
+        return $objeto->GenerarTabla($offset, $limit);
     }
 }
 
-$paginacionHTML .= "</div>";
+// Función para contar las páginas totales
+function contarPaginas($campo, $buscar, $limit) {
+    $objeto = new query();
+    
+    if ($buscar !== '' && $campo !== '') {
+        $numFilas = $objeto->TotalPaginasFiltradas($campo, $buscar);
+    } else {
+        $numFilas = $objeto->TotalPaginas();
+    }
 
+    return ceil($numFilas / $limit);
+}
+
+// Función para crear los datos de la tabla
+function crearArregloDatos($contador) {
+    return array_map(function($fila) {
+        return [
+            'cedula' => $fila["cedula"],
+            'nombres' => $fila["nombres"],
+            'apellidos' => $fila["apellidos"],
+            'direccion' => $fila["direccion"],
+            'telefono' => $fila["telefono"],
+            'correo' => $fila["correo"]
+        ];
+    }, $contador);
+}
+
+// Función para generar la paginación
+function generarPaginacionHTML($paginaActual, $totalpag, $campo, $buscar) {
+    $paginacionHTML = "<div class='paginacion'>";
+
+    if ($totalpag <= 10) {
+        for ($i = 1; $i <= $totalpag; $i++) {
+            if ($paginaActual == $i) {
+                $paginacionHTML .= "<a href='?pag_asig={$i}&campo={$campo}&listar={$buscar}' class='seleccionado'>" . $i . "</a>";
+            } else {
+                $paginacionHTML .= "<a href='?pag_asig={$i}&campo={$campo}&listar={$buscar}'>" . $i . "</a>";
+            }
+        }
+    } else {
+        for ($i = $paginaActual - 4; $i <= $paginaActual + 6; $i++) {
+            if ($i <= 0) continue;
+            if ($i > $totalpag) break;
+
+            if ($paginaActual == $i) {
+                $paginacionHTML .= "<a href='?pag_asig={$i}&campo={$campo}&listar={$buscar}' class='seleccionado'>" . $i . "</a>";
+            } else {
+                $paginacionHTML .= "<a href='?pag_asig={$i}&campo={$campo}&listar={$buscar}'>" . $i . "</a>";
+            }
+        }
+    }
+    $paginacionHTML .= "</div>";
+    return $paginacionHTML;
+}
+
+// Controlador principal
+function controladorPaginado() {
+    $soloNombresColumnas = obtenerNombreColumnas();
+    $paginaActual = obtenerPaginaActual();
+    $limit = 10; // Número de registros por página
+    $offset = ($paginaActual - 1) * $limit; // Offset para la consulta SQL
+    list($campo, $buscar) = obtenerParametrosBusqueda();
+
+    $contador = generarTabla($campo, $buscar, $offset, $limit);
+    $totalpag = contarPaginas($campo, $buscar, $limit);
+
+    $tablaDatos = crearArregloDatos($contador);
+    $paginacionHTML = generarPaginacionHTML($paginaActual, $totalpag, $campo, $buscar);
+
+    return [$soloNombresColumnas, $tablaDatos, $paginacionHTML];
+}
+
+// Llamada al controlador
+list($soloNombresColumnas, $tablaDatos, $paginacionHTML) = controladorPaginado();
 
 ?>
 
