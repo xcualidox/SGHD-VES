@@ -42,7 +42,7 @@ function Enviar(valor) {
 
         if (cod == "" || nom == "") {
             showToast("No puede dejar los campos vacios", false);
-        } else if (cod.length > 3) {
+        } else if (cod.length > 10) {
             showToast("El codigo de la asignatura no puede tener mas de 3 letras", false);
         } else if (nom.length > 25) {
             showToast("El nombre de la asignatura es muy largo", false);
