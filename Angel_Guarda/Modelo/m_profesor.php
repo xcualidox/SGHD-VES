@@ -18,16 +18,16 @@ class personas extends database_connect{
 	  }
 
     function incluye(){
-        $sql= "insert into personas(cedula, nombres, apellidos, direccion, telefono, correo) values(?,?,?,?,?,?)";
+        $sql= "INSERT INTO personas(cedula, nombres, apellidos, direccion, telefono, correo) VALUES(?,?,?,?,?,?)";
 		return $this->query($sql,[$this->cedula,$this->nombres,$this->apellidos,$this->direccion,$this->telefono,$this->correo]);
     }
 
-    function modificar($origin){
-        $sql= "UPDATE `personas`
-                SET `cedula`=?, `nombres`=?, `apellidos`=?, `direccion`=?, `telefono`=?, `correo`=?
-                WHERE `cedula`=?";
-		return $this->query($sql,[$this->cedula,$this->nombres,$this->apellidos,$this->direccion,$this->telefono,$this->correo,$origin]);
-    }
+    function modificar($cedulaOriginal) {
+      $sql = "UPDATE `personas`
+              SET `cedula`=?, `nombres`=?, `apellidos`=?, `direccion`=?, `telefono`=?, `correo`=?
+              WHERE `cedula`=?";
+      return $this->query($sql, [$this->cedula, $this->nombres, $this->apellidos, $this->direccion, $this->telefono, $this->correo, $cedulaOriginal]);
+  }
     function verificarCedula($cedula) {
       $sql = "SELECT * FROM `personas` WHERE `cedula` = ?";
       
@@ -59,6 +59,11 @@ class personas extends database_connect{
       $sql= "SELECT * from `personas`";
       return count($this->fetch_all_query($this->query($sql,"")));
     }
+
+    function nombreColumna() {
+      $sql = "SHOW COLUMNS FROM `personas`";
+      return $this->fetch_all_query($this->query($sql, ""));
+  }
 }
 //Query para El paginado
 class query extends personas {
