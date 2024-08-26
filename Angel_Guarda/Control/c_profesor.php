@@ -107,14 +107,13 @@ function Elimina()
 
 
 // Inicializar el objeto de nombre de columnas
+// Inicializar el objeto de nombre de columnas
 $nombre_Columnas = new personas();
 
 // #Paginado
 
-
 // Función para obtener las columnas de la tabla
-function obtenerNombreColumnas() {
-    global $nombre_Columnas; // Usar el objeto global
+function obtenerNombreColumnas($nombre_Columnas) {
     $NombreColumnas = $nombre_Columnas->nombreColumna($nombre_Columnas);
     return array_map(function($columna) {
         return $columna['Field'];
@@ -195,9 +194,8 @@ function generarPaginacionHTML($paginaActual, $totalpag, $campo, $buscar) {
 }
 
 // Controlador principal
-function controladorPaginado() {
-    global $nombre_Columnas; // Usar el objeto global
-    $soloNombresColumnas = obtenerNombreColumnas();
+function controladorPaginado($nombre_Columnas) {
+    $soloNombresColumnas = obtenerNombreColumnas($nombre_Columnas);
     $paginaActual = obtenerPaginaActual();
     $limit = 10;
     $offset = ($paginaActual - 1) * $limit;
@@ -213,7 +211,7 @@ function controladorPaginado() {
 }
 
 // Llamada al controlador
-list($soloNombresColumnas, $tablaDatos, $paginacionHTML) = controladorPaginado();
+list($soloNombresColumnas, $tablaDatos, $paginacionHTML) = controladorPaginado($nombre_Columnas);
 ?>
 
 
