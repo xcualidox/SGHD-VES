@@ -3,8 +3,6 @@ session_start();
 include_once("../../../libraries/vendor/autoload.php");
 include_once("../../Control/c_profesor.php");
 
-
-
 if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador") {
 } else {
     header("Location: ../../../index.php");
@@ -21,40 +19,39 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
 <div class="main-content">
-    <div class="flex flex-col sm:flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
-        <h1 class="text-xl font-semibold mb-2 md:mb-0"><?php echo $title; ?></h1>
+<div class="flex flex-col sm:flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
+    <h1 class="text-xl font-semibold mb-2 md:mb-0"><?php echo $title; ?></h1>
 
-        <!-- Botón para añadir -->
-        <div class="bg-gray-100 rounded-full">
-            <img src="../../../images/icons/añadir.svg" class="w-10 filtro-verde" alt="Añadir" title="Añadir" id="boton1" onclick="Mostrar()">
-        </div>
+    <!-- Botón para añadir -->
+    <div class="bg-gray-100 rounded-full">
+        <img src="../../../images/icons/añadir.svg" class="w-10 filtro-verde" alt="Añadir" title="Añadir" id="boton1" onclick="Mostrar()">
+    </div>
 
-        <!-- Formulario de búsqueda -->
-        <form method="GET" action="" class="flex items-center space-x-2">
-            <select name="campo" class='capitalize border-solid border-2  border-black' id="selectListar" class="border rounded px-2 py-1 w-auto">
-                <?php
-
+    <!-- Formulario de búsqueda -->
+    <form method="GET" action="" class="flex items-center space-x-2">
+        <select name="campo" class='capitalize border-solid border-2  border-black' id="selectListar" class="border rounded px-2 py-1 w-auto">
+            <?php
                 foreach ($soloNombresColumnas as $nombreColumna) {
                     echo "<option class='capitalize' value='{$nombreColumna}'" . ($campo == $nombreColumna ? " selected" : "") . ">{$nombreColumna}</option>";
                 }
-                ?>
-            </select>
+            ?>
+        </select>
 
-            <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0" value="<?php echo htmlspecialchars($buscar ?? ''); ?>">
+        <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0" value="<?php echo htmlspecialchars($buscar ?? ''); ?>">
 
-            <button type="submit" class="bg-gray-100 rounded-full">
-                <img src="../../../images/icons/buscar.svg" class=" w-20 filtro-verde" alt="Buscar" title="Buscar">
-            </button>
-        </form>
+        <button type="submit" class="bg-gray-100 rounded-full">
+            <img src="../../../images/icons/buscar.svg" class=" w-20 filtro-verde" alt="Buscar" title="Buscar">
+        </button>
+    </form>
 
-        <!-- Botón para limpiar los filtros -->
-        <form method="GET" action="" class="ml-4">
+    <!-- Botón para limpiar los filtros -->
+    <form method="GET" action="" class="ml-4">
 
-            <button type="submit" class="bg-gray-100 rounded-full">
-                <img src="../../../images/icons/reload.svg" class="   w-6 filtro-verde" alt="Buscar" title="Buscar">
-            </button>
-        </form>
-    </div>
+    <button type="submit" class="bg-gray-100 rounded-full">
+            <img src="../../../images/icons/reload.svg" class="   w-6 filtro-verde" alt="Buscar" title="Buscar">
+        </button>
+    </form>
+</div>
 
 
 
@@ -92,13 +89,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                         <td class="border px-4 py-2"><?php echo $fila['correo']; ?></td>
                         <td class="border px-4 py-2 text-center">
                             <div class="flex justify-center items-center space-x-4">
-                                <?php
-                                if ($_SESSION["sesion"] == "admin") {
-                                    echo '<img src="../../../images/icons/papelera.svg" class="w-8 h-8 filtro-rojo cursor-pointer" alt="Borrar" title="Borrar" id="boton1" onclick="Eliminar(\'' . $fila["cedula"] . '\')">';
-                                }
-                                ?>
-
-
+                                <img src="../../../images/icons/papelera.svg" class="w-8 h-8 filtro-rojo cursor-pointer" alt="Borrar" title="Borrar" id="boton1" onclick='Eliminar(`<?php echo $fila["cedula"]; ?>`)'>
                                 <img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar" id="boton2" onclick='Modificar(`<?php echo $fila["cedula"]; ?>`, `<?php echo $fila["nombres"]; ?>`, `<?php echo $fila["apellidos"]; ?>`, `<?php echo $fila["direccion"]; ?>`, `<?php echo $fila["telefono"]; ?>`, `<?php echo $fila["correo"]; ?>`)'>
                             </div>
                         </td>
@@ -118,7 +109,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
 
-    <form id="form" style="display: block;" class="formulario-extenso" name="pantalla" method="POST" action="../../Control/c_profesor.php">
+    <form id="form" style="display: none;" class="formulario-extenso" name="pantalla" method="POST" action="../../Control/c_profesor.php">
         <div class="flex justify-end">
             <div class="bg-red-500 w-10 rounded-full">
                 <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar" id="boton1" onclick="Mostrar()">
@@ -130,9 +121,11 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <label for="cedula">Cedula: </label>
                 <input type="text" id="cedula" name="cedula" placeholder="Cedula del Profesor" class="formulario-extenso__input" maxlength="25">
             </div>
+
         </div>
 
         <div class="formulario-extenso__row">
+
             <div class="formulario-extenso__column">
                 <label for="nombres">Nombres: </label>
                 <input type="input" name="nombres" id="nombres" placeholder="Nombres" class="formulario-extenso__input" maxlength="30">
@@ -144,6 +137,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         </div>
 
         <div class="formulario-extenso__row">
+
             <div class="formulario-extenso__column">
                 <label for="direccion">Dirección: </label>
                 <input type="input" name="direccion" id="direccion" placeholder="Direccion" class="formulario-extenso__input" maxlength="150">
@@ -160,13 +154,21 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <input type="input" name="correo" id="correo" placeholder="Correo" class="formulario-extenso__input" maxlength="255">
             </div>
         </div>
+        <div class="formulario-extenso__row">
+            <div class="formulario-extenso__column">
+                <label for="profesorRol">Rol: </label>
+                <select name="rol" id="profesorRol">
 
-        <input type="hidden" name="origin" id='origin' value="<?php echo $originValue; ?>">
+                    <option value="coordinador">Coordinador</option>
+                    <option value="administrador">Administrador</option>
+                    <option value="profesor" selected>Profesor</option>
+                </select>
+            </div>
+        </div>
 
-        <!-- Aquí agregas un botón submit con nombre 'ope' y un valor para identificar la operación -->
-        <input type="submit" name="ope" value="Incluir" class="table_button w-full">
-        <input type="submit" name="ope" value="Modificar" class="table_button w-full">
-        <input type="submit" name="ope" value="Borrar" class="table_button w-full">
+        <input type="hidden" name="ope" id='ope'>
+        <input type="hidden" name="origin" id='origin'>
+        <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button w-full">
     </form>
 
 
