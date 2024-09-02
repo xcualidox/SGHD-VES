@@ -45,14 +45,8 @@
 
 
                 if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador") {
-                    echo ' <li>
-            <a href="../../Vista/v_estudiante/v_estudiante.php" class="flex items-center" title="Estudiante">
-                 <i class="flex  justify-center  items-center ">
-                    <img src="../../../images/icons/usuariocliente.svg" class="w-8  filtro-blanco">
-                </i>
-                <span class="nav-item">Representante</span>
-            </a>
-            <span class="tooltip">Representante</span>
+                    echo ' 
+             
                     
                     
                     <li>
