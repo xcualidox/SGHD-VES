@@ -121,12 +121,12 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 }
                 ?>
             </div>
-            <button type='button' style='cursor:pointer;text-align:center;' onclick="Add()">Añadir</button>
+            <button type='button'  class= " text-white mt-2 bg-sky-500  w-full  rounded  hover:bg-sky-400  " onclick="Add()">Añadir</button>
             <br><br>
 
             <label for="fecF">Materias Añadidas: </label><br>
             <div class='materias_container'></div>
-            <button type='button' style='cursor:pointer;text-align:center;' onclick="Del()">Quitar</button>
+            <button type='button'  class= " text-white mt-2 bg-red-500  w-full  rounded  hover:bg-red-400  "  onclick="Del()">Quitar</button>
             <br><br>
 
             <button type="button" id="btn3" onclick="Enviar()" class="table_button w-full">Guardar</button>

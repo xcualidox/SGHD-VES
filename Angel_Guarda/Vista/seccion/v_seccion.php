@@ -99,6 +99,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <br>
                 <select name="sec" id="sec" class="t">
                     <option value="" hidden selected>Seccion del salon</option>
+                    <option value="U">U</option>
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="C">C</option>

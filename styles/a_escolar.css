@@ -265,15 +265,21 @@ select {
 .materias_container {
     background-color: rgb(240, 240, 240);
     border: 1px solid black;
-    height: 100px;
+    height: 150px;
     display: flex;
     flex-direction: column;
     overflow: auto;
 }
 .lista {
+    padding: 0.2rem;
     cursor: pointer;
     transition: .5s ease all;
 }
+.lista:nth-child(odd) {
+    background-color: rgb(219, 219, 219);
+}
+/* No aplica fondo a los elementos pares */
+
 .lista:hover {
     background-color: #058671;
     color: white;
