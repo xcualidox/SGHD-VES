@@ -4,7 +4,8 @@ include_once("../../../libraries/vendor/autoload.php");
 include_once("../../Control/c_profesor.php");
 
 if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador") {
-} else {
+}
+ else {
     header("Location: ../../../index.php");
 }
 

@@ -8,8 +8,11 @@
     background-color: rgb(220, 220,220);
     padding: 20px;
 }
+
+
 .tabla_horario {
     position: absolute;
+    
     display: none;
     grid-template-columns: 130px 200px 200px 200px 200px 200px;
     top: 98%;
@@ -38,20 +41,18 @@
     width: 90px;
     font-size: 19px;
     color: white;
-    background-color: dodgerblue;
+    background-color: #058671;
     transition: .5s all ease;
     cursor: pointer;
 }
 .button_crear {
     text-align: center;
-    position: absolute;
-    margin-top: 60px;
-    margin-left: 330px;
-    height: 30px;
-    width: 180px;
-    font-size: 19px;
+    
+    padding: 0.5rem;
+  
+    margin: 1rem;
     color: white;
-    background-color: dodgerblue;
+    background-color: #058671;
     transition: .5s all ease;
     cursor: pointer;
 }
@@ -73,20 +74,13 @@
     background-color: rgb(247, 44, 68);
 }
 .guardar {
-    text-align: center;
-    outline: none;
-    border: none;
-    display: none;
-    margin-top: 10px;
-    margin-left: 75%;
-    height: 30px;
-    width: 180px;
-    font-size: 19px;
-    color: white;
-    background-color: dodgerblue;
-    transition: .5s all ease;
-    cursor: pointer;
+
+
+   
+    background-color: #058671;
+ 
 }
+
 .tabla {
     display: grid;
     grid-template-columns: 150px 150px 150px 130px 130px 200px;
@@ -98,7 +92,7 @@
 }
 .tabla button {
     cursor: pointer;
-    background-color: dodgerblue;
+    background-color: #058671;
     border: none;
     font-size: 18px;
     color: white;
@@ -119,19 +113,9 @@
 }
 
 .volver {
-    text-align: center;
-    position: absolute;
-    display: none;
-    border: none;
-    margin-top: 10px;
-    margin-left: 10%;
-    height: 30px;
-    width: 180px;
-    font-size: 19px;
-    color: white;
-    background-color: dodgerblue;
-    transition: .5s all ease;
-    cursor: pointer;
+ 
+    background-color: #dd2f04;
+
 }
 .registrar_materia button:hover, .guardar:hover, .volver:hover, .button_crear:hover {
     background-color: rgb(2, 101, 199);
@@ -204,7 +188,7 @@ h2 {
     height: 40px;
     font-size: 30px;
     color: white;
-    background-color: dodgerblue;
+    background-color: #058671;
     transition: .5s all ease;
     cursor: pointer;
 }

@@ -40,6 +40,13 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 
     <button type='button' class='button_crear' onclick='CalcularHora(<?php echo $tiempo . "," . $id ?>)'>Crear Horario</button>
 
+    <div class="absolute right-0  top-0 flex  justify-end items-start gap-4 bg-slate-300 p-1  z-50 ">
+    <div class="grid grid-cols-1 gap-2">
+        <button type="button" class="volver hidden z-50 w-48 text-xl text-white bg-gray-800 transition-all ease-in-out duration-500 cursor-pointer" onclick="Volver()">Volver</button>
+        <button type="button" class="guardar hidden z-50 w-48 text-xl text-white bg-gray-800 transition-all ease-in-out duration-500 cursor-pointer" onclick="GuardarHorario()">Guardar Horario</button>
+    </div>
+</div>
+
     <div class='table-wrapper min-w-full'>
         <table class="fl-table">
             <thead>
@@ -131,11 +138,10 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
                                         <button onclick='CrearHorario()' type='button'>Crear</button>
 
                                     </div>
+                               
                                     </form>
-                                    <div></div>
-                                    <button type="button" class='volver' onclick='Volver()'>Volver</button>
-                                    <button type="button" class='guardar' onclick='GuardarHorario()'>Guardar Horario</button>
-                                    <div class='tabla_horario' style=" grid-column-gap: -10px;">
+                              
+                                    <div class='tabla_horario bg-slate-400 ' style=" grid-column-gap: -10px;">
                                         <span class='titulos'>Lapso:</span>
                                         <span style='grid-column:2/4;' class='titulos'></span>
                                         <span class='titulos'>Seccion:</span>
@@ -146,6 +152,8 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
                                         <div style='height:40px;text-align:center;font-size:22px;background-color:rgb(74, 96, 219);color:white;cursor: inherit;'>Miercoles</div>
                                         <div style='height:40px;text-align:center;font-size:22px;background-color:rgb(74, 96, 219);color:white;cursor: inherit;'>Jueves</div>
                                         <span style='height:40px;text-align:center;font-size:22px;background-color:rgb(74, 96, 219);color:white;cursor: inherit;'>Viernes</span>
+                                    </div>
+
                                     </div>
                                     <div class='registrar_materia'>
                                         <div class='cerrar cerrar_bloque'>X</div>

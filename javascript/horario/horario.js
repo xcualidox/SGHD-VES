@@ -20,6 +20,7 @@ function CrearHorario() {
       document.querySelector(".tabla_horario").style.display='grid';
       document.querySelector('.guardar').style.display='block';
       document.querySelector('.volver').style.display='block';
+      document.querySelector('.container_horario').style.display='none';
     }
     else {
       alert("Tiene que selecionar año y seccion");
