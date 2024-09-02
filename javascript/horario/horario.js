@@ -147,7 +147,7 @@ function ClearHorario() {
     }
 function enviarRequest(ano, bloque) {
     $.ajax({
-      url: '../../Angel_Guarda/Control/horario_ajax.php',
+      url: '../../Control/horario_ajax.php',
       type: 'POST',
       data: { anos: ano, bloques: bloque},
       success: function(response) {
@@ -170,7 +170,7 @@ function enviarRequest(ano, bloque) {
     RecorrerProfesor(select,"");
     if (ano.value!="") {
       $.ajax({
-        url: '../../Angel_Guarda/Control/horario_ajax.php',
+        url: '../../Control/horario_ajax.php',
         type: 'POST',
         data: { materia: ano.value, block: bloques, ano_array: ano_seccion},
         success: function(response) {
@@ -191,7 +191,7 @@ function enviarRequest(ano, bloque) {
   }
   function BorrarBloque() {
       $.ajax({
-        url: '../../Angel_Guarda/Control/horario_ajax.php',
+        url: '../../Control/horario_ajax.php',
         type: 'POST',
         data: { ano_solo: ano_seccion, block: bloques, seccion_solo: seccion_array},
         success: function(response) {
@@ -235,7 +235,7 @@ function RecorrerProfesor(profesor, array, profesor2) {
 }
 function EliminarHorario(ano, seccion) {
     $.ajax({
-      url: '../../Angel_Guarda/Control/horario_ajax.php',
+      url: '../../Control/horario_ajax.php',
       type: 'POST',
       data: { anos_borrar: ano, seccion_borrar: seccion},
       success: function(response) {
@@ -279,7 +279,7 @@ function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo){
     ano_seccion=ano;
     seccion_array=seccion;
     $.ajax({
-      url: '../../Angel_Guarda/Control/horario_ajax.php',
+      url: '../../Control/horario_ajax.php',
       type: 'POST',
       data: { anos: ano, seccion: seccion},
       success: function(response) {
@@ -372,7 +372,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#ano').addEventListener('click', function () {
       document.getElementById('seccion').value="";
       $.ajax({
-        url: '../../Angel_Guarda/Control/horario_ajax.php',
+        url: '../../Control/horario_ajax.php',
         type: 'POST',
         data: { anos_crear: document.querySelector('#ano').value},
         success: function(response) {
