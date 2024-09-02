@@ -1,11 +1,11 @@
 <?php
 session_start();
 include_once("../../Control/horario_tabla.php");
-/*
+
 if ($_SESSION["sesion"]!="admin") {
     header("Location: ../../../index.php");
 }
-*/   
+ 
 $title='Horario';
 include_once('../v_Sidebar/v_Sidebar.php');
 ?>
@@ -36,18 +36,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
   
 
   <div class="main-content">
-  <div class="flex flex-row justify-end items-center md:space-x-2 p-4 md:p-0">
-    <h1 class="text-xl font-semibold mb-2 md:mb-0">Profesores</h1>
 
-    
-    <img src="../../../images/icons/añadir.svg" class="w-10 bg-green-500 hover:bg-green-400 rounded-full cursor-pointer" onclick='CalcularHora(<?php echo $tiempo . "," . $id ?>)' >
-    <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
-    <select name="selectListar" id="selectListar" class="border rounded px-2 py-1 w-auto">
-        <option value="">Todos</option>
-        <option value="1">DatoxD</option>
-        <option value="0">Prueba</option>
-    </select>
-</div>
 
 <button type='button' class='button_crear' onclick='CalcularHora(<?php echo $tiempo . "," . $id ?>)'>Crear Horario</button>
 
