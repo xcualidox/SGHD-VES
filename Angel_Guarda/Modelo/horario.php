@@ -1,7 +1,7 @@
 <?php
 include_once("basedatos.php");
 class zona extends bdmysql{
-    private $ano_escolar, $ano_seccion, $asginatura, $aula, $bloque;
+    private $ano_escolar, $ano_seccion, $asginatura, $aula, $bloque,$grupo,$profesor,$id;
 
     function setDatos($ano_escolar, $ano_seccion, $asginatura, $aula, $bloque, $grupo, $profesor,$id){
       $this->ano_escolar=$ano_escolar;
@@ -14,6 +14,38 @@ class zona extends bdmysql{
         $this->id=$id;
 	  }
 
+    function SelectAllAno_Escolar(){
+      $sql= "SELECT `codigo`, `nombre` from ano_escolar";
+      return $this->ejecutar($sql);
+    }
+    function SelectAllAno_Seccion(){
+      $sql= "SELECT * from ano_seccion";
+      return $this->ejecutar($sql);
+    }
+    function SelectAllAula(){
+      $sql= "SELECT * from aula WHERE `disponibilidad`=1";
+      return $this->ejecutar($sql);
+    }
+    function SelectAllAsignatura(){
+      $sql= "SELECT * from asignatura";
+      return $this->ejecutar($sql);
+    }
+    function SelectAllHorario(){
+      $sql= "SELECT DISTINCT  ano_escolar.nombre, ano_seccion.ano, ano_seccion.seccion, horario_estudiante.codigo_a_escolar, horario_estudiante.codigo_a_y_seccion, intervalo.intervalo
+      FROM horario_estudiante
+      JOIN ano_escolar ON horario_estudiante.codigo_a_escolar = ano_escolar.codigo
+      JOIN ano_seccion ON horario_estudiante.codigo_a_y_seccion = ano_seccion.codigo
+      JOIN intervalo ON horario_estudiante.intervalo = intervalo.id";
+      return $this->ejecutar($sql);
+    }
+    function SelectAllProfesores(){
+      $sql= "SELECT personas.cedula, personas.nombres, personas.apellidos FROM personas WHERE EXISTS ( SELECT * FROM profesores_materias WHERE personas.cedula = profesores_materias.profesor)";
+      return $this->ejecutar($sql);
+    }
+    function SelectAllIntervalo(){
+      $sql= "SELECT intervalo, id from intervalo WHERE `estado`=1";
+      return $this->ejecutar($sql);
+    }
     function Registrar_Horario(){
         $sql= "INSERT INTO  horario_estudiante(codigo_a_escolar, codigo_a_y_seccion, codigo_asignatura, codigo_aula, codigo_dia, grupo, profesor, intervalo) values('$this->ano_escolar','$this->ano_seccion', '$this->asginatura', '$this->aula', '$this->bloque', '$this->grupo', '$this->profesor','$this->id')";
 		return $this->ejecutar($sql);

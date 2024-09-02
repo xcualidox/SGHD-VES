@@ -6,7 +6,7 @@
             $paginaActual = $_GET["pag_asig"]; // Página actual obtenida de la URL
         }
 
-        $limit = 5; // Número de registros por página
+        $limit = 10; // Número de registros por página
         $offset = ($paginaActual - 1) * $limit; // Offset para la consulta SQL
 
         $objeto = new query();

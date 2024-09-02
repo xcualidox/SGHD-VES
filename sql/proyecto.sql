@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 24-08-2024 a las 15:57:33
+-- Tiempo de generación: 02-09-2024 a las 15:37:15
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -41,8 +41,7 @@ CREATE TABLE `ano_escolar` (
 --
 
 INSERT INTO `ano_escolar` (`codigo`, `nombre`, `fecha_inicio`, `fecha_fin`) VALUES
-(16, '2022', '2023-07-23', '2023-07-27'),
-(17, '2023', '2023-08-15', '2023-08-26');
+(18, '2024', '2024-09-12', '2024-09-13');
 
 -- --------------------------------------------------------
 
@@ -73,8 +72,8 @@ INSERT INTO `ano_seccion` (`codigo`, `ano`, `seccion`) VALUES
 --
 
 CREATE TABLE `asignatura` (
-  `codigo` varchar(3) NOT NULL,
-  `nombre` varchar(25) NOT NULL
+  `codigo` varchar(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `nombre` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -82,8 +81,20 @@ CREATE TABLE `asignatura` (
 --
 
 INSERT INTO `asignatura` (`codigo`, `nombre`) VALUES
-('1ad', 'Asd'),
-('sad', 'Triste');
+('AP', 'ARTE Y PATRIMONIO'),
+('BI', 'BIOLOGIA'),
+('CA', 'CASTELLANO'),
+('CT', 'CIENCIAS DE LA TIERRA '),
+('CN', 'CIENCIAS NATURALES'),
+('EF', 'EDUCACION FISICA'),
+('FI', 'FÍSICA'),
+('FSN', 'FORMACIÓN PARA LA SOBERANIA NACIONAL'),
+('GHC', 'GEOGRAFÍA, HISTORIA Y CIUDADANÍA '),
+('ILE', 'INGLÉS Y OTRAS LENGUAS EXTRANJERAS'),
+('MA', 'MATEMATICA'),
+('OC', 'ORIENTACIÓN Y CONVIVENCIA'),
+('PGCRP', 'PARTICIPACION  EN GRUPOS DE CREACIÓN, RECREACIÓN Y PRODUCCIÓN  '),
+('QU', 'QUIMICA');
 
 -- --------------------------------------------------------
 
@@ -103,8 +114,8 @@ CREATE TABLE `aula` (
 --
 
 INSERT INTO `aula` (`codigo`, `nombre`, `descripcion`, `disponibilidad`) VALUES
-(25, 'Sexo', 'se encuentra cuando lo buscas', 1),
-(26, 'Puta madre bart', 'sexo tilin\r\n', 1);
+(25, 'Aula 1', 'se encuentra cuando lo buscas', 1),
+(26, 'Aula 2', 'sexo tilin\nBiologia', 1);
 
 -- --------------------------------------------------------
 
@@ -197,10 +208,11 @@ CREATE TABLE `horario_estudiante` (
 --
 
 INSERT INTO `horario_estudiante` (`codigo`, `codigo_a_escolar`, `codigo_a_y_seccion`, `codigo_asignatura`, `codigo_aula`, `codigo_dia`, `grupo`, `profesor`, `intervalo`) VALUES
-(51, 17, 21, '1ad', 25, 'B1MM', ' ', '11716900', 1),
-(52, 17, 21, '1ad', 25, 'B1J', '1', '11716900', 1),
-(53, 17, 21, 'sad', 26, 'B1J', '2', '27564672', 1),
-(54, 17, 21, '1ad', 26, 'B2MM', ' ', '11716900', 1);
+(59, 16, 20, '1ad', 25, 'B1V', ' ', '11716900', 1),
+(60, 16, 20, '1ad', 25, 'B3V', ' ', '11716900', 1),
+(63, 17, 19, '1ad', 26, 'B1J', ' ', '11716900', 1),
+(64, 17, 19, '1ad', 26, 'B2J', ' ', '11716900', 1),
+(67, 18, 18, 'CA', 25, 'B1V', ' ', '19282324', 1);
 
 -- --------------------------------------------------------
 
@@ -219,7 +231,7 @@ CREATE TABLE `intervalo` (
 --
 
 INSERT INTO `intervalo` (`id`, `intervalo`, `estado`) VALUES
-(1, '45', 1),
+(1, '40', 1),
 (2, '30', 0),
 (3, '50', 0);
 
@@ -266,7 +278,7 @@ CREATE TABLE `personas` (
   `nombres` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `apellidos` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `direccion` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `telefono` varchar(14) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `telefono` varchar(14) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `correo` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -320,10 +332,15 @@ CREATE TABLE `profesores_materias` (
 --
 
 INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
-(40, '27564672', 'sad'),
-(39, '11716900', '1ad'),
 (42, '332323', 'sad'),
-(43, '123', 'sad');
+(43, '123', 'sad'),
+(48, '5656', 'EF'),
+(49, '5656', 'FSN'),
+(50, '5656', 'GHC'),
+(54, '27414575', 'AP'),
+(53, '27414575', 'BI'),
+(55, '19282324', 'CT'),
+(56, '19282324', 'CA');
 
 -- --------------------------------------------------------
 
@@ -454,7 +471,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ano_escolar`
 --
 ALTER TABLE `ano_escolar`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `ano_seccion`
@@ -478,7 +495,7 @@ ALTER TABLE `bitacora`
 -- AUTO_INCREMENT de la tabla `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT de la tabla `intervalo`
@@ -502,7 +519,7 @@ ALTER TABLE `preguntas_seguridad`
 -- AUTO_INCREMENT de la tabla `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
