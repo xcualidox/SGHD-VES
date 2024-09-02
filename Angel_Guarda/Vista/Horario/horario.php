@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../../control/horario_tabla.php");
+include_once("../../Control/horario_tabla.php");
 /*
 if ($_SESSION["sesion"]!="admin") {
     header("Location: ../../../index.php");

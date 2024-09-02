@@ -1,7 +1,7 @@
 <?php
 include_once("basedatos.php");
 class zona extends bdmysql{
-    private $ano_escolar, $ano_seccion, $asginatura, $aula, $bloque;
+    private $ano_escolar, $ano_seccion, $asginatura, $aula, $bloque,$grupo,$profesor,$id;
 
     function setDatos($ano_escolar, $ano_seccion, $asginatura, $aula, $bloque, $grupo, $profesor,$id){
       $this->ano_escolar=$ano_escolar;
@@ -39,7 +39,7 @@ class zona extends bdmysql{
       return $this->ejecutar($sql);
     }
     function SelectAllProfesores(){
-      $sql= "SELECT personas.cedula, personas.primer_nombre, personas.primer_apellido, personas.segundo_nombre, personas.segundo_apellido FROM personas WHERE EXISTS ( SELECT * FROM profesores_materias WHERE personas.cedula = profesores_materias.profesor)";
+      $sql= "SELECT personas.cedula, personas.nombres, personas.apellidos FROM personas WHERE EXISTS ( SELECT * FROM profesores_materias WHERE personas.cedula = profesores_materias.profesor)";
       return $this->ejecutar($sql);
     }
     function SelectAllIntervalo(){
