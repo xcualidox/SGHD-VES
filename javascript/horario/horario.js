@@ -279,7 +279,7 @@ function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo){
     ano_seccion=ano;
     seccion_array=seccion;
     $.ajax({
-      url: '../../../Php/Control/horario_ajax.php',
+      url: '../../Control/horario_ajax.php',
       type: 'POST',
       data: { anos: ano, seccion: seccion},
       success: function(response) {

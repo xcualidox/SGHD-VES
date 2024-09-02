@@ -1,9 +1,11 @@
 <?php
 session_start();
-$conexion=mysqli_connect("localhost", "root", "", "proyecto");
+include_once("../../control/horario_tabla.php");
+/*
 if ($_SESSION["sesion"]!="admin") {
     header("Location: ../../../index.php");
 }
+*/   
 $title='Horario';
 include_once('../v_Sidebar/v_Sidebar.php');
 ?>
@@ -14,29 +16,18 @@ include_once('../v_Sidebar/v_Sidebar.php');
     <script type="text/javascript" src="../../../javascript/horario/a_escolar.js"></script>
     <script type="text/javascript" src="../../../javascript/horario/horario.js"></script>
 
-    <?php 
-    $consulta="SELECT `codigo`, `nombre` from ano_escolar";
-    $ano_escolar=mysqli_query($conexion, $consulta);
-    $consulta="SELECT * from ano_seccion";
-    $ano_seccion=mysqli_query($conexion, $consulta);
-    $consulta="SELECT * from aula WHERE `disponibilidad`=1";
-    $aula=mysqli_query($conexion, $consulta);
-    $aula2=mysqli_query($conexion, $consulta);
-    $consulta="SELECT * from asignatura";
-    $materia=mysqli_query($conexion, $consulta);
-    $materia2=mysqli_query($conexion, $consulta);
-    $consulta="SELECT DISTINCT  ano_escolar.nombre, ano_seccion.ano, ano_seccion.seccion, horario_estudiante.codigo_a_escolar, horario_estudiante.codigo_a_y_seccion, intervalo.intervalo
-    FROM horario_estudiante
-    JOIN ano_escolar ON horario_estudiante.codigo_a_escolar = ano_escolar.codigo
-    JOIN ano_seccion ON horario_estudiante.codigo_a_y_seccion = ano_seccion.codigo
-    JOIN intervalo ON horario_estudiante.intervalo = intervalo.id";
-
-    $horario=mysqli_query($conexion, $consulta);
-    $consulta="SELECT personas.cedula, personas.nombres, personas.apellidos FROM personas WHERE EXISTS ( SELECT * FROM profesores_materias WHERE personas.cedula = profesores_materias.profesor)";
-    $profesores=mysqli_query($conexion, $consulta);
-    $profesores2=mysqli_query($conexion, $consulta);
-    $consulta="SELECT intervalo, id from intervalo WHERE `estado`=1";
-    $intervalo=mysqli_query($conexion, $consulta);
+    <?php
+    $objeto = new query();
+    $ano_escolar=$objeto->SelectAno_Escolar();
+    $ano_seccion=$objeto->SelectAno_Seccion();
+    $aula=$objeto->SelectAula();
+    $aula2=$objeto->SelectAula();
+    $materia=$objeto->SelectAsignatura();
+    $materia2=$objeto->SelectAsignatura();
+    $horario=$objeto->SelectHorario();
+    $profesores=$objeto->SelectProfesores();
+    $profesores2=$objeto->SelectProfesores();
+    $intervalo=$objeto->SelectIntervalo();
     while ($mostrar=mysqli_fetch_array($intervalo)) {
         $tiempo=$mostrar["intervalo"];
         $id=$mostrar["id"];
@@ -79,12 +70,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <td>
                         <button type='button' 
                             class='table_button' 
-                            onclick='ModificarBloques("<?php echo $mostrar["codigo_a_escolar"]; ?>", 
-                            "<?php echo $mostrar["codigo_a_y_seccion"]; ?>", 
-                            "<?php echo $mostrar["nombre"]; ?>", 
-                            "<?php echo $mostrar["ano"]." 
-                            ".$mostrar["seccion"]; ?>", 
-                        <?php echo $mostrar["intervalo"]; ?>)'>Mostrar</button>
+                            onclick='ModificarBloques("<?php echo $mostrar["codigo_a_escolar"]; ?>","<?php echo $mostrar["codigo_a_y_seccion"]; ?>", "<?php echo $mostrar["nombre"]; ?>", "<?php echo $mostrar["ano"]."".$mostrar["seccion"]; ?>",<?php echo $mostrar["intervalo"]; ?>)'>Mostrar</button>
                         <button type='button' 
                             class='table_button' 
                             onclick='EliminarHorario("<?php echo $mostrar["codigo_a_escolar"]; ?>", 
