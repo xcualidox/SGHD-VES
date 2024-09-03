@@ -56,8 +56,8 @@ function Mostrar(){
         form.style.display = 'none';
         btn2.style.display = 'none';
         btn.style.display = 'block';
-        document.getElementById("profesor").style.display="block";
-        document.getElementById("datos").style.display="none";
+    //    document.getElementById("profesor").style.display="block";
+    //    document.getElementById("datos").style.display="none";
         ResetDiv();
     }
 }
@@ -73,9 +73,9 @@ function Modificar(cedula, array, nombres, apellidos) {
     for (let index = 0; index < array.length; index++) {
         div[1].appendChild(document.getElementById(array[index].materia));
     }
-    document.getElementById("profesor").style.display="none";
-    document.getElementById("datos").style.display="block";
-    document.getElementById("datos").value=nombres+" "+apellidos;
+    //document.getElementById("profesor").style.display="none";
+    //document.getElementById("datos").style.display="block";
+    document.getElementById("profesor").value=cedula;
     document.getElementById("origin").value=cedula;
     Mostrar();
 };

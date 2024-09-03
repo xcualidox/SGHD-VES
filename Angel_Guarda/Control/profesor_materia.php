@@ -13,6 +13,13 @@ else {
     else {
         $cedula=$_POST["origin"];
     }
+    
+    if($_POST["profesor"]!=$_POST["origin"]) {
+        $cedula = $_POST["profesor"];
+        $cedula_original = $_POST["origin"];
+        
+        $operacion->Modificar($cedula, $cedula_original);
+    }
     $operacion->Eliminar($cedula);
     if ($_POST["add"]!="") {
         $array=explode(",",$_POST["add"]);
