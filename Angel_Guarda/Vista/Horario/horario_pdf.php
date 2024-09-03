@@ -41,7 +41,7 @@ $dias= ["L","M","MM","J","V"];
             for ($i=0; $i < 5; $i++) {
                 $bloque="B".$contador.$dias[$i];
                 $array= $objeto->BloquesHorarioPDF($_GET["codigo_escolar"],$_GET["codigo_seccion"],$bloque);
-           // Depuración: Imprime el array completo
+          
         
 
             if (count($array) > 0 && !empty($array[0][5])) {
@@ -63,8 +63,8 @@ $dias= ["L","M","MM","J","V"];
             }
             echo "</tr>";
             echo "<tr>";
-            echo "<td style='height:80px;border:1px solid black;width:30px;'>9:00 - 9:30</td>";
-            echo"<td style='height:80px;border:1px solid black;font-size:22px;' colspan=5>RECREO</td>";
+            echo "<td style='height:50px;border:1px solid black;width:30px;'>9:00 - 9:30</td>";
+            echo"<td style='height:50px;border:1px solid black;font-size:22px;' colspan=5>RECREO</td>";
             $fecha_actual = new DateTime('09:30:00');
             echo "</tr>";
         }
