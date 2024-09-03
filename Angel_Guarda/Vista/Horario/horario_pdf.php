@@ -16,15 +16,15 @@ $dias= ["L","M","MM","J","V"];
         width:100%;border-collapse: collapse;
         text-align: center;'>
     <tr>
-        <th style='border:1px solid black;font-size:23px;background-color:dodgerblue;color:white;' colspan=6>Horario <?php echo $_GET["ano"]." ".$_GET["seccion"]."       LAPSO ".$_GET["nombre"]?></th>
+        <th style='border:1px solid black;font-size:23px;background-color:#00796b;color:white;' colspan=6>HORARIO <?php echo $_GET["ano"]." '".$_GET["seccion"]."'       AÑO ".$_GET["nombre"]?></th>
     </tr>
     <tr>
-        <td style='border:1px solid black;font-size:18px;width:30px;'>HORA</td>
-        <td style='border:1px solid black;font-size:18px;width:30px;'>LUNES</td>
-        <td style='border:1px solid black;font-size:18px;width:30px;'>MARTES</td>
-        <td style='border:1px solid black;font-size:18px;width:30px;'>MIERCOLES</td>
-        <td style='border:1px solid black;font-size:18px;width:30px;'>JUEVES</td>
-        <td style='border:1px solid black;font-size:18px;width:30px;'>VIERNES</td>
+        <td style='font-weight:bold; border:1px solid black;font-size:18px;width:30px ;'>HORA</td>
+        <td style='font-weight:bold; border:1px solid black;font-size:18px;width:30px;'>LUNES</td>
+        <td style='font-weight:bold; border:1px solid black;font-size:18px;width:30px;'>MARTES</td>
+        <td style='font-weight:bold; border:1px solid black;font-size:18px;width:30px;'>MIERCOLES</td>
+        <td style='font-weight:bold; border:1px solid black;font-size:18px;width:30px;'>JUEVES</td>
+        <td style='font-weight:bold; border:1px solid black;font-size:18px;width:30px;'>VIERNES</td>
     </tr>
     <?php 
     while ($fecha_actual <= $fecha_fin) {
@@ -78,12 +78,23 @@ $dias= ["L","M","MM","J","V"];
                     $resultado="";
                 }
                 else if(count($array)>1 && $array[0][5]!="") {
-                    $resultado="<b>GRUPO ".$array[0][5]."</b><br><b>AULA:</b> ".$array[0][1]."<br><b>MATERIA:</b> ".$array[0][3]."<br><b>GRUPO ".$array[1][5]."</b><br><b>AULA:</b> ".$array[1][1]."<br><b>MATERIA:</b> ".$array[1][3]."<br>";
+                    $resultado = "
+<div style='display: flex; align-items: flex-start; font-size: 12px;'>
+ 
+    <div style='flex: 2; text-align: right;'>
+          <b>GRUPO: ".$array[0][5]."</b>
+        <b>AULA:</b> ".$array[0][1]."<br>
+        <b>MATERIA:</b> ".$array[0][3]."<br><br>
+         <b>GRUPO: ".$array[1][5]."</b>
+        <b>AULA:</b> ".$array[1][1]."<br>
+        <b>MATERIA:</b> ".$array[1][3]."
+    </div>
+</div>";
                 }
                 else if (count($array)>0) {
                     $resultado="<b>AULA:</b> ".$array[0][1]."<br><b>MATERIA:</b> ".$array[0][3]."<br><b>PROF:</b> ".$array[0][7]." ".$array[0][8];
                 }
-                echo "<td style='height:80px;border:1px solid black;font-size:14px;width:30px;'>".$resultado."</td>";
+                echo "<td style='height:80px;border:1px solid black;font-size:15px;width:30px;'>".$resultado."</td>";
             }
             echo "</tr>";
         }
