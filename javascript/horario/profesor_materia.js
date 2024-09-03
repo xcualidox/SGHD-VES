@@ -45,6 +45,8 @@ function Mostrar(){
     const btn2 = document.getElementById('boton2');
     const form = document.getElementById('form');
     const inputs= form.querySelectorAll('input');
+    const profesorForm = document.getElementById("form");
+
     inputs[0].value="";
     if (form.style.display === 'none') {
     // 👇️ this SHOWS the form
@@ -56,8 +58,13 @@ function Mostrar(){
         form.style.display = 'none';
         btn2.style.display = 'none';
         btn.style.display = 'block';
+
+        profesorForm.reset();
     //    document.getElementById("profesor").style.display="block";
     //    document.getElementById("datos").style.display="none";
+
+
+
         ResetDiv();
     }
 }
