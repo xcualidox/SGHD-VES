@@ -41,21 +41,24 @@ $dias= ["L","M","MM","J","V"];
             for ($i=0; $i < 5; $i++) {
                 $bloque="B".$contador.$dias[$i];
                 $array= $objeto->BloquesHorarioPDF($_GET["codigo_escolar"],$_GET["codigo_seccion"],$bloque);
+           // Depuración: Imprime el array completo
+        
 
-                if (count($array) > 0 && !empty($array[0][5])) {
-                    // Solo si el grupo no está vacío
-                    $resultado = "<b>GRUPO " . $array[0][5] . "</b><br><b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3];
-                    // Si hay al menos dos registros en el array
-                    if (isset($array[1][5]) && !empty($array[1][5])) {
-                        $resultado .= "<br><b>GRUPO " . $array[1][5] . "</b><br><b>AULA:</b> " . $array[1][1] . "<br><b>MATERIA:</b> " . $array[1][3];
-                    }
-                } else if (count($array) > 0 && isset($array[0][1], $array[0][3], $array[0][7], $array[0][8])) {
-                    // Si el grupo está vacío, muestra AULA, MATERIA y PROF
-                    $resultado = "<b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3] . "<br><b>PROF:</b> " . $array[0][7] . " " . $array[0][8];
-                } else {
-                    // Si no hay datos suficientes o los índices no existen
-                    $resultado = "";
+            if (count($array) > 0 && !empty($array[0][5])) {
+                // Solo si el grupo no está vacío
+                $resultado = "<b>GRUPO " . $array[0][5] . "</b><br><b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3];
+                // Si hay al menos dos registros en el array
+                if (isset($array[1][5]) && !empty($array[1][5])) {
+                    $resultado .= "<br><b>GRUPO " . $array[1][5] . "</b><br><b>AULA:</b> " . $array[1][1] . "<br><b>MATERIA:</b> " . $array[1][3];
                 }
+            } else if (count($array) > 0 && isset($array[0][1], $array[0][3], $array[0][7], $array[0][8])) {
+                // Si el grupo está vacío, muestra AULA, MATERIA y PROF
+                $resultado = "<b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3] . "<br><b>PROF:</b> " . $array[0][7] . " " . $array[0][8];
+            } else {
+                // Si no hay datos suficientes o los índices no existen
+                $resultado = "";
+            }
+
                 echo "<td style='height:80px;border:1px solid black;font-size:14px;width:30px;'>".$resultado."</td>";
             }
             echo "</tr>";
