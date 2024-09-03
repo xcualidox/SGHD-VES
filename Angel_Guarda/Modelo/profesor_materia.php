@@ -12,6 +12,11 @@ class zona extends database_connect{
 		  return $this->query($sql,[$profesor,$materia]);
     }
 
+    function Modificar($nuevoprofesor, $profesor){
+      $sql= "UPDATE `profesores_materias` SET `profesor`=? WHERE `profesor`=?";
+      return $this->query($sql,[$nuevoprofesor,$profesor]);
+    }
+
     function Eliminar($profesor){
         $sql= "DELETE FROM `profesores_materias`
         WHERE profesor = ?";
