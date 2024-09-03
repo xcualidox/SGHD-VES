@@ -407,71 +407,65 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 function CalcularHora(intervalo, x) {
-  id=x;
-  var reset=document.querySelectorAll('.borrar');
-  if (reset.length>0) {
+  id = x;
+  var reset = document.querySelectorAll('.borrar');
+  if (reset.length > 0) {
     for (let index = 0; index < reset.length; index++) {
       reset[index].remove();
     }
   }
-  horaInicial.setHours(7, 0, 0, 0); // Establece la hora a las 07:00
 
-  horaComparar.setHours(9,0,0,0);
+  horaInicial.setHours(7, 0, 0, 0); 
+  horaComparar.setHours(9, 0, 0, 0);
   horaEnd.setHours(17, 0, 0, 0);
-  div=document.querySelector('.tabla_horario');
-  var contador=1;
-  // Minutos a agregar
+  
+  div = document.querySelector('.tabla_horario');
+  var contador = 1;
   var minutosAgregar = intervalo;
-  // Suma los minutos a la hora inicial
-  for (let index = 1; horaInicial < horaEnd; index++) {
-    horaFinal = horaInicial.getHours();
-    minutosFinal = horaInicial.getMinutes();
-    if (minutosFinal==0) {
-     minutosFinal="00";
+
+  while (horaInicial < horaEnd) {
+    var horaFinal = horaInicial.getHours();
+    var minutosFinal = horaInicial.getMinutes();
+    if (minutosFinal == 0) {
+      minutosFinal = "00";
     }
     horaInicial.setMinutes(horaInicial.getMinutes() + minutosAgregar);
-    horasiguiente = horaInicial.getHours();
-    minutosiguiente = horaInicial.getMinutes();
+    var horasiguiente = horaInicial.getHours();
+    var minutosiguiente = horaInicial.getMinutes();
 
-    if (minutosiguiente==0) {
-      minutosiguiente="00";
-     }
-     if (horaInicial.toLocaleTimeString()>=horaComparar.toLocaleTimeString() && contador>2) {
-        document.querySelector('.tabla_horario').insertAdjacentHTML ("beforeend","<span class='hora borrar'>"+horaFinal + ":" + minutosFinal + "-9:00 </span>");
-        var dias=["L","M","MM","J","V"]
-        
-        for (let i = 0; i < 5; i++) {
-          
-          document.querySelector('.tabla_horario').insertAdjacentHTML ("beforeend","<div id='B"+contador+dias[i]+"' class='borrar contend' onclick='EditarBloque(this)'></div>");
-        }
-        document.querySelector('.tabla_horario').insertAdjacentHTML ("beforeend","<span class='hora borrar'>9:00-9:30</span>");
-          document.querySelector('.tabla_horario').insertAdjacentHTML ("beforeend","<p class='borrar'style='letter-spacing: 30px;font-size:50px; grid-column: 2/7;border:1px solid black;font-weitgh:bold;text-align:center;max-height:100px;'>RECREO</p>");
-          horaInicial.setHours(9,0,0,0);
-          horaInicial.setMinutes(30);
-     }
-     else {
-      document.querySelector('.tabla_horario').insertAdjacentHTML ("beforeend","<span class='hora borrar'>"+horaFinal + ":" + minutosFinal + "-" + horasiguiente + ":" +minutosiguiente+"</span>");
-      var dias=["L","M","MM","J","V"]
+    if (minutosiguiente == 0) {
+      minutosiguiente = "00";
+    }
+
+    if (horaInicial.toLocaleTimeString() >= horaComparar.toLocaleTimeString() && contador > 2) {
+      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>" + horaFinal + ":" + minutosFinal + "-9:00 </span>");
+      var dias = ["L", "M", "MM", "J", "V"];
       
       for (let i = 0; i < 5; i++) {
-        
-        document.querySelector('.tabla_horario').insertAdjacentHTML ("beforeend","<div id='B"+contador+dias[i]+"' class='borrar contend' onclick='EditarBloque(this)'></div>");
+        document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<div id='B" + contador + dias[i] + "' class='borrar contend' onclick='EditarBloque(this)'></div>");
       }
-      
-      
-      if (horaInicial>=horaEnd) {
-        console.log(horaInicial.toLocaleTimeString()+"   -  "+horaEnd.toLocaleTimeString())
-        console.log(horaInicial>=horaEnd)
-        document.querySelector('.tabla_horario').insertAdjacentHTML ("beforeend","<span style='letter-spacing: 30px;font-size:50px; grid-column: 1/7;font-weitgh:bold;text-align:center;height:180px;background-color:white;' class='borrar'></span>");
-      }
-      contador=1+contador;
-     }
-   
-   
-  // Obtén la hora y los minutos actualizados
-  // Imprime la hora final
-  
- 
-}
 
+      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>9:00-9:30</span>");
+      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<p class='borrar' style='letter-spacing: 30px; font-size:50px; grid-column: 2/7; border:1px solid black; font-weight:bold; text-align:center; max-height:100px;'>RECREO</p>");
+      
+      horaInicial.setHours(9, 0, 0, 0);
+      horaInicial.setMinutes(30);
+      
+      // Incrementar el contador después de recreo
+      contador++;
+    } else {
+      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>" + horaFinal + ":" + minutosFinal + "-" + horasiguiente + ":" + minutosiguiente + "</span>");
+      var dias = ["L", "M", "MM", "J", "V"];
+      
+      for (let i = 0; i < 5; i++) {
+        document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<div id='B" + contador + dias[i] + "' class='borrar contend' onclick='EditarBloque(this)'></div>");
+      }
+
+      contador++;
+
+      if (horaInicial >= horaEnd) {
+        document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span style='letter-spacing: 30px; font-size:50px; grid-column: 1/7; font-weight:bold; text-align:center; height:180px; background-color:white;' class='borrar'></span>");
+      }
+    }
+  }
 }
