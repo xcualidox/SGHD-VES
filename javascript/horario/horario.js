@@ -8,10 +8,11 @@ var ano_seccion="";
 var seccion_array="";
 var change="";
 function CrearHorario() {
-    var select=document.querySelectorAll(".select");
-    if (select[0].value!="" && select[1].value!="") {
+    var select=document.querySelectorAll(".select") ;
+    if (select[0].value!="" && select[1].value!="" && select[2].value!="") {
       ano_seccion=select[0].value;
       seccion_array=select[1].value;
+      receso=select[2].value;
       var span= document.querySelector(".tabla_horario").querySelectorAll('span');
      console.log(select)
       console.log(select[1].selectedIndex);
@@ -275,32 +276,34 @@ function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo){
     
   }
 }
-  function ModificarBloques(ano, seccion, nombre_ano, nombre_seccion, intervalo) {
-    CalcularHora(intervalo);
-    ano_seccion=ano;
-    seccion_array=seccion;
-    $.ajax({
+function ModificarBloques(ano, seccion, nombre_ano, nombre_seccion, intervalo, receso) {
+  CalcularHora(intervalo);
+  ano_seccion = ano;
+  seccion_array = seccion;
+  receso=receso;
+
+  $.ajax({
       url: '../../Control/horario_ajax.php',
       type: 'POST',
-      data: { anos: ano, seccion: seccion},
+      data: { anos: ano, seccion: seccion, receso: receso },
       success: function(response) {
-        // La solicitud se ha realizado con éxito
-        // Aquí puedes manejar la respuesta del servidor, que puede ser un JSON o cualquier otro formato
-        // Si deseas trabajar con los datos recibidos, puedes hacerlo aquí
-        var datos = JSON.parse(response);
-        anos=ano;
-        console.log()
-        document.getElementById('ano').value=ano;
-        document.getElementById('seccion').value=seccion;
-        ModificarHorario(datos, nombre_ano, nombre_seccion, intervalo);
-        // Ahora puedes manipular la matriz de datos según tus necesidades
+          var datos = JSON.parse(response);
+          console.log(datos);
+
+          document.getElementById('ano').value = ano;
+          document.getElementById('seccion').value = seccion;
+          document.getElementById('receso').value = receso;
+         
+     
+
+          ModificarHorario(datos, nombre_ano, nombre_seccion);
       },
       error: function(xhr, status, error) {
-        // Ocurrió un error al realizar la solicitud AJAX
-        console.log(error);
+          console.log(error);
       }
-    });
-  }
+  });
+}
+
 function Volver() {
     document.querySelector(".tabla_horario").style.display='none';
     document.querySelector('.container_horario').style.display='none';

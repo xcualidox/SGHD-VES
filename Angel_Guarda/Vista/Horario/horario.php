@@ -10,6 +10,7 @@ $title = 'Horario';
 include_once('../v_Sidebar/v_Sidebar.php');
 ?>
 
+<meta name="viewport" content="1024" >
 
 <link rel="stylesheet" type="text/css" href="../../../styles/horario.css">
 
@@ -82,8 +83,9 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 
 
                                 <a href='horario_pdf.php?codigo_escolar=<?php echo $mostrar["codigo_a_escolar"];
-                                                                        ?>&codigo_seccion=<?php echo $mostrar["codigo_a_y_seccion"];
-                                                                                            ?>&nombre=<?php echo $mostrar["nombre"]; ?>&ano=<?php echo $mostrar["ano"]; ?>&seccion=<?php echo $mostrar["seccion"]; ?>&intervalo=<?php echo $mostrar["intervalo"]; ?>'>
+                                ?>&codigo_seccion=<?php echo $mostrar["codigo_a_y_seccion"];
+                                ?>&nombre=<?php echo $mostrar["nombre"]; ?>&ano=<?php echo $mostrar["ano"]; 
+                                ?>&seccion=<?php echo $mostrar["seccion"]; ?>&intervalo=<?php echo $mostrar["intervalo"]; ?>'>
 
 
 
@@ -108,7 +110,9 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
                                         <div class='cerrar cerrar_div' style='left:730px;width:60px;'>X</div>
                                         <h2 style='text-align:center;'>Crear Horario</h2>
                                         <p>Para crear el horario nececita ingresar el lapso, año y seccion para comenzar su creacion</p>
+                                       
                                         <div class='input_container'>
+                                   
                                             <label for="lapso">Año Escolar</label>
                                             <select name="ano" id="ano" class='select'>
                                                 <option value="">Seleccione</option>
@@ -132,16 +136,26 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
                                                 ?>
 
                                             </select>
+                                       
+                                        
+                                       
+                               
+                                        </div>
+                                        <div class='input_container'>
+                                            <label for="receso">Receso</label>
+                                            <input type="time" id='receso' name='receso' class="select" value="08:20" >
                                         </div>
                                         <input type="text" id='valores_horario' name='valores_horario' hidden>
                                         <input type="text" id='id_intervalo' name='id_intervalo' hidden>
+                                 
+
                                         <button onclick='CrearHorario()' type='button'>Crear</button>
 
                                     </div>
                                
                                     </form>
                               
-                                    <div class='tabla_horario bg-slate-400 ' style=" grid-column-gap: -10px;">
+                                    <div class='tabla_horario bg-slate-400 p-2' style=" grid-column-gap: -10px;">
                                         <span class='titulos'>Lapso:</span>
                                         <span style='grid-column:2/4;' class='titulos'></span>
                                         <span class='titulos'>Seccion:</span>
