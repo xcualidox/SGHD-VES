@@ -8,12 +8,17 @@ var ano_seccion="";
 var seccion_array="";
 
 var change="";
-function CrearHorario() {
-    var select=document.querySelectorAll(".select") ;
+function CrearHorario(intervalo,x) {
+
+    var select=document.querySelectorAll(".select");
     if (select[0].value!="" && select[1].value!="" && select[2].value!="") {
       ano_seccion=select[0].value;
       seccion_array=select[1].value;
       receso=select[2].value;
+      console.log(receso);
+ 
+    
+      
       var span= document.querySelector(".tabla_horario").querySelectorAll('span');
      
       console.log(select[1].selectedIndex);
@@ -24,14 +29,16 @@ function CrearHorario() {
       document.querySelector('.volver').style.display='block';
       document.querySelector('.container_horario').style.display='none';
 
-
-     
     }
 
 
-    else {
+    else {  
       alert("Tiene que selecionar año y seccion");
     }
+     document.getElementById("receso").value=receso;
+
+    CalcularHora(intervalo, x)
+
     }
     
 function EditarBloque(bloque) {
@@ -286,12 +293,16 @@ function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo,receso_ar
   }
 }
 function ModificarBloques(ano, seccion, nombre_ano, nombre_seccion, intervalo, receso) {
-  CalcularHora(intervalo,receso);
+ 
   ano_seccion = ano;
   seccion_array = seccion;
   receso_array=receso;
 
-  console.log(receso_array);
+  CalcularHora(intervalo,receso);
+
+
+
+  
   
 
 
@@ -429,9 +440,13 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
 });
+
+
 function CalcularHora(intervalo, x) {
   id = x;
+  intervalo;
   const receso_array = document.querySelector("#receso").value;
+
   const [horaReceso, minutoReceso] = receso_array.split(':');
   var contador = 1;
   var minutosAgregar = intervalo;
@@ -445,9 +460,7 @@ function CalcularHora(intervalo, x) {
       reset[index].remove();
     }
   }
-
   // Establecemos la hora inicial y la hora de receso
-
 
   horaInicial.setHours(7, 0, 0, 0); // Hora de inicio del horario
   horaComparar.setHours(parseInt(horaReceso), parseInt(minutoReceso), 0, 0); // Hora de receso
@@ -467,7 +480,7 @@ function CalcularHora(intervalo, x) {
     if (horaInicial.getTime() === horaComparar.getTime()) {
       // Añadimos el bloque de receso
       document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>" + horaReceso + ":" + minutoReceso + " - " + (parseInt(horaReceso) + (minutoReceso >= 30 ? 1 : 0)) + ":" + ((minutoReceso + 30) % 60).toString().padStart(2, '0') + "</span>");
-      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<p class='borrar' style='letter-spacing: 30px; font-size:50px; grid-column: 2/7; border:1px solid black; font-weight:bold; text-align:center; max-height:100px;'>RECREO</p>");
+      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<p class='borrar' style='letter-spacing: 30px; font-size:50px; grid-column: 2/7; border:1px solid black; font-weight:bold; text-align:center; max-height:100px;'>RECESO</p>");
 
       // Añadimos 30 minutos al receso
       horaInicial.setMinutes(horaInicial.getMinutes() + 30);

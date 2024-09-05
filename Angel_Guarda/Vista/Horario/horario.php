@@ -41,7 +41,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 <div class="main-content">
 
 
-    <button type='button' class='button_crear' onclick='CalcularHora(<?php echo $tiempo . "," . $id ?>)'>Crear Horario</button>
+    <button type='button' class='button_crear' >Crear Horario</button>
 
     <div class="absolute right-0  top-0 flex  justify-end items-start gap-4 bg-slate-300 p-1  z-50 ">
     <div class="grid grid-cols-1 gap-2">
@@ -156,7 +156,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
                                         <input type="text" id='id_intervalo' name='id_intervalo' hidden>
                                  
 
-                                        <button onclick='CrearHorario()' type='button'>Crear</button>
+                                        <button onclick='CrearHorario(<?php echo $tiempo . "," . $id ?>)' type='button'>Crear</button>
 
                                     </div>
                                
