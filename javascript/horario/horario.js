@@ -292,21 +292,21 @@ function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo,receso_ar
     
   }
 }
-function ModificarBloques(ano, seccion, nombre_ano, nombre_seccion, intervalo, receso) {
- 
+function ModificarBloques(ano, seccion, nombre_ano, nombre_seccion, intervalo,receso) {
+
+  document.getElementById('receso').value = receso;
+  CalcularHora(intervalo);
   ano_seccion = ano;
   seccion_array = seccion;
   receso_array=receso;
 
-  CalcularHora(intervalo,receso);
-
-
-
-  
+  console.log(receso_array);
   
 
 
-  
+
+ 
+
   
 
   $.ajax({
@@ -316,7 +316,7 @@ function ModificarBloques(ano, seccion, nombre_ano, nombre_seccion, intervalo, r
       success: function(response) {
           var datos = JSON.parse(response);
 
-          console.log(receso);
+
           
          
 
@@ -332,6 +332,8 @@ function ModificarBloques(ano, seccion, nombre_ano, nombre_seccion, intervalo, r
           console.log(error);
       }
   });
+
+ 
 }
 
 function Volver() {
@@ -340,8 +342,9 @@ function Volver() {
     document.querySelector('.guardar').style.display='none';
     document.querySelector('.volver').style.display='none';
     document.querySelector('#ano').value='';
-    document.querySelector('#seccion').value='';
-    document.querySelector('#receso').value='08:20';
+  
+
+  
     if (change=="change") {
       location.reload();
     }

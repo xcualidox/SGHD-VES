@@ -78,8 +78,9 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
                                 if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador" || $_SESSION["sesion"] == "coordinador") {
 
                                
-                                    echo  '<img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar" 
-                                    onclick=\'ModificarBloques("' . $mostrar["codigo_a_escolar"] . '","' . $mostrar["codigo_a_y_seccion"] . '", "' . $mostrar["nombre"] . '", "' . $mostrar["ano"] . $mostrar["seccion"] . '",' . $mostrar["intervalo"] .',"' . $mostrar["receso"] . '")\'>';
+                                    echo '<img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar" 
+                                    onclick="ModificarBloques(\'' . $mostrar["codigo_a_escolar"] . '\', \'' . $mostrar["codigo_a_y_seccion"] . '\', \'' . $mostrar["nombre"] . '\', \'' . $mostrar["ano"] . $mostrar["seccion"] . '\', ' . $mostrar["intervalo"] . ', \'' . $mostrar["receso"] . '\')" />';
+                                    
                              
                                 }
                                 ?>
@@ -149,7 +150,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
                                         </div>
                                         <div class='input_container'>
                                             <label for="receso">Receso</label>
-                                            <input type="time" id='receso' name='receso' class="select" value="09:00" >
+                                            <input type="time" id='receso' name='receso' class="select" value="08:20" >
                                         </div>
                                         
                                         <input type="text" id='valores_horario' name='valores_horario' hidden>
