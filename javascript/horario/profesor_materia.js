@@ -17,6 +17,22 @@ for (let index = 0; index < lista.length; index++) {
         document.getElementById(lista[index].id).style.backgroundColor='#00796b';
         document.getElementById(lista[index].id).style.color='white';
         indice=lista[index].id;
+
+        //Obtener el ID del padre del span (determinara si se debe agregar o quitar)
+        parent=document.getElementById(indice).parentElement.id;
+
+        switch(parent)
+        {
+            //Actuar en caso de que esté en el contenedor de materias disponibles o agregadas
+            case 'disponibles':
+                Add();
+                break;
+
+            case 'agregadas':
+                Del();
+                break;
+        
+        }
     })
     
 }
