@@ -149,7 +149,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
                                         </div>
                                         <div class='input_container'>
                                             <label for="receso">Receso</label>
-                                            <input type="time" id='receso' name='receso' class="select" value="08:20" >
+                                            <input type="time" id='receso' name='receso' class="select" value="09:00" >
                                         </div>
                                         
                                         <input type="text" id='valores_horario' name='valores_horario' hidden>

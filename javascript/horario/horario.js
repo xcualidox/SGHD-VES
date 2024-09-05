@@ -15,7 +15,7 @@ function CrearHorario() {
       seccion_array=select[1].value;
       receso=select[2].value;
       var span= document.querySelector(".tabla_horario").querySelectorAll('span');
-     console.log(select)
+     
       console.log(select[1].selectedIndex);
       span[1].innerHTML= select[0].options[select[0].selectedIndex].innerText;
       span[3].innerHTML=select[1].options[select[1].selectedIndex].innerText;
@@ -23,7 +23,12 @@ function CrearHorario() {
       document.querySelector('.guardar').style.display='block';
       document.querySelector('.volver').style.display='block';
       document.querySelector('.container_horario').style.display='none';
+
+
+     
     }
+
+
     else {
       alert("Tiene que selecionar año y seccion");
     }
@@ -281,7 +286,7 @@ function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo,receso_ar
   }
 }
 function ModificarBloques(ano, seccion, nombre_ano, nombre_seccion, intervalo, receso) {
-  CalcularHora(intervalo);
+  CalcularHora(intervalo,receso);
   ano_seccion = ano;
   seccion_array = seccion;
   receso_array=receso;
@@ -426,6 +431,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 function CalcularHora(intervalo, x) {
   id = x;
+  const receso_array = document.querySelector("#receso").value;
+  const [horaReceso, minutoReceso] = receso_array.split(':');
+  var contador = 1;
+  var minutosAgregar = intervalo;
+  var horaInicial = new Date();
+  var horaComparar = new Date();
+  var horaEnd = new Date();
+
   var reset = document.querySelectorAll('.borrar');
   if (reset.length > 0) {
     for (let index = 0; index < reset.length; index++) {
@@ -433,13 +446,15 @@ function CalcularHora(intervalo, x) {
     }
   }
 
-  horaInicial.setHours(7, 0, 0, 0); 
-  horaComparar.setHours(9, 0, 0, 0);
-  horaEnd.setHours(17, 0, 0, 0);
-  
+  // Establecemos la hora inicial y la hora de receso
+
+
+  horaInicial.setHours(7, 0, 0, 0); // Hora de inicio del horario
+  horaComparar.setHours(parseInt(horaReceso), parseInt(minutoReceso), 0, 0); // Hora de receso
+  horaEnd.setHours(17, 0, 0, 0); // Hora de fin del horario
+
   div = document.querySelector('.tabla_horario');
-  var contador = 1;
-  var minutosAgregar = intervalo;
+
 
   while (horaInicial < horaEnd) {
     var horaFinal = horaInicial.getHours();
@@ -447,6 +462,19 @@ function CalcularHora(intervalo, x) {
     if (minutosFinal == 0) {
       minutosFinal = "00";
     }
+
+    // Comprobamos si es hora de receso
+    if (horaInicial.getTime() === horaComparar.getTime()) {
+      // Añadimos el bloque de receso
+      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>" + horaReceso + ":" + minutoReceso + " - " + (parseInt(horaReceso) + (minutoReceso >= 30 ? 1 : 0)) + ":" + ((minutoReceso + 30) % 60).toString().padStart(2, '0') + "</span>");
+      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<p class='borrar' style='letter-spacing: 30px; font-size:50px; grid-column: 2/7; border:1px solid black; font-weight:bold; text-align:center; max-height:100px;'>RECREO</p>");
+
+      // Añadimos 30 minutos al receso
+      horaInicial.setMinutes(horaInicial.getMinutes() + 30);
+      continue; // Saltamos la iteración actual del ciclo
+    }
+
+    // Calculamos la hora siguiente
     horaInicial.setMinutes(horaInicial.getMinutes() + minutosAgregar);
     var horasiguiente = horaInicial.getHours();
     var minutosiguiente = horaInicial.getMinutes();
@@ -455,35 +483,31 @@ function CalcularHora(intervalo, x) {
       minutosiguiente = "00";
     }
 
-    if (horaInicial.toLocaleTimeString() >= horaComparar.toLocaleTimeString() && contador > 2) {
-      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>" + horaFinal + ":" + minutosFinal + "-9:00 </span>");
-      var dias = ["L", "M", "MM", "J", "V"];
-      
-      for (let i = 0; i < 5; i++) {
-        document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<div id='B" + contador + dias[i] + "' class='borrar contend' onclick='EditarBloque(this)'></div>");
-      }
+    // Añadimos el bloque de tiempo al horario
+    document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>" + horaFinal + ":" + minutosFinal + "-" + horasiguiente + ":" + minutosiguiente + "</span>");
+    var dias = ["L", "M", "MM", "J", "V"];
 
-      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>9:00-9:30</span>");
-      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<p class='borrar' style='letter-spacing: 30px; font-size:50px; grid-column: 2/7; border:1px solid black; font-weight:bold; text-align:center; max-height:100px;'>RECREO</p>");
-      
-      horaInicial.setHours(9, 0, 0, 0);
-      horaInicial.setMinutes(30);
-      
-      // Incrementar el contador después de recreo
-      contador++;
-    } else {
-      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>" + horaFinal + ":" + minutosFinal + "-" + horasiguiente + ":" + minutosiguiente + "</span>");
-      var dias = ["L", "M", "MM", "J", "V"];
-      
-      for (let i = 0; i < 5; i++) {
-        document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<div id='B" + contador + dias[i] + "' class='borrar contend' onclick='EditarBloque(this)'></div>");
-      }
+    for (let i = 0; i < 5; i++) {
+      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<div id='B" + contador + dias[i] + "' class='borrar contend' onclick='EditarBloque(this)'></div>");
+    }
 
-      contador++;
+    contador++;
 
-      if (horaInicial >= horaEnd) {
-        document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span style='letter-spacing: 30px; font-size:50px; grid-column: 1/7; font-weight:bold; text-align:center; height:180px; background-color:white;' class='borrar'></span>");
-      }
+    if (horaInicial >= horaEnd) {
+      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span style='letter-spacing: 30px; font-size:50px; grid-column: 1/7; font-weight:bold; text-align:center; height:180px; background-color:white;' class='borrar'></span>");
     }
   }
 }
+
+
+
+// document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>" + horaFinal + ":" + minutosFinal + "</span>");
+// var dias = ["L", "M", "MM", "J", "V"];
+
+// for (let i = 0; i < 5; i++) {
+//   document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<div id='B" + contador + dias[i] + "' class='borrar contend' onclick='EditarBloque(this)'></div>");
+
+// }
+
+// document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>"+receso_array+ "</span>");
+// document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<p class='borrar' style='letter-spacing: 30px; font-size:50px; grid-column: 2/7; border:1px solid black; font-weight:bold; text-align:center; max-height:100px;'>RECREO</p>");
