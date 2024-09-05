@@ -6,6 +6,7 @@ var horaComparar = new Date();
 var id="";
 var ano_seccion="";
 var seccion_array="";
+
 var change="";
 function CrearHorario() {
     var select=document.querySelectorAll(".select") ;
@@ -257,20 +258,23 @@ function EliminarHorario(ano, seccion) {
     });
     location.reload();
 }
-function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo){
+function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo,receso_array){
   ClearHorario();
   document.querySelector(".tabla_horario").style.display='grid';
   document.querySelector('.guardar').style.display='block';
   document.querySelector('.volver').style.display='block';
   var span= document.querySelector(".tabla_horario").querySelectorAll('span');
+ console.log(span);
+ 
+  
   span[1].innerHTML= nombre_ano;
   span[3].innerHTML=nombre_seccion;
   for (let index = 0; index < array.length; index++) {
     if (array[index][5]==" " || array[index][5]=="") {
-      document.querySelector('#'+array[index][4]).innerHTML="<span style='font-weight: bold;'>Aula </span><b id='"+array[index][0]+"' style='font-weight: lighter;'>"+array[index][1]+"</b><br><span style='font-weight: bold;'>Materia </span><b id='"+array[index][2]+"' style='font-weight: lighter;'>"+array[index][3]+"</b><br><span style='font-weight: bold;'>Prof </span><b id='"+array[index][6]+"' style='font-size:12px;font-weight: lighter;'>"+array[index][7]+" "+array[index][8]+" "+array[index][9]+" "+array[index][10]+"</b>";
+      document.querySelector('#'+array[index][4]).innerHTML="<span style='font-weight: bold;'>Aula </span><b id='"+array[index][0]+"' style='font-weight: lighter;'>"+array[index][1]+"</b><br><span style='font-weight: bold;'>Materia </span><b id='"+array[index][2]+"' style='font-weight: lighter;'>"+array[index][3]+"</b><br><span style='font-weight: bold;'>Prof </span><b id='"+array[index][6]+"' style='font-size:12px;font-weight: lighter;'>"+array[index][7]+" "+array[index][8]+"</b>";
     }
     else {
-      document.querySelector('#'+array[index][4]).innerHTML="<b id='"+array[index][5]+"'> GRUPO "+array[index][5]+"</b><br>"+"<span style='font-weight: bold;'>Aula </span><b id='"+array[index][0]+"' style='font-weight: lighter;'>"+array[index][1]+"</b><br><span style='font-weight: bold;'>Materia </span><b id='"+array[index][2]+"' style='font-weight: lighter;'>"+array[index][3]+"</b><br><span style='font-weight: bold;'>Prof </span><b id='"+array[index][6]+"' style='font-size:12px;font-weight: lighter;'>"+array[index][7]+" "+array[index][8]+" "+array[index][9]+" "+array[index][10]+"</b><br>"+document.querySelector('#'+array[index][4]).innerHTML;
+      document.querySelector('#'+array[index][4]).innerHTML="<b id='"+array[index][5]+"'> GRUPO "+array[index][5]+"</b><br>"+"<span style='font-weight: bold;'>Aula </span><b id='"+array[index][0]+"' style='font-weight: lighter;'>"+array[index][1]+"</b><br><span style='font-weight: bold;'>Materia </span><b id='"+array[index][2]+"' style='font-weight: lighter;'>"+array[index][3]+"</b><br><span style='font-weight: bold;'>Prof </span><b id='"+array[index][6]+"' style='font-size:12px;font-weight: lighter;'>"+array[index][7]+" "+array[index][8]+"</b><br>"+document.querySelector('#'+array[index][4]).innerHTML;
     }
     
     
@@ -280,7 +284,14 @@ function ModificarBloques(ano, seccion, nombre_ano, nombre_seccion, intervalo, r
   CalcularHora(intervalo);
   ano_seccion = ano;
   seccion_array = seccion;
-  receso=receso;
+  receso_array=receso;
+
+  console.log(receso_array);
+  
+
+
+  
+  
 
   $.ajax({
       url: '../../Control/horario_ajax.php',
@@ -288,7 +299,10 @@ function ModificarBloques(ano, seccion, nombre_ano, nombre_seccion, intervalo, r
       data: { anos: ano, seccion: seccion, receso: receso },
       success: function(response) {
           var datos = JSON.parse(response);
-          console.log(datos);
+
+          console.log(receso);
+          
+         
 
           document.getElementById('ano').value = ano;
           document.getElementById('seccion').value = seccion;
@@ -296,7 +310,7 @@ function ModificarBloques(ano, seccion, nombre_ano, nombre_seccion, intervalo, r
          
      
 
-          ModificarHorario(datos, nombre_ano, nombre_seccion);
+          ModificarHorario(datos, nombre_ano, nombre_seccion,receso_array);
       },
       error: function(xhr, status, error) {
           console.log(error);
@@ -311,6 +325,7 @@ function Volver() {
     document.querySelector('.volver').style.display='none';
     document.querySelector('#ano').value='';
     document.querySelector('#seccion').value='';
+    document.querySelector('#receso').value='08:20';
     if (change=="change") {
       location.reload();
     }

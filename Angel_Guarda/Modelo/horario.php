@@ -32,7 +32,7 @@ class zona extends bdmysql{
       return $this->ejecutar($sql);
     }
     function SelectAllHorario(){
-      $sql= "SELECT DISTINCT  ano_escolar.nombre, ano_seccion.ano, ano_seccion.seccion, horario_estudiante.codigo_a_escolar, horario_estudiante.codigo_a_y_seccion, intervalo.intervalo
+      $sql= "SELECT DISTINCT  ano_escolar.nombre, ano_seccion.ano, ano_seccion.seccion, horario_estudiante.codigo_a_escolar, horario_estudiante.codigo_a_y_seccion, intervalo.intervalo, horario_estudiante.receso
       FROM horario_estudiante
       JOIN ano_escolar ON horario_estudiante.codigo_a_escolar = ano_escolar.codigo
       JOIN ano_seccion ON horario_estudiante.codigo_a_y_seccion = ano_seccion.codigo

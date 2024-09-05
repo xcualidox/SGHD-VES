@@ -32,7 +32,9 @@ $intervalo = $objeto->SelectIntervalo();
 while ($mostrar = mysqli_fetch_array($intervalo)) {
     $tiempo = $mostrar["intervalo"];
     $id = $mostrar["id"];
+
 }
+
 ?>
 
 
@@ -74,10 +76,14 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 
                                 <?php
                                 if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador" || $_SESSION["sesion"] == "coordinador") {
+
+                               
                                     echo  '<img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar" 
-                               onclick=\'ModificarBloques("' . $mostrar["codigo_a_escolar"] . '","' . $mostrar["codigo_a_y_seccion"] . '", "' . $mostrar["nombre"] . '", "' . $mostrar["ano"] . $mostrar["seccion"] . '",' . $mostrar["intervalo"] . ')\'>';
+                                    onclick=\'ModificarBloques("' . $mostrar["codigo_a_escolar"] . '","' . $mostrar["codigo_a_y_seccion"] . '", "' . $mostrar["nombre"] . '", "' . $mostrar["ano"] . $mostrar["seccion"] . '",' . $mostrar["intervalo"] .',"' . $mostrar["receso"] . '")\'>';
+                             
                                 }
                                 ?>
+                              
 
 
 
@@ -145,6 +151,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
                                             <label for="receso">Receso</label>
                                             <input type="time" id='receso' name='receso' class="select" value="08:20" >
                                         </div>
+                                        
                                         <input type="text" id='valores_horario' name='valores_horario' hidden>
                                         <input type="text" id='id_intervalo' name='id_intervalo' hidden>
                                  

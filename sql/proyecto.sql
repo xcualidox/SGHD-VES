@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 04-09-2024 a las 22:49:13
+-- Tiempo de generación: 05-09-2024 a las 01:33:34
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyecto`
 --
+CREATE DATABASE IF NOT EXISTS `proyecto` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci;
+USE `proyecto`;
 
 -- --------------------------------------------------------
 
@@ -201,7 +203,7 @@ CREATE TABLE `horario_estudiante` (
   `grupo` varchar(2) NOT NULL,
   `profesor` bigint NOT NULL DEFAULT '0',
   `intervalo` int NOT NULL,
-  `receso` time(6) NOT NULL
+  `receso` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -209,8 +211,13 @@ CREATE TABLE `horario_estudiante` (
 --
 
 INSERT INTO `horario_estudiante` (`codigo`, `codigo_a_escolar`, `codigo_a_y_seccion`, `codigo_asignatura`, `codigo_aula`, `codigo_dia`, `grupo`, `profesor`, `intervalo`, `receso`) VALUES
-(263, 18, 18, 'AP', 25, 'B1J', ' ', 5656, 1, '00:00:00.000000'),
-(264, 18, 18, 'AP', 25, 'B2J', ' ', 5656, 1, '00:00:00.000000');
+(297, 18, 19, 'AP', 26, 'B1J', ' ', 11716900, 2, '08:20'),
+(306, 18, 20, 'AP', 25, 'B1J', ' ', 5656, 2, '23:20'),
+(307, 18, 20, 'AP', 25, 'B1V', ' ', 5656, 2, '23:20'),
+(308, 18, 20, 'BI', 26, 'B2MM', '1', 11716900, 2, '23:20'),
+(309, 18, 20, 'AP', 25, 'B2MM', '2', 5656, 2, '23:20'),
+(310, 18, 20, 'BI', 26, 'B3MM', '1', 27564672, 2, '23:20'),
+(311, 18, 20, 'AP', 25, 'B3MM', '2', 5656, 2, '23:20');
 
 -- --------------------------------------------------------
 
@@ -229,8 +236,8 @@ CREATE TABLE `intervalo` (
 --
 
 INSERT INTO `intervalo` (`id`, `intervalo`, `estado`) VALUES
-(1, '40', 1),
-(2, '20', 0),
+(1, '40', 0),
+(2, '30', 1),
 (3, '10', 0);
 
 -- --------------------------------------------------------
@@ -502,7 +509,7 @@ ALTER TABLE `bitacora`
 -- AUTO_INCREMENT de la tabla `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=312;
 
 --
 -- AUTO_INCREMENT de la tabla `intervalo`
