@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 05-09-2024 a las 01:33:34
+-- Tiempo de generación: 06-09-2024 a las 15:46:47
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -142,7 +142,9 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 (2, '2024-07-16 20:23:43', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-D2HTI36'),
 (3, '2024-08-24 11:41:17', 19282324, 'login', '19282324 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
 (4, '2024-08-24 11:42:26', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(5, '2024-09-04 13:06:37', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU');
+(5, '2024-09-04 13:06:37', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
+(6, '2024-09-05 10:24:46', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
+(7, '2024-09-06 08:15:57', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU');
 
 -- --------------------------------------------------------
 
@@ -211,13 +213,18 @@ CREATE TABLE `horario_estudiante` (
 --
 
 INSERT INTO `horario_estudiante` (`codigo`, `codigo_a_escolar`, `codigo_a_y_seccion`, `codigo_asignatura`, `codigo_aula`, `codigo_dia`, `grupo`, `profesor`, `intervalo`, `receso`) VALUES
-(297, 18, 19, 'AP', 26, 'B1J', ' ', 11716900, 2, '08:20'),
-(306, 18, 20, 'AP', 25, 'B1J', ' ', 5656, 2, '23:20'),
-(307, 18, 20, 'AP', 25, 'B1V', ' ', 5656, 2, '23:20'),
-(308, 18, 20, 'BI', 26, 'B2MM', '1', 11716900, 2, '23:20'),
-(309, 18, 20, 'AP', 25, 'B2MM', '2', 5656, 2, '23:20'),
-(310, 18, 20, 'BI', 26, 'B3MM', '1', 27564672, 2, '23:20'),
-(311, 18, 20, 'AP', 25, 'B3MM', '2', 5656, 2, '23:20');
+(370, 18, 18, 'AP', 25, 'B3MM', ' ', 5656, 6, '09:00'),
+(386, 18, 19, 'AP', 26, 'B1V', '1', 5656, 6, '08:20'),
+(387, 18, 19, 'FI', 25, 'B1V', '2', 27414575, 6, '08:20'),
+(388, 18, 19, 'AP', 25, 'B2V', '1', 5656, 6, '08:20'),
+(389, 18, 19, 'BI', 26, 'B2V', '2', 11716900, 6, '08:20'),
+(390, 18, 20, 'AP', 26, 'B2L', ' ', 5656, 6, '09:00'),
+(391, 18, 20, 'BI', 26, 'B2M', ' ', 11716900, 6, '09:00'),
+(392, 18, 20, 'AP', 25, 'B3L', ' ', 5656, 6, '09:00'),
+(393, 18, 20, 'AP', 26, 'B3M', ' ', 5656, 6, '09:00'),
+(394, 18, 20, 'AP', 25, 'B4L', ' ', 5656, 6, '09:00'),
+(395, 18, 20, 'AP', 26, 'B4M', ' ', 5656, 6, '09:00'),
+(396, 18, 20, 'AP', 25, 'B5L', ' ', 5656, 6, '09:00');
 
 -- --------------------------------------------------------
 
@@ -236,9 +243,9 @@ CREATE TABLE `intervalo` (
 --
 
 INSERT INTO `intervalo` (`id`, `intervalo`, `estado`) VALUES
-(1, '40', 0),
-(2, '30', 1),
-(3, '10', 0);
+(7, '45', 0),
+(6, '40', 1),
+(5, '10', 0);
 
 -- --------------------------------------------------------
 
@@ -270,7 +277,8 @@ INSERT INTO `login` (`id`, `username`, `password`, `security_q_1`, `security_q_2
 (4, 27564672, '$2y$10$2LdbHmQeaN5.amJ86/gQFeZAK9Mb6fdZ2.bDZkqM9kWv5/1mXjERi', '¿Cuál es el nombre de tu primera mascota?', '¿Cuál es el nombre de tu escuela primaria?', '¿En qué ciudad naciste?', '$2y$10$nmlXTunPzLLb5VrsRBZ7y.rr.RO0rAhszWg.H5HQP4ORBeAwyO7X2', '$2y$10$yv6lnXbkvRPxsW/GjqWWmulj1wAxhfgHzb6n7SUciFngJWVbdCA6C', '$2y$10$PwpOMuTvWGFmKcVGwW41He90ksoCzKG6DyT0kCJo7WveqSBxBOoIi', 'profesor', 'active'),
 (5, 29629080, '$2y$10$iztSmb7xT9arACvPGNiLmuVu.IPZfpPCRrquHgPpKXfkWMrCOU7f6', '¿Cual es su color favorito?', '¿Cual es fue su primera mascota?', '¿Cual es su comida favorita?', '$2y$10$MKhsRwZ/V6pN2POJ3eete..IigsrkWdUtDOVRA7.Tlfy9ZGp4w.8O', '$2y$10$T6PjmXUjButQzVO8FIV0UOvnYsD2Em153oEi9Cv6J/0Pdk5EGdelm', '$2y$10$llAi/KhMxhEj5YtessVBe.vfpnESeMO16Sh0NdoDnfhcWSPoWGS.2', 'admin', 'active'),
 (7, 19282340, '$2y$10$moo9yxZLhEx/2nm8hm.4y.CYC6HTptlepQFJVvhWDDhrUAoCJnkwW', '¿Cuál es el nombre de tu escuela primaria?', '¿Cuál es el nombre de tu primera mascota?', '¿En qué ciudad naciste?', '$2y$10$.74Lk2GGk0wg.YfrqkhzA.Uy8WBuq/YVHEvm2YWY0uXOkLW4649tO', '$2y$10$sXMNpg.hK0t9yg1ZZzhif.SG.GzVSN7WkR6HJi6mCvAePrGOSYzPi', '$2y$10$0g4l.tzDZwQ3potE6fDBTukJdn0UO6nl1jSw4Y2GkdVPVv1deS5qm', 'profesor', 'active'),
-(9, 5656, '$2y$10$XnKkMjz3oQcmQ1vv2Vjga.iGB8bO7165A5pV87kcP/nZsvjAgZ3Zm', '', '', '', '', '', '', 'administrador', 'new');
+(9, 5656, '$2y$10$XnKkMjz3oQcmQ1vv2Vjga.iGB8bO7165A5pV87kcP/nZsvjAgZ3Zm', '', '', '', '', '', '', 'profesor', 'new'),
+(10, 19282324, '$2y$10$YWeRd2gZhLd0XqO.w/.hMOzr3.9q2J8S5/2QyjCncVDjAsr17xfOG', '', '', '', '', '', '', 'profesor', 'new');
 
 -- --------------------------------------------------------
 
@@ -292,8 +300,9 @@ CREATE TABLE `personas` (
 --
 
 INSERT INTO `personas` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono`, `correo`) VALUES
-(5656, 'FASD', 'MENDEZ', 'VENEZUELA, PORTUGUESA, GUANARE URBANIZACION LA VERGUISA ENTFRE LA CALLE 13 Y 2 , CASA NUMERO 10', '04122696463', 'equisde@gmail.com'),
+(5656, 'PEDRITO', 'MENDEZ', 'VENEZUELA, PORTUGUESA, GUANARE URBANIZACION LA VERGUISA ENTFRE LA CALLE 13 Y 2 , CASA NUMERO 10', '04122696463', 'equisde@gmail.com'),
 (11716900, 'JOHN ENMANUEL', 'RAMIREZ VALERO', 'Enrique Segoviano', '+584169919122', 'cojggeo@equisde.com'),
+(19282324, 'CARLOS', 'DIAZ', 'FASDF', '04121', 'fasdf@gmail.com'),
 (19282340, 'FASDFUNCIONO', 'FASDFUNCIONO', 'FASD', '04122696463', 'equisde@gmail.com'),
 (27414575, 'ASDAS', 'ADASDAS', 'DIREKSION', '04246646364', 'lol@lol.com'),
 (27564672, 'NIRETCIA INMACULADA', 'RAMIREZ VALERO', 'Venezuela, Portuguesa, Guanare Urbanizacion la Verguisa entre la calle 13 y 2 , casa numero 10', '04161234567', 'equisde@gmail.com'),
@@ -340,19 +349,33 @@ INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
 (14, 5656, 'AP'),
 (15, 5656, 'CA'),
 (16, 5656, 'CT'),
-(25, 19282340, 'CT'),
-(26, 19282340, 'CA'),
-(27, 19282340, 'CN'),
 (32, 11716900, 'CA'),
 (33, 11716900, 'CT'),
 (34, 11716900, 'AP'),
 (35, 11716900, 'CN'),
 (36, 11716900, 'BI'),
-(37, 27564672, 'AP'),
-(38, 27564672, 'BI'),
-(39, 27564672, 'CA'),
-(40, 29629080, 'EF'),
-(41, 29629080, 'FSN');
+(37, 29629080, 'AP'),
+(38, 29629080, 'BI'),
+(39, 29629080, 'CA'),
+(42, 19282340, 'BI'),
+(43, 19282340, 'ILE'),
+(44, 19282340, 'EF'),
+(45, 19282340, 'PGCRP'),
+(50, 27414575, 'FSN'),
+(51, 27414575, 'CA'),
+(52, 27414575, 'CT'),
+(53, 27414575, 'BI'),
+(54, 27414575, 'CN'),
+(55, 27414575, 'FI'),
+(56, 27414575, 'FSN'),
+(57, 27414575, 'CA'),
+(58, 27414575, 'CT'),
+(59, 27414575, 'BI'),
+(60, 27414575, 'CN'),
+(61, 27414575, 'FI'),
+(62, 29629080, 'AP'),
+(63, 29629080, 'BI'),
+(64, 29629080, 'CA');
 
 -- --------------------------------------------------------
 
@@ -503,25 +526,25 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=312;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=397;
 
 --
 -- AUTO_INCREMENT de la tabla `intervalo`
 --
 ALTER TABLE `intervalo`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas_seguridad`
@@ -533,7 +556,7 @@ ALTER TABLE `preguntas_seguridad`
 -- AUTO_INCREMENT de la tabla `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

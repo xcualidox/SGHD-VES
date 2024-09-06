@@ -3,118 +3,198 @@ require("../../Modelo/horario.php");
 ob_start();
 $objeto = new zona();
 
+//Imagen para el PDF
+$image = file_get_contents('../../../images/LogoTransp.png');
+$base64Image = 'data:image/jpg;base64,' . base64_encode($image);
+
+// Obtener el receso desde el parámetro GET
+$receso = $_GET['receso'];
+
+
 $fecha_inicio = new DateTime('07:00:00');
-$fecha_comparar = new DateTime('09:00:00');
-$fecha_comparar2 = new DateTime('09:40:00');
+$fecha_receso_inicio = new DateTime($receso . ':00');
+$fecha_receso_fin = clone $fecha_receso_inicio;
+$fecha_receso_fin->add(new DateInterval('PT30M'));
 $fecha_fin = new DateTime('17:00:00');
-$intervalo1 = new DateInterval('PT'.$_GET["intervalo"].'M');
+$intervalo1 = new DateInterval('PT' . $_GET["intervalo"] . 'M');
 $fecha_actual = $fecha_inicio;
-$contador=1;
-$dias= ["L","M","MM","J","V"];
+$contador = 1;
+$dias = ["L", "M", "MM", "J", "V"];
 ?>
-<table style='
-        width:100%;border-collapse: collapse;
-        text-align: center;'>
+
+<style>
+    /* Estilo para centrar la imagen y el texto */
+    .header-container {
+ text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+ img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    max-width: 100px;
+    height: auto;
+}
+.header-text {
+    flex-grow: 1;
+    text-align: center;
+}
+    
+    img {
+        max-width: 100px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    h3, h4 {
+        margin: 5px 0;
+    }
+
+    /* Estilos para la tabla */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+    }
+
+    th {
+        border: 1px solid black;
+        font-size: 23px;
+        background-color: #00796b;
+        color: white;
+    }
+
+    td.header {
+        font-weight: bold;
+        border: 1px solid black;
+        font-size: 18px;
+        width: 30px;
+    }
+
+    td.hour, td.block {
+        border: 1px solid black;
+        font-size: 15px;
+        height: 30px;
+    }
+
+    td.recess {
+        font-size: 22px;
+        font-weight: bold;
+        background-color: #f0f0f0;
+        color: #333;
+    }
+
+    @media print {
+        th {
+            font-size: 20px;
+        }
+
+        td {
+            font-size: 10px;
+        }
+    }
+</style>
+
+
+ <!-- Contendor de Imagen y Texto -->
+ <img src="<?php echo $base64Image; ?>" alt="No Carga la Imagen"> 
+<div class="header-container">
+
+    <h3>REPÚBLICA BOLIVARIANA DE VENEZUELA</h3>
+    <h3>MINISTERIO DEL PODER POPULAR PARA LA EDUCACIÓN</h3>
+    <h3>U.E.C "VICENTE EMILIO SOJO"</h3>
+    <h4>CODIGO PD00511808</h4>
+</div>
+
+
+<table>
     <tr>
-        <th style='border:1px solid black;font-size:23px;background-color:#00796b;color:white;' colspan=6>HORARIO <?php echo $_GET["ano"]." '".$_GET["seccion"]."'       AÑO ".$_GET["nombre"]?></th>
+        <th colspan="6">
+            HORARIO <?php echo $_GET["ano"]." '".$_GET["seccion"]."'       AÑO ".$_GET["nombre"]?>
+        </th>
     </tr>
     <tr>
-        <td style='font-weight:bold; border:1px solid black;font-size:18px;width:30px ;'>HORA</td>
-        <td style='font-weight:bold; border:1px solid black;font-size:18px;width:30px;'>LUNES</td>
-        <td style='font-weight:bold; border:1px solid black;font-size:18px;width:30px;'>MARTES</td>
-        <td style='font-weight:bold; border:1px solid black;font-size:18px;width:30px;'>MIERCOLES</td>
-        <td style='font-weight:bold; border:1px solid black;font-size:18px;width:30px;'>JUEVES</td>
-        <td style='font-weight:bold; border:1px solid black;font-size:18px;width:30px;'>VIERNES</td>
+        <td class="header">HORA</td>
+        <td class="header">LUNES</td>
+        <td class="header">MARTES</td>
+        <td class="header">MIERCOLES</td>
+        <td class="header">JUEVES</td>
+        <td class="header">VIERNES</td>
     </tr>
+
     <?php 
     while ($fecha_actual <= $fecha_fin) {
         if ($fecha_actual >= $fecha_fin) {
             break;
         }
-        $hora=$fecha_actual->format('H:i');
-        $hora2=$fecha_actual->add($intervalo1)->format('H:i');
-        $tiempo=$hora. ' - ' . $hora2;
-        if ($fecha_actual >= $fecha_comparar && $fecha_actual < $fecha_comparar2) {
-            $tiempo=$hora . ' - 9:00';
+
+        $hora = $fecha_actual->format('H:i');
+        $hora2 = $fecha_actual->add($intervalo1)->format('H:i');
+        $tiempo = $hora . ' - ' . $hora2;
+
+        if ($fecha_actual >= $fecha_receso_inicio && $fecha_actual < $fecha_receso_fin) {
             echo "<tr>";
-            echo "<td style='height:80px;border:1px solid black;font-size:18px;width:30px;'>".$tiempo."</td>";
-            for ($i=0; $i < 5; $i++) {
-                $bloque="B".$contador.$dias[$i];
-                $array= $objeto->BloquesHorarioPDF($_GET["codigo_escolar"],$_GET["codigo_seccion"],$bloque);
-          
-        
-
-            if (count($array) > 0 && !empty($array[0][5])) {
-                // Solo si el grupo no está vacío
-                $resultado = "<b>GRUPO " . $array[0][5] . "</b><br><b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3];
-                // Si hay al menos dos registros en el array
-                if (isset($array[1][5]) && !empty($array[1][5])) {
-                    $resultado .= "<br><b>GRUPO " . $array[1][5] . "</b><br><b>AULA:</b> " . $array[1][1] . "<br><b>MATERIA:</b> " . $array[1][3];
+            echo "<td class='hour'>$hora - $hora2</td>";
+            for ($i = 0; $i < 5; $i++) {
+                $bloque = "B" . $contador . $dias[$i];
+                $array = $objeto->BloquesHorarioPDF($_GET["codigo_escolar"], $_GET["codigo_seccion"], $bloque);
+                if (count($array) > 0 && !empty($array[0][5])) {
+                    $resultado = "<b>GRUPO " . $array[0][5] . "</b><br><b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3];
+                    if (isset($array[1][5]) && !empty($array[1][5])) {
+                        $resultado .= "<br><b>GRUPO " . $array[1][5] . "</b><br><b>AULA:</b> " . $array[1][1] . "<br><b>MATERIA:</b> " . $array[1][3];
+                    }
+                } else {
+                    $resultado = "";
                 }
-            } else if (count($array) > 0 && isset($array[0][1], $array[0][3], $array[0][7], $array[0][8])) {
-                // Si el grupo está vacío, muestra AULA, MATERIA y PROF
-                $resultado = "<b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3] . "<br><b>PROF:</b> " . $array[0][7] . " " . $array[0][8];
-            } else {
-                // Si no hay datos suficientes o los índices no existen
-                $resultado = "";
-            }
 
-                echo "<td style='height:80px;border:1px solid black;font-size:14px;width:30px;'>".$resultado."</td>";
+                echo "<td class='block'>$resultado</td>";
             }
             echo "</tr>";
+
             echo "<tr>";
-            echo "<td style='height:50px;border:1px solid black;width:30px;'>9:00 - 9:30</td>";
-            echo"<td style='height:50px;border:1px solid black;font-size:22px;' colspan=5>RECREO</td>";
-            $fecha_actual = new DateTime('09:30:00');
+            echo "<td class='hour'>{$fecha_receso_inicio->format('H:i')} - {$fecha_receso_fin->format('H:i')}</td>";
+            echo "<td class='recess' colspan=5>RECESO</td>";
+            $fecha_actual = clone $fecha_receso_fin;
             echo "</tr>";
-        }
-        else {
+        } else {
             echo "<tr>";
-            echo "<td style='height:80px;border:1px solid black;font-size:18px;width:30px;'>".$tiempo."</td>";
-            for ($i=0; $i < 5; $i++) {
-                $bloque="B".$contador.$dias[$i];
-                $array= $objeto->BloquesHorarioPDF($_GET["codigo_escolar"],$_GET["codigo_seccion"],$bloque);
-                if (count($array)==0) {
-                    $resultado="";
+            echo "<td class='hour'>$tiempo</td>";
+            for ($i = 0; $i < 5; $i++) {
+                $bloque = "B" . $contador . $dias[$i];
+                $array = $objeto->BloquesHorarioPDF($_GET["codigo_escolar"], $_GET["codigo_seccion"], $bloque);
+
+                if (count($array) == 0) {
+                    $resultado = "";
+                } else if (count($array) > 1 && $array[0][5] != "") {
+                    $resultado = "<b>GRUPO:</b> " . $array[0][5] . "<br><b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3] .
+                                 "<br><b>GRUPO:</b> " . $array[1][5] . "<br><b>AULA:</b> " . $array[1][1] . "<br><b>MATERIA:</b> " . $array[1][3];
+                } else {
+                    $resultado = "<b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3] . "<br><b>PROF:</b> " . $array[0][7] . " " . $array[0][8];
                 }
-                else if(count($array)>1 && $array[0][5]!="") {
-                    $resultado = "
-<div style='display: flex; align-items: flex-start; font-size: 12px;'>
- 
-    <div style='flex: 2; text-align: right;'>
-          <b>GRUPO: ".$array[0][5]."</b>
-        <b>AULA:</b> ".$array[0][1]."<br>
-        <b>MATERIA:</b> ".$array[0][3]."<br><br>
-         <b>GRUPO: ".$array[1][5]."</b>
-        <b>AULA:</b> ".$array[1][1]."<br>
-        <b>MATERIA:</b> ".$array[1][3]."
-    </div>
-</div>";
-                }
-                else if (count($array)>0) {
-                    $resultado="<b>AULA:</b> ".$array[0][1]."<br><b>MATERIA:</b> ".$array[0][3]."<br><b>PROF:</b> ".$array[0][7]." ".$array[0][8];
-                }
-                echo "<td style='height:80px;border:1px solid black;font-size:15px;width:30px;'>".$resultado."</td>";
+
+                echo "<td class='block'>$resultado</td>";
             }
             echo "</tr>";
         }
-        $contador=1+$contador;
-        
+
+        $contador++;
     }
     ?>
 </table>
+
 <?php
 include_once("../../../libraries/vendor/autoload.php");
 use Dompdf\Dompdf;
-$dompdf= new Dompdf();
-$html=ob_get_clean();
+$dompdf = new Dompdf();
+$html = ob_get_clean();
 $option = $dompdf->getOptions();
-$option->set(array('isRemoteEnable' => true));
+$option->set(array('isRemoteEnabled' => true));
 $dompdf->set_option('dpi', 100);
 $dompdf->setOptions($option);
 $dompdf->loadHtml($html);
 $dompdf->setPaper("A4", "landscape");
 $dompdf->render();
-$dompdf->stream("horario_".$_GET["ano"]."_".$_GET["seccion"]."_LAPSO_".$_GET["nombre"].".pdf", array('Attachment' => false)); 
+$dompdf->stream("horario_" . $_GET["ano"] . "_" . $_GET["seccion"] . "_LAPSO_" . $_GET["nombre"] . ".pdf", array('Attachment' => false)); 
 
 ?>
