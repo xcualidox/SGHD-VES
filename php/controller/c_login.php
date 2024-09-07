@@ -217,16 +217,16 @@ function login($username, $pw, $op)
             $_SESSION['sesion'] = $loginResult[1];
             // Destruye la instancia login
             $GLOBALS["login"] = null;
-            if ($_SESSION['sesion'] == "admin"){
+            if ($_SESSION['sesion'] == "admin" || $_SESSION['sesion']=="administrador"){
                 require_once("../../Angel_Guarda/Control/c_bitacora.php");
                 insertBitacora($username, "login", "$username ha ingresado al sistema.");
                 header("Location: ../../Angel_guarda/Vista/Asignatura/v_asignatura.php");
                 // echo "angel";
             }
-            else if ($_SESSION['sesion'] == "profesor"){
+            else if ($_SESSION['sesion'] == "profesor" ||$_SESSION['sesion'] == "coordinador"){
                 require_once("../../Angel_Guarda/Control/c_bitacora.php");
                 insertBitacora($username, "login", "$username ha ingresado al sistema.");
-                header("Location: ../..//Angel_guarda/Vista/Horario/horario_usuario.php");
+                header("Location: ../..//Angel_guarda/Vista/Horario/horario.php");
             }
             exit();
         }

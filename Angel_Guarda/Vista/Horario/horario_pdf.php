@@ -72,10 +72,16 @@ $dias = ["L", "M", "MM", "J", "V"];
         width: 30px;
     }
 
-    td.hour, td.block {
+    td.hour {
         border: 1px solid black;
         font-size: 15px;
         height: 30px;
+    }
+    td.block {
+        text-align: left;
+        border: 1px solid black;
+        font-size: 12px;
+       
     }
 
     td.recess {
@@ -140,9 +146,10 @@ $dias = ["L", "M", "MM", "J", "V"];
                 $bloque = "B" . $contador . $dias[$i];
                 $array = $objeto->BloquesHorarioPDF($_GET["codigo_escolar"], $_GET["codigo_seccion"], $bloque);
                 if (count($array) > 0 && !empty($array[0][5])) {
-                    $resultado = "<b>GRUPO " . $array[0][5] . "</b><br><b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3];
+               
+                    $resultado = "<b>GRUPO " . $array[0][5] . "</b><br><b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3]."<br><b>PROF:</b> " . $array[0][7] . " ".  $array[0][8];
                     if (isset($array[1][5]) && !empty($array[1][5])) {
-                        $resultado .= "<br><b>GRUPO " . $array[1][5] . "</b><br><b>AULA:</b> " . $array[1][1] . "<br><b>MATERIA:</b> " . $array[1][3];
+                        $resultado .= "<br><b>GRUPO " . $array[1][5] . "</b><br><b>AULA:</b> " . $array[1][1] . "<br><b>MATERIA:</b> " . $array[1][3]."<br><b>PROF:</b> " . $array[1][7] . " ".  $array[1][8];
                     }
                 } else {
                     $resultado = "";
@@ -167,11 +174,13 @@ $dias = ["L", "M", "MM", "J", "V"];
                 if (count($array) == 0) {
                     $resultado = "";
                 } else if (count($array) > 1 && $array[0][5] != "") {
-                    $resultado = "<b>GRUPO:</b> " . $array[0][5] . "<br><b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3] .
-                                 "<br><b>GRUPO:</b> " . $array[1][5] . "<br><b>AULA:</b> " . $array[1][1] . "<br><b>MATERIA:</b> " . $array[1][3];
+             
+                    $resultado = "<b>GRUPO:</b> " . $array[0][5] . "<br><b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3] ."<br><b>PROF:</b> " . $array[0][7] . " ".  $array[0][8].
+                                 "<br><b>GRUPO:</b> " . $array[1][5] . "<br><b>AULA:</b> " . $array[1][1] . "<br><b>MATERIA:</b> " . $array[1][3] ."<br><b>PROF:</b> " . $array[1][7] . " ".  $array[1][8];
                 } else {
                     $resultado = "<b>AULA:</b> " . $array[0][1] . "<br><b>MATERIA:</b> " . $array[0][3] . "<br><b>PROF:</b> " . $array[0][7] . " " . $array[0][8];
                 }
+               
 
                 echo "<td class='block'>$resultado</td>";
             }

@@ -1,7 +1,9 @@
 <?php
 session_start();
 include_once("../../Control/c_seccion.php");
-if ($_SESSION["sesion"]!="admin") {
+if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador") {
+}
+ else {
     header("Location: ../../../index.php");
 }
 $title='Año y Seccion';

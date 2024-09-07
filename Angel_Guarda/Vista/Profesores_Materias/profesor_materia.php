@@ -1,7 +1,9 @@
 <?php
 session_start();
 include_once("../../control/profesor_materia_tabla.php");
-if ($_SESSION["sesion"] != "admin") {
+if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador") {
+}
+ else {
     header("Location: ../../../index.php");
 }
 
