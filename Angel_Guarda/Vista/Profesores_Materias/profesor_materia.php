@@ -88,7 +88,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <form id="form" style="display: none;" name="pantalla" class='formulario' method="POST" action="../../Control/profesor_materia.php">
         <div class=" flex justify-end ">
                 <div class="  bg-red-500  w-10  rounded-full ">
-                    <img src="../../../images/icons/error.svg" class=" filtro-blanco botoncerrar" alt="Añadir" title="Cerrar" id="boton1" onclick="Mostrar()">
+                    <img src="../../../images/icons/error.svg" class=" filtro-blanco botoncerrar" alt="Añadir" title="Cerrar" id="boton1" onclick="Mostrar('')">
                 </div>
             </div>
         
@@ -99,7 +99,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <label for="">Profesor:</label>
             <input type="text" id='datos' style='display:none;' class="formulario__input" disabled>
           <!-- Cambiado a input con datalist -->
-            <input type="text" name="profesor" id="profesor" list="profesoresList" class="formulario__input" placeholder="Seleccione el profesor" autocomplete="off">
+            <input type="text" name="profesor" id="profesor" list="profesoresList" class="formulario__input" placeholder="Seleccione el profesor" autocomplete="off" oninput=ValidarNombre(this.value)>
 
             <datalist id="profesoresList">
 
@@ -114,7 +114,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
             
             <label id="nombre_profesor"></label>
 
-            <br><br>
+            <br>
 
             <label for="fecI">Materias</label><br>
             <div id='disponibles' class='materias_container'>

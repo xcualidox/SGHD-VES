@@ -56,14 +56,50 @@ function Del() {
     var span=document.getElementById(indice);
     div[0].appendChild(span);
 }
-function Mostrar(cedula = undefined){
 
+
+function ResetBotonCerrar() {
+    let boton_cerrar=document.querySelector('.botoncerrar');
+    boton_cerrar.setAttribute('onclick','Mostrar()')
+}
+
+function AsignarBotonCerrar(cedula){
+    let boton_cerrar=document.querySelector('.botoncerrar');
+    boton_cerrar.setAttribute('onclick','Mostrar('+cedula+')')
+}
+
+function EliminarProfesorActual(){
+    let profesoractualmostrar=document.querySelectorAll('#profesoractual')
+    for (let i = 0; i < profesoractualmostrar.length; i++) {
+        profesoractualmostrar[i].remove();
+    }
+}
+
+//Limpiar al clickear el boton de crear porsiacasoxd
+let boton_crear=document.querySelector('.filtro-verde');
+boton_crear.addEventListener('click', EliminarProfesorActual);
+boton_crear.addEventListener('click', function() { ValidarNombre(''); });
+
+function Mostrar(cedula = undefined){
     const btn = document.getElementById('boton1');
     const btn2 = document.getElementById('boton2');
     const form = document.getElementById('form');
     const inputs= form.querySelectorAll('input');
     const profesorForm = document.getElementById("form");
 
+    //si el formulario a ocultar es de modificar
+    if (cedula != undefined) {
+
+        //obtener el <option> añadido en Modificar y eliminarlo
+        EliminarProfesorActual
+        //Restaurar el onclick del boton de cerrar porque ya no es requerido eliminar datos del datalist
+        ResetBotonCerrar();
+    }
+
+    else{
+        //Si no pues solo resetear el boton de cerrar en caso de que se haya abierto desde otra ventana de modificar(no debería)
+        ResetBotonCerrar();
+    }
 
     inputs[0].value="";
     if (form.style.display === 'none') {
@@ -73,25 +109,12 @@ function Mostrar(cedula = undefined){
         btn.style.display = 'block';
     } else {
     // 👇️ this HIDES the form
-
-        //si el formulario a ocultar es de modificar
-        if (cedula != undefined) {
-
-            //obtener el <option> añadido en Modificar y eliminarlo
-            profesoractualmostrar=document.getElementById('profesoractual')
-            profesoractualmostrar.remove();
-
-            //Restaurar el onclick del boton de cerrar porque ya no es requerido eliminar datos del datalist
-            let boton_cerrar=document.querySelector('.botoncerrar');
-            boton_cerrar.setAttribute('onclick','Mostrar()')
-        }
-
-        else{
-            btn.onClick='Mostrar()';
-        }
         form.style.display = 'none';
         btn2.style.display = 'none';
         btn.style.display = 'block';
+
+        //Elimina el profesor actual del datalist para evitar que salga en otros modificar o en crear
+        EliminarProfesorActual();
 
         profesorForm.reset();
     //    document.getElementById("profesor").style.display="block";
@@ -111,6 +134,11 @@ function ResetDiv() {
     document.querySelector("#origin").value="";
 }
 function Modificar(cedula, array, nombres, apellidos) {
+
+    //Restaurar el onclick del boton de cerrar para evitar bugs
+    EliminarProfesorActual();
+
+    //Obtener la lista de profesores del datalist
     listaprofesores=document.querySelector('#profesoresList');
 
     //Crear el <option> del datalist del profesor a modificar
@@ -121,8 +149,12 @@ function Modificar(cedula, array, nombres, apellidos) {
     profesoractual.id = 'profesoractual';
     profesoractual.textContent=nombres+' '+apellidos;
 
-    //Insertar el elemento como hijo del datalist 
-    listaprofesores.appendChild(profesoractual)
+    //Insertar el profesor actual como el primer hijo del datalist 
+    listaprofesores.insertBefore(profesoractual, listaprofesores.firstChild)
+
+    //Validar la cedula para que salga el nombre al clickear modificar
+    ValidarNombre(cedula);
+    
 
     for (let index = 0; index < array.length; index++) {
         div[1].appendChild(document.getElementById(array[index].materia));
@@ -133,11 +165,8 @@ function Modificar(cedula, array, nombres, apellidos) {
     document.getElementById("profesor").value=cedula;
     document.getElementById("origin").value=cedula;
 
-    //Obtener el boton de cerrar
-    let boton_cerrar=document.querySelector('.botoncerrar');
-
     //Colocarle la cedula para que Mostrar() elimine el datalist al usar su función de cerrar el formulario.
-    boton_cerrar.setAttribute('onclick','Mostrar('+cedula+')')
+    AsignarBotonCerrar(cedula);
     Mostrar();
 
 
@@ -196,17 +225,27 @@ function Enviar() {
     }
 }
 
-
+//Obtener el nombre usando la cedula y mostrarlo como un label en el formulario de crear/modificar
 function ValidarNombre(cedula){
+    
+    //Obtener 
     let profesores = document.querySelectorAll('#profesoresList option');
 
-    let nombre = 'No se ha encontrado un profesor con esa cedula.'
+    let nombre;
+    //Si no hay nada en el input no mostrar nada
+    if (cedula=='') {
+        nombre = '';
+    }
+
+    else{
+        nombre = 'No hay registrado un profesor disponible con esa cedula.';
+    }
 
     for (let i = 0; i < profesores.length; i++) {
         console.log('Indice ' + i + 'es ' + profesores[i].value +' y dato a comparar ' + cedula)
         if (profesores[i].value == cedula) {
             console.log('Obtenido: '+profesores[i].value)
-            nombre = profesores[i].value;
+            nombre = profesores[i].textContent;
         }
     }
 
