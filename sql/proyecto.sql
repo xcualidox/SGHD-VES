@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 08, 2024 at 01:08 AM
+-- Generation Time: Sep 08, 2024 at 04:16 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -209,13 +209,6 @@ CREATE TABLE `horario_estudiante` (
   `receso` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `horario_estudiante`
---
-
-INSERT INTO `horario_estudiante` (`codigo`, `codigo_a_escolar`, `codigo_a_y_seccion`, `codigo_asignatura`, `codigo_aula`, `codigo_dia`, `grupo`, `profesor`, `intervalo`, `receso`) VALUES
-(1, 18, 18, 'AP', 25, 'B1J', ' ', 5656, 6, '08:20');
-
 -- --------------------------------------------------------
 
 --
@@ -336,20 +329,9 @@ CREATE TABLE `profesores_materias` (
 --
 
 INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
-(1, 19282324, 'AP'),
-(2, 19282324, 'AP'),
-(3, 5656, 'AP'),
-(4, 5656, 'BI'),
-(5, 5656, 'AP'),
-(6, 5656, 'BI'),
-(7, 5656, 'AP'),
-(8, 5656, 'BI'),
-(9, 5656, 'AP'),
-(10, 5656, 'BI'),
-(11, 5656, 'CA'),
-(12, 5656, 'AP'),
-(13, 5656, 'BI'),
-(14, 11716900, 'CT');
+(48, 5656, 'AP'),
+(49, 11716900, 'BI'),
+(50, 11716900, 'CA');
 
 -- --------------------------------------------------------
 
@@ -510,7 +492,7 @@ ALTER TABLE `bitacora`
 -- AUTO_INCREMENT for table `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `intervalo`
@@ -534,7 +516,7 @@ ALTER TABLE `preguntas_seguridad`
 -- AUTO_INCREMENT for table `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
