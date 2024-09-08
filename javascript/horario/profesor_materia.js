@@ -56,12 +56,14 @@ function Del() {
     var span=document.getElementById(indice);
     div[0].appendChild(span);
 }
-function Mostrar(){
+function Mostrar(cedula = undefined){
+
     const btn = document.getElementById('boton1');
     const btn2 = document.getElementById('boton2');
     const form = document.getElementById('form');
     const inputs= form.querySelectorAll('input');
     const profesorForm = document.getElementById("form");
+
 
     inputs[0].value="";
     if (form.style.display === 'none') {
@@ -71,6 +73,22 @@ function Mostrar(){
         btn.style.display = 'block';
     } else {
     // 👇️ this HIDES the form
+
+        //si el formulario a ocultar es de modificar
+        if (cedula != undefined) {
+
+            //obtener el <option> añadido en Modificar y eliminarlo
+            profesoractualmostrar=document.getElementById('profesoractual')
+            profesoractualmostrar.remove();
+
+            //Restaurar el onclick del boton de cerrar porque ya no es requerido eliminar datos del datalist
+            let boton_cerrar=document.querySelector('.botoncerrar');
+            boton_cerrar.setAttribute('onclick','Mostrar()')
+        }
+
+        else{
+            btn.onClick='Mostrar()';
+        }
         form.style.display = 'none';
         btn2.style.display = 'none';
         btn.style.display = 'block';
@@ -93,14 +111,36 @@ function ResetDiv() {
     document.querySelector("#origin").value="";
 }
 function Modificar(cedula, array, nombres, apellidos) {
+    listaprofesores=document.querySelector('#profesoresList');
+
+    //Crear el <option> del datalist del profesor a modificar
+    profesoractual=document.createElement('option');
+
+    //asignarle los valores
+    profesoractual.value = cedula;
+    profesoractual.id = 'profesoractual';
+    profesoractual.textContent=nombres+' '+apellidos;
+
+    //Insertar el elemento como hijo del datalist 
+    listaprofesores.appendChild(profesoractual)
+
     for (let index = 0; index < array.length; index++) {
         div[1].appendChild(document.getElementById(array[index].materia));
     }
+    
     //document.getElementById("profesor").style.display="none";
     //document.getElementById("datos").style.display="block";
     document.getElementById("profesor").value=cedula;
     document.getElementById("origin").value=cedula;
+
+    //Obtener el boton de cerrar
+    let boton_cerrar=document.querySelector('.botoncerrar');
+
+    //Colocarle la cedula para que Mostrar() elimine el datalist al usar su función de cerrar el formulario.
+    boton_cerrar.setAttribute('onclick','Mostrar('+cedula+')')
     Mostrar();
+
+
 };
 
 function Eliminar(cedula) {
@@ -155,6 +195,26 @@ function Enviar() {
         showToast("Existen campos vacios", false);
     }
 }
+
+
+function ValidarNombre(cedula){
+    let profesores = document.querySelectorAll('#profesoresList option');
+
+    let nombre = 'No se ha encontrado un profesor con esa cedula.'
+
+    for (let i = 0; i < profesores.length; i++) {
+        console.log('Indice ' + i + 'es ' + profesores[i].value +' y dato a comparar ' + cedula)
+        if (profesores[i].value == cedula) {
+            console.log('Obtenido: '+profesores[i].value)
+            nombre = profesores[i].value;
+        }
+    }
+
+    document.getElementById('nombre_profesor').textContent=nombre;
+    
+  }
+  
+
 function enviarRequest(cedula, nombres, apellidos) {
     $.ajax({
       url: '../../Control/profesor_materia.php',

@@ -88,7 +88,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <form id="form" style="display: none;" name="pantalla" class='formulario' method="POST" action="../../Control/profesor_materia.php">
         <div class=" flex justify-end ">
                 <div class="  bg-red-500  w-10  rounded-full ">
-                    <img src="../../../images/icons/error.svg" class=" filtro-blanco" alt="Añadir" title="Cerrar" id="boton1" onclick="Mostrar()">
+                    <img src="../../../images/icons/error.svg" class=" filtro-blanco botoncerrar" alt="Añadir" title="Cerrar" id="boton1" onclick="Mostrar()">
                 </div>
             </div>
         
@@ -102,6 +102,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <input type="text" name="profesor" id="profesor" list="profesoresList" class="formulario__input" placeholder="Seleccione el profesor" autocomplete="off">
 
             <datalist id="profesoresList">
+
                 <?php
                 if ($profesores) {
                     foreach ($profesores as $profesor) {
@@ -110,6 +111,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 }
                 ?>
             </datalist>
+            
+            <label id="nombre_profesor"></label>
 
             <br><br>
 
@@ -124,12 +127,12 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 ?>
             </div>
             <!-- <button type='button'  class= " text-white mt-2 bg-sky-500  w-full  rounded  hover:bg-sky-400  " onclick="Add()">Añadir</button> -->
-            <br><br>
+            <!-- <br><br> -->
 
             <label for="fecF">Materias Añadidas: </label><br>
             <div id='agregadas' class='materias_container'></div>
             <!-- <button type='button'  class= " text-white mt-2 bg-red-500  w-full  rounded  hover:bg-red-400  "  onclick="Del()">Quitar</button> -->
-            <br><br>
+            <!-- <br><br> -->
 
             <button type="button" id="btn3" onclick="Enviar()" class="table_button w-full">Guardar</button>
           

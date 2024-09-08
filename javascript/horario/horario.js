@@ -261,14 +261,15 @@ function EliminarHorario(ano, seccion) {
         var datos = JSON.parse(response);
         console.log(datos)
         // Ahora puedes manipular la matriz de datos según tus necesidades
+
+        //Recargar la pagina para mostrar resultados
+        location.reload();
       },
       error: function(xhr, status, error) {
         // Ocurrió un error al realizar la solicitud AJAX
         console.log(error);
       }
-      
     });
-    location.reload();
 }
 function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo,receso_array){
   ClearHorario();
@@ -514,7 +515,6 @@ function CalcularHora(intervalo, x) {
     }
   }
 }
-
 
 
 // document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>" + horaFinal + ":" + minutosFinal + "</span>");
