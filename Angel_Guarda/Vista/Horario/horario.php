@@ -167,12 +167,12 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
     <span style='grid-column:2/4;' class='titulos'></span>
     <span class='titulos'>Seccion:</span>
     <span style='grid-column:5/7;' class='titulos'></span>
-    <div style='height:40px;text-align:center;font-size:22px;background-color:rgb(74, 96, 219);color:white;cursor: inherit;'>Hora</div>
-    <div style='height:40px;text-align:center;font-size:22px;background-color:rgb(74, 96, 219);color:white;cursor: inherit;'>Lunes</div>
-    <div style='height:40px;text-align:center;font-size:22px;background-color:rgb(74, 96, 219);color:white;cursor: inherit;'>Martes</div>
-    <div style='height:40px;text-align:center;font-size:22px;background-color:rgb(74, 96, 219);color:white;cursor: inherit;'>Miercoles</div>
-    <div style='height:40px;text-align:center;font-size:22px;background-color:rgb(74, 96, 219);color:white;cursor: inherit;'>Jueves</div>
-    <span style='height:40px;text-align:center;font-size:22px;background-color:rgb(74, 96, 219);color:white;cursor: inherit;'>Viernes</span>
+    <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;'>Hora</div>
+    <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;'>Lunes</div>
+    <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;'>Martes</div>
+    <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;'>Miercoles</div>
+    <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;'>Jueves</div>
+    <span style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;'>Viernes</span>
 </div>
 
 </div>
