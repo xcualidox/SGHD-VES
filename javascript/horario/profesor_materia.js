@@ -50,11 +50,46 @@ window.addEventListener("click", function(event) {
 
 function Add() {
     var span=document.getElementById(indice);
-    div[1].appendChild(span);
+
+    //Insertarlo en el sitio adecuado
+    let insertado = false;
+    opciones=div[1].childNodes;
+    for (let i = 0; i < opciones.length; i++) {
+
+        if (span.textContent.localeCompare(opciones[i].textContent) < 0) {
+            div[1].insertBefore(span, opciones[i]);
+            insertado = true;
+            break;
+        }
+
+    }
+    
+    if(!insertado){
+        console.log(insertado);
+        div[1].appendChild(span);
+    }
 }
+
 function Del() {
     var span=document.getElementById(indice);
-    div[0].appendChild(span);
+
+    //Insertarlo en el sitio adecuado
+    let insertado = false;
+    opciones=div[0].childNodes;
+    for (let i = 0; i < opciones.length; i++) {
+
+        if (span.textContent.localeCompare(opciones[i].textContent) < 0) {
+            div[0].insertBefore(span, opciones[i]);
+            insertado = true;
+            break;
+        }
+
+    }
+    if(!insertado){
+
+        div[0].appendChild(span);
+
+    }
 }
 
 
@@ -228,7 +263,7 @@ function Enviar() {
 //Obtener el nombre usando la cedula y mostrarlo como un label en el formulario de crear/modificar
 function ValidarNombre(cedula){
     
-    //Obtener 
+    //Obtener lista de profesores
     let profesores = document.querySelectorAll('#profesoresList option');
 
     let nombre;
@@ -238,7 +273,7 @@ function ValidarNombre(cedula){
     }
 
     else{
-        nombre = 'No hay registrado un profesor disponible con esa cedula.';
+        nombre = 'No hay un profesor con esa cedula o no está disponible.';
     }
 
     for (let i = 0; i < profesores.length; i++) {
