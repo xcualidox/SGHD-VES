@@ -5,8 +5,35 @@ var div=document.querySelectorAll(".materias_container")
 var lista=document.querySelectorAll('.lista');
 var indice="";
 var origin_array=[];
+const estado = getQueryParam('estado');
+handleEstado(estado);
 console.log(div);
 console.log("sss")
+
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// Función para limpiar el parámetro de la URL
+function clearQueryParam(param) {
+    const url = new URL(window.location);
+    url.searchParams.delete(param);
+    window.history.replaceState({}, document.title, url.toString());
+}
+
+// Función para manejar el estado y mostrar el mensaje correspondiente
+function handleEstado(estado) {
+    if (estado === 'error') {
+        showToast("Error de Operacion", false);
+        clearQueryParam('estado');
+    } else if (estado === 'exito') {
+        showToast("Cambios realizados correctamente", true);
+        clearQueryParam('estado');
+    }
+}
+
+
 for (let index = 0; index < lista.length; index++) {
     document.getElementById(lista[index].id).addEventListener("click", function () {
         for (let index = 0; index < lista.length; index++) {
@@ -215,6 +242,11 @@ function Eliminar(cedula) {
     document.querySelector('#form').submit();
     });
 }
+
+
+
+
+
 function Enviar() {
     document.getElementById('add').value="";
     span=div[1].querySelectorAll('span');
@@ -223,10 +255,11 @@ function Enviar() {
             document.getElementById('add').value=document.getElementById('add').value+","+span[index].id;
         }
 
-        showToast("Se Añadieron Materias Exitosamente", true);
-        setTimeout(() => {
-            document.getElementById('form').submit()
-        }, 1000);
+        // showToast("Se Añadieron Materias Exitosamente", true);
+        // setTimeout(() => {
+        //  
+        // }, 1000);
+        document.getElementById('form').submit()
      
     }
     else if (document.querySelector("#origin").value!="") {
@@ -243,16 +276,17 @@ function Enviar() {
             }
         }
         if (ValidarCambio || origin_array.length+1!=array.length) {
-            showToast("Se Modificaron Materias Exitosamente", true);
-            setTimeout(() => {
-                document.getElementById('form').submit()
-            }, 1000);
+            // showToast("Se Modificaron Materias Exitosamente", true);
+            // setTimeout(() => {
+            //    
+            // }, 1000);
+            document.getElementById('form').submit()
         }
         else {
           
             showToast("Tienes que hacer algun cambio para poder guarda", false);
         }
-        console.log(array);
+       
     }
     else {
        
