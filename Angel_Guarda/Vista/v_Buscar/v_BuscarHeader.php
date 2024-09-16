@@ -9,7 +9,7 @@
     
         <select name="selectListar" id="selectListar" class="border rounded px-2 py-1 w-auto">
             <option value="">Todos</option>
-            <option value="1">DatoxD</option>
+  
             <option value="0">Prueba</option>
         </select>
         <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">

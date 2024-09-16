@@ -58,10 +58,21 @@
 
 .filtro-blanco{
     filter: var(  --filtroBlanco);
+    transition: 0.5s; 
     cursor: pointer;
 
 }
 .filtro-blanco:hover{
+    transform: scale(1.1);
+   
+}
+.filtro-negro{
+    filter: var(  --filtro--negro);
+    transition: 0.5s; 
+    cursor: pointer;
+
+}
+.filtro-negro:hover{
     transform: scale(1.1);
    
 }
@@ -194,12 +205,14 @@ thead {
 }
 
 .fl-table th, .fl-table td {
+  
     text-align: center;
     padding: 12px 15px;
     background: transparent;
 }
 
 .fl-table thead td {
+    font-weight: bold;
     background-color: var(--color-primary);
     color: var(--color-text);
     text-transform: uppercase;

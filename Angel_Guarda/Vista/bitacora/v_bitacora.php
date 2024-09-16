@@ -40,15 +40,16 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <button type="button" id="resetFilterBtn" style="border:1px solid #ddd" >Limpiar</button>
         </form>
     </header>
+    <div class="table-wrapper min-w-full">
     <table style="margin-top: 2rem; margin-inline:auto;box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" id="bitacoraTable">
   <thead>
     <tr>
-      <th style="padding: 1rem;">Fecha y Hora</th>
-      <th style="padding: 1rem;">Tipo de operación</th>
-      <th style="padding: 1rem;">Cédula del usuario</th>
-      <th style="padding: 1rem;">Nombre y apellido del usuario</th>
-      <th style="padding: 1rem;">Descripción de la operación</th>
-      <th style="padding: 1rem;">Computador</th>
+      <th style="color:white; padding: 1rem; background-color:#058671;">Fecha y Hora</th>
+      <th style="color:white;padding: 1rem;background-color:#058671;">Tipo de operación</th>
+      <th style="color:white;padding: 1rem;background-color:#058671;">Cédula del usuario</th>
+      <th style="color:white; padding: 1rem;background-color:#058671;; ">Nombre y apellido del usuario</th>
+      <th style="color:white;padding: 1rem;background-color:#058671;;">Descripción de la operación</th>
+      <th style="color:white;padding: 1rem; background-color:#058671;;">Computador</th>
     </tr>
   </thead>
   <tbody>

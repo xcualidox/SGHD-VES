@@ -1,3 +1,12 @@
+:root {
+    /* Definir los colores */
+    --color-primary: #058671;  /* Verde oscuro */
+    --color-secondary: #00796b;  /* Verde */
+    --color-tertiary: #7fccc3;  /* Fondo claro */
+    --color-highlight: #b6e0e5;  /* Azul verdoso */
+
+}
+
 .paginationjs {
 	display: flex;
 	line-height: 1.6;
@@ -39,20 +48,23 @@
 }
 
 .paginationjs .paginationjs-pages li>a {
+	gap: 2;
 	min-width: 30px;
 	height: 28px;
 	line-height: 28px;
 	display: block;
-	background: #fff;
+	background: var(--color-tertiary);
 	font-size: 14px;
-	color: #333;
+	color: #faeaea;
+	
 	text-decoration: none;
 	text-align: center;
-	cursor: pointer
+	cursor: pointer;
+	transition: .5s ease;
 }
 
 .paginationjs .paginationjs-pages li>a:hover {
-	background: #eee
+	background: var(--color-secondary);
 }
 
 .paginationjs .paginationjs-pages li.active {
@@ -62,20 +74,18 @@
 .paginationjs .paginationjs-pages li.active>a {
 	height: 30px;
 	line-height: 30px;
-	background: #aaa;
+	background: var(--color-secondary);
 	color: #fff;
 	cursor: default
 }
 
-.paginationjs .paginationjs-pages li.disabled>a {
-	opacity: .3;
-	cursor: default
-}
-
+.paginationjs .paginationjs-pages li.disabled>a,
 .paginationjs .paginationjs-pages li.disabled>a:hover {
-	background: 0 0
+    opacity: .3;
+    cursor: default;
+    pointer-events: none; /* Desactiva cualquier interacción con el hover */
+    background-color: inherit; /* Mantiene el color de fondo original */
 }
-
 .paginationjs .paginationjs-pages li:first-child,
 .paginationjs .paginationjs-pages li:first-child>a {
 	border-radius: 3px 0 0 3px
@@ -138,7 +148,7 @@
 }
 
 .paginationjs .paginationjs-go-button>input[type=button]:hover {
-	background-color: #f8f8f8
+	background-color: #f8f8f8;
 }
 
 .paginationjs .paginationjs-nav {
