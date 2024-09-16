@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Sep 08, 2024 at 04:16 AM
--- Server version: 8.0.30
--- PHP Version: 8.1.10
+-- Servidor: localhost:3306
+-- Tiempo de generación: 16-09-2024 a las 00:31:26
+-- Versión del servidor: 8.0.30
+-- Versión de PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,26 +18,24 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `proyecto`
+-- Base de datos: `proyecto`
 --
-CREATE DATABASE IF NOT EXISTS `proyecto` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci;
-USE `proyecto`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ano_escolar`
+-- Estructura de tabla para la tabla `ano_escolar`
 --
 
 CREATE TABLE `ano_escolar` (
   `codigo` int NOT NULL,
-  `nombre` varchar(25) NOT NULL,
+  `nombre` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ano_escolar`
+-- Volcado de datos para la tabla `ano_escolar`
 --
 
 INSERT INTO `ano_escolar` (`codigo`, `nombre`, `fecha_inicio`, `fecha_fin`) VALUES
@@ -46,17 +44,17 @@ INSERT INTO `ano_escolar` (`codigo`, `nombre`, `fecha_inicio`, `fecha_fin`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ano_seccion`
+-- Estructura de tabla para la tabla `ano_seccion`
 --
 
 CREATE TABLE `ano_seccion` (
   `codigo` int NOT NULL,
-  `ano` varchar(4) NOT NULL,
-  `seccion` varchar(1) NOT NULL
+  `ano` varchar(4) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `seccion` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ano_seccion`
+-- Volcado de datos para la tabla `ano_seccion`
 --
 
 INSERT INTO `ano_seccion` (`codigo`, `ano`, `seccion`) VALUES
@@ -69,7 +67,7 @@ INSERT INTO `ano_seccion` (`codigo`, `ano`, `seccion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asignatura`
+-- Estructura de tabla para la tabla `asignatura`
 --
 
 CREATE TABLE `asignatura` (
@@ -78,11 +76,11 @@ CREATE TABLE `asignatura` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `asignatura`
+-- Volcado de datos para la tabla `asignatura`
 --
 
 INSERT INTO `asignatura` (`codigo`, `nombre`) VALUES
-('AP', 'ARTE Y PATRIMONIO'),
+('ASFAS', 'ARTE Y PATRIMONIO'),
 ('BI', 'BIOLOGIA'),
 ('CA', 'CASTELLANO'),
 ('CT', 'CIENCIAS DE LA TIERRA '),
@@ -100,18 +98,18 @@ INSERT INTO `asignatura` (`codigo`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `aula`
+-- Estructura de tabla para la tabla `aula`
 --
 
 CREATE TABLE `aula` (
   `codigo` int NOT NULL,
-  `nombre` varchar(25) NOT NULL,
-  `descripcion` varchar(100) NOT NULL,
+  `nombre` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `descripcion` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `disponibilidad` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `aula`
+-- Volcado de datos para la tabla `aula`
 --
 
 INSERT INTO `aula` (`codigo`, `nombre`, `descripcion`, `disponibilidad`) VALUES
@@ -121,7 +119,7 @@ INSERT INTO `aula` (`codigo`, `nombre`, `descripcion`, `disponibilidad`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bitacora`
+-- Estructura de tabla para la tabla `bitacora`
 --
 
 CREATE TABLE `bitacora` (
@@ -134,7 +132,7 @@ CREATE TABLE `bitacora` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Dumping data for table `bitacora`
+-- Volcado de datos para la tabla `bitacora`
 --
 
 INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `user_computer`) VALUES
@@ -145,21 +143,24 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 (5, '2024-09-04 13:06:37', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
 (6, '2024-09-05 10:24:46', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
 (7, '2024-09-06 08:15:57', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(8, '2024-09-07 15:54:05', 29629080, 'login', '29629080 ha ingresado al sistema.', 'ZUHE2-PC');
+(8, '2024-09-07 15:54:05', 29629080, 'login', '29629080 ha ingresado al sistema.', 'ZUHE2-PC'),
+(9, '2024-09-15 20:13:38', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
+(10, '2024-09-15 20:13:52', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
+(11, '2024-09-15 20:14:51', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dias_semana`
+-- Estructura de tabla para la tabla `dias_semana`
 --
 
 CREATE TABLE `dias_semana` (
   `codigo` int NOT NULL,
-  `dia` varchar(9) NOT NULL
+  `dia` varchar(9) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `dias_semana`
+-- Volcado de datos para la tabla `dias_semana`
 --
 
 INSERT INTO `dias_semana` (`codigo`, `dia`) VALUES
@@ -174,16 +175,16 @@ INSERT INTO `dias_semana` (`codigo`, `dia`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `disponibilidad`
+-- Estructura de tabla para la tabla `disponibilidad`
 --
 
 CREATE TABLE `disponibilidad` (
   `codigo_id` int NOT NULL,
-  `disponible` varchar(20) NOT NULL
+  `disponible` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `disponibilidad`
+-- Volcado de datos para la tabla `disponibilidad`
 --
 
 INSERT INTO `disponibilidad` (`codigo_id`, `disponible`) VALUES
@@ -193,26 +194,34 @@ INSERT INTO `disponibilidad` (`codigo_id`, `disponible`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `horario_estudiante`
+-- Estructura de tabla para la tabla `horario_estudiante`
 --
 
 CREATE TABLE `horario_estudiante` (
   `codigo` int NOT NULL,
-  `codigo_a_escolar` int NOT NULL,
-  `codigo_a_y_seccion` int NOT NULL,
-  `codigo_asignatura` varchar(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `codigo_aula` int NOT NULL,
+  `codigo_a_escolar` int DEFAULT NULL,
+  `codigo_a_y_seccion` int DEFAULT NULL,
+  `codigo_asignatura` varchar(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `codigo_aula` int DEFAULT NULL,
   `codigo_dia` varchar(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `grupo` varchar(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `profesor` bigint NOT NULL DEFAULT '0',
+  `profesor` bigint DEFAULT NULL,
   `intervalo` int NOT NULL,
   `receso` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `horario_estudiante`
+--
+
+INSERT INTO `horario_estudiante` (`codigo`, `codigo_a_escolar`, `codigo_a_y_seccion`, `codigo_asignatura`, `codigo_aula`, `codigo_dia`, `grupo`, `profesor`, `intervalo`, `receso`) VALUES
+(17, 18, 18, 'BI', 26, 'B1J', '1', 19282324, 6, '08:20'),
+(18, 18, 18, 'ASFAS', 25, 'B1J', '2', NULL, 6, '08:20');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `intervalo`
+-- Estructura de tabla para la tabla `intervalo`
 --
 
 CREATE TABLE `intervalo` (
@@ -222,7 +231,7 @@ CREATE TABLE `intervalo` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Dumping data for table `intervalo`
+-- Volcado de datos para la tabla `intervalo`
 --
 
 INSERT INTO `intervalo` (`id`, `intervalo`, `estado`) VALUES
@@ -233,7 +242,7 @@ INSERT INTO `intervalo` (`id`, `intervalo`, `estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login`
+-- Estructura de tabla para la tabla `login`
 --
 
 CREATE TABLE `login` (
@@ -251,7 +260,7 @@ CREATE TABLE `login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Dumping data for table `login`
+-- Volcado de datos para la tabla `login`
 --
 
 INSERT INTO `login` (`id`, `username`, `password`, `security_q_1`, `security_q_2`, `security_q_3`, `security_a_1`, `security_a_2`, `security_a_3`, `rol`, `status`) VALUES
@@ -266,7 +275,7 @@ INSERT INTO `login` (`id`, `username`, `password`, `security_q_1`, `security_q_2
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personas`
+-- Estructura de tabla para la tabla `personas`
 --
 
 CREATE TABLE `personas` (
@@ -279,7 +288,7 @@ CREATE TABLE `personas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Dumping data for table `personas`
+-- Volcado de datos para la tabla `personas`
 --
 
 INSERT INTO `personas` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono`, `correo`) VALUES
@@ -289,12 +298,12 @@ INSERT INTO `personas` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono
 (19282340, 'FASDFUNCIONO', 'FASDFUNCIONO', 'FASD', '04122696463', 'equisde@gmail.com'),
 (27414575, 'ASDAS', 'ADASDAS', 'DIREKSION', '04246646364', 'lol@lol.com'),
 (27564672, 'NIRETCIA INMACULADA', 'RAMIREZ VALERO', 'Venezuela, Portuguesa, Guanare Urbanizacion la Verguisa entre la calle 13 y 2 , casa numero 10', '04161234567', 'equisde@gmail.com'),
-(29629080, 'ANGEL', 'MENDEZ', 'ENRIQUE SEGOVIANO', '0424', 'tuputamadre@puta.com');
+(29629080, 'ANGEL', 'MENDEZ', 'ENRIQUE SEGOVIANO', '0424', 'irechamo@yolewadesi.unawaina');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `preguntas_seguridad`
+-- Estructura de tabla para la tabla `preguntas_seguridad`
 --
 
 CREATE TABLE `preguntas_seguridad` (
@@ -303,7 +312,7 @@ CREATE TABLE `preguntas_seguridad` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Dumping data for table `preguntas_seguridad`
+-- Volcado de datos para la tabla `preguntas_seguridad`
 --
 
 INSERT INTO `preguntas_seguridad` (`id`, `pregunta`) VALUES
@@ -315,28 +324,30 @@ INSERT INTO `preguntas_seguridad` (`id`, `pregunta`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profesores_materias`
+-- Estructura de tabla para la tabla `profesores_materias`
 --
 
 CREATE TABLE `profesores_materias` (
-  `id` int NOT NULL,
+  `id` bigint NOT NULL,
   `profesor` bigint NOT NULL,
   `materia` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Dumping data for table `profesores_materias`
+-- Volcado de datos para la tabla `profesores_materias`
 --
 
 INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
-(48, 5656, 'AP'),
-(49, 11716900, 'BI'),
-(50, 11716900, 'CA');
+(179, 19282324, 'ASFAS'),
+(180, 19282324, 'BI'),
+(181, 19282324, 'CT'),
+(182, 11716900, 'EF'),
+(183, 11716900, 'FI');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -351,7 +362,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Dumping data for table `usuarios`
+-- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `cedula`, `nombre`, `apellido`, `rol`, `pregunta_seguridad`, `respuesta`, `clave`) VALUES
@@ -359,11 +370,11 @@ INSERT INTO `usuarios` (`id`, `cedula`, `nombre`, `apellido`, `rol`, `pregunta_s
 (2, 27564672, 'JONATHA', 'RAMIREZ', 0, 1, 'niretcia', '152560loco');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `ano_escolar`
+-- Indices de la tabla `ano_escolar`
 --
 ALTER TABLE `ano_escolar`
   ADD PRIMARY KEY (`codigo`),
@@ -372,45 +383,45 @@ ALTER TABLE `ano_escolar`
   ADD UNIQUE KEY `nombre_2` (`nombre`,`fecha_inicio`,`fecha_fin`);
 
 --
--- Indexes for table `ano_seccion`
+-- Indices de la tabla `ano_seccion`
 --
 ALTER TABLE `ano_seccion`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Indexes for table `asignatura`
+-- Indices de la tabla `asignatura`
 --
 ALTER TABLE `asignatura`
   ADD PRIMARY KEY (`codigo`),
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
--- Indexes for table `aula`
+-- Indices de la tabla `aula`
 --
 ALTER TABLE `aula`
   ADD PRIMARY KEY (`codigo`),
   ADD KEY `disponibilidad` (`disponibilidad`);
 
 --
--- Indexes for table `bitacora`
+-- Indices de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `dias_semana`
+-- Indices de la tabla `dias_semana`
 --
 ALTER TABLE `dias_semana`
   ADD KEY `codigo` (`codigo`);
 
 --
--- Indexes for table `disponibilidad`
+-- Indices de la tabla `disponibilidad`
 --
 ALTER TABLE `disponibilidad`
   ADD PRIMARY KEY (`codigo_id`);
 
 --
--- Indexes for table `horario_estudiante`
+-- Indices de la tabla `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
   ADD PRIMARY KEY (`codigo`),
@@ -421,33 +432,33 @@ ALTER TABLE `horario_estudiante`
   ADD KEY `FK_horario_estudiante_ano_seccion` (`codigo_a_y_seccion`);
 
 --
--- Indexes for table `intervalo`
+-- Indices de la tabla `intervalo`
 --
 ALTER TABLE `intervalo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `login`
+-- Indices de la tabla `login`
 --
 ALTER TABLE `login`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indexes for table `personas`
+-- Indices de la tabla `personas`
 --
 ALTER TABLE `personas`
   ADD PRIMARY KEY (`cedula`),
   ADD UNIQUE KEY `cedula` (`cedula`);
 
 --
--- Indexes for table `preguntas_seguridad`
+-- Indices de la tabla `preguntas_seguridad`
 --
 ALTER TABLE `preguntas_seguridad`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `profesores_materias`
+-- Indices de la tabla `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
   ADD PRIMARY KEY (`id`),
@@ -455,100 +466,99 @@ ALTER TABLE `profesores_materias`
   ADD KEY `FK_profesores_materias_asignatura` (`materia`);
 
 --
--- Indexes for table `usuarios`
+-- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `ano_escolar`
+-- AUTO_INCREMENT de la tabla `ano_escolar`
 --
 ALTER TABLE `ano_escolar`
   MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `ano_seccion`
+-- AUTO_INCREMENT de la tabla `ano_seccion`
 --
 ALTER TABLE `ano_seccion`
   MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `aula`
+-- AUTO_INCREMENT de la tabla `aula`
 --
 ALTER TABLE `aula`
   MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `bitacora`
+-- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `horario_estudiante`
+-- AUTO_INCREMENT de la tabla `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `intervalo`
+-- AUTO_INCREMENT de la tabla `intervalo`
 --
 ALTER TABLE `intervalo`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `login`
+-- AUTO_INCREMENT de la tabla `login`
 --
 ALTER TABLE `login`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `preguntas_seguridad`
+-- AUTO_INCREMENT de la tabla `preguntas_seguridad`
 --
 ALTER TABLE `preguntas_seguridad`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `profesores_materias`
+-- AUTO_INCREMENT de la tabla `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
--- AUTO_INCREMENT for table `usuarios`
+-- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `horario_estudiante`
+-- Filtros para la tabla `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
-  ADD CONSTRAINT `FK_horario_estudiante_ano_escolar` FOREIGN KEY (`codigo_a_escolar`) REFERENCES `ano_escolar` (`codigo`),
-  ADD CONSTRAINT `FK_horario_estudiante_ano_seccion` FOREIGN KEY (`codigo_a_y_seccion`) REFERENCES `ano_seccion` (`codigo`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_horario_estudiante_asignatura` FOREIGN KEY (`codigo_asignatura`) REFERENCES `asignatura` (`codigo`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_horario_estudiante_aula` FOREIGN KEY (`codigo_aula`) REFERENCES `aula` (`codigo`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_horario_estudiante_profesores_materias` FOREIGN KEY (`profesor`) REFERENCES `profesores_materias` (`profesor`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_horario_estudiante_ano_escolar` FOREIGN KEY (`codigo_a_escolar`) REFERENCES `ano_escolar` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_horario_estudiante_ano_seccion` FOREIGN KEY (`codigo_a_y_seccion`) REFERENCES `ano_seccion` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_horario_estudiante_asignatura` FOREIGN KEY (`codigo_asignatura`) REFERENCES `asignatura` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_horario_estudiante_aula` FOREIGN KEY (`codigo_aula`) REFERENCES `aula` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_horario_estudiante_profesores_materias` FOREIGN KEY (`profesor`) REFERENCES `profesores_materias` (`profesor`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `login`
+-- Filtros para la tabla `login`
 --
 ALTER TABLE `login`
   ADD CONSTRAINT `login_personas` FOREIGN KEY (`username`) REFERENCES `personas` (`cedula`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `profesores_materias`
+-- Filtros para la tabla `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
-  ADD CONSTRAINT `FK_profesores_materias_asignatura` FOREIGN KEY (`materia`) REFERENCES `asignatura` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_profesores_materias_personas` FOREIGN KEY (`profesor`) REFERENCES `personas` (`cedula`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
