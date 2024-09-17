@@ -70,7 +70,7 @@ function DeshabilitarAulaGrupo() {
   console.log('aulashabilitadas: ')
   console.log(aulasBhabilitadas);
     
-  for (let i = 0; i < aulasA.length; i++) {
+  for (let i = 0; i < aulasAhabilitadas.length; i++) {
     if(aulasAhabilitadas[i].value==aulaB.value && aulasAhabilitadas[i].value!=''){
       aulasAhabilitadas[i].hidden=true;
     }
@@ -79,8 +79,8 @@ function DeshabilitarAulaGrupo() {
     }
   }
 
-  for (let i = 0; i < aulasB.length; i++) {
-    if(aulasBhabilitadas[i].value==aulaA.value && aulasAhabilitadas[i].value!=''){
+  for (let i = 0; i < aulasBhabilitadas.length; i++) {
+    if(aulasBhabilitadas[i].value==aulaA.value && aulasBhabilitadas[i].value!=''){
       aulasBhabilitadas[i].hidden=true;
     }
     else{
@@ -203,7 +203,7 @@ function EditarBloque(bloque) {
       profesor2input.value = '';
     }
     
-    //DeshabilitarAulaGrupo();
+    DeshabilitarAulaGrupo();
 
 }
 function RegistrarBloque() {
@@ -330,6 +330,7 @@ function enviarRequest(ano, bloque, seccion) {
         // Si deseas trabajar con los datos recibidos, puedes hacerlo aquí
         var datosxd = JSON.parse(response);
         console.log('enviarRequest: ');
+        console.log(datosxd);
         var datos = datosxd;
         recorrerSelect(datos);
         datos = '';

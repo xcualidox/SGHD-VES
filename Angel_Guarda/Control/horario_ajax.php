@@ -3,17 +3,13 @@ include_once("../Modelo/horario.php");
 $objeto = new zona();
 if (isset($_POST["bloques"])) {
     $dato=$objeto->VerificarAula($_POST["anos"],$_POST["bloques"]);
-    $mismaAula=$objeto->VerificarHorarioAula($_POST["anos"],$_POST["seccion"]);
+    $mismaAula=$objeto->VerificarHorarioAula($_POST["anos"],$_POST["seccion"],$_POST['bloques']);
 
     $datoAplanado=array_merge(...$dato);
     $mismaAulaAplanada=array_merge(...$mismaAula);
 
     $dato_diff=array_values(array_diff($datoAplanado,$mismaAulaAplanada));
-    
-    //Edit: AL final esto se bugueaba era porque era una array multidimensional metida dentro de arrays multidimensionales, tremendo desastre
-    //Si se tiene un problema similar solo aplanar la array utilizando array_merge(...$array)
 
-    //echo json_encode([$_POST["anos"], $_POST["seccion"], $_POST["bloques"]]);
     echo json_encode($dato_diff);
 }
 else if (isset($_POST["materia"])) {
