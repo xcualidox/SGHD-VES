@@ -48,7 +48,7 @@ class zona extends bdmysql{
       return $this->ejecutar($sql);
     }
     function Registrar_Horario(){
-        $sql= "INSERT INTO  horario_estudiante(codigo_a_escolar, codigo_a_y_seccion, codigo_asignatura, codigo_aula, codigo_dia, grupo, profesor, intervalo,receso) values('$this->ano_escolar','$this->ano_seccion', '$this->asginatura', '$this->aula', '$this->bloque', '$this->grupo', '$this->profesor','$this->id', '$this->receso')";
+        $sql= "INSERT INTO  horario_estudiante(codigo_a_escolar, codigo_a_y_seccion, codigo_asignatura, codigo_aula, codigo_dia, grupo, profesor, intervalo,receso) values('$this->ano_escolar','$this->ano_seccion', $this->asginatura, $this->aula, '$this->bloque', '$this->grupo', $this->profesor,'$this->id', '$this->receso')";
 		return $this->ejecutar($sql);
     }
     function ListaMateriaPrefesor($materia) {
@@ -100,9 +100,9 @@ class zona extends bdmysql{
                      personas.cedula, personas.nombres, personas.apellidos,
                      horario_estudiante.receso 
               FROM horario_estudiante
-              JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
-              JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 
-              JOIN personas ON horario_estudiante.profesor = personas.cedula
+              LEFT JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
+              LEFT JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 
+              LEFT JOIN personas ON horario_estudiante.profesor = personas.cedula
               WHERE horario_estudiante.codigo_a_escolar = '$ano_escolar' 
               AND horario_estudiante.codigo_a_y_seccion = '$seccion'";
       
