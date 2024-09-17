@@ -111,9 +111,9 @@ class zona extends bdmysql{
     function BloquesHorarioPDF($ano_escolar, $seccion, $bloque) {
       $sql="SELECT aula.codigo, aula.nombre, asignatura.codigo,  asignatura.nombre, horario_estudiante.codigo_dia, horario_estudiante.grupo, personas.cedula, personas.nombres, personas.apellidos,  horario_estudiante.receso 
       FROM horario_estudiante
-      JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
-      JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 
-      JOIN personas ON horario_estudiante.profesor= personas.cedula
+      LEFT JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
+      LEFT JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 
+      LEFT JOIN personas ON horario_estudiante.profesor= personas.cedula
       WHERE horario_estudiante.codigo_a_escolar='$ano_escolar' 
       AND horario_estudiante.codigo_a_y_seccion='$seccion'
       AND horario_estudiante.codigo_dia='$bloque'";
