@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 16-09-2024 a las 00:31:26
+-- Tiempo de generación: 17-09-2024 a las 22:43:52
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -83,7 +83,7 @@ CREATE TABLE `asignatura` (
 --
 
 INSERT INTO `asignatura` (`codigo`, `nombre`) VALUES
-('ASFAS', 'ARTE Y PATRIMONIO'),
+('AP', 'ARTE Y PATRIMONIO'),
 ('BI', 'BIOLOGIA'),
 ('CA', 'CASTELLANO'),
 ('CT', 'CIENCIAS DE LA TIERRA '),
@@ -116,8 +116,13 @@ CREATE TABLE `aula` (
 --
 
 INSERT INTO `aula` (`codigo`, `nombre`, `descripcion`, `disponibilidad`) VALUES
-(25, 'Aula 1', 'se encuentra cuando lo buscasxd', 1),
-(26, 'Aula 2', 'sexo tilin\nBiologia', 1);
+(25, 'Aula 1', 'aula 1', 1),
+(26, 'Aula 2', 'aula 2', 1),
+(27, 'Aula 3', 'aula 3', 1),
+(28, 'Aula 4', 'aula 4', 1),
+(29, 'Aula 5', 'aula 5', 1),
+(30, 'Cancha deportiva', 'actividades y recreaciones', 1),
+(31, 'Laboratorio', 'laboratorio', 1);
 
 -- --------------------------------------------------------
 
@@ -149,7 +154,8 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 (8, '2024-09-07 15:54:05', 29629080, 'login', '29629080 ha ingresado al sistema.', 'ZUHE2-PC'),
 (9, '2024-09-15 20:13:38', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
 (10, '2024-09-15 20:13:52', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(11, '2024-09-15 20:14:51', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU');
+(11, '2024-09-15 20:14:51', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
+(12, '2024-09-17 18:27:56', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU');
 
 -- --------------------------------------------------------
 
@@ -218,8 +224,11 @@ CREATE TABLE `horario_estudiante` (
 --
 
 INSERT INTO `horario_estudiante` (`codigo`, `codigo_a_escolar`, `codigo_a_y_seccion`, `codigo_asignatura`, `codigo_aula`, `codigo_dia`, `grupo`, `profesor`, `intervalo`, `receso`) VALUES
-(17, 18, 18, 'BI', 26, 'B1J', '1', 19282324, 6, '08:20'),
-(18, 18, 18, 'ASFAS', 25, 'B1J', '2', NULL, 6, '08:20');
+(19, 18, 18, 'AP', 25, 'B1L', ' ', 19282324, 6, '08:20'),
+(20, 18, 18, 'AP', 25, 'B1M', ' ', 19282324, 6, '08:20'),
+(21, 18, 19, 'AP', 26, 'B1L', ' ', 11716900, 6, '08:20'),
+(22, 18, 19, 'AP', 25, 'B1MM', '1', 11716900, 6, '08:20'),
+(23, 18, 19, 'BI', 26, 'B1MM', '2', 19282324, 6, '08:20');
 
 -- --------------------------------------------------------
 
@@ -231,16 +240,16 @@ CREATE TABLE `intervalo` (
   `id` int NOT NULL,
   `intervalo` varchar(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `estado` int NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `intervalo`
 --
 
 INSERT INTO `intervalo` (`id`, `intervalo`, `estado`) VALUES
-(7, '45', 0),
+(5, '10', 0),
 (6, '40', 1),
-(5, '10', 0);
+(7, '45', 0);
 
 -- --------------------------------------------------------
 
@@ -341,11 +350,16 @@ CREATE TABLE `profesores_materias` (
 --
 
 INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
-(179, 19282324, 'ASFAS'),
+(179, 19282324, 'AP'),
 (180, 19282324, 'BI'),
 (181, 19282324, 'CT'),
-(182, 11716900, 'EF'),
-(183, 11716900, 'FI');
+(184, 11716900, 'AP'),
+(185, 11716900, 'BI'),
+(186, 11716900, 'CA'),
+(187, 11716900, 'CT'),
+(188, 11716900, 'CN'),
+(189, 11716900, 'EF'),
+(190, 11716900, 'FI');
 
 -- --------------------------------------------------------
 
@@ -362,7 +376,7 @@ CREATE TABLE `usuarios` (
   `pregunta_seguridad` int NOT NULL,
   `respuesta` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `clave` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -494,19 +508,19 @@ ALTER TABLE `ano_seccion`
 -- AUTO_INCREMENT de la tabla `aula`
 --
 ALTER TABLE `aula`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `intervalo`
@@ -530,7 +544,7 @@ ALTER TABLE `preguntas_seguridad`
 -- AUTO_INCREMENT de la tabla `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -562,6 +576,7 @@ ALTER TABLE `login`
 -- Filtros para la tabla `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
+  ADD CONSTRAINT `FK_profesores_materias_asignatura` FOREIGN KEY (`materia`) REFERENCES `asignatura` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_profesores_materias_personas` FOREIGN KEY (`profesor`) REFERENCES `personas` (`cedula`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 

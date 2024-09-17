@@ -27,6 +27,10 @@ if (count($bloques) > 1) {
         $profesor = $bloques[$i + 3];
         $id = $intervalo;
 
+        //Si la asignatura es válida entonces encerrarla en comillas para ejecutar correctamente el query
+        if ($asginatura!='null'){
+            $asginatura="'".$asginatura."'";
+        }
   
         
         // Llamada a setDatos con las variables definidas

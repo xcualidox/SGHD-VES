@@ -67,8 +67,6 @@ function DeshabilitarAulaGrupo() {
 
   aulasAhabilitadas=Array.from(aulasA).filter(option => option.style.display === 'block');
   aulasBhabilitadas=Array.from(aulasB).filter(option => option.style.display === 'block');
-  console.log('aulashabilitadas: ')
-  console.log(aulasBhabilitadas);
     
   for (let i = 0; i < aulasAhabilitadas.length; i++) {
     if(aulasAhabilitadas[i].value==aulaB.value && aulasAhabilitadas[i].value!=''){
@@ -107,7 +105,7 @@ function EditarBloque(bloque) {
     //Recorrer los hijos del bloque
     for (let i = 0; i < contenidobloque.length; i++) {
 
-      //Si el objeto es un <b> entonces guardarlo en el diccionario
+      //Si el objeto es un <b> entonces guardarlo en la array
       if (contenidobloque[i].tagName == 'B') {
         let idbloque = contenidobloque[i].id;
         let textobloque = contenidobloque[i].innerText;
@@ -141,11 +139,11 @@ function EditarBloque(bloque) {
     if (datosbloque.length > 0 && datosbloque.length < 4){
 
       console.log('lol: ')
-      console.log(datosbloque[0][0  ])
+      console.log(datosbloque[0][0])
       aulainput.value = datosbloque[0][0];
 
       //Llenar el input de asignatura y buscar profesores
-      //La funcion como ultimo parametro de ArrayMateria es para que llenar el campo de profesor al terminar de ejecutarse la funcion
+      //La funcion como ultimo parametro de ArrayMateria es para llenar el campo de profesor al terminar de ejecutarse la funcion
       materiainput.value = datosbloque[1][0];
       ArrayMateria(materiainput, 'profesor','profesor2',function() {profesorinput.value=datosbloque[2][0]});
 
