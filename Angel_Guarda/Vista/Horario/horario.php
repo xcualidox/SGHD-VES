@@ -185,7 +185,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
     <h3 style='text-align:center; display:none;' class='grupo1'>GRUPO 1</h3>
     <div class='input_container' style='margin-top:5px;'>
         <label for="">Aula</label>
-        <select name="aula" id="aula">
+        <select name="aula" id="aula" onclick=DeshabilitarAulaGrupo();>
             <option value="">Seleccione</option>
             <?php
             while ($mostrar = mysqli_fetch_array($aula)) {
@@ -220,7 +220,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
         <h3 style='text-align:center;'>GRUPO 2</h3>
         <div class='input_container' style='margin-top:5px;'>
             <label for="">Aula</label>
-            <select name="aula2" id="aula2">
+            <select name="aula2" id="aula2" onclick=DeshabilitarAulaGrupo();>
                 <option value="">Seleccione</option>
                 <?php
                 print_r($aula);
