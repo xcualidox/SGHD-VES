@@ -244,8 +244,9 @@ label{
 }
 
 
+
 tr:nth-child(even){
-    background: #ddd;
+    background: #b6e0e5;
 }
 
 H4{
