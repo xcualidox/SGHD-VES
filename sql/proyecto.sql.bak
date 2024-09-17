@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 17, 2024 at 09:28 PM
+-- Generation Time: Sep 08, 2024 at 04:16 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -31,7 +31,7 @@ USE `proyecto`;
 
 CREATE TABLE `ano_escolar` (
   `codigo` int NOT NULL,
-  `nombre` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `nombre` varchar(25) NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -51,8 +51,8 @@ INSERT INTO `ano_escolar` (`codigo`, `nombre`, `fecha_inicio`, `fecha_fin`) VALU
 
 CREATE TABLE `ano_seccion` (
   `codigo` int NOT NULL,
-  `ano` varchar(4) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `seccion` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
+  `ano` varchar(4) NOT NULL,
+  `seccion` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -60,11 +60,11 @@ CREATE TABLE `ano_seccion` (
 --
 
 INSERT INTO `ano_seccion` (`codigo`, `ano`, `seccion`) VALUES
+(18, '1ero', 'U'),
 (19, '2do', 'U'),
 (20, '5to', 'U'),
 (21, '4to', 'U'),
-(22, '3ero', 'U'),
-(23, '1ero', 'U');
+(22, '3ero', 'U');
 
 -- --------------------------------------------------------
 
@@ -82,6 +82,9 @@ CREATE TABLE `asignatura` (
 --
 
 INSERT INTO `asignatura` (`codigo`, `nombre`) VALUES
+('AP', 'ARTE Y PATRIMONIO'),
+('BI', 'BIOLOGIA'),
+('CA', 'CASTELLANO'),
 ('CT', 'CIENCIAS DE LA TIERRA '),
 ('CN', 'CIENCIAS NATURALES'),
 ('EF', 'EDUCACION FISICA'),
@@ -102,8 +105,8 @@ INSERT INTO `asignatura` (`codigo`, `nombre`) VALUES
 
 CREATE TABLE `aula` (
   `codigo` int NOT NULL,
-  `nombre` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `descripcion` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `nombre` varchar(25) NOT NULL,
+  `descripcion` varchar(100) NOT NULL,
   `disponibilidad` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -112,8 +115,8 @@ CREATE TABLE `aula` (
 --
 
 INSERT INTO `aula` (`codigo`, `nombre`, `descripcion`, `disponibilidad`) VALUES
-(26, 'Aula 2', 'sexo tilin\nBiologia', 1),
-(27, 'Aula 3', 'xd', 1);
+(25, 'Aula 1', 'se encuentra cuando lo buscasxd', 1),
+(26, 'Aula 2', 'sexo tilin\nBiologia', 1);
 
 -- --------------------------------------------------------
 
@@ -142,10 +145,7 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 (5, '2024-09-04 13:06:37', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
 (6, '2024-09-05 10:24:46', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
 (7, '2024-09-06 08:15:57', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(8, '2024-09-07 15:54:05', 29629080, 'login', '29629080 ha ingresado al sistema.', 'ZUHE2-PC'),
-(9, '2024-09-17 16:55:27', 29629080, 'login', '29629080 ha ingresado al sistema.', 'ZUHE2-PC'),
-(10, '2024-09-17 16:56:11', 29629080, 'login', '29629080 ha ingresado al sistema.', 'ZUHE2-PC'),
-(11, '2024-09-17 16:56:24', 29629080, 'login', '29629080 ha ingresado al sistema.', 'ZUHE2-PC');
+(8, '2024-09-07 15:54:05', 29629080, 'login', '29629080 ha ingresado al sistema.', 'ZUHE2-PC');
 
 -- --------------------------------------------------------
 
@@ -155,7 +155,7 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 
 CREATE TABLE `dias_semana` (
   `codigo` int NOT NULL,
-  `dia` varchar(9) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
+  `dia` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -179,7 +179,7 @@ INSERT INTO `dias_semana` (`codigo`, `dia`) VALUES
 
 CREATE TABLE `disponibilidad` (
   `codigo_id` int NOT NULL,
-  `disponible` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
+  `disponible` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -198,23 +198,16 @@ INSERT INTO `disponibilidad` (`codigo_id`, `disponible`) VALUES
 
 CREATE TABLE `horario_estudiante` (
   `codigo` int NOT NULL,
-  `codigo_a_escolar` int DEFAULT NULL,
-  `codigo_a_y_seccion` int DEFAULT NULL,
-  `codigo_asignatura` varchar(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `codigo_aula` int DEFAULT NULL,
+  `codigo_a_escolar` int NOT NULL,
+  `codigo_a_y_seccion` int NOT NULL,
+  `codigo_asignatura` varchar(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `codigo_aula` int NOT NULL,
   `codigo_dia` varchar(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `grupo` varchar(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `profesor` bigint DEFAULT NULL,
+  `profesor` bigint NOT NULL DEFAULT '0',
   `intervalo` int NOT NULL,
   `receso` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `horario_estudiante`
---
-
-INSERT INTO `horario_estudiante` (`codigo`, `codigo_a_escolar`, `codigo_a_y_seccion`, `codigo_asignatura`, `codigo_aula`, `codigo_dia`, `grupo`, `profesor`, `intervalo`, `receso`) VALUES
-(95, 18, 19, NULL, NULL, 'B2L', ' ', NULL, 6, '08:20');
 
 -- --------------------------------------------------------
 
@@ -226,16 +219,16 @@ CREATE TABLE `intervalo` (
   `id` int NOT NULL,
   `intervalo` varchar(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `estado` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
 -- Dumping data for table `intervalo`
 --
 
 INSERT INTO `intervalo` (`id`, `intervalo`, `estado`) VALUES
-(5, '10', 0),
+(7, '45', 0),
 (6, '40', 1),
-(7, '45', 0);
+(5, '10', 0);
 
 -- --------------------------------------------------------
 
@@ -296,7 +289,7 @@ INSERT INTO `personas` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono
 (19282340, 'FASDFUNCIONO', 'FASDFUNCIONO', 'FASD', '04122696463', 'equisde@gmail.com'),
 (27414575, 'ASDAS', 'ADASDAS', 'DIREKSION', '04246646364', 'lol@lol.com'),
 (27564672, 'NIRETCIA INMACULADA', 'RAMIREZ VALERO', 'Venezuela, Portuguesa, Guanare Urbanizacion la Verguisa entre la calle 13 y 2 , casa numero 10', '04161234567', 'equisde@gmail.com'),
-(29629080, 'ANGEL', 'MENDEZ', 'ENRIQUE SEGOVIANO', '0424', 'irechamo@yolewadesi.unawaina');
+(29629080, 'ANGEL', 'MENDEZ', 'ENRIQUE SEGOVIANO', '0424', 'tuputamadre@puta.com');
 
 -- --------------------------------------------------------
 
@@ -326,10 +319,19 @@ INSERT INTO `preguntas_seguridad` (`id`, `pregunta`) VALUES
 --
 
 CREATE TABLE `profesores_materias` (
-  `id` bigint NOT NULL,
+  `id` int NOT NULL,
   `profesor` bigint NOT NULL,
   `materia` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Dumping data for table `profesores_materias`
+--
+
+INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
+(48, 5656, 'AP'),
+(49, 11716900, 'BI'),
+(50, 11716900, 'CA');
 
 -- --------------------------------------------------------
 
@@ -346,7 +348,7 @@ CREATE TABLE `usuarios` (
   `pregunta_seguridad` int NOT NULL,
   `respuesta` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `clave` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
 -- Dumping data for table `usuarios`
@@ -472,25 +474,25 @@ ALTER TABLE `ano_escolar`
 -- AUTO_INCREMENT for table `ano_seccion`
 --
 ALTER TABLE `ano_seccion`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `aula`
 --
 ALTER TABLE `aula`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `intervalo`
@@ -514,7 +516,7 @@ ALTER TABLE `preguntas_seguridad`
 -- AUTO_INCREMENT for table `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
@@ -530,11 +532,11 @@ ALTER TABLE `usuarios`
 -- Constraints for table `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
-  ADD CONSTRAINT `FK_horario_estudiante_ano_escolar` FOREIGN KEY (`codigo_a_escolar`) REFERENCES `ano_escolar` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_horario_estudiante_ano_seccion` FOREIGN KEY (`codigo_a_y_seccion`) REFERENCES `ano_seccion` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_horario_estudiante_asignatura` FOREIGN KEY (`codigo_asignatura`) REFERENCES `asignatura` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_horario_estudiante_aula` FOREIGN KEY (`codigo_aula`) REFERENCES `aula` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_horario_estudiante_profesores_materias` FOREIGN KEY (`profesor`) REFERENCES `profesores_materias` (`profesor`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_horario_estudiante_ano_escolar` FOREIGN KEY (`codigo_a_escolar`) REFERENCES `ano_escolar` (`codigo`),
+  ADD CONSTRAINT `FK_horario_estudiante_ano_seccion` FOREIGN KEY (`codigo_a_y_seccion`) REFERENCES `ano_seccion` (`codigo`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_horario_estudiante_asignatura` FOREIGN KEY (`codigo_asignatura`) REFERENCES `asignatura` (`codigo`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_horario_estudiante_aula` FOREIGN KEY (`codigo_aula`) REFERENCES `aula` (`codigo`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_horario_estudiante_profesores_materias` FOREIGN KEY (`profesor`) REFERENCES `profesores_materias` (`profesor`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `login`
