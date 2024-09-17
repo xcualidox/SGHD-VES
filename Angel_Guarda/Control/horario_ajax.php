@@ -3,18 +3,42 @@ include_once("../Modelo/horario.php");
 $objeto = new zona();
 if (isset($_POST["bloques"])) {
     $dato=$objeto->VerificarAula($_POST["anos"],$_POST["bloques"]);
-    echo json_encode($dato);
+    $mismaAula=$objeto->VerificarHorarioAula($_POST["anos"],$_POST["seccion"]);
+
+    $datoAplanado=array_merge(...$dato);
+    $mismaAulaAplanada=array_merge(...$mismaAula);
+
+    $dato_diff=array_values(array_diff($datoAplanado,$mismaAulaAplanada));
+    
+    //Edit: AL final esto se bugueaba era porque era una array multidimensional metida dentro de arrays multidimensionales, tremendo desastre
+    //Si se tiene un problema similar solo aplanar la array utilizando array_merge(...$array)
+
+    //echo json_encode([$_POST["anos"], $_POST["seccion"], $_POST["bloques"]]);
+    echo json_encode($dato_diff);
 }
 else if (isset($_POST["materia"])) {
     $array= array();
     $x=0;
     $dato=$objeto->ListaMateriaPrefesor($_POST["materia"]);
+
+    //Verifica si el bloque a modificar tiene el mismo profesor
+    $mismoProfesor=$objeto->VerificarHorarioProfesor($_POST["ano_array"], $_POST["seccion"],$_POST["materia"],$_POST["block"]);
+
+    //Aplana las array, es decir, las convierte de multi a unidimensional
+    $datoFlat=array_merge(...$dato);
+    $mismoProfesorFlat=array_merge(...$mismoProfesor);
+
     for ($i=0; $i < count($dato); $i++) { 
         $consulta=$objeto->ListaBloqueProfesor($_POST["block"], $dato[$i][0], $_POST["ano_array"]);
         if (count($consulta)==0) {
             $array[$x]=$dato[$i][0];
             $x=$x+1;
         }
+    }
+    //Si la query que verifica si el bloque tiene el mismo profesor da un resultado, entonces lo añade de vuelta a la array para mostrarlo en modificar
+    if ($mismoProfesorFlat){
+        $array[$x+1]=$mismoProfesorFlat[0];
+        $array=array_values($array);
     }
     echo json_encode($array);
 }

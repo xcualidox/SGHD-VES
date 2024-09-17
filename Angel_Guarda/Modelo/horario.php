@@ -69,12 +69,26 @@ class zona extends bdmysql{
     }
     function VerificarAula($ano,$bloque)  {
         $sql= "SELECT `codigo_aula` FROM `horario_estudiante` WHERE `codigo_a_escolar`='$ano' AND `codigo_dia`='$bloque'";
-		return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM); 
+		    return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
+    }
+    function VerificarHorarioAula($ano,$seccion){
+        $sql= "SELECT `codigo_aula` FROM `horario_estudiante` WHERE `codigo_a_escolar`='$ano' AND `codigo_a_y_seccion`='$seccion'" ;
+        return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
     }
     function VerificarAno($ano)  {
       $sql= "SELECT DISTINCT `codigo_a_y_seccion` FROM `horario_estudiante` WHERE `codigo_a_escolar`='$ano'";
     return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM); 
     }
+
+    function VerificarHorarioProfesor($ano,$seccion,$asignatura,$bloque){
+      $sql= "SELECT `profesor` FROM `horario_estudiante` WHERE
+      `codigo_a_escolar`='$ano' AND
+      `codigo_a_y_seccion`='$seccion' AND
+      `codigo_asignatura`='$asignatura' AND
+      `codigo_dia`='$bloque'";
+      return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
+    }
+
     function ClearHorario($ano_escolar, $ano_seccion) {
       $sql="DELETE FROM `horario_estudiante`
       WHERE codigo_a_escolar = '$ano_escolar' AND codigo_a_y_seccion = '$ano_seccion';";
