@@ -14,6 +14,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 <link rel="stylesheet" type="text/css" href="../../../styles/horario.css">
 
+<script type="text/javascript" src="../../../javascript/horario/mostrarModal.js"></script>
+
 <script type="text/javascript" src="../../../javascript/horario/a_escolar.js"></script>
 <script type="text/javascript" src="../../../javascript/horario/horario.js"></script>
 
@@ -260,12 +262,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 </body>
 <script src="../../../javascript/libquery.js"></script>
 <script>
-    let btn = document.querySelector('#btn');
-    let sidebar = document.querySelector('.sidebar');
-    console.log(document.querySelector('.button_crear'));
-    btn.onclick = function() {
-        sidebar.classList.toggle('active')
-    };
+
     CalcularHora(<?php echo $tiempo ?>);
 </script>
 
