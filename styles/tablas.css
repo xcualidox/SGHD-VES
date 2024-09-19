@@ -446,3 +446,23 @@ textarea:focus{
     outline: none;
     box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
 }
+
+/* Modales Dialog */
+/* Estilos para centrar el modal */
+dialog {
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}

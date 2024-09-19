@@ -33,7 +33,10 @@ function CrearHorario(intervalo,x) {
 
 
     else {  
-      alert("Tiene que selecionar año y seccion");
+  
+      showToast("Tiene que selecionar año y seccion",false)
+      submit.preventDefault()
+   
     }
      document.getElementById("receso").value=receso;
 
@@ -232,7 +235,7 @@ function RegistrarBloque() {
       CheckedGrupos(document.querySelector("#dividir"));
     }
     else {
-        alert('No puede dejar los campos vacios')
+        showToast("No puede dejar los campos vacios",false);
     }
     console.log(input.value);
 }
@@ -265,7 +268,11 @@ function GuardarHorario() {
       console.log(document.getElementById('valores_horario').value)
       document.getElementById('id_intervalo').value=id;
       console.log(document.getElementById('id_intervalo').value);
-      document.getElementById('guardar_horario').submit();
+      showToast("Operacion Exitosa",true);
+      setTimeout(() => {
+        document.getElementById('guardar_horario').submit();
+      }, 800);
+  
     }
 }
 function recorrerSelect(array) {
@@ -424,20 +431,19 @@ function RecorrerProfesor(profesor, array, profesor2) {
   
 }
 function EliminarHorario(ano, seccion) {
+  // Mostrar confirmación antes de eliminar
+  showConfirm("¿Está seguro de que desea eliminar este dato?", () => {
+    // Realiza la solicitud AJAX solo si se confirma
     $.ajax({
       url: '../../Control/horario_ajax.php',
       type: 'POST',
-      data: { anos_borrar: ano, seccion_borrar: seccion},
+      data: { anos_borrar: ano, seccion_borrar: seccion },
       success: function(response) {
         // La solicitud se ha realizado con éxito
-        // Aquí puedes manejar la respuesta del servidor, que puede ser un JSON o cualquier otro formato
         console.log(response);
-        // Si deseas trabajar con los datos recibidos, puedes hacerlo aquí
         var datos = JSON.parse(response);
-        console.log(datos)
-        // Ahora puedes manipular la matriz de datos según tus necesidades
-
-        //Recargar la pagina para mostrar resultados
+        console.log(datos);
+        // Recargar la página para mostrar resultados
         location.reload();
       },
       error: function(xhr, status, error) {
@@ -445,7 +451,9 @@ function EliminarHorario(ano, seccion) {
         console.log(error);
       }
     });
+  });
 }
+
 function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo,receso_array){
   ClearHorario();
   document.querySelector(".tabla_horario").style.display='grid';
