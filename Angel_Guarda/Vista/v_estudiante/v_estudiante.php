@@ -103,17 +103,109 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
     <!-- Ventanas de Pagos Modales -->
     <dialog id="modalAñadir" class="relative p-6">
-        <div class="flex justify-end  items-end ">
-            <!-- Botón de Cerrar en la parte superior derecha -->
-            <div class=" w-10  bg-red-500 rounded-full cursor-pointer p-2" id="closeModalAñadir">
-                <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
+
+<div class="flex justify-end items-end">
+    <!-- Botón de Cerrar en la parte superior derecha -->
+    <div class="w-10 bg-red-500 rounded-full cursor-pointer p-2" id="closeModalAñadir">
+        <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
+    </div>
+</div>
+<!-- Contenido del Modal -->
+<h2 class="text-xl font-semibold mb-4">Registro Estudiante</h2>
+
+<form id="" class="space-y-4" method="POST" action="#">
+    <!-- Contenedor principal con flex para dividir izquierda y derecha -->
+    <div class="flex space-x-8">
+        <!-- Columna Izquierda -->
+        <div class="w-1/2">
+            <div class="formulario-extenso__row">
+                <div class="formulario-extenso__column">
+                    <label for="cedulaEstudiante">Cédula Estudiante: </label>
+                    <input type="text" id="cedulaEstudiante" name="cedulaEstudiante" placeholder="Cédula del Estudiante" class="formulario-extenso__input" maxlength="25">
+                </div>
+            </div>
+            <div class="formulario-extenso__row">
+                <div class="formulario-extenso__column">
+                    <label for="nombres">Nombres: </label>
+                    <input type="input" name="nombres" id="nombres" placeholder="Nombres" class="formulario-extenso__input" maxlength="70">
+                </div>
+                <div class="formulario-extenso__column">
+                    <label for="apellidos">Apellidos: </label>
+                    <input type="input" name="apellidos" id="apellidos" class="formulario-extenso__input" placeholder="Apellidos" maxlength="70">
+                </div>
+            </div>
+            <div class="formulario-extenso__row">
+                <div class="formulario-extenso__column">
+                    <label for="anoEscolar">Año Escolar: </label>
+                    <select name="" id="" class="formulario-extenso__input">
+                        <option value="">Año Escolar 1</option>
+                        <option value="">Año Escolar 2</option>
+                    </select>
+                </div>
+                <div class="formulario-extenso__column">
+                    <label for="anoSeccion">Año Sección: </label>
+                    <select name="" id="" class="formulario-extenso__input">
+                        <option value="1">1ero</option>
+                        <option value="2">2do</option>
+                        <option value="3">3ro</option>
+                        <option value="4">4to</option>
+                        <option value="5">5to</option>
+                    </select>
+                </div>
             </div>
         </div>
-        <!-- Contenido del Modal -->
-        <h2 class="text-xl font-semibold mb-4">Añadir</h2>
-        <p>Este es el contenido del modal para añadir.</p>
 
-    </dialog>
+        <!-- Columna Derecha -->
+        <div class="w-1/2">
+            <div class="formulario-extenso__row">
+                <div class="formulario-extenso__column">
+                    <label for="cedulaRepresentante">Cédula Representante: </label>
+                    <input type="text" id="cedulaRepresentante" name="cedulaRepresentante" placeholder="Cédula del Representante" class="formulario-extenso__input" maxlength="25">
+                </div>
+            </div>
+            <div class="formulario-extenso__row">
+                <div class="formulario-extenso__column">
+                    <label for="nombresRepresentante">Nombres: </label>
+                    <input type="input" name="nombresRepresentante" id="nombresRepresentante" placeholder="Nombres del Representante" class="formulario-extenso__input" maxlength="70">
+                </div>
+                <div class="formulario-extenso__column">
+                    <label for="apellidosRepresentante">Apellidos: </label>
+                    <input type="input" name="apellidosRepresentante" id="apellidosRepresentante" class="formulario-extenso__input" placeholder="Apellidos Representante" maxlength="70">
+                </div>
+            </div>
+            <div class="formulario-extenso__row">
+                <div class="formulario-extenso__column">
+                    <label for="telefono">Telefono: </label>
+                    <input type="input" name="telefono" id="telefono" placeholder="Telefono" class="formulario-extenso__input" maxlength="70">
+                </div>
+                <div class="formulario-extenso__column">
+                    <label for="telefonoDomicilio">telefono Domicilio: </label>
+                    <input type="input" name="telefonoDomicilio" id="telefonoDomicilio" class="formulario-extenso__input" placeholder="telefono Domicilio:" maxlength="70">
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    <div class="formulario-extenso__row">
+                <div class="formulario-extenso__column">
+                    <label for="direccion">Dirección: </label>
+                    <input type="text" id="direccion" name="direccion" placeholder="Direccion del Estudiante" class="formulario-extenso__input" maxlength="255">
+                </div>
+                <div class="formulario-extenso__column">
+                <label for="correo">Correo: </label>
+                <input type="text" id="correo" name="correo" placeholder="Correo" class="formulario-extenso__input" maxlength="255">
+            </div>
+            </div>
+
+    <input type="button" id="" value="Guardar" class="table_button w-full">
+</form>
+</dialog>
+
+
+    <!-- Aqui termina el Registro del Estudiante -->
+
+
     <!-- Modal para "Ver Pagos" -->
     <dialog id="modalPagos">
         <div class="flex justify-end  items-end ">
@@ -140,16 +232,16 @@ include_once('../v_Sidebar/v_Sidebar.php');
     </dialog>
     <!-- Modal Pago Especifico -->
 
-<dialog id="modalPagosEspecificos">
-    <div class="flex justify-end items-end ">
-        <!-- Botón de Cerrar en la parte superior derecha -->
-        <div class="w-10 bg-red-500 rounded-full cursor-pointer p-2" id="closePagosEspecificos">
-            <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
+    <dialog id="modalPagosEspecificos">
+        <div class="flex justify-end items-end ">
+            <!-- Botón de Cerrar en la parte superior derecha -->
+            <div class="w-10 bg-red-500 rounded-full cursor-pointer p-2" id="closePagosEspecificos">
+                <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
+            </div>
         </div>
-    </div>
-    <h2 class="text-xl font-semibold mb-4">Pago Específico</h2>
-    <p>Este es el contenido del modal para ver pagos específicos.</p>
-</dialog>
+        <h2 class="text-xl font-semibold mb-4">Pago Específico</h2>
+        <p>Este es el contenido del modal para ver pagos específicos.</p>
+    </dialog>
 
 
 
