@@ -464,6 +464,11 @@ dialog {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: var(--color-background);
+    transition: opacity .3s ease-in-out ;
+    @starting-style{
+        opacity:0
+      
+    }
 }
 
 dialog::backdrop {

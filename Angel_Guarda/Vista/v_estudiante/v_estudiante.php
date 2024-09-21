@@ -64,7 +64,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <td class='no_style'>
                         <div class="flex justify-center ">
 
-                            <a href="profesorPDF.php">
+                            <a href="#">
                                 <img src="../../../images/icons/pdf.svg" class="w-10  filtro-blanco " alt="Reporte" title="Reporte">
                             </a>
 
@@ -74,7 +74,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
             </thead>
             <tbody>
 
-            <tbody>
+           
 
                 <tr>
                     <td class="border px-4 py-2"> Cedula</td>
@@ -94,7 +94,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 </tr>
 
             </tbody>
-            </tbody>
+        
         </table>
         <!-- Mostrando El total de Paginas -->
 
@@ -126,12 +126,12 @@ include_once('../v_Sidebar/v_Sidebar.php');
             </div>
             <div class="formulario-extenso__row">
                 <div class="formulario-extenso__column">
-                    <label for="nombres">Nombres: </label>
-                    <input type="input" name="nombres" id="nombres" placeholder="Nombres" class="formulario-extenso__input" maxlength="70">
+                    <label for="nombres">Estudiante: </label>
+                    <input type="input" name="nombres" id="nombres" placeholder="Nombres Estudiante" class="formulario-extenso__input" maxlength="70">
                 </div>
                 <div class="formulario-extenso__column">
-                    <label for="apellidos">Apellidos: </label>
-                    <input type="input" name="apellidos" id="apellidos" class="formulario-extenso__input" placeholder="Apellidos" maxlength="70">
+                    <label for="apellidos">Estudiante: </label>
+                    <input type="input" name="apellidos" id="apellidos" class="formulario-extenso__input" placeholder="Apellidos Estudiante" maxlength="70">
                 </div>
             </div>
             <div class="formulario-extenso__row">
@@ -165,11 +165,11 @@ include_once('../v_Sidebar/v_Sidebar.php');
             </div>
             <div class="formulario-extenso__row">
                 <div class="formulario-extenso__column">
-                    <label for="nombresRepresentante">Nombres: </label>
+                    <label for="nombresRepresentante"> Representante: </label>
                     <input type="input" name="nombresRepresentante" id="nombresRepresentante" placeholder="Nombres del Representante" class="formulario-extenso__input" maxlength="70">
                 </div>
                 <div class="formulario-extenso__column">
-                    <label for="apellidosRepresentante">Apellidos: </label>
+                    <label for="apellidosRepresentante">Representante: </label>
                     <input type="input" name="apellidosRepresentante" id="apellidosRepresentante" class="formulario-extenso__input" placeholder="Apellidos Representante" maxlength="70">
                 </div>
             </div>
@@ -203,10 +203,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
 </dialog>
 
 
-    <!-- Aqui termina el Registro del Estudiante -->
+    <!-- AQUI TERMINA EL REGISTRO DE ESTUDIANTES -->
 
 
-    <!-- Modal para "Ver Pagos" -->
+    <!-- MODAL VER PAGOS" -->
     <dialog id="modalPagos">
         <div class="flex justify-end  items-end ">
             <!-- Botón de Cerrar en la parte superior derecha -->
@@ -214,11 +214,75 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
             </div>
         </div>
-        <h2 class="text-xl font-semibold mb-4">Ver Pagos</h2>
-        <p>Este es el contenido del modal para ver pagos.</p>
+        
+        <div class="flex flex-col sm:flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
+        <h1 class="text-xl font-semibold mb-2 md:mb-0">Ver Pagos</h1>
+
+        
+        <!-- FORMULARIO BUSQUEDA -->
+        <form method="GET" action="" class="flex items-center space-x-2">
+            <select name="campo" class='capitalize border-solid border-2  border-black' id="selectListar" name="listar" p class="border rounded px-2 py-1 w-auto">
+            </select>
+
+            <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
+
+            <button type="button" class="bg-gray-100 rounded-full">
+                <img src="../../../images/icons/buscar.svg" class=" w-20 filtro-verde" alt="Buscar" title="Buscar">
+            </button>
+        </form>
+
+        <!-- Botón para limpiar los filtros -->
+      
+    </div>
+    <div class="table-wrapper min-w-full">
+        <table class="fl-table">
+            <thead>
+                <tr>
+                    <td>Año Escolar</td>
+                    <td>Nombre y Apellido </td>
+                    <td>Año Sección</td>
+                    <td>Telefono Representante</td>
+                    <td class='no_style'>
+                        <div class="flex justify-center ">
+
+                            <a href="#">
+                                <img src="../../../images/icons/pdf.svg" class="w-10  filtro-blanco " alt="Reporte" title="Reporte">
+                            </a>
+
+                        </div>
+                    </td>
+                    <td>Pago</td>
+                </tr>
+            </thead>
+            <tbody>
+
+         
+
+                <tr>
+                    <td class="border px-4 py-2"> Año Escolar</td>
+                    <td class="border px-4 py-2">Nombre y Apellido </td>
+                    <td class="border px-4 py-2">Año Sección</td>
+                    <td class="border px-4 py-2">Telefono Representante</td>
+
+                    <td class="border px-4 py-2 text-center">
+                        <div class="flex justify-center items-center space-x-4">
+                            <img src="../../../images/icons/pdf.svg" class="w-8 h-8 filtro-rojo cursor-pointer" alt="PDF" title="PDF">
+                            <img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar">
+                          
+                        </div>
+                    </td>
+                    <td class="border px-4 py-2">1/12</td>
+                </tr>
+
+            
+            </tbody>
+        </table>
+        <!--MOSTRANDO EL TOTAL DE PAGINAS-->
+
+    </div>
 
     </dialog>
-    <!-- Mostrar Mas -->
+    <!-- MOSTRAR MAS-->
     <dialog id="modalMostrarMas">
         <div class="flex justify-end  items-end ">
             <!-- Botón de Cerrar en la parte superior derecha -->
@@ -230,7 +294,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <p>fasdfasdfa.</p>
 
     </dialog>
-    <!-- Modal Pago Especifico -->
+    <!-- MODAL PAGO ESPECIFICO -->
 
     <dialog id="modalPagosEspecificos">
         <div class="flex justify-end items-end ">
@@ -239,8 +303,77 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
             </div>
         </div>
-        <h2 class="text-xl font-semibold mb-4">Pago Específico</h2>
-        <p>Este es el contenido del modal para ver pagos específicos.</p>
+    
+        
+        <div class="flex flex-col sm:flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
+        <h1 class="text-xl font-semibold mb-2 md:mb-0">Pago Especifico</h1>
+
+        <div class="bg-gray-100 rounded-full cursor-pointer" id="openAñadirPago">
+            <img src="../../../images/icons/añadir.svg" class="w-10 filtro-verde" alt="openAñadirPago" title="openAñadirPago">
+        </div>
+        <!-- FORMULARIO BUSQUEDA-->
+        <form method="GET" action="" class="flex items-center space-x-2">
+            <select name="campo" class='capitalize border-solid border-2  border-black' id="selectListar" name="listar" p class="border rounded px-2 py-1 w-auto">
+            </select>
+
+            <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
+
+            <button type="button" class="bg-gray-100 rounded-full">
+                <img src="../../../images/icons/buscar.svg" class=" w-20 filtro-verde" alt="Buscar" title="Buscar">
+            </button>
+        </form>
+
+        <!-- Botón para limpiar los filtros -->
+      
+    </div>
+    <div class="table-wrapper min-w-full">
+        <table class="fl-table">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Forma de Pago</td>
+                    <td>Total</td>
+                    <td>fecha</td>
+                    <td>Descuento</td>
+                    <td class='no_style'>
+                        <div class="flex justify-center ">
+
+                            <a href="#">
+                                <img src="../../../images/icons/pdf.svg" class="w-10  filtro-blanco " alt="Reporte" title="Reporte">
+                            </a>
+
+                        </div>
+                    </td>
+            
+                </tr>
+            </thead>
+            <tbody>
+
+        
+
+                <tr>
+                    <td class="border px-4 py-2"> Año Escolar</td>
+                    <td class="border px-4 py-2">Nombre y Apellido </td>
+                    <td class="border px-4 py-2">Año Sección</td>
+                    <td class="border px-4 py-2">Telefono Representante</td>
+
+                    <td class="border px-4 py-2 text-center">
+                        <div class="flex justify-center items-center space-x-4">
+                            <img src="../../../images/icons/pdf.svg" class="w-8 h-8 filtro-rojo cursor-pointer" alt="PDF" title="PDF">
+                            <img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar">
+                          
+                        </div>
+                    </td>
+                    <td class="border px-4 py-2">1/12</td>
+                </tr>
+
+     
+            </tbody>
+        </table>
+        <!-- Mostrando El total de Paginas -->
+
+    </div>
+
     </dialog>
 
 
@@ -252,6 +385,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 </div>
 
 </body>
-<script type="text/javascript" src="../../../javascript//estudiantesPagos.js"></script>
+<!-- Llamado JavaScriptEstudiantes -->
+<script type="text/javascript" src="../../../javascript/estudiantesPagos.js"></script>
 
 </html>
