@@ -238,8 +238,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <table class="fl-table">
             <thead>
                 <tr>
-                    <td>Año Escolar</td>
-                    <td>Nombre y Apellido </td>
+                    <td>Nombre y Apellido</td>
+                    <td>Año Escolar </td>
                     <td>Año Sección</td>
                     <td>Telefono Representante</td>
                     <td class='no_style'>
@@ -259,8 +259,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
          
 
                 <tr>
+                    <td class="border px-4 py-2"> Nombre y Apellido</td>
                     <td class="border px-4 py-2"> Año Escolar</td>
-                    <td class="border px-4 py-2">Nombre y Apellido </td>
                     <td class="border px-4 py-2">Año Sección</td>
                     <td class="border px-4 py-2">Telefono Representante</td>
 
