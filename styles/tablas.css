@@ -396,6 +396,24 @@ thead {
     margin-bottom: 15px;
     transition: border 0.3s ease;
 }
+.formulario-extenso__input:disabled{
+    background: rgb(226, 223, 223);
+   
+}
+
+
+.custom-radio{
+    display: flex;
+    margin:3px;
+    gap:1px;
+ 
+}
+
+  .custom-radio-group input[type="radio"] {
+   
+    accent-color: #1E40AF; /* Cambia el color del radio button */
+ 
+  }
 
 .formulario-extenso__input:focus {
     border-color: var(--color-primary);
@@ -404,6 +422,10 @@ thead {
 }
 
 .formulario-extenso__row {
+  
+
+
+    padding: 2px;
     display: flex;
     flex-wrap:wrap;/* Permite que los elementos se envuelvan en pantallas pequeñas */
     gap: 20px; /* Espacio entre los elementos de la fila */
@@ -502,6 +524,7 @@ summary {
   details{
     border: 2px solid var(--color-secondary); /* Borde más grueso y color azul */
     border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     padding: 1rem; /* Espaciado interno */
     margin: 1rem 1rem 0 0;
     overflow: hidden;
