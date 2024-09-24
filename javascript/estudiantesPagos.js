@@ -107,3 +107,54 @@ function calcular() {
     const test = document.getElementById("DolarBCV").value;
     return test;    
 }
+
+//FORMULARIO DE REGISTRO ESTUDIANTE
+
+function registrarFormularioEstudiante() {
+    const campos = [
+        document.querySelector('#cedulaEstudiante'),
+        document.querySelector('#nombres'),
+        document.querySelector('#apellidos'),
+        document.querySelector('#cedulaRepresentante'),
+        document.querySelector('#nombresRepresentante'),
+        document.querySelector('#apellidosRepresentante'),
+        document.querySelector('#telefono'),
+        document.querySelector('#direccion'),
+        document.querySelector('#correo')
+    ];
+    
+    let formularioValido = true;
+
+    campos.forEach(function(campo) {
+        if (campo.value.trim() === '') {
+            formularioValido = false;
+          
+        } 
+    });
+
+    if (formularioValido) {
+        // Imprimir todos los valores en consola
+        const datosRepresentantes = {
+         
+            cedulaRepresentante: document.querySelector('#cedulaRepresentante').value,
+            nombresRepresentante: document.querySelector('#nombresRepresentante').value,
+            apellidosRepresentante: document.querySelector('#apellidosRepresentante').value,
+            telefono: document.querySelector('#telefono').value,
+            telefonoDomicilio: document.querySelector('#telefonoDomicilio').value,
+            direccion: document.querySelector('#direccion').value,
+            correo: document.querySelector('#correo').value
+        };
+        const datosestudiantes={
+            cedulaEstudiante: document.querySelector('#cedulaEstudiante').value,
+            nombres: document.querySelector('#nombres').value,
+            apellidos: document.querySelector('#apellidos').value,
+            anoSeccion:document.querySelector('#anoSeccion').value,
+            anoEscolar:document.querySelector('#anoEscolar').value
+           
+        }
+        console.log("Datos del formulario:", datosRepresentantes,datosestudiantes);
+        alert("Formulario completado correctamente. Revisa la consola para ver los datos.");
+    } else {
+        alert("Por favor, llena todos los campos.");
+    }
+}

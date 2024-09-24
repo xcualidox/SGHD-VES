@@ -118,7 +118,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <!-- Contenido del Modal -->
         <h2 class="text-xl font-semibold mb-4">Registro Estudiante</h2>
 
-        <form id="" class="space-y-4" method="POST" action="#">
+        <form id="formRegistroEstudiante" class="space-y-4" method="POST" action="#">
             <!-- Contenedor principal con flex para dividir izquierda y derecha -->
             <div class="flex space-x-8">
                 <!-- Columna Izquierda -->
@@ -142,14 +142,14 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <div class="formulario-extenso__row">
                         <div class="formulario-extenso__column">
                             <label for="anoEscolar">Año Escolar: </label>
-                            <select name="" id="" class="formulario-extenso__input">
-                                <option value="">Año Escolar 1</option>
-                                <option value="">Año Escolar 2</option>
+                            <select name="anoEscolar" id="anoEscolar" class="formulario-extenso__input">
+                                <option value="Ano Escolar 1">Año Escolar 1</option>
+                                <option value="Ano Escolar 2">Año Escolar 2</option>
                             </select>
                         </div>
                         <div class="formulario-extenso__column">
                             <label for="anoSeccion">Año Sección: </label>
-                            <select name="" id="" class="formulario-extenso__input">
+                            <select name="anoSeccion" id="anoSeccion" class="formulario-extenso__input">
                                 <option value="1">1ero</option>
                                 <option value="2">2do</option>
                                 <option value="3">3ro</option>
@@ -203,7 +203,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 </div>
             </div>
 
-            <input type="button" id="" value="Guardar" class="table_button w-full">
+            <input type="button" id="guardarBtnEstudiante" value="Guardar" class="table_button w-full" onclick="registrarFormularioEstudiante()">
         </form>
     </dialog>
 
