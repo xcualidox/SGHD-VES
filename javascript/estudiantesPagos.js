@@ -51,4 +51,59 @@ closeModalPagoEspecifico.addEventListener('click', () => {
     modalPagoEspecifico.close(); // Cerrar el modal
 });
 
-//Aqui terminan los Modales
+function cargarDolar() {
+    fetch('/javascript/dolar.json')
+    .then(response => response.json())
+    .then(data => {
+        // Establece el valor del input con el valor del dólar desde el JSON
+        document.querySelector('#DolarBCV').value = data.DolarBCV;
+        // console.log('Valor cargado en DolarBCV:', calcular());
+    })
+    .catch(error => {
+        console.error('Error al cargar el archivo JSON:', error);
+    });
+}
+
+// Función para actualizar el valor del dólar al hacer onblur en el input
+function actualizarDolar() {
+    const input = document.getElementById('DolarBCV').value;
+
+    const convertidor=parseFloat(input);
+    if (convertidor>0) {
+
+            // Enviar el valor al servidor mediante una solicitud POST
+    fetch('/Angel_Guarda/Control/c_dolar.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ DolarBCV: convertidor }), // Convertimos el valor a JSON
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Respuesta del servidor:', data);
+        // Una vez actualizado, vuelve a cargar el valor desde el archivo JSON
+        cargarDolar(); // Llamar cargarDolar para recargar el valor actualizado
+    })
+    .catch(error => {
+        console.error('Error al actualizar el valor:', error);
+    });
+        
+    }
+    else{
+        // console.log("Tiene que ser mayor a 0");
+        cargarDolar();
+        
+    }
+  
+
+
+}
+
+// Llamar a la función cargarDolar cuando se cargue la página
+window.onload = cargarDolar();
+
+function calcular() {
+    const test = document.getElementById("DolarBCV").value;
+    return test;    
+}
