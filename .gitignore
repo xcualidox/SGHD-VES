@@ -2,7 +2,7 @@
 logs
 *.log
 # Ignorar todos los archivos JSON
-*.json
+
 
 
 npm-debug.log*
@@ -25,3 +25,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+*.json
