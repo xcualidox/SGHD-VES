@@ -519,5 +519,6 @@ include_once('../v_Sidebar/v_Sidebar.php');
 </body>
 <!-- Llamado JavaScriptEstudiantes -->
 <script type="text/javascript" src="../../../javascript/estudiantesPagos.js"></script>
+<script src="../../../javascript/libquery.js"></script>
 
 </html>

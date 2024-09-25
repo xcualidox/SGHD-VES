@@ -112,31 +112,29 @@ function calcular() {
 
 function registrarFormularioEstudiante() {
     const campos = [
-        document.querySelector('#cedulaEstudiante'),
-        document.querySelector('#nombres'),
-        document.querySelector('#apellidos'),
-        document.querySelector('#cedulaRepresentante'),
-        document.querySelector('#nombresRepresentante'),
-        document.querySelector('#apellidosRepresentante'),
-        document.querySelector('#telefono'),
-        document.querySelector('#direccion'),
-        document.querySelector('#correo')
+        document.querySelector('#cedulaEstudiante').value,
+        document.querySelector('#nombres').value,
+        document.querySelector('#apellidos').value,
+        document.querySelector('#cedulaRepresentante').value,
+        document.querySelector('#nombresRepresentante').value,
+        document.querySelector('#apellidosRepresentante').value,
+        document.querySelector('#telefono').value,
+        document.querySelector('#direccion').value,
+        document.querySelector('#correo').value
     ];
     
     let formularioValido = true;
 
     campos.forEach(function(campo) {
-        if (campo.value.trim() === '') {
+        if (campo.trim() === '') {
             formularioValido = false;
-          
-        } 
+        }
     });
 
     if (formularioValido) {
-        // Imprimir todos los valores en consola
+        // Obtener los datos de los formularios
         const datosRepresentantes = {
-         
-            cedulaRepresentante: document.querySelector('#cedulaRepresentante').value,
+            cedulaRepresentante: document.querySelector("#cedulaRepresentante").value,
             nombresRepresentante: document.querySelector('#nombresRepresentante').value,
             apellidosRepresentante: document.querySelector('#apellidosRepresentante').value,
             telefono: document.querySelector('#telefono').value,
@@ -144,17 +142,33 @@ function registrarFormularioEstudiante() {
             direccion: document.querySelector('#direccion').value,
             correo: document.querySelector('#correo').value
         };
-        const datosestudiantes={
+
+        const datosEstudiantes = {
             cedulaEstudiante: document.querySelector('#cedulaEstudiante').value,
             nombres: document.querySelector('#nombres').value,
             apellidos: document.querySelector('#apellidos').value,
-            anoSeccion:document.querySelector('#anoSeccion').value,
-            anoEscolar:document.querySelector('#anoEscolar').value
-           
-        }
-        console.log("Datos del formulario:", datosRepresentantes,datosestudiantes);
-        alert("Formulario completado correctamente. Revisa la consola para ver los datos.");
+            anoSeccion: document.querySelector('#anoSeccion').value,
+            anoEscolar: document.querySelector('#anoEscolar').value
+        };
+
+        // Realizar la solicitud AJAX
+        $.ajax({
+            url: '/Angel_Guarda/Control/c_estudiante.php',
+            type: 'POST',
+            data: {
+                datosRepresentantes: datosRepresentantes,
+                datosEstudiantes: datosEstudiantes
+            },
+            success: function(response) {
+                console.log('Respuesta del servidor:', response);
+                showToast("Formulario enviado correctamente", true);
+            },
+            error: function(error) {
+                console.error('Error al enviar los datos:', error);
+                showToast("Hubo un error al enviar los datos", false);
+            }
+        });
     } else {
-        alert("Por favor, llena todos los campos.");
+        showToast('Por favor, llena todos los campos.', false);
     }
 }
