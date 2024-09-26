@@ -25,7 +25,7 @@ include_once('../v_Sidebar/v_Sidebar.php')
                 <td class='no_style'>
                 <div class="flex justify-center ">
                         
-                        <a href="aulaPDF.php">
+                        <a href="aulaPDF.php" target="_blank">
                             <img src="../../../images/icons/pdf.svg" class="w-10  filtro-blanco "  alt="Reporte" title="Reporte" id="boton1" >
                         </a>
                   

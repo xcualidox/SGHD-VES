@@ -32,7 +32,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <td class=''>   
                         <div class="flex justify-center ">
                         
-                            <a href="asignaturaPDF.php">
+                            <a href="asignaturaPDF.php" target="_blank">
                                 <img src="../../../images/icons/pdf.svg" class="w-10  filtro-blanco "  alt="Reporte" title="Reporte" id="boton1" >
                             </a>
                       

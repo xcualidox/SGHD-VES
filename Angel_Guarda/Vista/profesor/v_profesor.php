@@ -69,7 +69,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <td class='no_style'>
                         <div class="flex justify-center ">
 
-                            <a href="profesorPDF.php">
+                            <a href="profesorPDF.php" target="_blank">
                                 <img src="../../../images/icons/pdf.svg" class="w-10  filtro-blanco " alt="Reporte" title="Reporte" id="boton1">
                             </a>
 
@@ -163,6 +163,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <option value="coordinador">Coordinador</option>
                     <option value="administrador">Administrador</option>
                     <option value="profesor" selected>Profesor</option>
+                   <?php   if ($_SESSION["sesion"] == "admin" ) {
+                    echo ' <option value="admin" >Master</option>';
+                   } ?>
+                   
                 </select>
             </div>
         </div>
