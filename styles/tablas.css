@@ -47,6 +47,7 @@
 
 /* Inicio Filtro SVG*/
 
+
 .filtro-verde  {
     filter: var(  --filtroPrimario);
     cursor: pointer;
@@ -395,6 +396,24 @@ thead {
     margin-bottom: 15px;
     transition: border 0.3s ease;
 }
+.formulario-extenso__input:disabled{
+    background: rgb(226, 223, 223);
+   
+}
+
+
+.custom-radio{
+    display: flex;
+    margin:3px;
+    gap:1px;
+ 
+}
+
+  .custom-radio-group input[type="radio"] {
+   
+    accent-color: #1E40AF; /* Cambia el color del radio button */
+ 
+  }
 
 .formulario-extenso__input:focus {
     border-color: var(--color-primary);
@@ -403,6 +422,10 @@ thead {
 }
 
 .formulario-extenso__row {
+  
+
+
+    padding: 2px;
     display: flex;
     flex-wrap:wrap;/* Permite que los elementos se envuelvan en pantallas pequeñas */
     gap: 20px; /* Espacio entre los elementos de la fila */
@@ -473,4 +496,78 @@ dialog {
 
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+  }
+
+
+
+  summary::after {
+    content: '';
+    width: 18px;
+    height: 10px;
+    background: url('../images/icons/arrow.svg') no-repeat;
+    background-size: cover;
+    transition: 0.2s;
+  }
+
+  details{
+    border: 2px solid var(--color-secondary); /* Borde más grueso y color azul */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 1rem; /* Espaciado interno */
+    margin: 1rem 1rem 0 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    max-height: 20%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: var(--color-text); /* Color de fondo */
+
+  }
+
+  details .content__details{
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    background-color: var(--color-background);
+  }
+
+  details[open] {
+
+    max-height: 100%; /* Se expande completamente cuando está abierto */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Más sombra al abrir */
+  }
+  details[open] .content__details{
+    opacity: 1;
+    padding: 1rem;
+  }
+ 
+  
+  details[open] > summary::after {
+    transform: rotate(180deg);
+
+
+  }
+  
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  summary {
+    color: #30353b;
+    border-radius: 5px;
+  }
+  
+  details[open] summary {
+    border-radius: 5px 5px 0 0;
+    
 }
