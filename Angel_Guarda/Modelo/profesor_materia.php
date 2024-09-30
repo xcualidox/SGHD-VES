@@ -27,6 +27,16 @@ class zona extends database_connect{
       return $this->fetch_all_query($this->query($sql,$cedula));
     }
 
+    function VerificarMateriaPensum($cedula){
+      $sql="SELECT `materia` FROM `profesores_materias` where `profesor`=?";
+      return $this->fetch_all_query($this->query($sql,$cedula));
+    }
+
+    function EliminarMaterias($profesor,$a_conservar){
+      $sql= "DELETE FROM `profesores_materias` WHERE profesor = ? and materia NOT IN ( ".$a_conservar." );";
+      return $this->query($sql,$profesor);
+    }
+
     function Eliminar($profesor){
         $sql= "DELETE FROM `profesores_materias`
         WHERE profesor = ?";
