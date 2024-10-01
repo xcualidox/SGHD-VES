@@ -92,7 +92,7 @@ function Add() {
     }
     
     if(!insertado){
-        console.log(insertado);
+        //console.log(insertado);
         div[1].appendChild(span);
     }
 }
@@ -237,9 +237,11 @@ function Modificar(cedula, array, nombres, apellidos) {
 function Eliminar(cedula) {
 
     showConfirm('¿Está seguro de que desea eliminar este datos?',() =>{
-    document.getElementById('origin').value=cedula;
-   
-    document.querySelector('#form').submit();
+
+        document.getElementById('origin').value=cedula;
+    
+        document.querySelector('#form').submit();
+        
     });
 }
 
