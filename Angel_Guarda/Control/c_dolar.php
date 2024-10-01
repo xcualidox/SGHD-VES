@@ -1,43 +1,39 @@
 <?php
-// Verificar si los datos fueron enviados correctamente
+require_once('../Modelo/m_dolar.php');
+
+// Instancia del modelo
+$dolarModel = new Dolar();
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    // Obtener el precio del dólar
+    $precio = $dolarModel->obtenerPrecio();
+
+    // Verificar si se obtuvo un resultado
+    if ($precio !== null) {
+        echo json_encode(['DolarBCV' => $precio]);
+    } else {
+        echo json_encode(['error' => 'No se pudo obtener el precio del dólar']);
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obtener los datos del cuerpo de la solicitud (JSON)
-    $data = json_decode(file_get_contents('php://input'), true);
+    // Obtener los datos del cuerpo de la solicitud
+    $data = json_decode(file_get_contents("php://input"), true);
 
-    // Verificar si se envió el valor de "DolarBCV"
-    if (isset($data['DolarBCV'])) {
-        // Convertir el valor a número flotante (float) para asegurarse de que se guarde como número
-        $nuevoValor = floatval($data['DolarBCV']);
+    if (isset($data['DolarBCV']) && is_numeric($data['DolarBCV'])) {
+        // Establecer los nuevos datos del precio
+        $dolarModel->setDatos(1, $data['DolarBCV']);  // Asumiendo que el ID del dólar es 1
+        
+        // Modificar el precio del dólar
+        $resultado = $dolarModel->modificar();
 
-        // Ruta del archivo JSON que deseas actualizar
-        $archivo = '../../javascript/dolar.json';
-
-        // Leer el contenido actual del archivo JSON
-        $jsonActual = file_get_contents($archivo);
-
-        // Decodificar el contenido JSON
-        $datos = json_decode($jsonActual, true);
-
-        // Actualizar el valor del dólar en los datos
-        $datos['DolarBCV'] = $nuevoValor;
-
-        // Codificar los datos actualizados a formato JSON
-        $jsonActualizado = json_encode($datos, JSON_PRETTY_PRINT);
-
-        // Escribir los datos actualizados en el archivo JSON
-        if (file_put_contents($archivo, $jsonActualizado)) {
-            // Respuesta de éxito
-            echo json_encode(['mensaje' => 'Dólar actualizado correctamente']);
+        if ($resultado) {
+            echo json_encode(['success' => 'El precio del dólar se ha actualizado']);
         } else {
-            // Error al escribir en el archivo
-            echo json_encode(['mensaje' => 'Error al actualizar el archivo JSON']);
+            echo json_encode(['error' => 'Error al actualizar el precio del dólar']);
         }
     } else {
-        // Si no se envió el valor de DolarBCV
-        echo json_encode(['mensaje' => 'Valor de DolarBCV no proporcionado']);
+        echo json_encode(['error' => 'Datos inválidos']);
     }
-} else {
-    // Si la solicitud no es POST
-    echo json_encode(['mensaje' => 'Método no permitido']);
 }
 ?>

@@ -15,7 +15,7 @@
 
 <body>
 
-    <div class="sidebar ">
+    <div class="sidebar  ">
         <div class="top">
             <div class="logo"></div>
 
@@ -30,7 +30,7 @@
         </div>
         <ul>
             <!-- Representante -->
-          <!-- <li>
+          <li>
             <a href="../v_estudiante/v_estudiante.php" class="flex items-center" title="Representante">
                  <i class="flex  justify-center  items-center ">
                     <img src="../../../images/icons/usuariocliente.svg" class="w-8  filtro-blanco">
@@ -38,7 +38,7 @@
                 <span class="nav-item">Representante</span>
             </a>
             <span class="tooltip">Representante</span>
-        </li>  -->
+        </li> 
             <?php
             if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador" || $_SESSION["sesion"] == 'coordinador') {
 

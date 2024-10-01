@@ -52,53 +52,54 @@ closeModalPagoEspecifico.addEventListener('click', () => {
 });
 
 function cargarDolar() {
-    fetch('/javascript/dolar.json')
-    .then(response => response.json())
-    .then(data => {
-        // Establece el valor del input con el valor del dólar desde el JSON
-        document.querySelector('#DolarBCV').value = data.DolarBCV;
-        // console.log('Valor cargado en DolarBCV:', calcular());
-    })
-    .catch(error => {
-        console.error('Error al cargar el archivo JSON:', error);
+    $.ajax({
+        url: '../../Control/c_dolar.php', // Ruta al controlador PHP
+        method: 'GET',                   // Método GET para consultar
+        dataType: 'json',                // Esperamos una respuesta en formato JSON
+        success: function(data) {
+            // Establece el valor del input con el valor del dólar desde la respuesta del controlador
+            if (data.DolarBCV) {
+                $('#DolarBCV').val(data.DolarBCV);
+            } else {
+                console.error('Error en los datos recibidos:', data);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error al cargar los datos del dólar:', textStatus, errorThrown);
+        }
     });
 }
 
 // Función para actualizar el valor del dólar al hacer onblur en el input
 function actualizarDolar() {
     const input = document.getElementById('DolarBCV').value;
+    const convertidor = parseFloat(input);
 
-    const convertidor=parseFloat(input);
-    if (convertidor>0) {
-
-            // Enviar el valor al servidor mediante una solicitud POST
-    fetch('/Angel_Guarda/Control/c_dolar.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ DolarBCV: convertidor }), // Convertimos el valor a JSON
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Respuesta del servidor:', data);
-        // Una vez actualizado, vuelve a cargar el valor desde el archivo JSON
-        cargarDolar(); // Llamar cargarDolar para recargar el valor actualizado
-    })
-    .catch(error => {
-        console.error('Error al actualizar el valor:', error);
-    });
-        
-    }
-    else{
-        // console.log("Tiene que ser mayor a 0");
+    if (convertidor > 0) {
+        $.ajax({
+            url: '../../Control/c_dolar.php', // Ruta al controlador PHP
+            method: 'POST',
+            dataType: 'json', // Tipo de datos esperado
+            contentType: 'application/json', // Tipo de contenido que se envía
+            data: JSON.stringify({ DolarBCV: convertidor }), // Datos enviados al servidor en formato JSON
+            success: function(data) {
+                if (data.success) {
+                    console.log('Respuesta del servidor:', data);
+                    cargarDolar(); // Recargar el valor actualizado
+                } else {
+                    console.error('Error en la actualización:', data.error);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error al actualizar el valor:', textStatus, errorThrown);
+            }
+        });
+    } else {
+        console.error("El valor debe ser mayor a 0");
         cargarDolar();
-        
     }
-  
-
-
 }
+
 
 // Llamar a la función cargarDolar cuando se cargue la página
 window.onload = cargarDolar();
