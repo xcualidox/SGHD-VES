@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../../Control/c_estudiantes.php");
+
 include_once("../../../libraries/vendor/autoload.php");
 
 

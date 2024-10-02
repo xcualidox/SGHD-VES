@@ -3,11 +3,15 @@
 require_once(__DIR__ . "/../Modelo/m_estudiantes.php");
 
 
-
+//Llamo el Modelo Estudiante
 $estudiante = new estudiante();
 
 // Obtener los años escolares
 $anosEscolares = $estudiante->obtenerAnoEscolar();
+$anoSeccion= $estudiante->obtenerAnoSeccion();
+
+
+
 if (isset($_POST['datosRepresentantes']) && isset($_POST['datosEstudiantes'])) {
     // Obtener los datos enviados
     $datosRepresentantes = $_POST['datosRepresentantes'];
