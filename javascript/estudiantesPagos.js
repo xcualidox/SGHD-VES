@@ -154,7 +154,7 @@ function registrarFormularioEstudiante() {
 
         // Realizar la solicitud AJAX
         $.ajax({
-            url: '/Angel_Guarda/Control/c_estudiante.php',
+            url: '../../Control/c_estudiantes.php',
             type: 'POST',
             data: {
                 datosRepresentantes: datosRepresentantes,

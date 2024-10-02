@@ -1,4 +1,13 @@
 <?php
+
+require_once(__DIR__ . "/../Modelo/m_estudiantes.php");
+
+
+
+$estudiante = new estudiante();
+
+// Obtener los años escolares
+$anosEscolares = $estudiante->obtenerAnoEscolar();
 if (isset($_POST['datosRepresentantes']) && isset($_POST['datosEstudiantes'])) {
     // Obtener los datos enviados
     $datosRepresentantes = $_POST['datosRepresentantes'];
@@ -14,10 +23,6 @@ if (isset($_POST['datosRepresentantes']) && isset($_POST['datosEstudiantes'])) {
         'status' => 'success',
         'message' => 'Datos recibidos correctamente'
     ]);
-} else {
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'No se recibieron datos'
-    ]);
 }
+
 ?>
