@@ -80,7 +80,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <tbody>
 
             <tbody>
-                <?php foreach ($tablaDatos as $fila) { ?>
+
+                <?php 
+                $datos = $estudiante->obtenerRepresentanteRepresentado();
+                foreach ($tablaDatos as $fila) { ?>
                     <tr>
                         <td class="border px-4 py-2"><?php echo $fila['cedula']; ?></td>
                         <td class="border px-4 py-2"><?php echo $fila['nombres']; ?></td>
@@ -120,7 +123,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <div class="formulario-extenso__row">
             <div class="formulario-extenso__column">
                 <label for="cedula">Cedula: </label>
-                <input type="text" id="cedula" name="cedula" placeholder="Cedula del Profesor" class="formulario-extenso__input" maxlength="25">
+                <input type="text" id="cedula" name="cedula" autocomplete="off" placeholder="Cedula del Profesor" class="formulario-extenso__input" maxlength="25">
             </div>
 
         </div>
@@ -129,11 +132,11 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
             <div class="formulario-extenso__column">
                 <label for="nombres">Nombres: </label>
-                <input type="input" name="nombres" id="nombres" placeholder="Nombres" class="formulario-extenso__input" maxlength="30">
+                <input type="input" name="nombres" id="nombres" autocomplete="off" placeholder="Nombres" class="formulario-extenso__input" maxlength="30">
             </div>
             <div class="formulario-extenso__column">
                 <label for="apellidos">Apellidos: </label>
-                <input type="input" name="apellidos" id="apellidos" class="formulario-extenso__input" placeholder="Apellidos" maxlength="30">
+                <input type="input" name="apellidos" id="apellidos" autocomplete="off" class="formulario-extenso__input" placeholder="Apellidos" maxlength="30">
             </div>
         </div>
 
@@ -141,18 +144,18 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
             <div class="formulario-extenso__column">
                 <label for="direccion">Dirección: </label>
-                <input type="input" name="direccion" id="direccion" placeholder="Direccion" class="formulario-extenso__input" maxlength="150">
+                <input type="input" name="direccion" id="direccion"  placeholder="Direccion" class="formulario-extenso__input" maxlength="150">
             </div>
         </div>
 
         <div class="formulario-extenso__row">
             <div class="formulario-extenso__column">
                 <label for="telefono">Telefono: </label>
-                <input type="input" name="telefono" id="telefono" placeholder="Telefono" class="formulario-extenso__input" maxlength="14">
+                <input type="input" name="telefono" id="telefono" autocomplete="off" placeholder="Telefono" class="formulario-extenso__input" maxlength="14">
             </div>
             <div class="formulario-extenso__column">
                 <label for="correo">Correo: </label>
-                <input type="input" name="correo" id="correo" placeholder="Correo" class="formulario-extenso__input" maxlength="255">
+                <input type="input" name="correo" id="correo" autocomplete="off" placeholder="Correo" class="formulario-extenso__input" maxlength="255">
             </div>
         </div>
         <div class="formulario-extenso__row">

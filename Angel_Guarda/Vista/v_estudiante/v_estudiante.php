@@ -3,6 +3,8 @@ session_start();
 
 include_once("../../../libraries/vendor/autoload.php");
 
+include_once("../../Control/c_estudiantes.php");
+
 
 
 if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador") {
@@ -63,7 +65,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <thead>
                 <tr>
                     <td>Cedula Estudiante</td>
-                    <td>Nombre,Apellidos </td>
+                    <td>Nombre y Apellidos Estudiante </td>
                     <td>Nombre del Representante</td>
                     <td>Cedula Representante</td>
                     <td>Telefono</td>
@@ -84,13 +86,28 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
                 <tr>
-                    <td class="border px-4 py-2"> Cedula</td>
-                    <td class="border px-4 py-2">Nombre,Apellidos </td>
-                    <td class="border px-4 py-2">Nombre del Representante</td>
-                    <td class="border px-4 py-2">Cedula Representante</td>
-                    <td class="border px-4 py-2">Telefono Representante</td>
+             <?php
+       
+               if (!empty($datos)) {
+                foreach ($datos as $dato) {
+                    // Imprimir cada fila de la tabla
+                    echo "<tr>";
+                    echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['cedula_estudiante']) . "</td>";
+                    echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_estudiante']) . ", " . htmlspecialchars($dato['apellidos_estudiante']) . "</td>";
+                    echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_representante']) . " " . htmlspecialchars($dato['apellidos_representante']) . "</td>";
+                    echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['cedula_representante']) . "</td>";
+                    echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['telefono']) . "</td>";
+              
+                }
+            };
+            
+             
+             ?>
 
-                    <td class="border px-4 py-2 text-center">
+               
+                </tr>
+
+                <td class="border px-4 py-2 text-center">
                         <div class="flex justify-center items-center space-x-4">
                             <img src="../../../images/icons/papelera.svg" class="w-8 h-8 filtro-rojo cursor-pointer" alt="Borrar" title="Borrar">
                             <img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar">
@@ -98,7 +115,6 @@ include_once('../v_Sidebar/v_Sidebar.php');
                             <img src="../../../images/icons/credit-card.svg" class="w-8 h-8 filtro-negro  cursor-pointer" id="openPagoEspecifico" alt="Pago Especifico" title="Pago Especifico">
                         </div>
                     </td>
-                </tr>
 
             </tbody>
 
