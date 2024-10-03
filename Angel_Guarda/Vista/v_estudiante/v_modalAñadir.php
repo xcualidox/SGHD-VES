@@ -21,7 +21,7 @@ include_once("../../Control/c_estudiantes.php");
                     <div class="formulario-extenso__row">
                         <div class="formulario-extenso__column">
                             <label for="cedulaEstudiante">Cédula Estudiante: </label>
-                            <input type="text" id="cedulaEstudiante" name="cedulaEstudiante" placeholder="Cédula del Estudiante" class="formulario-extenso__input" maxlength="25">
+                            <input type="text" id="cedulaEstudiante" name="cedulaEstudiante" placeholder="Cédula del Estudiante" class="formulario-extenso__input" maxlength="12">
                         </div>
                     </div>
                     <div class="formulario-extenso__row">
@@ -49,11 +49,10 @@ include_once("../../Control/c_estudiantes.php");
                         <div class="formulario-extenso__column">
                             <label for="anoSeccion">Año Sección: </label>
                             <select name="anoSeccion" id="anoSeccion" class="formulario-extenso__input">
-                                <option value="1">1ero</option>
-                                <option value="2">2do</option>
-                                <option value="3">3ro</option>
-                                <option value="4">4to</option>
-                                <option value="5">5to</option>
+                            <option value=""  disabled selected> ---Selecciona---</option>
+                            <?php foreach ($anoSeccion as $seccion): ?>
+                                <option value="<?php echo htmlspecialchars($seccion); ?>"><?php echo htmlspecialchars($seccion); ?></option>
+                            <?php endforeach; ?>
                             </select>
                         </div>
                     
@@ -65,7 +64,7 @@ include_once("../../Control/c_estudiantes.php");
                     <div class="formulario-extenso__row">
                         <div class="formulario-extenso__column">
                             <label for="cedulaRepresentante">Cédula Representante: </label>
-                            <input type="text" id="cedulaRepresentante" name="cedulaRepresentante" placeholder="Cédula del Representante" class="formulario-extenso__input" maxlength="25">
+                            <input type="text" id="cedulaRepresentante" name="cedulaRepresentante" placeholder="Cédula del Representante" class="formulario-extenso__input" maxlength="10">
                         </div>
                     </div>
                     <div class="formulario-extenso__row">
@@ -81,11 +80,11 @@ include_once("../../Control/c_estudiantes.php");
                     <div class="formulario-extenso__row">
                         <div class="formulario-extenso__column">
                             <label for="telefono">Telefono: </label>
-                            <input type="input" name="telefono" id="telefono" placeholder="Telefono" class="formulario-extenso__input" maxlength="70">
+                            <input type="input" name="telefono" id="telefono" placeholder="Telefono" class="formulario-extenso__input" maxlength="17">
                         </div>
                         <div class="formulario-extenso__column">
                             <label for="telefonoDomicilio">telefono Domicilio: </label>
-                            <input type="input" name="telefonoDomicilio" id="telefonoDomicilio" class="formulario-extenso__input" placeholder="telefono Domicilio:" maxlength="70">
+                            <input type="input" name="telefonoDomicilio" id="telefonoDomicilio" class="formulario-extenso__input" placeholder="telefono 2:" maxlength="17">
                         </div>
                     </div>
                 </div>
