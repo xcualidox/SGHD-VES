@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 02-10-2024 a las 20:40:55
+-- Tiempo de generación: 03-10-2024 a las 15:02:19
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -152,7 +152,8 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 (12, '2024-09-26 21:46:37', 29629080, 'login', '29629080 ha ingresado al sistema.', 'ZUHE2-PC'),
 (13, '2024-09-28 23:16:27', 29629080, 'login', '29629080 ha ingresado al sistema.', 'ZUHE2-PC'),
 (14, '2024-10-01 14:01:21', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(15, '2024-10-02 10:47:07', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU');
+(15, '2024-10-02 10:47:07', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
+(16, '2024-10-03 09:37:50', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU');
 
 -- --------------------------------------------------------
 
@@ -247,7 +248,10 @@ CREATE TABLE `estudiante` (
 
 INSERT INTO `estudiante` (`cedula_estudiante`, `nombres`, `apellidos`, `ano`, `seccion`) VALUES
 (123456, 'lol', 'lolol', '2025-2026', 'XD'),
+(2584756, 'Angel', 'Mendez', '2025-2026', '1ero U'),
 (5555656, 'angel', 'mendez', '2025-2026', 'XD'),
+(19282324, 'Angel', 'Mendez', '2025-2026', '1ero U'),
+(27414575, 'Martin', 'Rojas', '2025-2026', '2do U'),
 (29629080, 'Orlando', 'mendez', '2025-2026', 'XD');
 
 -- --------------------------------------------------------
@@ -483,7 +487,11 @@ CREATE TABLE `representante` (
 
 INSERT INTO `representante` (`cedula_representante`, `nombres`, `apellidos`, `correo`, `direccion`, `telefono`, `telefono_2`) VALUES
 (85858, 'Juan', 'Pérez', 'juan@example.com', 'Calle Falsa 123', '5551234', '5555678'),
-(123456789, 'Juan', 'Pérez', 'juan@example.com', 'Calle Falsa 123', '5551234', '5555678');
+(7595365, 'Pedro', 'Picapiedra', 'ADSFASDF', 'FASDFASD', '04122696463', ''),
+(29629080, 'Orlando', 'Nicolas', 'fasd@gmail.com', 'La Corteza', '04122696463', ''),
+(123456789, 'Juan', 'Pérez', 'juan@example.com', 'Calle Falsa 123', '5551234', '5555678'),
+(1928232411, 'as', 'dfasdf', 'asdf', 'asdf', 'asd', 'fasdf'),
+(5555555555, 'Orlando', 'Nicolas', 'fasd@gmail.com', 'La Corteza', '04122696463', '');
 
 -- --------------------------------------------------------
 
@@ -502,7 +510,11 @@ CREATE TABLE `representante-representado` (
 
 INSERT INTO `representante-representado` (`cedula_estudiante`, `cedula_representante`) VALUES
 (5555656, 123456789),
-(5555656, 123456789);
+(19282324, 29629080),
+(19282324, 5555555555),
+(2584756, 29629080),
+(19282324, 1928232411),
+(27414575, 7595365);
 
 --
 -- Índices para tablas volcadas
@@ -675,7 +687,7 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `horario_estudiante`
