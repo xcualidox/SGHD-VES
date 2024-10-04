@@ -9,11 +9,13 @@
                         <div class=" w-full">
                             <div class="formulario-extenso__row">
                                 <div class="formulario-extenso__column">
-                                    <label for="anoEscolar">Año Escolar: </label>
-                                    <select name="" id="" class="formulario-extenso__input">
-                                        <option value="">Año Escolar 1</option>
-                                        <option value="">Año Escolar 2</option>
-                                    </select>
+                                <label for="AnoEscolarPago">Año Escolar: </label>
+                            <select name="AnoEscolarPago" id="AnoEscolarPago" class="formulario-extenso__input">
+                                <option value=""  disabled selected> ---Selecciona---</option>
+                            <?php foreach ($anosEscolares as $ano): ?>
+                                <option value="<?php echo htmlspecialchars($ano); ?>"><?php echo htmlspecialchars($ano); ?></option>
+                            <?php endforeach; ?>
+                            </select>
                                 </div>
                                 <div class="formulario-extenso__column">
                                     <label for="mesPagar">Meses a Pagar: </label>
@@ -30,15 +32,7 @@
                                             <input type="radio" id="total" value="0" name="descuento">
                                             <label for="total">Total</label>
                                         </div>
-                                        <div class="custom-radio">
-                                            <input type="radio" id="descuento-10" value="10%" name="descuento">
-                                            <label for="descuento-10">10%</label>
-                                        </div>
-
-                                        <div class="custom-radio">
-                                            <input type="radio" id="descuento-20" value="20%" name="descuento">
-                                            <label for="descuento-20">20%</label>
-                                        </div>
+                                   
 
                                         <div class="custom-radio">
                                             <input type="radio" id="descuento-50" value="50%" name="descuento">
@@ -102,10 +96,7 @@
 
                         <!-- Columna Derecha -->
 
-
-
                     </div>
-
 
                     <input type="button" id="" value="Guardar" class="table_button w-full">
                 </form>
