@@ -244,3 +244,17 @@ modalMostrarMas.addEventListener('click', () => {
     modalMostrarMas.close(); // Cierra el modal
 }
 );
+
+
+
+//FUNCION PARA AÑADIR . VISUALMENTE
+
+document.addEventListener("DOMContentLoaded", function() {
+    const numeros = document.querySelectorAll(".numeroCedula");
+
+    numeros.forEach(function(elemento) {
+        const numero = elemento.textContent;
+        const numeroFormateado = numero.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        elemento.textContent = numeroFormateado;
+    });
+});

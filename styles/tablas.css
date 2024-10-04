@@ -571,3 +571,13 @@ summary {
     border-radius: 5px 5px 0 0;
     
 }
+
+
+.numeroCedula {
+    font-size: 14px;
+    font-weight: bold;
+}
+.numeroCelular {
+    font-size: 14px;
+    font-weight: bold;
+}
