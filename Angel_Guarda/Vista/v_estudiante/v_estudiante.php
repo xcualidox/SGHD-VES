@@ -86,35 +86,51 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
                 <tr>
-             <?php
-       
-               if (!empty($datos)) {
-                foreach ($datos as $dato) {
-                    // Imprimir cada fila de la tabla
-                    echo "<tr>";
-                    echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['cedula_estudiante']) . "</td>";
-                    echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_estudiante']) . ", " . htmlspecialchars($dato['apellidos_estudiante']) . "</td>";
-                    echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_representante']) . " " . htmlspecialchars($dato['apellidos_representante']) . "</td>";
-                    echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['cedula_representante']) . "</td>";
-                    echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['telefono']) . "</td>";
-              
-                }
-            };
-            
-             
-             ?>
+                    <?php
 
-               
+                    if (!empty($datos)) {
+                        foreach ($datos as $dato) {
+                            // Imprimir cada fila de la tabla
+                            echo "<tr>";
+                            echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['cedula_estudiante']) . "</td>";
+                            echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_estudiante']) . ", " . htmlspecialchars($dato['apellidos_estudiante']) . "</td>";
+                            echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_representante']) . " " . htmlspecialchars($dato['apellidos_representante']) . "</td>";
+                            echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['cedula_representante']) . "</td>";
+                            echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['telefono']) . "</td>";
+                            echo '
+                            <td class="border px-4 py-2 text-center">
+                                <div class="flex justify-center items-center space-x-4">
+                                    <img src="../../../images/icons/papelera.svg" class="w-8 h-8 filtro-rojo cursor-pointer" alt="Borrar" title="Borrar">
+                                    <img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar">
+                                  <img src="../../../images/icons/moreGrid.svg" 
+             class="w-8 h-8 filtro-negro cursor-pointer" 
+             alt="Mostrar Más" title="Mostrar Más"
+             data-datos="' . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . '"
+             onclick="openModalMostrarMasDatos(event)">
+                                    <img src="../../../images/icons/credit-card.svg" 
+                                    class="w-8 h-8 filtro-negro cursor-pointer" 
+                                    onclick="openPagoEspecificoModal(
+                                        \'' . htmlspecialchars($dato['cedula_estudiante']) . '\',
+                                        \'' . htmlspecialchars($dato['nombres_estudiante']) . '\',
+                                        \'' . htmlspecialchars($dato['apellidos_estudiante']) . '\',
+                                        \'' . htmlspecialchars($dato['cedula_representante']) . '\',
+                                        \'' . htmlspecialchars($dato['nombres_representante']) . '\',
+                                        \'' . htmlspecialchars($dato['apellidos_representante']) . '\'
+                                    )" 
+                                    alt="Pago Especifico" title="Pago Especifico">
+                                </div>
+                            </td>';
+                            echo "</tr>";
+                        }
+                    };
+
+
+                    ?>
+
+
                 </tr>
 
-                <td class="border px-4 py-2 text-center">
-                        <div class="flex justify-center items-center space-x-4">
-                            <img src="../../../images/icons/papelera.svg" class="w-8 h-8 filtro-rojo cursor-pointer" alt="Borrar" title="Borrar">
-                            <img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar">
-                            <img src="../../../images/icons/moreGrid.svg" class="w-8 h-8 filtro-negro  cursor-pointer" id="openMostrarMas" alt="Mostrar Más" title="Mostrar Más">
-                            <img src="../../../images/icons/credit-card.svg" class="w-8 h-8 filtro-negro  cursor-pointer" id="openPagoEspecifico" alt="Pago Especifico" title="Pago Especifico">
-                        </div>
-                    </td>
+       
 
             </tbody>
 
@@ -148,16 +164,15 @@ include_once('../v_Sidebar/v_Sidebar.php');
     </dialog>
     <!-- MOSTRAR MAS-->
     <dialog id="modalMostrarMas">
-        <div class="flex justify-end  items-end ">
-            <!-- Botón de Cerrar en la parte superior derecha -->
-            <div class=" w-10  bg-red-500 rounded-full cursor-pointer p-2" id="closeMostrarMas">
-                <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
-            </div>
+    <div class="flex justify-end items-end">
+        <div class="w-10 bg-red-500 rounded-full cursor-pointer p-2" id="closeMostrarMas" >
+            <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
         </div>
-        <h2 class="text-xl font-semibold mb-4">Mostrar Más</h2>
-        <p>fasdfasdfa.</p>
-
-    </dialog>
+    </div>
+    <h2 class="text-xl font-semibold mb-4">Mostrar Más</h2>
+    <!-- Imprimiendo Datos Para Mostrar -->
+    <p id="DatosCompletosMostrarMas"></p>
+</dialog>
     <!-- MODAL PAGO ESPECIFICO -->
 
     <dialog id="modalPagosEspecificos">
@@ -166,9 +181,33 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <!-- Título y descripción -->
             <div class="flex flex-col">
                 <h1 class="text-xl font-semibold">Pago de Estudiante</h1>
-                <h2 class=" font-semibold">"Nombre Nombre y Apellido Apellido"</h2>
-                <h3 class=" font-semibold">Cedula Estudiante: 565656</h3>
-                <h3 class=" font-semibold">Cedula Del Representante: 565656</h3>
+                <div class="flex  flex-wrap mb-1">
+                    <span class="font-bold mr-2">Nombre Estudiante:</span>
+                    <!-- NOMBRE ESTUDIANTE REGISTRO PAGO -->
+                    <p id="nombresEstudianteRegistroPago" class="font-semibold"></p>
+
+                </div>
+                <div class="flex  flex-wrap mb-1">
+                       <!-- CEDULA ESTUDIANTE REGISTRO PAGO -->
+                    <span class="font-bold mr-2">Cédula Estudiante:</span>
+                    <span id="cedulaEstudianteRegistroPago" class="font-normal"></span>
+                </div>
+                <div class="flex  flex-wrap mb-1">
+                 <!-- CEDULA REPRESENTANTE REGISTRO PAGO -->
+                    <span class="font-bold mr-1">Cédula Representante:</span>
+                    <span id="cedulaRepresentanteRegistroPago" class="font-normal"></span>
+
+                </div>
+                <div class="flex  flex-wrap mb-1">
+                <!-- NOMBRE REPRESENTANTE REGISTRO PAGO -->
+                    <span class="font-bold mr-1">Nombre Representante:</span>
+                    <span id="nombresRepresentanteRegistroPago" class="font-normal"></span>
+
+                </div>
+
+
+           
+
 
             </div>
 
