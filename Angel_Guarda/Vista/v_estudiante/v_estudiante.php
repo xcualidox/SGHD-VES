@@ -64,11 +64,11 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <table class="fl-table">
             <thead>
                 <tr>
-                    <td>Cedula Estudiante</td>
+                    <td>Cédula Estudiante</td>
                     <td>Nombre y Apellidos Estudiante </td>
                     <td>Nombre del Representante</td>
-                    <td>Cedula Representante</td>
-                    <td>Telefono</td>
+                    <td>Cédula Representante</td>
+                    <td>Télefono</td>
 
                     <td class='no_style'>
                         <div class="flex justify-center ">
@@ -88,15 +88,15 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <tr>
                     <?php
 
-                    if (!empty($datos)) {
-                        foreach ($datos as $dato) {
+                    if (!empty($datosRepresentanteRepresentado)) {
+                        foreach ($datosRepresentanteRepresentadoRevertidos as $dato) {
                             // Imprimir cada fila de la tabla
                             echo "<tr>";
-                            echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['cedula_estudiante']) . "</td>";
-                            echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_estudiante']) . ", " . htmlspecialchars($dato['apellidos_estudiante']) . "</td>";
+                            echo "<td class='numeroCedula border px-4 py-2'>" . htmlspecialchars($dato['cedula_estudiante']) . "</td>";
+                            echo "<td class=' border px-4 py-2'>" . htmlspecialchars($dato['nombres_estudiante']) . " " . htmlspecialchars($dato['apellidos_estudiante']) . "</td>";
                             echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_representante']) . " " . htmlspecialchars($dato['apellidos_representante']) . "</td>";
-                            echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['cedula_representante']) . "</td>";
-                            echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['telefono']) . "</td>";
+                            echo "<td class='numeroCedula border px-4 py-2'>" . htmlspecialchars($dato['cedula_representante']) . "</td>";
+                            echo "<td class='numeroCelular border px-4 py-2'>" . htmlspecialchars($dato['telefono']) . "</td>";
                             echo '
                             <td class="border px-4 py-2 text-center">
                                 <div class="flex justify-center items-center space-x-4">
@@ -190,18 +190,19 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <div class="flex  flex-wrap mb-1">
                        <!-- CEDULA ESTUDIANTE REGISTRO PAGO -->
                     <span class="font-bold mr-2">Cédula Estudiante:</span>
-                    <span id="cedulaEstudianteRegistroPago" class="font-normal"></span>
+                    <span id="cedulaEstudianteRegistroPago" class="font-semibold"   ></span>
+                  
                 </div>
                 <div class="flex  flex-wrap mb-1">
                  <!-- CEDULA REPRESENTANTE REGISTRO PAGO -->
                     <span class="font-bold mr-1">Cédula Representante:</span>
-                    <span id="cedulaRepresentanteRegistroPago" class="font-normal"></span>
+                    <span id="cedulaRepresentanteRegistroPago" class="font-semibold"></span>
 
                 </div>
                 <div class="flex  flex-wrap mb-1">
                 <!-- NOMBRE REPRESENTANTE REGISTRO PAGO -->
                     <span class="font-bold mr-1">Nombre Representante:</span>
-                    <span id="nombresRepresentanteRegistroPago" class="font-normal"></span>
+                    <span id="nombresRepresentanteRegistroPago" class="font-semibold"></span>
 
                 </div>
 

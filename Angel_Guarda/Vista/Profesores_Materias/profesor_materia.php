@@ -51,7 +51,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                
                 ?>
                         <tr>
-                            <td class="border px-4 py-2"><?php echo $row["cedula"]; ?></td>
+                            <td class="numeroCedula border px-4 py-2"><?php echo $row["cedula"]; ?></td>
                             <td class="border px-4 py-2"><?php echo $row["nombres"] . " " . $row["apellidos"]; ?></td>
                           
                     

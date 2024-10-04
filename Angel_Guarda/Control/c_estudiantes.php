@@ -50,5 +50,7 @@ if (isset($_POST['datosRepresentantes']) && isset($_POST['datosEstudiantes'])) {
     
 }
 //LISTADOD de ESTUDIANTES Y REPRESENTANTES
-$datos = $estudiante->obtenerRepresentanteRepresentado();
+$datosRepresentanteRepresentado = $estudiante->obtenerRepresentanteRepresentado();
+
+$datosRepresentanteRepresentadoRevertidos=array_reverse($datosRepresentanteRepresentado); 
 

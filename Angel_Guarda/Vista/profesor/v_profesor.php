@@ -4,8 +4,7 @@ include_once("../../../libraries/vendor/autoload.php");
 include_once("../../Control/c_profesor.php");
 
 if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador") {
-}
- else {
+} else {
     header("Location: ../../../index.php");
 }
 
@@ -20,39 +19,39 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
 <div class="main-content">
-<div class="flex flex-col sm:flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
-    <h1 class="text-xl font-semibold mb-2 md:mb-0"><?php echo $title; ?></h1>
+    <div class="flex flex-col sm:flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
+        <h1 class="text-xl font-semibold mb-2 md:mb-0"><?php echo $title; ?></h1>
 
-    <!-- Botón para añadir -->
-    <div class="bg-gray-100 rounded-full">
-        <img src="../../../images/icons/añadir.svg" class="w-10 filtro-verde" alt="Añadir" title="Añadir" id="boton1" onclick="Mostrar()">
-    </div>
+        <!-- Botón para añadir -->
+        <div class="bg-gray-100 rounded-full">
+            <img src="../../../images/icons/añadir.svg" class="w-10 filtro-verde" alt="Añadir" title="Añadir" id="boton1" onclick="Mostrar()">
+        </div>
 
-    <!-- Formulario de búsqueda -->
-    <form method="GET" action="" class="flex items-center space-x-2">
-        <select name="campo" class='capitalize border-solid border-2  border-black' id="selectListar" class="border rounded px-2 py-1 w-auto">
-            <?php
+        <!-- Formulario de búsqueda -->
+        <form method="GET" action="" class="flex items-center space-x-2">
+            <select name="campo" class='capitalize border-solid border-2  border-black' id="selectListar" class="border rounded px-2 py-1 w-auto">
+                <?php
                 foreach ($soloNombresColumnas as $nombreColumna) {
                     echo "<option class='capitalize' value='{$nombreColumna}'" . ($campo == $nombreColumna ? " selected" : "") . ">{$nombreColumna}</option>";
                 }
-            ?>
-        </select>
+                ?>
+            </select>
 
-        <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0" value="<?php echo htmlspecialchars($buscar ?? ''); ?>">
+            <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0" value="<?php echo htmlspecialchars($buscar ?? ''); ?>">
 
-        <button type="submit" class="bg-gray-100 rounded-full">
-            <img src="../../../images/icons/buscar.svg" class=" w-20 filtro-verde" alt="Buscar" title="Buscar">
-        </button>
-    </form>
+            <button type="submit" class="bg-gray-100 rounded-full">
+                <img src="../../../images/icons/buscar.svg" class=" w-20 filtro-verde" alt="Buscar" title="Buscar">
+            </button>
+        </form>
 
-    <!-- Botón para limpiar los filtros -->
-    <form method="GET" action="" class="ml-4">
+        <!-- Botón para limpiar los filtros -->
+        <form method="GET" action="" class="ml-4">
 
-    <button type="submit" class="bg-gray-100 rounded-full">
-            <img src="../../../images/icons/reload.svg" class="   w-6 filtro-verde" alt="Buscar" title="Buscar">
-        </button>
-    </form>
-</div>
+            <button type="submit" class="bg-gray-100 rounded-full">
+                <img src="../../../images/icons/reload.svg" class="   w-6 filtro-verde" alt="Buscar" title="Buscar">
+            </button>
+        </form>
+    </div>
 
 
 
@@ -81,15 +80,14 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
             <tbody>
 
-                <?php 
-                $datos = $estudiante->obtenerRepresentanteRepresentado();
+                <?php
                 foreach ($tablaDatos as $fila) { ?>
                     <tr>
-                        <td class="border px-4 py-2"><?php echo $fila['cedula']; ?></td>
+                        <td class="numeroCedula border px-4 py-2"><?php echo $fila['cedula']; ?></td>
                         <td class="border px-4 py-2"><?php echo $fila['nombres']; ?></td>
                         <td class="border px-4 py-2"><?php echo $fila['apellidos']; ?></td>
                         <td class="border px-4 py-2"><?php echo $fila['direccion']; ?></td>
-                        <td class="border px-4 py-2"><?php echo $fila['telefono']; ?></td>
+                        <td class="numeroCelular border px-4 py-2"><?php echo $fila['telefono']; ?></td>
                         <td class="border px-4 py-2"><?php echo $fila['correo']; ?></td>
                         <td class="border px-4 py-2 text-center">
                             <div class="flex justify-center items-center space-x-4">
@@ -144,15 +142,16 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
             <div class="formulario-extenso__column">
                 <label for="direccion">Dirección: </label>
-                <input type="input" name="direccion" id="direccion"  placeholder="Direccion" class="formulario-extenso__input" maxlength="150">
+                <input type="input" name="direccion" id="direccion" placeholder="Direccion" class="formulario-extenso__input" maxlength="150">
             </div>
         </div>
 
         <div class="formulario-extenso__row">
-            <div class="formulario-extenso__column">
-                <label for="telefono">Telefono: </label>
-                <input type="input" name="telefono" id="telefono" autocomplete="off" placeholder="Telefono" class="formulario-extenso__input" maxlength="14">
-            </div>
+        <div class="formulario-extenso__column">
+    <label for="telefono">Teléfono: </label>
+    <input type="text" name="telefono" id="telefono" autocomplete="off" placeholder="Teléfono" class="numeroCelular formulario-extenso__input" maxlength="17">
+</div>
+
             <div class="formulario-extenso__column">
                 <label for="correo">Correo: </label>
                 <input type="input" name="correo" id="correo" autocomplete="off" placeholder="Correo" class="formulario-extenso__input" maxlength="255">
@@ -166,10 +165,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <option value="coordinador">Coordinador</option>
                     <option value="administrador">Administrador</option>
                     <option value="profesor" selected>Profesor</option>
-                   <?php   if ($_SESSION["sesion"] == "admin" ) {
-                    echo ' <option value="admin" >Master</option>';
-                   } ?>
-                   
+                    <?php if ($_SESSION["sesion"] == "admin") {
+                        echo ' <option value="admin" >Master</option>';
+                    } ?>
+
                 </select>
             </div>
         </div>
@@ -184,5 +183,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 </div>
 
 </body>
+
+<script></script>
 
 </html>

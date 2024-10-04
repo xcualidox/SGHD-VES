@@ -102,6 +102,8 @@ class estudiante extends database_connect
 
     public function obtenerRepresentanteRepresentado() {
         // Consulta SQL
+
+   
         $query = "SELECT 
                 e.cedula_estudiante AS cedula_estudiante,
                 e.nombres AS nombres_estudiante,
@@ -117,7 +119,7 @@ class estudiante extends database_connect
             FROM `representante-representado` rr 
             JOIN estudiante e ON rr.cedula_estudiante = e.cedula_estudiante 
             JOIN representante r ON rr.cedula_representante = r.cedula_representante
-            ORDER BY e.cedula_estudiante DESC";
+            ";
         
         // Ejecutar la consulta
         $result = $this->query($query, []);
