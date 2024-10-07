@@ -83,7 +83,7 @@
                             <input type="input" name="telefono" id="telefono" placeholder="Telefono" class="formulario-extenso__input" maxlength="17">
                         </div>
                         <div class="formulario-extenso__column">
-                            <label for="telefonoDomicilio">telefono Domicilio: </label>
+                            <label for="telefonoDomicilio">telefono 2: </label>
                             <input type="input" name="telefonoDomicilio" id="telefonoDomicilio" class="formulario-extenso__input" placeholder="telefono 2:" maxlength="17">
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="formulario-extenso__column">
                     <label for="correo">Correo: </label>
-                    <input type="text" id="correo" name="correo" placeholder="Correo" class="formulario-extenso__input" maxlength="255">
+                    <input type="text" id="correo" name="correo" placeholder="Correo" class="formulario-extenso__input" maxlength="50">
                 </div>
             </div>
 
