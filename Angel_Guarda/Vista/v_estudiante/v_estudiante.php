@@ -42,13 +42,17 @@ include_once('../v_Sidebar/v_Sidebar.php');
         </div>
         <!-- Formulario de búsqueda -->
         <form method="GET" action="" class="flex items-center space-x-2">
-            <select name="campo" class='capitalize border-solid border-2  border-black' id="selectListar" name="listar" p class="border rounded px-2 py-1 w-auto">
+            <select name="campo" class='capitalize border-solid border-2 border-black' id="selectCampo">
+                <option value="cedula_estudiante">Cédula Estudiante</option>
+                <option value="nombre_estudiante">Nombre Estudiante</option>
+                <option value="cedula_representante">Cédula Representante</option>
+                <option value="nombre_representante">Nombre Representante</option>
             </select>
 
-            <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
+            <input type="text" id="buscar" name="buscar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
 
             <button type="submit" class="bg-gray-100 rounded-full">
-                <img src="../../../images/icons/buscar.svg" class=" w-20 filtro-verde" alt="Buscar" title="Buscar">
+                <img src="../../../images/icons/buscar.svg" class="w-20 filtro-verde" alt="Buscar" title="Buscar">
             </button>
         </form>
 
@@ -66,7 +70,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <tr>
                     <td>Cédula Estudiante</td>
                     <td>Nombre y Apellidos Estudiante </td>
-                    <td>Nombre del Representante</td>
+                    <td>Nombre y Apellido del Representante</td>
                     <td>Cédula Representante</td>
                     <td>Télefono</td>
 
@@ -87,10 +91,9 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
                 <tr>
                     <?php
-
-                    if (!empty($datosRepresentanteRepresentado)) {
-                        foreach ($datosRepresentanteRepresentadoRevertidos as $dato) {
-                            // Imprimir cada fila de la tabla
+                    if (!empty($resultados)) {
+                        foreach ($resultados as $dato) {
+                            // Mostrar cada resultado en la tabla
                             echo "<tr>";
                             echo "<td class='numeroCedula border px-4 py-2'>" . htmlspecialchars($dato['cedula_estudiante']) . "</td>";
                             echo "<td class=' border px-4 py-2'>" . htmlspecialchars($dato['nombres_estudiante']) . " " . htmlspecialchars($dato['apellidos_estudiante']) . "</td>";
@@ -100,37 +103,38 @@ include_once('../v_Sidebar/v_Sidebar.php');
                             echo '
                             <td class="border px-4 py-2 text-center">
                                 <div class="flex justify-center items-center space-x-4">
+                                
+                                   <!-- BORRAR DATO EN ESPECIFICO -->
                                     <img src="../../../images/icons/papelera.svg" class="w-8 h-8 filtro-rojo cursor-pointer" alt="Borrar" title="Borrar">
-                                    <img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar">
-                                  <img src="../../../images/icons/moreGrid.svg" 
-             class="w-8 h-8 filtro-negro cursor-pointer" 
-             alt="Mostrar Más" title="Mostrar Más"
-             data-datos="' . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . '"
-             onclick="openModalMostrarMasDatos(event)">
-                                    <img src="../../../images/icons/credit-card.svg" 
-                                    class="w-8 h-8 filtro-negro cursor-pointer" 
-                                    onclick="openPagoEspecificoModal(
+                                    
+                                    <!-- MODIFICAR -->
+                                    <img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar"
+                                    data-datos="' . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . '" onclick="llenarFormulario(this)">
+
+                                    <!-- MOSTRAR MAS -->
+                                    <img src="../../../images/icons/moreGrid.svg" class="w-8 h-8 filtro-negro cursor-pointer" 
+                                    alt="Mostrar Más" title="Mostrar Más" 
+                                    data-datos="' . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . '" onclick="openModalMostrarMasDatos(event)">
+
+                                    <!-- MODAL PAGO EN ESPECIFICO -->
+                                    <img src="../../../images/icons/credit-card.svg" class="w-8 h-8 filtro-negro cursor-pointer" onclick="openPagoEspecificoModal(
                                         \'' . htmlspecialchars($dato['cedula_estudiante']) . '\',
                                         \'' . htmlspecialchars($dato['nombres_estudiante']) . '\',
                                         \'' . htmlspecialchars($dato['apellidos_estudiante']) . '\',
                                         \'' . htmlspecialchars($dato['cedula_representante']) . '\',
                                         \'' . htmlspecialchars($dato['nombres_representante']) . '\',
                                         \'' . htmlspecialchars($dato['apellidos_representante']) . '\'
-                                    )" 
-                                    alt="Pago Especifico" title="Pago Especifico">
+                                    )" alt="Pago Especifico" title="Pago Especifico">
                                 </div>
                             </td>';
-                            echo "</tr>";
+                            echo '</tr>';
                         }
-                    };
-
-
+                    }
                     ?>
-
 
                 </tr>
 
-       
+
 
             </tbody>
 
@@ -164,15 +168,15 @@ include_once('../v_Sidebar/v_Sidebar.php');
     </dialog>
     <!-- MOSTRAR MAS-->
     <dialog id="modalMostrarMas">
-    <div class="flex justify-end items-end">
-        <div class="w-10 bg-red-500 rounded-full cursor-pointer p-2" id="closeMostrarMas" >
-            <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
+        <div class="flex justify-end items-end">
+            <div class="w-10 bg-red-500 rounded-full cursor-pointer p-2" id="closeMostrarMas">
+                <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
+            </div>
         </div>
-    </div>
-    <h2 class="text-xl font-semibold mb-4">Mostrar Más</h2>
-    <!-- Imprimiendo Datos Para Mostrar -->
-    <p id="DatosCompletosMostrarMas"></p>
-</dialog>
+        <h2 class="text-xl font-semibold mb-4">Mostrar Más</h2>
+        <!-- Imprimiendo Datos Para Mostrar -->
+        <p id="DatosCompletosMostrarMas"></p>
+    </dialog>
     <!-- MODAL PAGO ESPECIFICO -->
 
     <dialog id="modalPagosEspecificos">
@@ -188,26 +192,26 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
                 </div>
                 <div class="flex  flex-wrap mb-1">
-                       <!-- CEDULA ESTUDIANTE REGISTRO PAGO -->
+                    <!-- CEDULA ESTUDIANTE REGISTRO PAGO -->
                     <span class="font-bold mr-2">Cédula Estudiante:</span>
-                    <span id="cedulaEstudianteRegistroPago" class="font-semibold"   ></span>
-                  
+                    <span id="cedulaEstudianteRegistroPago" class="font-semibold"></span>
+
                 </div>
                 <div class="flex  flex-wrap mb-1">
-                 <!-- CEDULA REPRESENTANTE REGISTRO PAGO -->
+                    <!-- CEDULA REPRESENTANTE REGISTRO PAGO -->
                     <span class="font-bold mr-1">Cédula Representante:</span>
                     <span id="cedulaRepresentanteRegistroPago" class="font-semibold"></span>
 
                 </div>
                 <div class="flex  flex-wrap mb-1">
-                <!-- NOMBRE REPRESENTANTE REGISTRO PAGO -->
+                    <!-- NOMBRE REPRESENTANTE REGISTRO PAGO -->
                     <span class="font-bold mr-1">Nombre Representante:</span>
                     <span id="nombresRepresentanteRegistroPago" class="font-semibold"></span>
 
                 </div>
 
 
-           
+
 
 
             </div>
@@ -239,6 +243,6 @@ include_once('../v_Sidebar/v_Sidebar.php');
 </body>
 <!-- Llamado JavaScriptEstudiantes -->
 <script type="text/javascript" src="../../../javascript/estudiantesPagos.js"></script>
-<script src="../../../javascript/libquery.js"></script>
+<script src="../../../javascript/jquery-3.7.1.min.js"></script>
 
 </html>
