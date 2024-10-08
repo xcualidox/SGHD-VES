@@ -104,7 +104,6 @@ function calcular() {
 }
 
 //FORMULARIO DE REGISTRO ESTUDIANTE
-
 function registrarFormularioEstudiante() {
 
 
@@ -201,6 +200,46 @@ function registrarFormularioEstudiante() {
     }
 }
 
+// Función para llenar el formulario y abrir el modal al modificar
+function llenarFormulario(element) {
+    // Obtener los datos del atributo 'data-datos'
+    const datos = JSON.parse(element.getAttribute('data-datos'));
+    console.log(datos);
+    
+
+    // Rellenar los campos del formulario con los datos recibidos
+    document.querySelector('#cedulaEstudiante').value = datos.cedula_estudiante || '';
+    document.querySelector('#cedulaRepresentante').value = datos.cedula_representante || '';
+    document.querySelector('#nombres').value = datos.nombres_estudiante || '';
+    document.querySelector('#apellidos').value = datos.apellidos_estudiante || '';
+    document.querySelector('#nombresRepresentante').value = datos.nombres_representante || '';
+    document.querySelector('#apellidosRepresentante').value = datos.apellidos_representante || '';
+    document.querySelector('#telefono').value = datos.telefono || '';
+    document.querySelector('#telefonoDomicilio').value = datos.telefono_2 || '';
+    document.querySelector('#direccion').value = datos.direccion || '';
+    document.querySelector('#correo').value = datos.correo || '';
+      // Llenar los select de año y sección (asegurándote de que los valores coincidan)
+      const anoEscolar = document.querySelector('#anoEscolar');
+      const anoSeccion = document.querySelector('#anoSeccion');
+  
+     // Verificar si el valor existe en las opciones del select, si no, dejar la opción por defecto
+      if (anoEscolar.querySelector(`option[value="${datos.ano}"]`)) {
+        anoEscolar.value = datos.ano;
+    } else {
+        anoEscolar.value = ''; // Opción predeterminada
+    }
+
+    if (anoSeccion.querySelector(`option[value="${datos.seccion}"]`)) {
+        anoSeccion.value = datos.seccion;
+    } else {
+        anoSeccion.value = ''; // Opción predeterminada
+    }
+
+    // Abrir el modal
+    modalAñadir.showModal();
+}
+
+
 //MODAL PAGO ESPECIFICO
 //AL agregar los pagos de este registor no olvidar los ATRIBUTOS
 function openPagoEspecificoModal(cedulaEstudiante, nombresEstudiante, apellidosEstudiante, cedulaRepresentante,nombres_representante,apellidos_representante) {
@@ -247,14 +286,3 @@ modalMostrarMas.addEventListener('click', () => {
 
 
 
-//FUNCION PARA AÑADIR . VISUALMENTE
-
-document.addEventListener("DOMContentLoaded", function() {
-    const numeros = document.querySelectorAll(".numeroCedula");
-
-    numeros.forEach(function(elemento) {
-        const numero = elemento.textContent;
-        const numeroFormateado = numero.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        elemento.textContent = numeroFormateado;
-    });
-});

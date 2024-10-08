@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 03-10-2024 a las 15:02:19
+-- Tiempo de generación: 08-10-2024 a las 20:50:43
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyecto`
 --
-CREATE DATABASE IF NOT EXISTS `proyecto` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci;
-USE `proyecto`;
 
 -- --------------------------------------------------------
 
@@ -153,7 +151,11 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 (13, '2024-09-28 23:16:27', 29629080, 'login', '29629080 ha ingresado al sistema.', 'ZUHE2-PC'),
 (14, '2024-10-01 14:01:21', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
 (15, '2024-10-02 10:47:07', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(16, '2024-10-03 09:37:50', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU');
+(16, '2024-10-03 09:37:50', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
+(17, '2024-10-03 15:03:46', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
+(18, '2024-10-03 17:45:57', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
+(19, '2024-10-04 09:20:45', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
+(20, '2024-10-04 10:38:03', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU');
 
 -- --------------------------------------------------------
 
@@ -226,7 +228,7 @@ CREATE TABLE `dolar` (
 --
 
 INSERT INTO `dolar` (`id`, `precio`) VALUES
-(1, 36.92);
+(1, 36.8);
 
 -- --------------------------------------------------------
 
@@ -247,12 +249,12 @@ CREATE TABLE `estudiante` (
 --
 
 INSERT INTO `estudiante` (`cedula_estudiante`, `nombres`, `apellidos`, `ano`, `seccion`) VALUES
-(123456, 'lol', 'lolol', '2025-2026', 'XD'),
-(2584756, 'Angel', 'Mendez', '2025-2026', '1ero U'),
-(5555656, 'angel', 'mendez', '2025-2026', 'XD'),
-(19282324, 'Angel', 'Mendez', '2025-2026', '1ero U'),
-(27414575, 'Martin', 'Rojas', '2025-2026', '2do U'),
-(29629080, 'Orlando', 'mendez', '2025-2026', 'XD');
+(123456, 'lol', 'lolol', '2025-2026', '1ero U'),
+(8585684, 'Carlos', 'Diaz', '2025-2026', '3ero U'),
+(19282324, 'Carlos', 'Diaz', '2025-2026', '5to U'),
+(29629080, 'Angel Orlando', 'Mendez Mendoza', '2025-2026', '1ero U'),
+(30294676, 'Carlos', 'Diaz', '2025-2026', '3ero U'),
+(74545958, 'Juan Jose', 'Mendez', '2025-2026', '1ero U');
 
 -- --------------------------------------------------------
 
@@ -279,12 +281,12 @@ CREATE TABLE `horario_estudiante` (
 
 INSERT INTO `horario_estudiante` (`codigo`, `codigo_a_escolar`, `codigo_a_y_seccion`, `codigo_asignatura`, `codigo_aula`, `codigo_dia`, `grupo`, `profesor`, `intervalo`, `receso`) VALUES
 (27, 18, 19, 'CA', 26, 'B1V', ' ', 11716900, 6, '08:20'),
-(28, 18, 18, NULL, NULL, 'B1MM', ' ', NULL, 6, '08:20'),
 (29, 18, 18, 'BI', 26, 'B1J', '1', NULL, 6, '08:20'),
 (30, 18, 18, NULL, NULL, 'B1J', '2', NULL, 6, '08:20'),
 (31, 18, 18, 'EF', 26, 'B2MM', ' ', 11716900, 6, '08:20'),
 (32, 19, 18, 'CA', 26, 'B1MM', ' ', 11716900, 6, '08:20'),
-(33, 19, 20, 'CA', 26, 'B1J', ' ', 11716900, 6, '08:20');
+(34, 19, 19, 'CA', 26, 'B4V', ' ', 11716900, 6, '08:20'),
+(35, 19, 20, 'CA', 26, 'B8V', ' ', 11716900, 6, '08:20');
 
 -- --------------------------------------------------------
 
@@ -336,8 +338,7 @@ INSERT INTO `login` (`id`, `username`, `password`, `security_q_1`, `security_q_2
 (3, 27414575, '$2y$10$.0H6AyBzzc7kNetE99vB7uC3WHG/mNB/0nrq15m.82XPssDBhM9G.', '', '', '', '', '', '', 'profesor', 'new'),
 (4, 27564672, '$2y$10$2LdbHmQeaN5.amJ86/gQFeZAK9Mb6fdZ2.bDZkqM9kWv5/1mXjERi', '¿Cuál es el nombre de tu primera mascota?', '¿Cuál es el nombre de tu escuela primaria?', '¿En qué ciudad naciste?', '$2y$10$nmlXTunPzLLb5VrsRBZ7y.rr.RO0rAhszWg.H5HQP4ORBeAwyO7X2', '$2y$10$yv6lnXbkvRPxsW/GjqWWmulj1wAxhfgHzb6n7SUciFngJWVbdCA6C', '$2y$10$PwpOMuTvWGFmKcVGwW41He90ksoCzKG6DyT0kCJo7WveqSBxBOoIi', 'profesor', 'active'),
 (5, 29629080, '$2y$10$iztSmb7xT9arACvPGNiLmuVu.IPZfpPCRrquHgPpKXfkWMrCOU7f6', '¿Cual es su color favorito?', '¿Cual es fue su primera mascota?', '¿Cual es su comida favorita?', '$2y$10$MKhsRwZ/V6pN2POJ3eete..IigsrkWdUtDOVRA7.Tlfy9ZGp4w.8O', '$2y$10$T6PjmXUjButQzVO8FIV0UOvnYsD2Em153oEi9Cv6J/0Pdk5EGdelm', '$2y$10$llAi/KhMxhEj5YtessVBe.vfpnESeMO16Sh0NdoDnfhcWSPoWGS.2', 'admin', 'active'),
-(7, 19282340, '$2y$10$moo9yxZLhEx/2nm8hm.4y.CYC6HTptlepQFJVvhWDDhrUAoCJnkwW', '¿Cuál es el nombre de tu escuela primaria?', '¿Cuál es el nombre de tu primera mascota?', '¿En qué ciudad naciste?', '$2y$10$.74Lk2GGk0wg.YfrqkhzA.Uy8WBuq/YVHEvm2YWY0uXOkLW4649tO', '$2y$10$sXMNpg.hK0t9yg1ZZzhif.SG.GzVSN7WkR6HJi6mCvAePrGOSYzPi', '$2y$10$0g4l.tzDZwQ3potE6fDBTukJdn0UO6nl1jSw4Y2GkdVPVv1deS5qm', 'profesor', 'active'),
-(9, 5656, '$2y$10$XnKkMjz3oQcmQ1vv2Vjga.iGB8bO7165A5pV87kcP/nZsvjAgZ3Zm', '', '', '', '', '', '', 'profesor', 'new');
+(7, 19282340, '$2y$10$moo9yxZLhEx/2nm8hm.4y.CYC6HTptlepQFJVvhWDDhrUAoCJnkwW', '¿Cuál es el nombre de tu escuela primaria?', '¿Cuál es el nombre de tu primera mascota?', '¿En qué ciudad naciste?', '$2y$10$.74Lk2GGk0wg.YfrqkhzA.Uy8WBuq/YVHEvm2YWY0uXOkLW4649tO', '$2y$10$sXMNpg.hK0t9yg1ZZzhif.SG.GzVSN7WkR6HJi6mCvAePrGOSYzPi', '$2y$10$0g4l.tzDZwQ3potE6fDBTukJdn0UO6nl1jSw4Y2GkdVPVv1deS5qm', 'profesor', 'active');
 
 -- --------------------------------------------------------
 
@@ -404,7 +405,7 @@ CREATE TABLE `personas` (
   `nombres` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `apellidos` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `direccion` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `telefono` varchar(14) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `telefono` varchar(17) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `correo` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -413,10 +414,9 @@ CREATE TABLE `personas` (
 --
 
 INSERT INTO `personas` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono`, `correo`) VALUES
-(5656, 'PEDRITO', 'MENDEZ', 'VENEZUELA, PORTUGUESA, GUANARE URBANIZACION LA VERGUISA ENTFRE LA CALLE 13 Y 2 , CASA NUMERO 10', '04122696463', 'equisde@gmail.com'),
 (11716900, 'JOHN ENMANUEL', 'RAMIREZ VALERO', 'Enrique Segoviano', '+584169919122', 'cojggeo@equisde.com'),
-(19282340, 'FASDFUNCIONO', 'FASDFUNCIONO', 'FASD', '04122696463', 'equisde@gmail.com'),
-(27414575, 'ASDAS', 'ADASDAS', 'DIREKSION', '04246646364', 'lol@lol.com'),
+(19282340, 'FASDFUNCIONO', 'FASDFUNCIONO', 'FASD', '0412-2696463', 'equisde@gmail.com'),
+(27414575, 'ASDASFASDF', 'ADASDAS', 'DIREKSION', '04122696463', 'lol@lol.com'),
 (27564672, 'NIRETCIA INMACULADA', 'RAMIREZ VALERO', 'Venezuela, Portuguesa, Guanare Urbanizacion la Verguisa entre la calle 13 y 2 , casa numero 10', '04161234567', 'equisde@gmail.com'),
 (29629080, 'ANGEL', 'MENDEZ', 'ENRIQUE SEGOVIANO', '0424', 'irechamo@yolewadesi.unawaina');
 
@@ -476,8 +476,8 @@ CREATE TABLE `representante` (
   `nombres` varchar(70) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `apellidos` varchar(70) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `correo` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `direccion` varchar(255) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `telefono` varchar(17) COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
+  `direccion` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `telefono` varchar(17) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
   `telefono_2` varchar(17) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -486,12 +486,9 @@ CREATE TABLE `representante` (
 --
 
 INSERT INTO `representante` (`cedula_representante`, `nombres`, `apellidos`, `correo`, `direccion`, `telefono`, `telefono_2`) VALUES
-(85858, 'Juan', 'Pérez', 'juan@example.com', 'Calle Falsa 123', '5551234', '5555678'),
-(7595365, 'Pedro', 'Picapiedra', 'ADSFASDF', 'FASDFASD', '04122696463', ''),
-(29629080, 'Orlando', 'Nicolas', 'fasd@gmail.com', 'La Corteza', '04122696463', ''),
-(123456789, 'Juan', 'Pérez', 'juan@example.com', 'Calle Falsa 123', '5551234', '5555678'),
-(1928232411, 'as', 'dfasdf', 'asdf', 'asdf', 'asd', 'fasdf'),
-(5555555555, 'Orlando', 'Nicolas', 'fasd@gmail.com', 'La Corteza', '04122696463', '');
+(7595361, 'Obama', 'Clinton', 'casa', 'Casa', '04122696463', '04245552194'),
+(7595362, 'Hillary', 'Clinton', 'casa', 'Casa', '04122696463', '04245552194'),
+(7595365, 'Orlando', 'Mendez', 'casa', 'Casa', '04122696463', '04245552194');
 
 -- --------------------------------------------------------
 
@@ -500,7 +497,7 @@ INSERT INTO `representante` (`cedula_representante`, `nombres`, `apellidos`, `co
 --
 
 CREATE TABLE `representante-representado` (
-  `cedula_estudiante` bigint DEFAULT NULL,
+  `cedula_estudiante` bigint NOT NULL,
   `cedula_representante` bigint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -509,12 +506,11 @@ CREATE TABLE `representante-representado` (
 --
 
 INSERT INTO `representante-representado` (`cedula_estudiante`, `cedula_representante`) VALUES
-(5555656, 123456789),
-(19282324, 29629080),
-(19282324, 5555555555),
-(2584756, 29629080),
-(19282324, 1928232411),
-(27414575, 7595365);
+(8585684, 7595361),
+(30294676, 7595362),
+(19282324, 7595365),
+(29629080, 7595365),
+(74545958, 7595365);
 
 --
 -- Índices para tablas volcadas
@@ -658,6 +654,7 @@ ALTER TABLE `representante`
 -- Indices de la tabla `representante-representado`
 --
 ALTER TABLE `representante-representado`
+  ADD PRIMARY KEY (`cedula_estudiante`),
   ADD KEY `FK_representante-representado_representante` (`cedula_representante`),
   ADD KEY `FK2_cedula_estudiante` (`cedula_estudiante`);
 
@@ -687,13 +684,13 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `intervalo`
@@ -705,7 +702,7 @@ ALTER TABLE `intervalo`
 -- AUTO_INCREMENT de la tabla `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos`
