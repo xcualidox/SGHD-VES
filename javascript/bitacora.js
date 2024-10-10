@@ -92,7 +92,7 @@ function paginationJquery() {
         totalNumberLocator: function(response) {
             return response.total; // Ubicación de la clave total en la respuesta JSON
         },
-        pageSize: 5,
+        pageSize: 10,
         className: 'paginationjs-theme-gray paginationjs-big',
         callback: function(data, pagination) {
             if (data[0])

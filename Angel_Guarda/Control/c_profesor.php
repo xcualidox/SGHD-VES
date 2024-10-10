@@ -36,19 +36,22 @@ function Registra()
         exit();
     }
 	
-	else{
+	else{ 
+        session_start();
 		$objeto = new personas();
 		$objeto->setDatos($_POST["cedula"], $_POST["nombres"], $_POST["apellidos"], $_POST["direccion"], $_POST["telefono"], $_POST["correo"]);
 		$objeto->incluye();
 		require_once("../../php/controller/c_login.php");
-		createLogin($_POST["cedula"], $_POST["rol"]);
+		createLogin($_POST["cedula"], $_POST["rol"]); 
+        require_once("c_bitacora.php");
+        insertBitacora($_SESSION['username'], "insertar", $_SESSION['username']." ha agregado al profesor ".$_POST["cedula"].".");
 		header("Location: ../Vista/profesor/v_profesor.php");
 	}
 	}
 
 	function Modifica() {
-	
-	
+        session_start();
+        require_once("c_bitacora.php");
 		$objetoPersonas = new personas();
 		$cedula = $_POST['cedula'];
 		$cedulaOriginal = $_POST['origin']; // Cédula antes de la modificación
@@ -66,7 +69,7 @@ function Registra()
 				$loginModel->setRol($_POST["rol"]);
 				$loginModel->modificarRol($cedula, $_POST["rol"]);
 			}
-	
+            insertBitacora($_SESSION['username'], "modificar", $_SESSION['username']." ha modificado al profesor ".$_POST["cedula"].".");
 			header("Location: ../Vista/profesor/v_profesor.php");
 			exit();
 		} else {
@@ -87,7 +90,7 @@ function Registra()
 				$loginModel->setUsername($_POST["cedula"]);
 				$loginModel->setRol($_POST["rol"]);
 				$loginModel->modificarRol($_POST["cedula"], $_POST["rol"]);
-	
+                insertBitacora($_SESSION['username'], "modificar", $_SESSION['username']." ha modificado al profesor ".$_POST["cedula"].".");
 				header("Location: ../Vista/profesor/v_profesor.php");
 				exit();
 			}
@@ -95,9 +98,12 @@ function Registra()
 	}
 
 function Elimina()
-{	
+{	 
+    session_start(); 
+    require_once("c_bitacora.php");
 	$objeto = new personas();
-	$objeto->eliminar($_POST["origin"]);
+	$objeto->eliminar($_POST["origin"]); 
+    insertBitacora($_SESSION['username'], "eliminar", $_SESSION['username']." ha eliminado al profesor ".$_POST["cedula"].".");
 	header("Location: ../Vista/profesor/v_profesor.php");
 }
 

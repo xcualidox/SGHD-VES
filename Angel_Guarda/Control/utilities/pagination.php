@@ -1,7 +1,7 @@
 <?php
 function pagination($object, $page_number, $filter)
 {
-    $max_per_page = 5;
+    $max_per_page = 10;
     $object->setPaginationFilter($filter);
     $total_rows = $object->countAll()["n_records"];
     $lastPage = ceil( $total_rows/$max_per_page);

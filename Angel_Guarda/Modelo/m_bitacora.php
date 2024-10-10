@@ -128,7 +128,7 @@ class Bitacora extends database_connect
         else{
             $params = "";
         }
-        $query .= " LIMIT ".$this->offset;
+        $query .= " ORDER BY bitacora.fecha_hora DESC LIMIT ".$this->offset;
         $result = $this->query($query, $params);
         return $result ? $this->fetch_all_query($result) : false;
     }
