@@ -39,6 +39,9 @@ if (count($bloques) > 1) {
 
         $i = $i + 5;
     }
+    session_start();
+    require_once("c_bitacora.php");
+    insertBitacora($_SESSION['username'], "add", $_SESSION['username']." ha creado el horario para el año ".$_POST["ano"]." sección ".$_POST["nom"].".");
 }
 
 header("Location: ../Vista/Horario/horario.php");

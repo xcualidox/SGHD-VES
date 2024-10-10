@@ -29,28 +29,36 @@ if (isset($_POST["ope"])) {
 	
 function Registra()
 {
-
+	session_start();
 	$objeto = new aula();
 	$objeto->setDatos($_POST["nom"], $_POST["des"], $_POST["dis"]);
-	$objeto->incluye();
+	$objeto->incluye(); 
+	require_once("c_bitacora.php");
+    insertBitacora($_SESSION['username'], "insertar", $_SESSION['username']." ha agregado el aula ".$_POST["nom"].".");
 	header("Location: ../Vista/aula/v_aula.php");
 	
 }
 
 function Modifica()
 {
-
+	session_start();
 	$objeto = new aula();
 	$objeto->setDatos($_POST["nom"], $_POST["des"], $_POST["dis"]);
 	$objeto->modificar($_POST["origin"]);
+	require_once("c_bitacora.php");
+    insertBitacora($_SESSION['username'], "modificar", $_SESSION['username']." ha modificado el aula ".$_POST["nom"].".");
 	header("Location: ../Vista/aula/v_aula.php");
 	
 }
 
 function Elimina()
-{	
+{ 
+	session_start();
+
 	$objeto = new aula();
 	$objeto->eliminar($_POST["origin"]);
+	require_once("c_bitacora.php");
+    insertBitacora($_SESSION['username'], "eliminar", $_SESSION['username']." ha eliminado el aula ".$_POST["nom"].".");
 	header("Location: ../Vista/aula/v_aula.php");
 }
 function Disponi($disponibilidad)  {

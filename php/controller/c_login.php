@@ -215,6 +215,7 @@ function login($username, $pw, $op)
             session_start();
             // $_SESSION['username'] = getUserData($username)["fullname"];
             $_SESSION['sesion'] = $loginResult[1];
+            $_SESSION['username'] = $username;
             // Destruye la instancia login
             $GLOBALS["login"] = null;
             if ($_SESSION['sesion'] == "admin" || $_SESSION['sesion']=="administrador"){
