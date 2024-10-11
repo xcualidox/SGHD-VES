@@ -121,7 +121,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <div class="formulario-extenso__row">
             <div class="formulario-extenso__column">
                 <label for="cedula">Cedula: </label>
-                <input type="text" id="cedula" name="cedula" autocomplete="off" placeholder="Cedula del Profesor" class="formulario-extenso__input" maxlength="25">
+                <input type="text" id="cedula" name="cedula" autocomplete="off" placeholder="Cedula del Profesor" class="formulario-extenso__input" maxlength="9">
             </div>
 
         </div>
@@ -130,11 +130,11 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
             <div class="formulario-extenso__column">
                 <label for="nombres">Nombres: </label>
-                <input type="input" name="nombres" id="nombres" autocomplete="off" placeholder="Nombres" class="formulario-extenso__input" maxlength="30">
+                <input type="input" name="nombres" id="nombres" autocomplete="off" placeholder="Nombres" class="formulario-extenso__input" maxlength="50">
             </div>
             <div class="formulario-extenso__column">
                 <label for="apellidos">Apellidos: </label>
-                <input type="input" name="apellidos" id="apellidos" autocomplete="off" class="formulario-extenso__input" placeholder="Apellidos" maxlength="30">
+                <input type="input" name="apellidos" id="apellidos" autocomplete="off" class="formulario-extenso__input" placeholder="Apellidos" maxlength="50">
             </div>
         </div>
 
@@ -149,7 +149,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <div class="formulario-extenso__row">
         <div class="formulario-extenso__column">
     <label for="telefono">Teléfono: </label>
-    <input type="text" name="telefono" id="telefono" autocomplete="off" placeholder="Teléfono" class="numeroCelular formulario-extenso__input" maxlength="17">
+    <input type="text" name="telefono" id="telefono" autocomplete="off" placeholder="Teléfono" class="formulario-extenso__input" maxlength="17">
 </div>
 
             <div class="formulario-extenso__column">
