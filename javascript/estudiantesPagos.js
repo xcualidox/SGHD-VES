@@ -1,3 +1,5 @@
+//Regex solo numeros enteros sin .
+const regexSoloNumeros = /^\d+$/;
 // Modal Añadir
 const modalAñadir = document.querySelector('#modalAñadir');
 const openModalAñadir = document.querySelector('#openModalAñadir');
@@ -120,6 +122,9 @@ function registrarFormularioEstudiante() {
     const anoSeccion = document.querySelector('#anoSeccion').value
     const anoEscolar = document.querySelector('#anoEscolar').value
     const telefonoDomicilio=document.querySelector('#telefonoDomicilio').value
+    const cedulaEstudianteActual=document.querySelector('#cedulaEstudianteActual').value
+
+
 
     const campos = [
         cedulaEstudiante,
@@ -145,9 +150,9 @@ function registrarFormularioEstudiante() {
 
 
     // Si alguna cédula no es un número, retorna falso
-    if (isNaN(cedulaEstudiante) || isNaN(cedulaRepresentante)) {
+      if (!regexSoloNumeros.test(cedulaEstudiante) || !regexSoloNumeros.test(cedulaRepresentante))  {
         formularioValido = false;
-
+   
     }
 
 
@@ -155,6 +160,7 @@ function registrarFormularioEstudiante() {
     if (formularioValido) {
         // Obtener los datos de los formularios
         const datosRepresentantes = {
+            
             cedulaRepresentante: cedulaRepresentante,
             nombresRepresentante: nombreRepresentante,
             apellidosRepresentante: apellidosRepresentantes,
@@ -165,6 +171,7 @@ function registrarFormularioEstudiante() {
         };
 
         const datosEstudiantes = {
+            cedulaEstudianteActual:cedulaEstudianteActual,
             cedulaEstudiante: cedulaEstudiante,
             nombres:  nombres,
             apellidos: apellidos,
@@ -181,8 +188,17 @@ function registrarFormularioEstudiante() {
                 datosEstudiantes: datosEstudiantes
             },
             success: function (response) {
-                console.log('Respuesta del servidor:', response);
-                showToast("Formulario enviado correctamente", true);
+                const data = JSON.parse(response);
+                
+                if (data.status === 'success') {
+                    // Mostrar el toast de éxito
+                    showToast("Formulario enviado correctamente", true);
+        
+                    // Actualizar el contenido de la tabla con el nuevo HTML
+                    document.getElementById('tablaEstudiante').innerHTML = data.html;
+                } else {
+                    showToast("Hubo un error al enviar los datos", false);
+                }
             },
             error: function (error) {
                 console.error('Error al enviar los datos:', error);
@@ -190,7 +206,8 @@ function registrarFormularioEstudiante() {
             }
         });
     }
-    else if (isNaN(cedulaEstudiante) || isNaN(cedulaRepresentante)) {
+    //Hago otro Else if para que pueda mostrar el mensaje de que deben de ser solo numeros
+    else if (!regexSoloNumeros.test(cedulaEstudiante) || !regexSoloNumeros.test(cedulaRepresentante))  {
         showToast('Los Campos de Cedulas deben Ser Numeros', false);
 
     }
@@ -199,6 +216,10 @@ function registrarFormularioEstudiante() {
         showToast('Por favor, llena todos los campos.', false);
     }
 }
+
+// Función para actualizar la tabla
+
+
 
 // Función para llenar el formulario y abrir el modal al modificar
 function llenarFormulario(element) {
@@ -234,6 +255,11 @@ function llenarFormulario(element) {
     } else {
         anoSeccion.value = ''; // Opción predeterminada
     }
+
+    const cedulaEstudianteActual = datos.cedula_estudiante || '';
+    const cedulaEstudianteNuevo = document.querySelector('#cedulaEstudiante').value; 
+
+    document.querySelector('#cedulaEstudianteActual').value = cedulaEstudianteActual;
 
     // Abrir el modal
     modalAñadir.showModal();

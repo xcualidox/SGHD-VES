@@ -104,6 +104,8 @@
                 </div>
             </div>
 
+            <input type="hidden" id="cedulaEstudianteActual" value="">
+      
             <input type="button" id="guardarBtnEstudiante" value="Guardar" class="table_button w-full" onclick="registrarFormularioEstudiante()">
         </form>
 

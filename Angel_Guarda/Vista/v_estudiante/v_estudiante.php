@@ -85,51 +85,15 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     </td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tablaEstudiante">
 
 
 
                 <tr>
                     <?php
-                    if (!empty($resultados)) {
-                        foreach ($resultados as $dato) {
-                            // Mostrar cada resultado en la tabla
-                            echo "<tr>";
-                            echo "<td class='numeroCedula border px-4 py-2'>" . htmlspecialchars($dato['cedula_estudiante']) . "</td>";
-                            echo "<td class=' border px-4 py-2'>" . htmlspecialchars($dato['nombres_estudiante']) . " " . htmlspecialchars($dato['apellidos_estudiante']) . "</td>";
-                            echo "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_representante']) . " " . htmlspecialchars($dato['apellidos_representante']) . "</td>";
-                            echo "<td class='numeroCedula border px-4 py-2'>" . htmlspecialchars($dato['cedula_representante']) . "</td>";
-                            echo "<td class='numeroCelular border px-4 py-2'>" . htmlspecialchars($dato['telefono']) . "</td>";
-                            echo '
-                            <td class="border px-4 py-2 text-center">
-                                <div class="flex justify-center items-center space-x-4">
-                                
-                                   <!-- BORRAR DATO EN ESPECIFICO -->
-                                    <img src="../../../images/icons/papelera.svg" class="w-8 h-8 filtro-rojo cursor-pointer" alt="Borrar" title="Borrar">
-                                    
-                                    <!-- MODIFICAR -->
-                                    <img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar"
-                                    data-datos="' . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . '" onclick="llenarFormulario(this)">
+             
 
-                                    <!-- MOSTRAR MAS -->
-                                    <img src="../../../images/icons/moreGrid.svg" class="w-8 h-8 filtro-negro cursor-pointer" 
-                                    alt="Mostrar Más" title="Mostrar Más" 
-                                    data-datos="' . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . '" onclick="openModalMostrarMasDatos(event)">
-
-                                    <!-- MODAL PAGO EN ESPECIFICO -->
-                                    <img src="../../../images/icons/credit-card.svg" class="w-8 h-8 filtro-negro cursor-pointer" onclick="openPagoEspecificoModal(
-                                        \'' . htmlspecialchars($dato['cedula_estudiante']) . '\',
-                                        \'' . htmlspecialchars($dato['nombres_estudiante']) . '\',
-                                        \'' . htmlspecialchars($dato['apellidos_estudiante']) . '\',
-                                        \'' . htmlspecialchars($dato['cedula_representante']) . '\',
-                                        \'' . htmlspecialchars($dato['nombres_representante']) . '\',
-                                        \'' . htmlspecialchars($dato['apellidos_representante']) . '\'
-                                    )" alt="Pago Especifico" title="Pago Especifico">
-                                </div>
-                            </td>';
-                            echo '</tr>';
-                        }
-                    }
+                echo $tablaHTML;
                     ?>
 
                 </tr>
