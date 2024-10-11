@@ -21,6 +21,11 @@ if (isset($_POST["ope"])) {
             break;
     }
 }
+
+function passwordEncrypt($pw)
+{
+    return password_hash($pw, PASSWORD_DEFAULT);
+}
 	
 function Registra()
 {
@@ -47,7 +52,7 @@ function Registra()
         insertBitacora($_SESSION['username'], "insertar", $_SESSION['username']." ha agregado al profesor ".$_POST["cedula"].".");
 		header("Location: ../Vista/profesor/v_profesor.php");
 	}
-	}
+}
 
 	function Modifica() {
         session_start();
@@ -59,6 +64,7 @@ function Registra()
 		// Si la cédula no ha cambiado, no es necesario verificarla
 		if ($cedula === $cedulaOriginal) {
 			// Actualiza los datos personales
+
 			$objetoPersonas->setDatos($_POST["cedula"], $_POST["nombres"], $_POST["apellidos"], $_POST["direccion"], $_POST["telefono"], $_POST["correo"]);
 			$objetoPersonas->modificar($cedulaOriginal);
 	
@@ -84,6 +90,14 @@ function Registra()
 				// Actualiza los datos personales y el rol
 				$objetoPersonas->setDatos($_POST["cedula"], $_POST["nombres"], $_POST["apellidos"], $_POST["direccion"], $_POST["telefono"], $_POST["correo"]);
 				$objetoPersonas->modificar($cedulaOriginal);
+
+                //Verifica si el profesor a modificar es nuevo, es decir, no ha puesto su clave
+                $esnuevo=$objetoPersonas->VerificarClaveNueva($cedula);
+                if($esnuevo[0]['status']=='new'){
+                    //Y si es nuevo pues encriptar la cedula como clave y actualizar el login
+                    $clave_encriptada=passwordEncrypt($cedula);
+                    $objetoPersonas->ActualizarClave($clave_encriptada,$cedula);
+                }
 	
 				// Actualiza el rol en la tabla login
 				$loginModel = new Login();
@@ -91,7 +105,7 @@ function Registra()
 				$loginModel->setRol($_POST["rol"]);
 				$loginModel->modificarRol($_POST["cedula"], $_POST["rol"]);
                 insertBitacora($_SESSION['username'], "modificar", $_SESSION['username']." ha modificado al profesor ".$_POST["cedula"].".");
-				header("Location: ../Vista/profesor/v_profesor.php");
+				//header("Location: ../Vista/profesor/v_profesor.php");
 				exit();
 			}
 		}

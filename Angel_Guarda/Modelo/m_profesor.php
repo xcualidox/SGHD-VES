@@ -48,6 +48,16 @@ class personas extends database_connect
     }
   }
 
+  function VerificarClaveNueva($username) 
+  {
+    $sql = "SELECT `status` from `login` WHERE `username` = ?";
+    return $this->fetch_all_query($this->query($sql, $username));
+  }
+
+  function ActualizarClave($cedulaencriptada,$cedula) {
+    $sql = "UPDATE `login` SET `password`=? WHERE `username` = ?";
+    return $this->query($sql, [$cedulaencriptada, $cedula]);
+  }
 
   function eliminar($origin)
   {
