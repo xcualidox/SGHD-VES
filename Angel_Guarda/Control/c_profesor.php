@@ -22,7 +22,7 @@ if (isset($_POST["ope"])) {
     }
 }
 
-function passwordEncrypt($pw)
+function passwordEncryptPersona($pw)
 {
     return password_hash($pw, PASSWORD_DEFAULT);
 }
@@ -95,7 +95,7 @@ function Registra()
                 $esnuevo=$objetoPersonas->VerificarClaveNueva($cedula);
                 if($esnuevo[0]['status']=='new'){
                     //Y si es nuevo pues encriptar la cedula como clave y actualizar el login
-                    $clave_encriptada=passwordEncrypt($cedula);
+                    $clave_encriptada=passwordEncryptPersona($cedula);
                     $objetoPersonas->ActualizarClave($clave_encriptada,$cedula);
                 }
 	
@@ -105,7 +105,7 @@ function Registra()
 				$loginModel->setRol($_POST["rol"]);
 				$loginModel->modificarRol($_POST["cedula"], $_POST["rol"]);
                 insertBitacora($_SESSION['username'], "modificar", $_SESSION['username']." ha modificado al profesor ".$_POST["cedula"].".");
-				//header("Location: ../Vista/profesor/v_profesor.php");
+				header("Location: ../Vista/profesor/v_profesor.php");
 				exit();
 			}
 		}
