@@ -40,12 +40,11 @@ class estudiante extends database_connect
             if ($cedulaEstudianteActual !== $cedulaEstudiante) {
 
                   // Eliminar la relación en 'representante-representado' antes de actualizar
-                    $sqlDelete = "DELETE FROM `representante-representado` WHERE cedula_estudiante = ?";
-                    $this->query($sqlDelete, [$cedulaEstudianteActual]);
+                 
                 // Si la cédula nueva es diferente, realizar la actualización de la cédula
                 $sqlUpdate = "UPDATE estudiante SET cedula_estudiante = ?, nombres = ?, apellidos = ?, ano = ?, seccion = ? WHERE cedula_estudiante = ?";
                 $this->query($sqlUpdate, [$cedulaEstudiante, $nombres, $apellidos, $anoEscolar, $anoSeccion, $cedulaEstudianteActual]);
-                $this->insertarOActualizarRelacionRepresentanteEstudiante($cedulaEstudiante, $cedulaRepresentante);
+             
 
 
             } else {
@@ -84,28 +83,32 @@ class estudiante extends database_connect
 
 
 
-    public function insertarOActualizarRelacionRepresentanteEstudiante($cedulaEstudiante, $cedulaRepresentante)
+    public function insertarRelacionRepresentanteEstudiante($cedulaEstudiante, $cedulaRepresentante)
     {
-        try {
-            // Verificar si la relación ya existe
-            $sql = "SELECT * FROM `representante-representado` WHERE cedula_estudiante = ?";
-            $result = $this->query($sql, [$cedulaEstudiante]);
-    
-            if ($result) {
-                // Si existe, actualiza la relación
-                $sqlUpdate = "UPDATE `representante-representado` SET cedula_representante = ? WHERE cedula_estudiante = ?";
-                $this->query($sqlUpdate, [$cedulaRepresentante, $cedulaEstudiante]);
-                return json_encode(['success' => true, 'message' => 'La relación actualizada correctamente.']);
-            } else {
-                // Si no existe, inserta la relación
-                $sqlInsert = "INSERT INTO `representante-representado` (cedula_estudiante, cedula_representante) VALUES (?, ?)";
-                $this->query($sqlInsert, [$cedulaEstudiante, $cedulaRepresentante]);
-                return json_encode(['success' => true, 'message' => 'Relación insertada correctamente.']);
-            }
-        } catch (Exception $e) {
-            return json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+        // Verificar si la relación ya existe
+        $sql = "SELECT * FROM `representante-representado` WHERE cedula_estudiante = ? AND cedula_representante = ?";
+        $result = $this->query($sql, [$cedulaEstudiante, $cedulaRepresentante]);
+
+        if (!$result) {
+            // Si no existe, insertar la relación
+            $sqlInsert = "INSERT INTO `representante-representado` (cedula_estudiante, cedula_representante) VALUES (?, ?)";
+            $this->query($sqlInsert, [$cedulaEstudiante, $cedulaRepresentante]);
         }
     }
+
+    //Actualizar Relacion entre Estudiante y Representante
+    public function actualizarRepresentanteEstudiante($cedulaEstudiante, $cedulaRepresentanteNueva)
+    {
+        // Actualizar la relación para el estudiante con el nuevo representante
+        $sqlUpdate = "UPDATE `representante-representado`
+                      SET cedula_representante = ?
+                      WHERE cedula_estudiante = ?";
+        $this->query($sqlUpdate, [$cedulaRepresentanteNueva, $cedulaEstudiante]);
+
+       
+    }
+
+    
 
 
 

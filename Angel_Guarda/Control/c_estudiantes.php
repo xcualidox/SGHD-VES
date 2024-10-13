@@ -87,11 +87,23 @@ if (isset($_POST['datosRepresentantes']) && isset($_POST['datosEstudiantes'])) {
     );
 
     // Insertar la relación entre representante y estudiante
-    $estudiante->insertarOActualizarRelacionRepresentanteEstudiante(
-      
+  // Insertar la relación entre representante y estudiante
+    
+  if (!empty($datosEstudiantes['cedulaEstudianteActual'])) {
+
+         // Actualizar la relación entre el estudiante y el nuevo representante
+         $estudiante->actualizarRepresentanteEstudiante(
+            $datosEstudiantes['cedulaEstudiante'],
+            $datosRepresentantes['cedulaRepresentante']
+        );
+
+}
+
+    $estudiante->insertarRelacionRepresentanteEstudiante(
         $datosEstudiantes['cedulaEstudiante'],
         $datosRepresentantes['cedulaRepresentante']
     );
+   
     $resultados = $estudiante->obtenerRepresentanteRepresentado();
     $resultados = array_reverse($resultados); // Traer los más recientes primero
 

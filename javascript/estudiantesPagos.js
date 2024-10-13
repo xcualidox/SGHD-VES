@@ -196,6 +196,9 @@ function registrarFormularioEstudiante() {
         
                     // Actualizar el contenido de la tabla con el nuevo HTML
                     document.getElementById('tablaEstudiante').innerHTML = data.html;
+                    document.getElementById("formRegistroEstudiante").reset();
+                    
+
                 } else {
                     showToast("Hubo un error al enviar los datos", false);
                 }
