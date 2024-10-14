@@ -11,6 +11,9 @@ $anoSeccion = $estudiante->obtenerAnoSeccion();
 $resultados = [];  // Inicializar una variable vacía para los resultados
 
 
+$pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$resultados_por_pagina = 10;
+
 
 
 if (isset($_GET['campo']) && isset($_GET['buscar'])) {
@@ -49,13 +52,13 @@ if (isset($_GET['campo']) && isset($_GET['buscar'])) {
     // Filtrar resultados duplicados basados en un campo único, como 'cedula_estudiante'
     $resultados = array_unique(array_map('serialize', $resultados)); // Serialize para hacer único
     $resultados = array_map('unserialize', $resultados);
-    $tablaHTML = generarTabla($resultados);
+    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina);
 } else {
     // Si no se está realizando una búsqueda, traer todos los datos
     $resultados = $estudiante->obtenerRepresentanteRepresentado();
     //Le hago Reverse para traermelo de manera de Ultimo que se muestre de Primero
     $resultados = array_reverse($resultados);
-    $tablaHTML = generarTabla($resultados);
+    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina);
 
   
 }
@@ -96,7 +99,6 @@ if (isset($_POST['datosRepresentantes']) && isset($_POST['datosEstudiantes'])) {
             $datosEstudiantes['cedulaEstudiante'],
             $datosRepresentantes['cedulaRepresentante']
         );
-
 }
 
     $estudiante->insertarRelacionRepresentanteEstudiante(
@@ -107,7 +109,7 @@ if (isset($_POST['datosRepresentantes']) && isset($_POST['datosEstudiantes'])) {
     $resultados = $estudiante->obtenerRepresentanteRepresentado();
     $resultados = array_reverse($resultados); // Traer los más recientes primero
 
-    $tablaHTML = generarTabla($resultados);
+    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina);
 
     // Enviar una respuesta JSON al cliente
     echo json_encode([
@@ -119,10 +121,19 @@ if (isset($_POST['datosRepresentantes']) && isset($_POST['datosEstudiantes'])) {
 
 
 
-function generarTabla($resultados){
+
+
+
+
+function generarTabla($resultados, $pagina_actual, $resultados_por_pagina) {
     $html = ''; 
-    if (!empty($resultados)) {
-        foreach ($resultados as $dato) {
+    $total_resultados = count($resultados);
+    $total_paginas = ceil($total_resultados / $resultados_por_pagina);
+    $inicio = ($pagina_actual - 1) * $resultados_por_pagina;
+    $resultados_pagina = array_slice($resultados, $inicio, $resultados_por_pagina);
+
+    if (!empty($resultados_pagina)) {
+        foreach ($resultados_pagina as $dato) {
             $html .= "<tr>"; // Abre una nueva fila
             $html .= "<td class='numeroCedula border px-4 py-2'>" . htmlspecialchars($dato['cedula_estudiante']) . "</td>";
             $html .= "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_estudiante']) . " " . htmlspecialchars($dato['apellidos_estudiante']) . "</td>";
@@ -132,6 +143,7 @@ function generarTabla($resultados){
             $html .= "<td class='border px-4 py-2 text-center'>
                 <div class='flex justify-center items-center space-x-4'>
                     <img src='../../../images/icons/papelera.svg' class='w-8 h-8 filtro-rojo cursor-pointer' alt='Borrar' title='Borrar'>
+                    <img src='../../../images/icons/pdf.svg' class='w-8 h-8 filtro-verde cursor-pointer' alt='Borrar' title='Borrar'>
                     <img src='../../../images/icons/modificar.svg' class='w-8 h-8 filtro-azul cursor-pointer' title='Modificar' data-datos='" . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . "' onclick='llenarFormulario(this)'>
                     <img src='../../../images/icons/moreGrid.svg' class='w-8 h-8 filtro-negro cursor-pointer' title='Mostrar Más' data-datos='" . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . "' onclick='openModalMostrarMasDatos(event)'>
                     <img src='../../../images/icons/credit-card.svg' class='w-8 h-8 filtro-negro cursor-pointer' onclick='openPagoEspecificoModal(
@@ -151,9 +163,15 @@ function generarTabla($resultados){
         $html .= "<tr><td colspan='6' class='border px-4 py-2 text-center'>No se encontraron resultados.</td></tr>";
     }
 
+    // Agregar paginación al final de la tabla
+    $html .= "<tr><td colspan='6' class='paginacion'>";
+    for ($i = 1; $i <= $total_paginas; $i++) {
+        $clase = ($i == $pagina_actual) ? 'seleccionado' : '';
+        $html .= "<a href='?pagina=$i' class='$clase'>$i</a>";
+    }
+    $html .= "</td></tr>";
+
     return $html;
-
-
 }
 
 
