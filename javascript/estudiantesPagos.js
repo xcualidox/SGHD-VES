@@ -26,6 +26,7 @@ openModalAñadir.addEventListener('click', () => {
 });
 
 closeModalAñadir.addEventListener('click', () => {
+    document.getElementById("formRegistroEstudiante").reset();
     modalAñadir.close(); // Cerrar el modal
 });
 
