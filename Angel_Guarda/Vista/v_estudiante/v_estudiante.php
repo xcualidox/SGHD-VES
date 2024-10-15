@@ -16,7 +16,7 @@ $title = 'Estudiante';
 include_once('../v_Sidebar/v_Sidebar.php');
 ?>
 <!--Aqui se el css se toma del Padre que es Sidebar-->
-<script type="text/javascript" src="../../../javascript/horario/mostrarModal.js"></script>
+
 
 
 
@@ -203,6 +203,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 </div>
 
 </body>
+<script type="text/javascript" src="../../../javascript/horario/mostrarModal.js"></script>
 <!-- Llamado JavaScriptEstudiantes -->
 <script type="text/javascript" src="../../../javascript/estudiantesPagos.js"></script>
 <script src="../../../javascript/jquery-3.7.1.min.js"></script>

@@ -81,18 +81,19 @@ function Mostrar(){
 
 //FUNCION PARA AÑADIR . VISUALMENTE en la cedula
 
-document.addEventListener("DOMContentLoaded", function() {
-    const numeros = document.querySelectorAll(".numeroCedula");
+function formatearCedulas() {
+    const numerosCedula = document.querySelectorAll(".numeroCedula");
 
-    numeros.forEach(function(elemento) {
+    numerosCedula.forEach(function(elemento) {
         const numero = elemento.textContent;
         const numeroFormateado = numero.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         elemento.textContent = numeroFormateado;
     });
-});
+}
 
-//Para Añadirle guion al numero
-document.addEventListener("DOMContentLoaded", function() {
+
+// FUNCION PARA AÑADIR GUION AL NUMERO DE CELULAR
+function formatearNumerosCelular() {
     const numerosCelular = document.querySelectorAll(".numeroCelular");
 
     numerosCelular.forEach(function(elemento) {
@@ -100,7 +101,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Expresión regular que detecta prefijos de celulares venezolanos y agrega un guion
         const numeroFormateado = numero.replace(/^(0412|0416|0424|0414|0426)(\d+)/, '$1-$2');
-        
         elemento.textContent = numeroFormateado;
     });
-});
+}
+formatearCedulas();
+formatearNumerosCelular();

@@ -204,6 +204,11 @@ function registrarFormularioEstudiante() {
             
                         // Actualizar el contenido de la tabla con el nuevo HTML
                         document.getElementById('tablaEstudiante').innerHTML = data.html;
+                      
+                        //Funciones de Formatear en Carpeta horario y mostrarModal.js
+                        formatearCedulas();
+                        formatearNumerosCelular();
+                        
                         document.getElementById("formRegistroEstudiante").reset();
                         // Recargar la página manteniendo el parámetro de página actual
                  
