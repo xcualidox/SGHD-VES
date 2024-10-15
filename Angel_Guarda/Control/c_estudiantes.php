@@ -13,12 +13,14 @@ $resultados = [];  // Inicializar una variable vacía para los resultados
 
 $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $resultados_por_pagina = 10;
+$parametros_extra = '';
 
 
 
 if (isset($_GET['campo']) && isset($_GET['buscar'])) {
     $campo = $_GET['campo'];
     $buscar = $_GET['buscar'];
+    $parametros_extra = "&campo=$campo&buscar=$buscar";
 
     // Dividir el término de búsqueda en palabras
     $palabras = explode(' ', trim($buscar));
@@ -52,80 +54,88 @@ if (isset($_GET['campo']) && isset($_GET['buscar'])) {
     // Filtrar resultados duplicados basados en un campo único, como 'cedula_estudiante'
     $resultados = array_unique(array_map('serialize', $resultados)); // Serialize para hacer único
     $resultados = array_map('unserialize', $resultados);
-    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina);
+    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra );
 } else {
     // Si no se está realizando una búsqueda, traer todos los datos
     $resultados = $estudiante->obtenerRepresentanteRepresentado();
     //Le hago Reverse para traermelo de manera de Ultimo que se muestre de Primero
     $resultados = array_reverse($resultados);
-    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina);
+    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra );
 
   
 }
 
-if (isset($_POST['datosRepresentantes']) && isset($_POST['datosEstudiantes'])) {
-    $datosRepresentantes = $_POST['datosRepresentantes'];
-    $datosEstudiantes = $_POST['datosEstudiantes'];
-
-    // Insertar los datos del estudiante
-    $estudiante->insertEstudiante(
-        $datosEstudiantes['cedulaEstudianteActual'],
-        $datosEstudiantes['cedulaEstudiante'],
-        $datosEstudiantes['nombres'],
-        $datosEstudiantes['apellidos'],
-        $datosEstudiantes['anoSeccion'],
-        $datosEstudiantes['anoEscolar'],
-        $datosRepresentantes['cedulaRepresentante'],
-    );
-
-    // Insertar los datos del representante
-    $estudiante->insertRepresentante(
-        $datosRepresentantes['cedulaRepresentante'],
-        $datosRepresentantes['nombresRepresentante'],
-        $datosRepresentantes['apellidosRepresentante'],
-        $datosRepresentantes['correo'],
-        $datosRepresentantes['direccion'],
-        $datosRepresentantes['telefono'],
-        $datosRepresentantes['telefonoDomicilio']
-    );
-
-    // Insertar la relación entre representante y estudiante
-  // Insertar la relación entre representante y estudiante
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['datosRepresentantes']) && isset($_POST['datosEstudiantes'])) {
+        $datosRepresentantes = $_POST['datosRepresentantes'];
+        $datosEstudiantes = $_POST['datosEstudiantes'];
+        $pagina_actual = intval($_POST['pagina_actual']);
+     
     
-  if (!empty($datosEstudiantes['cedulaEstudianteActual'])) {
+     
+            $estudiante->insertEstudiante(
+                $datosEstudiantes['cedulaEstudianteActual'],
+                $datosEstudiantes['cedulaEstudiante'],
+                $datosEstudiantes['nombres'],
+                $datosEstudiantes['apellidos'],
+                $datosEstudiantes['anoSeccion'],
+                $datosEstudiantes['anoEscolar'],
+                $datosRepresentantes['cedulaRepresentante'],
+            );
+        
+            // Insertar los datos del representante
+            $estudiante->insertRepresentante(
+                $datosRepresentantes['cedulaRepresentante'],
+                $datosRepresentantes['nombresRepresentante'],
+                $datosRepresentantes['apellidosRepresentante'],
+                $datosRepresentantes['correo'],
+                $datosRepresentantes['direccion'],
+                $datosRepresentantes['telefono'],
+                $datosRepresentantes['telefonoDomicilio']
+            );
+        
+            // Insertar la relación entre representante y estudiante
+          // Insertar la relación entre representante y estudiante
+            
+          if (!empty($datosEstudiantes['cedulaEstudianteActual'])) {
+        
+                 // Actualizar la relación entre el estudiante y el nuevo representante
+                 $estudiante->actualizarRepresentanteEstudiante(
+                    $datosEstudiantes['cedulaEstudiante'],
+                    $datosRepresentantes['cedulaRepresentante']
+                );
+        }
+        
+            $estudiante->insertarRelacionRepresentanteEstudiante(
+                $datosEstudiantes['cedulaEstudiante'],
+                $datosRepresentantes['cedulaRepresentante']
+            );
+           
+            $resultados = $estudiante->obtenerRepresentanteRepresentado();
+            $resultados = array_reverse($resultados); // Traer los más recientes primero
+        
+            $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra );
+        
+            // Enviar una respuesta JSON al cliente
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Datos insertados correctamente',
+                'html' => $tablaHTML 
+            ]);
 
-         // Actualizar la relación entre el estudiante y el nuevo representante
-         $estudiante->actualizarRepresentanteEstudiante(
-            $datosEstudiantes['cedulaEstudiante'],
-            $datosRepresentantes['cedulaRepresentante']
-        );
+         
+        }
+    else {
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Ha habido Algun Error'
+        ]);
+    }
+
 }
 
-    $estudiante->insertarRelacionRepresentanteEstudiante(
-        $datosEstudiantes['cedulaEstudiante'],
-        $datosRepresentantes['cedulaRepresentante']
-    );
-   
-    $resultados = $estudiante->obtenerRepresentanteRepresentado();
-    $resultados = array_reverse($resultados); // Traer los más recientes primero
 
-    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina);
-
-    // Enviar una respuesta JSON al cliente
-    echo json_encode([
-        'status' => 'success',
-        'message' => 'Datos insertados correctamente',
-        'html' => $tablaHTML 
-    ]);
-}
-
-
-
-
-
-
-
-function generarTabla($resultados, $pagina_actual, $resultados_por_pagina) {
+function generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra) {
     $html = ''; 
     $total_resultados = count($resultados);
     $total_paginas = ceil($total_resultados / $resultados_por_pagina);
@@ -134,7 +144,7 @@ function generarTabla($resultados, $pagina_actual, $resultados_por_pagina) {
 
     if (!empty($resultados_pagina)) {
         foreach ($resultados_pagina as $dato) {
-            $html .= "<tr>"; // Abre una nueva fila
+            $html .= "<tr>";
             $html .= "<td class='numeroCedula border px-4 py-2'>" . htmlspecialchars($dato['cedula_estudiante']) . "</td>";
             $html .= "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_estudiante']) . " " . htmlspecialchars($dato['apellidos_estudiante']) . "</td>";
             $html .= "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_representante']) . " " . htmlspecialchars($dato['apellidos_representante']) . "</td>";
@@ -156,29 +166,52 @@ function generarTabla($resultados, $pagina_actual, $resultados_por_pagina) {
                     )' alt='Pago Especifico' title='Pago Especifico'>
                 </div>
             </td>";
-            $html .= "</tr>"; // Cierra la fila
+            $html .= "</tr>";
         }
     } else {
-        // Si no hay resultados, mostrar un mensaje
         $html .= "<tr><td colspan='6' class='border px-4 py-2 text-center'>No se encontraron resultados.</td></tr>";
     }
 
     // Agregar paginación al final de la tabla
-    $html .= "<tr><td colspan='6' class='paginacion'>";
-    for ($i = 1; $i <= $total_paginas; $i++) {
-        $clase = ($i == $pagina_actual) ? 'seleccionado' : '';
-        $html .= "<a href='?pagina=$i' class='$clase'>$i</a>";
+    $html .= "<tr><td colspan='6' class='paginacion text-center'>";
+
+    if ($total_paginas > 1) {
+
+        // Mostrar botón de "Anterior"
+    
+
+        // Determinar las páginas a mostrar
+        $mostrar_paginas = 7; // Máximo de páginas a mostrar
+        $rango_inicio = max(1, $pagina_actual - 3);
+        $rango_fin = min($total_paginas, $pagina_actual + 3);
+
+   
+        if ($rango_inicio > 1) {
+            $html .= "<a href='?pagina=1$parametros_extra'>1</a>";
+            if ($rango_inicio > 2) {
+                $html .= "... ";
+            }
+        }
+
+        // Mostrar las páginas en el rango
+        for ($i = $rango_inicio; $i <= $rango_fin; $i++) {
+            $clase = ($i == $pagina_actual) ? 'seleccionado' : '';
+            $html .= "<a href='?pagina=$i$parametros_extra' class='$clase'>$i</a>  ";
+        }
+
+        // Mostrar salto hacia adelante si es necesario
+        if ($rango_fin < $total_paginas) {
+            if ($rango_fin < $total_paginas - 1) {
+                $html .= "... ";
+            }
+            $html .= "<a href='?pagina=$total_paginas$parametros_extra'>$total_paginas</a>";
+        }
+
+        // Mostrar botón de "Siguiente"
+     
     }
+
     $html .= "</td></tr>";
 
     return $html;
 }
-
-
-
-
-
-
-
-
-

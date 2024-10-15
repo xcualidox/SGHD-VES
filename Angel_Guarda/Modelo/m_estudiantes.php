@@ -81,8 +81,6 @@ class estudiante extends database_connect
         }
     }
 
-
-
     public function insertarRelacionRepresentanteEstudiante($cedulaEstudiante, $cedulaRepresentante)
     {
         // Verificar si la relación ya existe

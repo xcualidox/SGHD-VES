@@ -38,7 +38,7 @@
                         <div class="formulario-extenso__column">
                             <label for="anoEscolar">Año Escolar: </label>
                             <select name="anoEscolar" id="anoEscolar" class="formulario-extenso__input">
-    <option value="" disabled selected>---Selecciona---</option>
+    <option value="" disabled >---Selecciona---</option>
     <?php foreach ($anosEscolares as $ano): ?>
         <option value="<?php echo htmlspecialchars($ano); ?>">
             <?php echo htmlspecialchars($ano); ?>
@@ -49,7 +49,7 @@
                         <div class="formulario-extenso__column">
                             <label for="anoSeccion">Año Sección: </label>
                             <select name="anoSeccion" id="anoSeccion" class="formulario-extenso__input">
-    <option value="" disabled selected>---Selecciona---</option>
+    <option value="" disabled >---Selecciona---</option>
     <?php foreach ($anoSeccion as $seccion): ?>
         <option value="<?php echo htmlspecialchars($seccion); ?>">
             <?php echo htmlspecialchars($seccion); ?>

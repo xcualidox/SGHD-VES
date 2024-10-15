@@ -106,6 +106,11 @@ function calcular() {
     return test;
 }
 
+//Parametro para buscar la pagina para que lo recargue ahi
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
 //FORMULARIO DE REGISTRO ESTUDIANTE
 function registrarFormularioEstudiante() {
 
@@ -186,22 +191,30 @@ function registrarFormularioEstudiante() {
             type: 'POST',
             data: {
                 datosRepresentantes: datosRepresentantes,
-                datosEstudiantes: datosEstudiantes
+                datosEstudiantes: datosEstudiantes,
+                pagina_actual: getQueryParam('pagina') || 1 
             },
             success: function (response) {
-                const data = JSON.parse(response);
-                
-                if (data.status === 'success') {
-                    // Mostrar el toast de éxito
-                    showToast("Formulario enviado correctamente", true);
-        
-                    // Actualizar el contenido de la tabla con el nuevo HTML
-                    document.getElementById('tablaEstudiante').innerHTML = data.html;
-                    document.getElementById("formRegistroEstudiante").reset();
+                try {
+                    const data = JSON.parse(response);
                     
-
-                } else {
-                    showToast("Hubo un error al enviar los datos", false);
+                    if (data.status === 'success') {
+                        // Mostrar el toast de éxito
+                        showToast("Formulario enviado correctamente", true);
+            
+                        // Actualizar el contenido de la tabla con el nuevo HTML
+                        document.getElementById('tablaEstudiante').innerHTML = data.html;
+                        document.getElementById("formRegistroEstudiante").reset();
+                        // Recargar la página manteniendo el parámetro de página actual
+                 
+                    } else {
+                        // Mostrar mensaje de error del servidor
+                        showToast("Error fas: " + data.message, false);
+                    }
+                } catch (mensageError) {
+                    // Capturar errores de JSON.parse o formato inválido
+                    console.error('Error al procesar la respuesta:', mensageError);
+                    showToast("Estudiante ya Registrado", false);
                 }
             },
             error: function (error) {

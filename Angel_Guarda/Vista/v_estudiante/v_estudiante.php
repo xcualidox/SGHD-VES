@@ -49,7 +49,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <option value="nombre_representante">Nombre Representante</option>
             </select>
 
-            <input type="text" id="buscar" name="buscar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
+            <input type="text" id="buscar" name="buscar" value="" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
 
             <button type="submit" class="bg-gray-100 rounded-full">
                 <img src="../../../images/icons/buscar.svg" class="w-20 filtro-verde" alt="Buscar" title="Buscar">
@@ -89,14 +89,12 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
 
-                <tr>
-                    <?php
+               
+                <?php
              
 
                 echo $tablaHTML;
-                    ?>
-
-                </tr>
+                 ?>
 
 
 
