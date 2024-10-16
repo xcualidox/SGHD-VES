@@ -141,7 +141,25 @@ class estudiante extends database_connect
         return $anoEscolar;
     }
 
-    public function obtenerRepresentanteRepresentado() {
+    public function contarTotalEstudiantesRepresentantes() {
+        $query = "SELECT COUNT(*) as total 
+                  FROM `representante-representado` rr 
+                  JOIN estudiante e ON rr.cedula_estudiante = e.cedula_estudiante 
+                  JOIN representante r ON rr.cedula_representante = r.cedula_representante";
+    
+        // Ejecutar la consulta
+        $result = $this->query($query,[]);
+    
+        // Retornar el total de registros
+        if ($result) {
+            $row = $this->fetch_query($result);
+            return $row['total'];
+        }
+    
+        return 0;  // Si no hay resultados, retornar 0
+    }
+
+    public function obtenerRepresentanteRepresentado($limit, $offset) {
         // Consulta SQL
 
    
@@ -161,8 +179,7 @@ class estudiante extends database_connect
             FROM `representante-representado` rr 
             JOIN estudiante e ON rr.cedula_estudiante = e.cedula_estudiante 
             JOIN representante r ON rr.cedula_representante = r.cedula_representante
-            ";
-        
+            LIMIT $limit OFFSET $offset";
         // Ejecutar la consulta
         $result = $this->query($query, []);
     

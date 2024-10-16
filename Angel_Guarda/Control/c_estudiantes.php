@@ -4,15 +4,18 @@ require_once(__DIR__ . "/../Modelo/m_estudiantes.php");
 
 $estudiante = new estudiante();
 
+
+$total_registrosEstRep=$estudiante->contarTotalEstudiantesRepresentantes(); //Muestra el total de Registros de la pagina
 // Obtener los años escolares
 $anosEscolares = $estudiante->obtenerAnoEscolar();
 $anoSeccion = $estudiante->obtenerAnoSeccion();
 
-$resultados = [];  // Inicializar una variable vacía para los resultados
+
 
 
 $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-$resultados_por_pagina = 10;
+$resultados_por_pagina = 1;
+$offset = ($pagina_actual - 1) * $resultados_por_pagina;
 $parametros_extra = '';
 
 
@@ -54,13 +57,20 @@ if (isset($_GET['campo']) && isset($_GET['buscar'])) {
     // Filtrar resultados duplicados basados en un campo único, como 'cedula_estudiante'
     $resultados = array_unique(array_map('serialize', $resultados)); // Serialize para hacer único
     $resultados = array_map('unserialize', $resultados);
-    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra );
+    $tablaHTML =generarTabla($resultados, $pagina_actual, $resultados_por_pagina, $parametros_extra, $total_registrosEstRep);
 } else {
     // Si no se está realizando una búsqueda, traer todos los datos
-    $resultados = $estudiante->obtenerRepresentanteRepresentado();
+
+    var_dump($resultados_por_pagina);
+    var_dump($offset);
+  
+
+    $resultados = $estudiante->obtenerRepresentanteRepresentado($resultados_por_pagina, $offset);
+  
+
     //Le hago Reverse para traermelo de manera de Ultimo que se muestre de Primero
     $resultados = array_reverse($resultados);
-    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra );
+    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina, $parametros_extra, $total_registrosEstRep);
 
   
 }
@@ -111,10 +121,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $datosRepresentantes['cedulaRepresentante']
             );
            
-            $resultados = $estudiante->obtenerRepresentanteRepresentado();
+            $resultados = $estudiante->obtenerRepresentanteRepresentado($resultados_por_pagina, $offset);
             $resultados = array_reverse($resultados); // Traer los más recientes primero
         
-            $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra );
+            $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina, $parametros_extra, $total_registrosEstRep);
         
             // Enviar una respuesta JSON al cliente
             echo json_encode([
@@ -135,15 +145,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
-function generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra) {
+function generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra,$total_registrosEstRep) {
+    
     $html = ''; 
-    $total_resultados = count($resultados);
-    $total_paginas = ceil($total_resultados / $resultados_por_pagina);
-    $inicio = ($pagina_actual - 1) * $resultados_por_pagina;
-    $resultados_pagina = array_slice($resultados, $inicio, $resultados_por_pagina);
 
-    if (!empty($resultados_pagina)) {
-        foreach ($resultados_pagina as $dato) {
+    $total_paginas = ceil($total_registrosEstRep / $resultados_por_pagina);
+
+    
+    
+
+    if (!empty($resultados)) {
+        foreach ($resultados as $dato) {
             $html .= "<tr>";
             $html .= "<td class='numeroCedula border px-4 py-2'>" . htmlspecialchars($dato['cedula_estudiante']) . "</td>";
             $html .= "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_estudiante']) . " " . htmlspecialchars($dato['apellidos_estudiante']) . "</td>";
@@ -177,29 +189,27 @@ function generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$param
 
     if ($total_paginas > 1) {
 
+
         // Mostrar botón de "Anterior"
     
 
         // Determinar las páginas a mostrar
-        $mostrar_paginas = 7; // Máximo de páginas a mostrar
+
         $rango_inicio = max(1, $pagina_actual - 3);
         $rango_fin = min($total_paginas, $pagina_actual + 3);
 
-   
         if ($rango_inicio > 1) {
-            $html .= "<a href='?pagina=1$parametros_extra'>1</a>";
+            $html .= "<a href='?pagina=1$parametros_extra'>1</a> ";
             if ($rango_inicio > 2) {
                 $html .= "... ";
             }
         }
 
-        // Mostrar las páginas en el rango
         for ($i = $rango_inicio; $i <= $rango_fin; $i++) {
             $clase = ($i == $pagina_actual) ? 'seleccionado' : '';
-            $html .= "<a href='?pagina=$i$parametros_extra' class='$clase'>$i</a>  ";
+            $html .= "<a href='?pagina=$i$parametros_extra' class='$clase'>$i</a> ";
         }
 
-        // Mostrar salto hacia adelante si es necesario
         if ($rango_fin < $total_paginas) {
             if ($rango_fin < $total_paginas - 1) {
                 $html .= "... ";
@@ -207,8 +217,7 @@ function generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$param
             $html .= "<a href='?pagina=$total_paginas$parametros_extra'>$total_paginas</a>";
         }
 
-        // Mostrar botón de "Siguiente"
-     
+       
     }
 
     $html .= "</td></tr>";
