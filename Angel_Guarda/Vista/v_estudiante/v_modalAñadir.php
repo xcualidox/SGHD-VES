@@ -21,7 +21,7 @@
                     <div class="formulario-extenso__row">
                         <div class="formulario-extenso__column">
                             <label for="cedulaEstudiante">Cédula Estudiante: </label>
-                            <input type="text" id="cedulaEstudiante" name="cedulaEstudiante" autocomplete="off" placeholder="Cédula del Estudiante" class="formulario-extenso__input" maxlength="12">
+                            <input type="number" id="cedulaEstudiante" name="cedulaEstudiante" autocomplete="off" placeholder="Cédula del Estudiante" class="numeroMax formulario-extenso__input" maxlength="12">
                         </div>
                     </div>
                     <div class="formulario-extenso__row">
@@ -66,7 +66,7 @@
                     <div class="formulario-extenso__row">
                         <div class="formulario-extenso__column">
                             <label for="cedulaRepresentante">Cédula Representante: </label>
-                            <input type="text" id="cedulaRepresentante" name="cedulaRepresentante" autocomplete="off" placeholder="Cédula del Representante" class="formulario-extenso__input" maxlength="9">
+                            <input type="number" id="cedulaRepresentante" name="cedulaRepresentante" autocomplete="off" placeholder="Cédula del Representante" class="formulario-extenso__input" maxlength="9">
                         </div>
                     </div>
                     <div class="formulario-extenso__row">
@@ -82,11 +82,11 @@
                     <div class="formulario-extenso__row">
                         <div class="formulario-extenso__column">
                             <label for="telefono">Telefono: </label>
-                            <input type="input" name="telefono" id="telefono" placeholder="Telefono" autocomplete="off" class="formulario-extenso__input" maxlength="17">
+                            <input type="number" name="telefono" id="telefono" placeholder="Telefono" autocomplete="off" class="numeroMax formulario-extenso__input" maxlength="17">
                         </div>
                         <div class="formulario-extenso__column">
                             <label for="telefonoDomicilio">telefono 2: </label>
-                            <input type="input" name="telefonoDomicilio" id="telefonoDomicilio" autocomplete="off" class="formulario-extenso__input" placeholder="telefono 2:" maxlength="17">
+                            <input type="number" name="telefonoDomicilio" id="telefonoDomicilio" autocomplete="off" class="numeroMax formulario-extenso__input" placeholder="telefono 2:" maxlength="17">
                         </div>
                     </div>
                 </div>

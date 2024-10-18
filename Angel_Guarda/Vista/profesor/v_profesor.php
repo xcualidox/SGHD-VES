@@ -184,6 +184,9 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 </body>
 
-<script></script>
+<script>
+        formatearCedulas();
+        formatearNumerosCelular();
+</script>
 
 </html>

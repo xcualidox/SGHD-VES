@@ -3,6 +3,7 @@
     /* Definir los colores */
     --color-primary: #058671;  /* Verde oscuro */
     --color-secondary: #00796b;  /* Verde */
+    --color-verdeOscuro: #105e55;  /* Verde */
     --color-tertiary: #7fccc3;  /* Fondo claro */
     --color-highlight: #b6e0e5;  /* Azul verdoso */
     --color-gris:#919494; /* Gris Claro */
@@ -237,8 +238,8 @@ thead {
 
 
 .table_button:hover {
-    background-color: var(--color-secondary);
-    transform: scale(1.1);
+    background-color: var(--color-verdeOscuro);
+  
 }
 
 .desactivar {
@@ -581,3 +582,46 @@ summary {
     font-size: 14px;
     font-weight: bold;
 }
+
+
+/* LISTA DE FILTRACION */
+
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+}
+
+.options-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 10;
+    display: none; /* Por defecto oculto */
+}
+
+.options-list.visible {
+    display: block; /* Mostrar opciones cuando esté visible */
+}
+
+.options-list div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.options-list div:hover {
+    background-color: #f1f1f1;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }

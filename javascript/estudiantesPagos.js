@@ -1,26 +1,18 @@
 //Regex solo numeros enteros sin .
 const regexSoloNumeros = /^\d+$/;
+const minimoNumeros=/^\d{11,}$/;
 // Modal Añadir
-const modalAñadir = document.querySelector('#modalAñadir');
-const openModalAñadir = document.querySelector('#openModalAñadir');
-const closeModalAñadir = document.querySelector('#closeModalAñadir');
 
 // Modal Pagos
-const modalPagos = document.querySelector('#modalPagos');
-const openModalPagos = document.querySelector('#openModalPagos');
-const closeModalPagos = document.querySelector('#closeModalPagos');
 
 // Modal Mostrar Más
-const modalMostrarMas = document.querySelector('#modalMostrarMas');
-const openModalMostrarMas = document.querySelector('#openMostrarMas');
-const closeModalMostrarMas = document.querySelector('#closeMostrarMas');
+
+
 
 // Modal Pago Específico
-const modalPagoEspecifico = document.querySelector('#modalPagosEspecificos');
-const openModalPagoEspecifico = document.querySelector('#openPagoEspecifico');
-const closeModalPagoEspecifico = document.querySelector('#closePagosEspecificos');
 
 // Eventos para abrir y cerrar los modales
+//MODAL DE REGISTRO ESTUDIANTE REPRESENTANTE
 openModalAñadir.addEventListener('click', () => {
     modalAñadir.showModal(); // Abrir el modal
 });
@@ -29,6 +21,14 @@ closeModalAñadir.addEventListener('click', () => {
     document.getElementById("formRegistroEstudiante").reset();
     modalAñadir.close(); // Cerrar el modal
 });
+openModalMensualidad.addEventListener('click', () => {
+    modalMensualidad.showModal(); // Abrir el modal
+});
+
+closeModalMensualidad.addEventListener('click', () => {
+    modalMensualidad.close(); // Cerrar el modal
+});
+
 
 openModalPagos.addEventListener('click', () => {
     modalPagos.showModal(); // Abrir el modal
@@ -82,6 +82,7 @@ function actualizarDolar() {
             success: function (data) {
                 if (data.success) {
                     console.log('Respuesta del servidor:', data);
+                    showToast(data.success);
                     cargarDolar(); // Recargar el valor actualizado
                 } else {
                     console.error('Error en la actualización:', data.error);
@@ -156,7 +157,7 @@ function registrarFormularioEstudiante() {
 
 
     // Si alguna cédula no es un número, retorna falso
-      if (!regexSoloNumeros.test(cedulaEstudiante) || !regexSoloNumeros.test(cedulaRepresentante))  {
+      if (!regexSoloNumeros.test(cedulaEstudiante) || !regexSoloNumeros.test(cedulaRepresentante) && !regexSoloNumeros.test(telefono))  {
         formularioValido = false;
    
     }
@@ -209,7 +210,7 @@ function registrarFormularioEstudiante() {
                         formatearCedulas();
                         formatearNumerosCelular();
                         
-                        document.getElementById("formRegistroEstudiante").reset();
+               
                         // Recargar la página manteniendo el parámetro de página actual
                  
                     } else {
@@ -308,29 +309,40 @@ function openPagoEspecificoModal(cedulaEstudiante, nombresEstudiante, apellidosE
     modal.showModal();
 }
 
+// Función para abrir el modal y mostrar los datos
 function openModalMostrarMasDatos(event) {
     const datos = JSON.parse(event.target.getAttribute('data-datos')); // Obtén los datos del atributo data-datos
     console.log(datos); // Muestra los datos en consola
 
     // Aquí puedes usar los datos para mostrar en el modal
-    const modalContent = modalMostrarMas.querySelector('p');
+    document.getElementById('DatosCompletosMostrarMas').textContent = `
+        Cédula Estudiante: ${datos.cedula_estudiante}
+        Nombres Estudiante: ${datos.nombres_estudiante}
+        Apellidos Estudiante: ${datos.apellidos_estudiante}
+        Nombres Representante: ${datos.nombres_representante}
+        Apellidos Representante: ${datos.apellidos_representante}
+        Teléfono: ${datos.telefono}
+    `;
 
-    document.getElementById('DatosCompletosMostrarMas').textContent =`Cédula Estudiante: ${datos.cedula_estudiante}
-                                Nombres Estudiante: ${datos.nombres_estudiante}
-                                Apellidos Estudiante: ${datos.apellidos_estudiante}
-                                Nombres Representante: ${datos.nombres_representante}
-                                Apellidos Representante: ${datos.apellidos_representante}
-                                Teléfono: ${datos.telefono}`;
-   
-    
     modalMostrarMas.showModal(); // Abre el modal
 }
 
-// Cerrar el modal al hacer clic en el botón de cerrar
-modalMostrarMas.addEventListener('click', () => {
+// Obtener el modal y el botón de cerrar por su ID
+
+const closeBtn = document.getElementById('closeMostrarMas');
+
+// Cerrar el modal al hacer clic en el botón de cerrar (X)
+closeBtn.addEventListener('click', () => {
     modalMostrarMas.close(); // Cierra el modal
-}
-);
+});
 
 
 
+document.querySelector('.numeroMax').addEventListener('input', function(e) {
+    const maxLength = e.target.getAttribute('maxlength');
+    const value = e.target.value;
+    
+    if (value.length > maxLength) {
+        e.target.value = value.slice(0, maxLength);
+    }
+});

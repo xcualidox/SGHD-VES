@@ -23,12 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($data['DolarBCV']) && is_numeric($data['DolarBCV'])) {
         // Establecer los nuevos datos del precio
         $dolarModel->setDatos(1, $data['DolarBCV']);  // Asumiendo que el ID del dólar es 1
+       
         
         // Modificar el precio del dólar
         $resultado = $dolarModel->modificar();
+        $precio = $dolarModel->obtenerPrecio();
 
         if ($resultado) {
-            echo json_encode(['success' => 'El precio del dólar se ha actualizado']);
+            echo json_encode(['success' => 'El precio del dólar se ha actualizado a: '.$precio]);
         } else {
             echo json_encode(['error' => 'Error al actualizar el precio del dólar']);
         }

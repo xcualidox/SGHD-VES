@@ -23,17 +23,21 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
 <div class="main-content">
-    <div class="flex flex-col sm:flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
-        <h1 class="text-xl font-semibold mb-2 md:mb-0"><?php echo $title; ?></h1>
-        <div class="flex ">
-            <h3 class=" font-semibold mb-2 md:mb-0">
+<div class="flex absolute mt-3 ">
+            <h3 class=" font-semibold  ">
                 Dólar BCV: <input type="text" class=" text-balance  w-28  border  font-normal  outline-none px-2 py-1 mb-2 md:mb-0" id="DolarBCV" maxlength="9" onblur="actualizarDolar()">
             </h3>
         </div>
 
+    <div class="flex flex-col sm:flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
+        <h1 class="text-xl font-semibold mb-2 md:mb-0"><?php echo $title; ?></h1>
+    
         <!-- Primer botón que abre el modal de "Añadir" -->
         <div class="bg-gray-100 rounded-full cursor-pointer" id="openModalAñadir">
             <img src="../../../images/icons/añadir.svg" class="w-10 filtro-verde" alt="Añadir" title="Añadir">
+        </div>
+        <div class="bg-gray-100 rounded-full cursor-pointer" id="openModalMensualidad">
+            <img src="../../../images/icons/calendario.svg" class="w-10 filtro-verde" alt="openModalMensualidad" title="Mensualidad">
         </div>
 
         <!-- Segundo botón que abre el modal de "Ver Pagos" -->
@@ -172,10 +176,6 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
                 </div>
 
-
-
-
-
             </div>
 
             <!-- Botón de cerrar en la parte superior derecha -->
@@ -199,6 +199,26 @@ include_once('../v_Sidebar/v_Sidebar.php');
         </details>
 
     </dialog>
+    <!-- MODAL PAGO ESPECIFICO -->
+
+
+    <!-- INICIO MENSUALIDAD -->
+    <dialog id="modalMensualidad">
+        <div class="flex justify-end items-end">
+            <div class="w-10 bg-red-500 rounded-full cursor-pointer p-2" id="closeModalMensualidad">
+                <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
+            </div>
+        </div>
+    
+        
+        <?php 
+
+            include_once('v_mensualidad.php');
+        ?>
+
+     
+    </dialog>
+    <!-- FINAL MENSUALIDAD -->
 
 </div>
 
@@ -206,6 +226,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 <script type="text/javascript" src="../../../javascript/horario/mostrarModal.js"></script>
 <!-- Llamado JavaScriptEstudiantes -->
 <script type="text/javascript" src="../../../javascript/estudiantesPagos.js"></script>
+<script type="text/javascript" src="../../../javascript/mensualidad.js"></script>
 <script src="../../../javascript/jquery-3.7.1.min.js"></script>
 
 </html>
