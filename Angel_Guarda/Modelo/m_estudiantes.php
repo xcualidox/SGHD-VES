@@ -174,8 +174,57 @@ class estudiante extends database_connect
     
         return []; // Devuelve un array vacío si no se encontraron resultados
     }
-    public function consultarEstudianteRepresentante($cedulaEstudiante = null, $cedulaRepresentante = null, $nombreEstudiante = null, $nombreRepresentante = null) {
-        // Inicia la consulta base
+
+    public function cantidadResultados($cedulaEstudiante = null, $cedulaRepresentante = null, $nombreEstudiante = null, $nombreRepresentante = null){
+        
+        $query = "
+            SELECT COUNT(*)
+              
+            FROM `representante-representado` rr 
+            JOIN estudiante e ON rr.cedula_estudiante = e.cedula_estudiante 
+            JOIN representante r ON rr.cedula_representante = r.cedula_representante
+            WHERE 1=1";  // Esto garantiza que se pueda agregar condicionales de manera flexible
+    
+        // Array para almacenar los parámetros de la consulta
+        $params = [];
+    
+        // Agrega condiciones dinámicamente basadas en los parámetros pasados
+        if ($cedulaEstudiante) {
+            $query .= " AND e.cedula_estudiante = ?";
+            $params[] = $cedulaEstudiante;
+        }
+    
+        if ($cedulaRepresentante) {
+            $query .= " AND r.cedula_representante = ?";
+            $params[] = $cedulaRepresentante;
+        }
+    
+        if ($nombreEstudiante) {
+            // Buscar por nombres y apellidos concatenados del estudiante
+            $query .= " AND CONCAT(e.nombres, ' ', e.apellidos) LIKE ?";
+            $params[] = "%" . $nombreEstudiante . "%";  // Usamos LIKE para buscar coincidencias parciales
+        }
+    
+        if ($nombreRepresentante) {
+            // Buscar por nombres y apellidos concatenados del representante
+            $query .= " AND CONCAT(r.nombres, ' ', r.apellidos) LIKE ?";
+            $params[] = "%" . $nombreRepresentante . "%";
+        }
+    
+        // Ejecutar la consulta con los parámetros
+        $result = $this->query($query, $params);
+    
+        // Verificar si se encontraron resultados
+        if ($result) {
+            // Devolver todos los registros encontrados
+            return $this->fetch_all_query($result);
+        }
+    
+        return 0; // Devuelve 0 si no se encontraron resultados
+    }
+
+    public function consultarEstudianteRepresentante($cedulaEstudiante = null, $cedulaRepresentante = null, $nombreEstudiante = null, $nombreRepresentante = null, $limit = "0", $offset = "0") {
+
         $query = "
             SELECT 
                 e.cedula_estudiante AS cedula_estudiante,
@@ -221,9 +270,11 @@ class estudiante extends database_connect
             $query .= " AND CONCAT(r.nombres, ' ', r.apellidos) LIKE ?";
             $params[] = "%" . $nombreRepresentante . "%";
         }
+
+        $querylista=$query." LIMIT ".$limit." OFFSET ".$offset;
     
         // Ejecutar la consulta con los parámetros
-        $result = $this->query($query, $params);
+        $result = $this->query($querylista, $params);
     
         // Verificar si se encontraron resultados
         if ($result) {

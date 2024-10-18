@@ -73,19 +73,19 @@ function DeshabilitarAulaGrupo() {
     
   for (let i = 0; i < aulasAhabilitadas.length; i++) {
     if(aulasAhabilitadas[i].value==aulaB.value && aulasAhabilitadas[i].value!=''){
-      aulasAhabilitadas[i].hidden=true;
+      aulasAhabilitadas[i].style.display='none';
     }
     else{
-      aulasAhabilitadas[i].hidden=false;
+      aulasAhabilitadas[i].style.display='block';
     }
   }
 
   for (let i = 0; i < aulasBhabilitadas.length; i++) {
     if(aulasBhabilitadas[i].value==aulaA.value && aulasBhabilitadas[i].value!=''){
-      aulasBhabilitadas[i].hidden=true;
+      aulasBhabilitadas[i].style.display='none';
     }
     else{
-      aulasBhabilitadas[i].hidden=false;
+      aulasBhabilitadas[i].style.display='block';
     }
   
   }
