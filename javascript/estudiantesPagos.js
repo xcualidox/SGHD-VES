@@ -112,6 +112,9 @@ function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
 }
+
+
+
 //FORMULARIO DE REGISTRO ESTUDIANTE
 function registrarFormularioEstudiante() {
 
@@ -186,6 +189,7 @@ function registrarFormularioEstudiante() {
             anoEscolar: anoEscolar
         };
 
+        
         // Realizar la solicitud AJAX
         $.ajax({
             url: '../../Control/c_estudiantes.php',
@@ -205,6 +209,7 @@ function registrarFormularioEstudiante() {
             
                         // Actualizar el contenido de la tabla con el nuevo HTML
                         document.getElementById('tablaEstudiante').innerHTML = data.html;
+                        
                       
                         //Funciones de Formatear en Carpeta horario y mostrarModal.js
                         formatearCedulas();
@@ -338,11 +343,13 @@ closeBtn.addEventListener('click', () => {
 
 
 
-document.querySelector('.numeroMax').addEventListener('input', function(e) {
-    const maxLength = e.target.getAttribute('maxlength');
-    const value = e.target.value;
-    
-    if (value.length > maxLength) {
-        e.target.value = value.slice(0, maxLength);
-    }
+document.querySelectorAll('.numeroMax').forEach(function(input) {
+    input.addEventListener('input', function(e) {
+        const maxLength = e.target.getAttribute('maxlength');
+        const value = e.target.value;
+        
+        if (value.length > maxLength) {
+            e.target.value = value.slice(0, maxLength);
+        }
+    });
 });

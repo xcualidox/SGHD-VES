@@ -83,8 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['datosRepresentantes']) && isset($_POST['datosEstudiantes'])) {
         $datosRepresentantes = $_POST['datosRepresentantes'];
         $datosEstudiantes = $_POST['datosEstudiantes'];
-        $pagina_actual = intval($_POST['pagina_actual']);
-     
+      
     
      
             $estudiante->insertEstudiante(
@@ -125,8 +124,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $datosRepresentantes['cedulaRepresentante']
             );
            
-            $resultados = $estudiante->obtenerRepresentanteRepresentado();
-            $resultados = array_reverse($resultados); // Traer los más recientes primero
+            $resultados = $estudiante->consultarEstudianteRepresentante(null, null, null, null, $resultados_por_pagina, $offset);
+          
         
             $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra, $resultados_totales);
         

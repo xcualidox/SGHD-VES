@@ -66,7 +66,7 @@
                     <div class="formulario-extenso__row">
                         <div class="formulario-extenso__column">
                             <label for="cedulaRepresentante">Cédula Representante: </label>
-                            <input type="number" id="cedulaRepresentante" name="cedulaRepresentante" autocomplete="off" placeholder="Cédula del Representante" class="formulario-extenso__input" maxlength="9">
+                            <input type="number" id="cedulaRepresentante" name="cedulaRepresentante" autocomplete="off" placeholder="Cédula del Representante" class="numeroMax formulario-extenso__input" maxlength="9">
                         </div>
                     </div>
                     <div class="formulario-extenso__row">
