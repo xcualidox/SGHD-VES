@@ -12,7 +12,16 @@ $resultados = [];  // Inicializar una variable vacía para los resultados
 
 
 $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
 $resultados_por_pagina = 10;
+$offset = 0;
+
+if (isset($_GET['pagina'])){
+    $pagina=$_GET['pagina']-1;
+
+    $offset= $resultados_por_pagina*$pagina;  
+}
+
 $parametros_extra = '';
 
 
@@ -21,49 +30,54 @@ if (isset($_GET['campo']) && isset($_GET['buscar'])) {
     $campo = $_GET['campo'];
     $buscar = $_GET['buscar'];
     $parametros_extra = "&campo=$campo&buscar=$buscar";
+}
+else{
+    $campo = '';
+    $buscar = '';
+    $parametros_extras = '';
+}
 
-    // Dividir el término de búsqueda en palabras
-    $palabras = explode(' ', trim($buscar));
+// Dividir el término de búsqueda en palabras
+$palabras = explode(' ', trim($buscar));
 
-    $resultados = []; // Inicializa el arreglo de resultados
+$resultados = []; // Inicializa el arreglo de resultados
 
-    switch ($campo) {
-        case 'cedula_estudiante':
-            $resultados = $estudiante->consultarEstudianteRepresentante($buscar, null, null, null);
-            break;
-        case 'nombre_estudiante':
-            foreach ($palabras as $palabra) {
-                $resultadosPalabra = $estudiante->consultarEstudianteRepresentante(null, null, $palabra, null);
-                $resultados = array_merge($resultados, $resultadosPalabra);
-            }
-            break;
-        case 'cedula_representante':
-            $resultados = $estudiante->consultarEstudianteRepresentante(null, $buscar, null, null);
-            break;
-        case 'nombre_representante':
-            foreach ($palabras as $palabra) {
-                $resultadosPalabra = $estudiante->consultarEstudianteRepresentante(null, null, null, $palabra);
-                $resultados = array_merge($resultados, $resultadosPalabra);
-            }
-            break;
-        default:
-            $resultados = []; // Si no se selecciona ningún campo válido
-            break;
-    }
+switch ($campo) {
+    case 'cedula_estudiante':
+        $resultados = $estudiante->consultarEstudianteRepresentante($buscar, null, null, null, $resultados_por_pagina, $offset);
+        $resultados_totales=$estudiante->cantidadResultados($buscar, null, null, null);
+        break;
+    case 'nombre_estudiante':
+        foreach ($palabras as $palabra) {
+            $resultadosPalabra = $estudiante->consultarEstudianteRepresentante(null, null, $palabra, null, $resultados_por_pagina, $offset);
+            $resultados = array_merge($resultados, $resultadosPalabra);
+        }
+        $resultados_totales=$estudiante->cantidadResultados(null, null, $palabra, null);
+        break;
+    case 'cedula_representante':
+        $resultados = $estudiante->consultarEstudianteRepresentante(null, $buscar, null, null, $resultados_por_pagina, $offset);
+        $resultados_totales=$estudiante->cantidadResultados(null, $buscar, null, null);
+        break;
+    case 'nombre_representante':
+        foreach ($palabras as $palabra) {
+            $resultadosPalabra = $estudiante->consultarEstudianteRepresentante(null, null, null, $palabra, $resultados_por_pagina, $offset);
+            $resultados = array_merge($resultados, $resultadosPalabra);
+        }
+        $resultados_totales=$estudiante->cantidadResultados(null, null, $palabra, null);
+        break;
+    default:
+        $resultados = $estudiante->consultarEstudianteRepresentante(null, null, null, null, $resultados_por_pagina, $offset);
+        $resultados_totales=$estudiante->cantidadResultados(null, null, null, null);
+        break;
+}
+
+    
 
     // Filtrar resultados duplicados basados en un campo único, como 'cedula_estudiante'
     $resultados = array_unique(array_map('serialize', $resultados)); // Serialize para hacer único
     $resultados = array_map('unserialize', $resultados);
-    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra );
-} else {
-    // Si no se está realizando una búsqueda, traer todos los datos
-    $resultados = $estudiante->obtenerRepresentanteRepresentado();
-    //Le hago Reverse para traermelo de manera de Ultimo que se muestre de Primero
-    $resultados = array_reverse($resultados);
-    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra );
+    $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra, $resultados_totales);
 
-  
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['datosRepresentantes']) && isset($_POST['datosEstudiantes'])) {
@@ -114,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $resultados = $estudiante->obtenerRepresentanteRepresentado();
             $resultados = array_reverse($resultados); // Traer los más recientes primero
         
-            $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra );
+            $tablaHTML = generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra, $resultados_totales);
         
             // Enviar una respuesta JSON al cliente
             echo json_encode([
@@ -135,15 +149,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
-function generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra) {
+function generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$parametros_extra, $resultados_totales) {
     $html = ''; 
-    $total_resultados = count($resultados);
+    //$total_resultados = count($resultados);
+    
+    $total_resultados = $resultados_totales[0]["COUNT(*)"];
     $total_paginas = ceil($total_resultados / $resultados_por_pagina);
-    $inicio = ($pagina_actual - 1) * $resultados_por_pagina;
-    $resultados_pagina = array_slice($resultados, $inicio, $resultados_por_pagina);
+    //$inicio = ($pagina_actual - 1) * $resultados_por_pagina;
+    //$resultados_pagina = array_slice($resultados, $inicio, $resultados_por_pagina);
 
-    if (!empty($resultados_pagina)) {
-        foreach ($resultados_pagina as $dato) {
+    if (!empty($resultados)) {
+        foreach ($resultados as $dato) {
             $html .= "<tr>";
             $html .= "<td class='numeroCedula border px-4 py-2'>" . htmlspecialchars($dato['cedula_estudiante']) . "</td>";
             $html .= "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_estudiante']) . " " . htmlspecialchars($dato['apellidos_estudiante']) . "</td>";
