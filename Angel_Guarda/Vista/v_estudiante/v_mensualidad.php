@@ -3,7 +3,7 @@
         <h1 class="text-xl font-semibold">Mensualidad</h1>
         <!-- Botón para añadir -->
         <div class="bg-gray-100 rounded-full cursor-pointer" id="addRowBtn">
-            <img src="../../../images/icons/addIcon.svg" class="w-10 filtro-verde" alt="Añadir" title="Añadir">
+            <img src="../../../images/icons/addIcon.svg" class="w-10 filtro-verde-SinScale" alt="Añadir" title="Añadir">
         </div>
         
         <!-- Formulario de selección del año escolar -->
@@ -37,7 +37,9 @@
 
          
         </tbody>
+     
     </table>
 
-    <input type="button" id="guardarBtnEstudiante" value="Guardar" class="table_button w-full" >
+   
 </div>
+<input type="button" id="guardarBtnMensualidad" value="Guardar" class="table_button w-full"  onclick="guardarMensualidad()">

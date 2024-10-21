@@ -57,6 +57,11 @@
 .filtro-verde:hover{
     transform: scale(1.1);
 }
+.filtro-verde-SinScale{
+    filter: var(  --filtroPrimario);
+    cursor: pointer;
+    transition: 0.5s; /* Aplicar transición al img también si es necesario */
+}
 
 .filtro-blanco{
     filter: var(  --filtroBlanco);
@@ -82,6 +87,12 @@
     filter: var( --filtroRojo);
     cursor: pointer;
     transition: 0.5s; /* Aplicar transición al img también si es necesario */
+}
+
+.filtro-rojo-SinScale{
+    filter: var( --filtroRojo);
+    cursor: pointer;
+    transition: 0.5s; 
 }
 .filtro-rojo:hover{
     transform: scale(1.1);
@@ -625,3 +636,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input[type=number] { -moz-appearance:textfield; }
+
+img {
+    width: 100%; /* Asegúrate de que la proporción se mantenga */
+    height: auto; /* Evita distorsiones */
+}
