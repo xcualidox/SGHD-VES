@@ -5,6 +5,7 @@ $operacion = new zona();
 
 $url="Location: ../Vista/Profesores_Materias/profesor_materia.php";
 $estado;
+$registro=false;
 
 if (isset($_POST["cedula"])) {
     // Si se recibe una cédula, selecciona las materias del profesor
@@ -36,7 +37,7 @@ if (isset($_POST["cedula"])) {
             //Para debug
             echo 'Profesor mezclado al modificar o ya existe al crear';
 
-            $estado='error';
+            $estado='profesormezclado';
 
             
             header($url.'?estado='.$estado);
@@ -47,8 +48,8 @@ if (isset($_POST["cedula"])) {
         else{
 
             $operacion->Modificar($cedula_nueva, $cedula_original);
-            require_once("c_bitacora.php");
-            insertBitacora($_SESSION['username'], "modificar", 'Movió el PEMSUN del profesor '.$cedula_original.' a '.$cedula_nueva.'.');
+            $registro=true;
+            $cambio=true;
     
             // Ahora eliminamos las entradas antiguas asociadas a 'cedula_original'
             //$operacion->Eliminar($cedula_original);
@@ -63,7 +64,7 @@ if (isset($_POST["cedula"])) {
         //Lista de materias a conservar, eliminará las materias del mismo profesor que no sean estas
         $a_conservar = '';
 
-        //$i empieza desde 1 porque 0 es un valor vacío, no me preguntes porque Xd
+        //'$i' empieza desde 1 porque 0 es un valor vacío, no me preguntes porque Xd
         for ($i=1; $i < count($array); $i++) {
             if($i+1 == count($array)){
                 $a_conservar = $a_conservar . '"' . $array[$i] . '"';
@@ -75,6 +76,7 @@ if (isset($_POST["cedula"])) {
 
         $operacion->EliminarMaterias($cedula,$a_conservar);
         echo $a_conservar;
+        $registro=true;
     }
 
     // Si hay materias que agregar y el profesor existe
@@ -116,9 +118,7 @@ if (isset($_POST["cedula"])) {
                 if($registrar){
                     
                     $operacion->registrar($cedula, $array[$i]);
-
-                    require_once("c_bitacora.php");
-                    insertBitacora($_SESSION['username'], "modificar", 'Cambió el PEMSUN del profesor '.$cedula.'.');
+                    $registro=true;
                 }
 
 
@@ -126,6 +126,21 @@ if (isset($_POST["cedula"])) {
 
         }
 
+    }
+
+    require_once("c_bitacora.php");
+
+    if ($registro){
+
+        $descripcionbitacora='Cambió el PEMSUN del profesor '.$cedula;
+
+        if(isset($cambio) and $cambio){
+            
+            $descripcionbitacora='Movió las materias del profesor '.$cedula_original.' al profesor '.$cedula_nueva;
+
+        }
+
+        insertBitacora($_SESSION['username'], "modificar", $descripcionbitacora. '.');
     }
 
     //Establece la variable de url a enviar en caso de exito
