@@ -42,20 +42,19 @@ function Registra()
     }
 	
 	else{ 
-        session_start();
 		$objeto = new personas();
 		$objeto->setDatos($_POST["cedula"], $_POST["nombres"], $_POST["apellidos"], $_POST["direccion"], $_POST["telefono"], $_POST["correo"]);
 		$objeto->incluye();
 		require_once("../../php/controller/c_login.php");
 		createLogin($_POST["cedula"], $_POST["rol"]); 
         require_once("c_bitacora.php");
-        insertBitacora($_SESSION['username'], "insertar", $_SESSION['username']." ha agregado al profesor ".$_POST["cedula"].".");
+        insertBitacora($_SESSION['username'], "insertar", "Agregó al profesor ".$_POST["cedula"].".");
 		header("Location: ../Vista/profesor/v_profesor.php");
+        exit();
 	}
 }
 
 	function Modifica() {
-        session_start();
         require_once("c_bitacora.php");
 		$objetoPersonas = new personas();
 		$cedula = $_POST['cedula'];
@@ -75,7 +74,7 @@ function Registra()
 				$loginModel->setRol($_POST["rol"]);
 				$loginModel->modificarRol($cedula, $_POST["rol"]);
 			}
-            insertBitacora($_SESSION['username'], "modificar", $_SESSION['username']." ha modificado al profesor ".$_POST["cedula"].".");
+            insertBitacora($_SESSION['username'], "modificar", "Modificó al profesor ".$_POST["cedula"].".");
 			header("Location: ../Vista/profesor/v_profesor.php");
 			exit();
 		} else {
@@ -104,7 +103,7 @@ function Registra()
 				$loginModel->setUsername($_POST["cedula"]);
 				$loginModel->setRol($_POST["rol"]);
 				$loginModel->modificarRol($_POST["cedula"], $_POST["rol"]);
-                insertBitacora($_SESSION['username'], "modificar", $_SESSION['username']." ha modificado al profesor ".$_POST["cedula"].".");
+                insertBitacora($_SESSION['username'], "modificar", "Modificó al profesor ".$_POST["cedula"]." (".$_POST["rol"].").");
 				header("Location: ../Vista/profesor/v_profesor.php");
 				exit();
 			}
@@ -113,12 +112,12 @@ function Registra()
 
 function Elimina()
 {	 
-    session_start(); 
     require_once("c_bitacora.php");
 	$objeto = new personas();
 	$objeto->eliminar($_POST["origin"]); 
-    insertBitacora($_SESSION['username'], "eliminar", $_SESSION['username']." ha eliminado al profesor ".$_POST["cedula"].".");
+    insertBitacora($_SESSION['username'], "eliminar", "Eliminó al profesor ".$_POST["cedula"].".");
 	header("Location: ../Vista/profesor/v_profesor.php");
+    exit();
 }
 
 //Añadiendo el Nombre de las Columnas
@@ -179,15 +178,20 @@ function contarPaginas($campo, $buscar, $limit) {
 // Función para crear los datos de la tabla
 function crearArregloDatos($contador, $nombre_Columnas) {
     $NombreColumnas = $nombre_Columnas->nombreColumna($nombre_Columnas);
+
     $soloNombresColumnas = array_map(function($columna) {
         return $columna['Field'];
     }, $NombreColumnas);
+    
+    //Mete 'rol' como campo para poder usarlo en la vista
+    array_push($soloNombresColumnas, 'rol');
 
     return array_map(function($fila) use ($soloNombresColumnas) {
         $resultado = [];
         foreach ($soloNombresColumnas as $columna) {
             $resultado[$columna] = isset($fila[$columna]) ? $fila[$columna] : null;
         }
+        
         return $resultado;
     }, $contador);
 }
@@ -225,6 +229,7 @@ function controladorPaginado($nombre_Columnas) {
     $totalpag = contarPaginas($campo, $buscar, $limit);
 
     $tablaDatos = crearArregloDatos($contador, $nombre_Columnas);
+
     $paginacionHTML = generarPaginacionHTML($paginaActual, $totalpag, $campo, $buscar);
 
     return [$soloNombresColumnas, $tablaDatos, $paginacionHTML];
@@ -232,8 +237,5 @@ function controladorPaginado($nombre_Columnas) {
 
 // Llamada al controlador
 list($soloNombresColumnas, $tablaDatos, $paginacionHTML) = controladorPaginado($nombre_Columnas);
+
 ?>
-
-
-
-

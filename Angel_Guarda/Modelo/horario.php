@@ -15,6 +15,12 @@ class zona extends bdmysql{
         $this->id=$id;
 	  }
 
+    //obtiene una seleccion simple
+    function SelectAlgo($campo,$tabla,$condicion){
+      $sql="SELECT $campo FROM $tabla WHERE $condicion";
+      return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
+    }
+
     function SelectAllAno_Escolar(){
       $sql= "SELECT `codigo`, `nombre` from ano_escolar";
       return $this->ejecutar($sql);

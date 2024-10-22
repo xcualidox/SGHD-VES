@@ -220,13 +220,13 @@ function login($username, $pw, $op)
             $GLOBALS["login"] = null;
             if ($_SESSION['sesion'] == "admin" || $_SESSION['sesion']=="administrador"){
                 require_once("../../Angel_Guarda/Control/c_bitacora.php");
-                insertBitacora($username, "login", "$username ha ingresado al sistema.");
+                insertBitacora($username, "login", "Ingresó al sistema.");
                 header("Location: ../../Angel_guarda/Vista/Asignatura/v_asignatura.php");
                 // echo "angel";
             }
             else if ($_SESSION['sesion'] == "profesor" ||$_SESSION['sesion'] == "coordinador"){
                 require_once("../../Angel_Guarda/Control/c_bitacora.php");
-                insertBitacora($username, "login", "$username ha ingresado al sistema.");
+                insertBitacora($username, "login", "Ingresó al sistema.");
                 header("Location: ../..//Angel_guarda/Vista/Horario/horario.php");
             }
             exit();

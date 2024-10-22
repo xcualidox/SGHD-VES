@@ -69,12 +69,12 @@ class personas extends database_connect
   }
   function tabla($offset, $limit)
   {
-    $sql = "SELECT * from `personas` LIMIT $offset,$limit";
+    $sql = "SELECT personas.*, login.rol from `personas` JOIN `login` ON personas.cedula = login.username LIMIT $offset,$limit";
     return $this->fetch_all_query($this->query($sql, ""));
   }
   function TotaldePagina()
   {
-    $sql = "SELECT * from `personas`";
+    $sql = "SELECT personas.*, login.rol from `personas` JOIN `login` ON personas.cedula = login.username";
     return count($this->fetch_all_query($this->query($sql, "")));
   }
 
@@ -85,7 +85,7 @@ class personas extends database_connect
   }
   function tablaFiltrada($campo, $valor, $offset, $limit)
   {
-    $sql = "SELECT * FROM `personas` WHERE `$campo` LIKE ? LIMIT $offset, $limit";
+    $sql = "SELECT personas.*, login.rol from `personas` JOIN `login` ON personas.cedula = login.username WHERE `$campo` LIKE ? LIMIT $offset, $limit";
     return $this->fetch_all_query($this->query($sql, ["%$valor%"]));
   }
 

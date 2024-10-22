@@ -4,11 +4,12 @@ var dato3="";
 var dato4="";
 var dato5="";
 var dato6="";
+var dato7="";
 
 
-function Modificar(cedula,nombres, apellidos, direccion, telefono, correo) {
+function Modificar(cedula,nombres, apellidos, direccion, telefono, correo, rol) {
     var div=document.querySelector('#form');
-    var inputs=div.querySelectorAll('input');
+    var inputs=div.querySelectorAll('input, select');
 
     document.getElementById('boton1').style.display='block';
     document.getElementById('boton2').style.display='none';
@@ -19,6 +20,7 @@ function Modificar(cedula,nombres, apellidos, direccion, telefono, correo) {
     inputs[3].value=direccion;
     inputs[4].value=telefono;
     inputs[5].value=correo;
+    inputs[6].value=rol;
 
     document.getElementById("ope").value='Modificar';
     
@@ -28,7 +30,7 @@ function Modificar(cedula,nombres, apellidos, direccion, telefono, correo) {
     dato4=direccion;
     dato5=telefono;
     dato6=correo;
-    console.log(dato1);
+    dato7=rol;
 }
 
 function Eliminar(nombre) {
@@ -92,11 +94,6 @@ function Enviar(valor){
         if(inp1 == "" || inp2=="" || inp3=="" || inp4=="" || inp5=="" || inp6=="" ){
           
             showToast("No puede dejar los campos vacios", false);
-        }
-
-        else if (inp1 == dato1 && inp2 == dato2 && inp3 == dato3 && inp4 == dato4 && inp5 == dato5 && inp6 == dato6 ){
-       
-            showToast("Los datos no pueden ser iguales", false);
         }
 
         else{
