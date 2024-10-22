@@ -254,37 +254,28 @@ function llenarFormulario(element) {
     // Obtener los datos del atributo 'data-datos'
     const datos = JSON.parse(element.getAttribute('data-datos'));
     console.log(datos);
-    
 
     // Rellenar los campos del formulario con los datos recibidos
-    document.querySelector('#cedulaEstudiante').value = datos.cedula_estudiante || '';
-    document.querySelector('#cedulaRepresentante').value = datos.cedula_representante || '';
-    document.querySelector('#nombres').value = datos.nombres_estudiante || '';
-    document.querySelector('#apellidos').value = datos.apellidos_estudiante || '';
-    document.querySelector('#nombresRepresentante').value = datos.nombres_representante || '';
-    document.querySelector('#apellidosRepresentante').value = datos.apellidos_representante || '';
-    document.querySelector('#telefono').value = datos.telefono || '';
-    document.querySelector('#telefonoDomicilio').value = datos.telefono_2 || '';
-    document.querySelector('#direccion').value = datos.direccion || '';
-    document.querySelector('#correo').value = datos.correo || '';
+    document.querySelector('#cedulaEstudiante').value = datos.cedula_estudiante ;
+    document.querySelector('#cedulaRepresentante').value = datos.cedula_representante ;
+    document.querySelector('#nombres').value = datos.nombres_estudiante ;
+    document.querySelector('#apellidos').value = datos.apellidos_estudiante ;
+    document.querySelector('#nombresRepresentante').value = datos.nombres_representante ;
+    document.querySelector('#apellidosRepresentante').value = datos.apellidos_representante ;
+    document.querySelector('#telefono').value = datos.telefono ;
+    document.querySelector('#telefonoDomicilio').value = datos.telefono_2 ;
+    document.querySelector('#direccion').value = datos.direccion ;
+    document.querySelector('#correo').value = datos.correo ;
+
+
       // Llenar los select de año y sección (asegurándote de que los valores coincidan)
       const anoEscolar = document.querySelector('#anoEscolar');
       const anoSeccion = document.querySelector('#anoSeccion');
+      anoEscolar.value = datos.ano;
+      anoSeccion.value = datos.seccion;
   
-     // Verificar si el valor existe en las opciones del select, si no, dejar la opción por defecto
-      if (anoEscolar.querySelector(`option[value="${datos.ano}"]`)) {
-        anoEscolar.value = datos.ano;
-    } else {
-        anoEscolar.value = ''; // Opción predeterminada
-    }
-
-    if (anoSeccion.querySelector(`option[value="${datos.seccion}"]`)) {
-        anoSeccion.value = datos.seccion;
-    } else {
-        anoSeccion.value = ''; // Opción predeterminada
-    }
-
-    const cedulaEstudianteActual = datos.cedula_estudiante || '';
+   
+    const cedulaEstudianteActual = datos.cedula_estudiante ;
     const cedulaEstudianteNuevo = document.querySelector('#cedulaEstudiante').value; 
 
     document.querySelector('#cedulaEstudianteActual').value = cedulaEstudianteActual;

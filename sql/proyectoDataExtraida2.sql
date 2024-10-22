@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 22-10-2024 a las 21:39:34
+-- Tiempo de generación: 14-10-2024 a las 12:59:40
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -33,16 +33,15 @@ CREATE TABLE `ano_escolar` (
   `codigo` int NOT NULL,
   `nombre` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `fecha_inicio` date NOT NULL,
-  `fecha_fin` date NOT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT '0'
+  `fecha_fin` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ano_escolar`
 --
 
-INSERT INTO `ano_escolar` (`codigo`, `nombre`, `fecha_inicio`, `fecha_fin`, `activo`) VALUES
-(18, '2024-2025', '2024-10-07', '2025-07-31', 0);
+INSERT INTO `ano_escolar` (`codigo`, `nombre`, `fecha_inicio`, `fecha_fin`) VALUES
+(18, '2024-2025', '2024-10-07', '2025-07-31');
 
 -- --------------------------------------------------------
 
@@ -193,27 +192,6 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `datos_inst`
---
-
-CREATE TABLE `datos_inst` (
-  `rif` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `direccion` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `telefono` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `nombre_institucion` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `codigo_plantel` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
-
---
--- Volcado de datos para la tabla `datos_inst`
---
-
-INSERT INTO `datos_inst` (`rif`, `direccion`, `telefono`, `nombre_institucion`, `codigo_plantel`) VALUES
-('J-30053973-3\r\n', 'Calle 28, Av. Esquina 37 , Acarigua', '0255-6153561', 'U.E. COLEGIO \"VICENTE EMILIO SOJO\"\n', 'P.D.00511808\n');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `disponibilidad`
 --
 
@@ -229,51 +207,6 @@ CREATE TABLE `disponibilidad` (
 INSERT INTO `disponibilidad` (`codigo_id`, `disponible`) VALUES
 (0, 'No disponible'),
 (1, 'Disponible');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `dolar`
---
-
-CREATE TABLE `dolar` (
-  `id` int NOT NULL,
-  `precio` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
-
---
--- Volcado de datos para la tabla `dolar`
---
-
-INSERT INTO `dolar` (`id`, `precio`) VALUES
-(1, 36.8);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `estudiante`
---
-
-CREATE TABLE `estudiante` (
-  `cedula_estudiante` bigint NOT NULL DEFAULT '0',
-  `nombres` varchar(70) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `apellidos` varchar(70) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `ano` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `seccion` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
-
---
--- Volcado de datos para la tabla `estudiante`
---
-
-INSERT INTO `estudiante` (`cedula_estudiante`, `nombres`, `apellidos`, `ano`, `seccion`, `activo`) VALUES
-(123456, 'lol', 'lolol', '2024-2025', '1ero U', 1),
-(8585684, 'Carlos', 'Diaz', '2024-2025', '3ero U', 1),
-(19282324, 'Carlos', 'Diaz', '2024-2025', '5to U', 1),
-(29629080, 'Angel Orlando', 'Mendez Mendoza', '2024-2025', '1ero U', 1),
-(30294676, 'Carlos', 'Diaz', '2024-2025', '3ero U', 1),
-(74545958, 'Juan Jose', 'Mendez', '2024-2025', '1ero U', 1);
 
 -- --------------------------------------------------------
 
@@ -501,7 +434,7 @@ CREATE TABLE `intervalo` (
 --
 
 INSERT INTO `intervalo` (`id`, `intervalo`, `estado`) VALUES
-(5, '10', 0),
+(5, '30', 0),
 (6, '40', 1),
 (7, '45', 0);
 
@@ -546,98 +479,6 @@ INSERT INTO `login` (`id`, `username`, `password`, `security_q_1`, `security_q_2
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `mensualidad`
---
-
-CREATE TABLE `mensualidad` (
-  `id` bigint NOT NULL,
-  `ano_escolar` int NOT NULL,
-  `mes` enum('inscripcion','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `monto` float NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
-
---
--- Volcado de datos para la tabla `mensualidad`
---
-
-INSERT INTO `mensualidad` (`id`, `ano_escolar`, `mes`, `monto`) VALUES
-(1, 18, 'agosto', 200),
-(2, 18, 'agosto', 200);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `meses_pagos`
---
-
-CREATE TABLE `meses_pagos` (
-  `cedula_estudiante` bigint NOT NULL,
-  `mes` bigint NOT NULL DEFAULT '0',
-  `ano_escolar` int NOT NULL,
-  `ano_seccion` int NOT NULL,
-  `abonado` float NOT NULL,
-  `maximo` float NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
-
---
--- Volcado de datos para la tabla `meses_pagos`
---
-
-INSERT INTO `meses_pagos` (`cedula_estudiante`, `mes`, `ano_escolar`, `ano_seccion`, `abonado`, `maximo`) VALUES
-(123456, 1, 18, 18, 500, 1000);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `meses_saldados`
---
-
-CREATE TABLE `meses_saldados` (
-  `id` bigint NOT NULL DEFAULT '0',
-  `cedula_estudiante` bigint NOT NULL,
-  `mes` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
-  `ano_escolar` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
-  `ano_seccion` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
-  `fecha` date NOT NULL,
-  `MontoBS` double NOT NULL,
-  `MontoBCV` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
-
---
--- Volcado de datos para la tabla `meses_saldados`
---
-
-INSERT INTO `meses_saldados` (`id`, `cedula_estudiante`, `mes`, `ano_escolar`, `ano_seccion`, `fecha`, `MontoBS`, `MontoBCV`) VALUES
-(0, 8585684, 'Enero', '2024-2025', '4to U', '2024-10-18', 400, 24);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pagos`
---
-
-CREATE TABLE `pagos` (
-  `idPago` bigint NOT NULL,
-  `cedula_estudiante` bigint NOT NULL,
-  `cedula_representante` bigint NOT NULL DEFAULT '0',
-  `monto` float NOT NULL DEFAULT '0',
-  `fecha` date NOT NULL,
-  `referencia_id` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
-  `ano_escolar` int NOT NULL DEFAULT '0',
-  `mes` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
-  `detalles` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
-
---
--- Volcado de datos para la tabla `pagos`
---
-
-INSERT INTO `pagos` (`idPago`, `cedula_estudiante`, `cedula_representante`, `monto`, `fecha`, `referencia_id`, `ano_escolar`, `mes`, `detalles`) VALUES
-(1, 8585684, 7595362, 200, '2024-10-18', 'XD', 18, '2', 'LOL');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `personas`
 --
 
@@ -646,7 +487,7 @@ CREATE TABLE `personas` (
   `nombres` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `apellidos` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `direccion` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `telefono` varchar(17) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `telefono` varchar(14) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `correo` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -665,7 +506,7 @@ INSERT INTO `personas` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono
 (15214479, 'AURORA', 'RIOS', 'ACARIGUA', '04145342254', 'correo'),
 (25347183, 'LEONELBYS', 'LUCENA', 'ACARIGUA', '04123459120', 'correo'),
 (27576598, 'VICTOR JULIO', 'MENDOZA VARGAS', 'ACARIGUA', '04125157986', 'correo'),
-(29629080, 'ANGEL', 'MENDEZ', 'ENRIQUE SEGOVIANO', '0424', 'irechamo@yolewadesi.unawaina'),
+(29629080, 'ANGEL', 'MENDEZ', 'LA CORTEZA', '04122696463', 'angeles7595@gmail.com'),
 (29800040, 'VENUS', 'MARTINEZ', 'ACARIGUA', '04125304708', 'correo');
 
 -- --------------------------------------------------------
@@ -707,14 +548,8 @@ CREATE TABLE `profesores_materias` (
 
 INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
 (219, 15071661, 'BI'),
-(220, 15071661, 'CN'),
 (227, 14091761, 'CT'),
 (228, 14091761, 'QU'),
-(266, 5945762, 'EF'),
-(267, 5945762, 'FSN'),
-(268, 5945762, 'OC'),
-(269, 5945762, 'PGCRP'),
-(270, 5945762, 'TC'),
 (271, 10143237, 'CA'),
 (272, 10143237, 'OC'),
 (273, 10143237, 'PGCRP'),
@@ -740,54 +575,6 @@ INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
 (293, 5945762, 'TC'),
 (294, 14091761, 'CN'),
 (295, 15071661, 'CN');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `representante`
---
-
-CREATE TABLE `representante` (
-  `cedula_representante` bigint NOT NULL DEFAULT '0',
-  `nombres` varchar(70) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `apellidos` varchar(70) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `correo` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `direccion` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `telefono` varchar(17) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
-  `telefono_2` varchar(17) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
-
---
--- Volcado de datos para la tabla `representante`
---
-
-INSERT INTO `representante` (`cedula_representante`, `nombres`, `apellidos`, `correo`, `direccion`, `telefono`, `telefono_2`) VALUES
-(7595361, 'Obama', 'Clinton', 'casa', 'Casa', '04122696463', '04245552194'),
-(7595362, 'Hillaryg', 'Clinton', 'casa', 'Casa', '04122696463', '04245552194'),
-(7595365, 'Orlando', 'Mendez', 'casa', 'Casa', '04122696463', '04245552194'),
-(75953625, 'Hillaryg', 'Clinton', 'casa', 'Casa', '04122696463', '04245552194');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `representante-representado`
---
-
-CREATE TABLE `representante-representado` (
-  `cedula_estudiante` bigint NOT NULL,
-  `cedula_representante` bigint NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
-
---
--- Volcado de datos para la tabla `representante-representado`
---
-
-INSERT INTO `representante-representado` (`cedula_estudiante`, `cedula_representante`) VALUES
-(8585684, 7595361),
-(19282324, 7595365),
-(29629080, 7595365),
-(74545958, 7595365),
-(30294676, 75953625);
 
 --
 -- Índices para tablas volcadas
@@ -835,19 +622,6 @@ ALTER TABLE `disponibilidad`
   ADD PRIMARY KEY (`codigo_id`);
 
 --
--- Indices de la tabla `dolar`
---
-ALTER TABLE `dolar`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `estudiante`
---
-ALTER TABLE `estudiante`
-  ADD PRIMARY KEY (`cedula_estudiante`),
-  ADD KEY `FK_estudiante_ano_escolar` (`ano`);
-
---
 -- Indices de la tabla `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
@@ -872,36 +646,6 @@ ALTER TABLE `login`
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indices de la tabla `mensualidad`
---
-ALTER TABLE `mensualidad`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_mensualidad_ano_escolar` (`ano_escolar`);
-
---
--- Indices de la tabla `meses_pagos`
---
-ALTER TABLE `meses_pagos`
-  ADD PRIMARY KEY (`cedula_estudiante`,`ano_escolar`),
-  ADD KEY `FK_meses_pagos_estudiante` (`cedula_estudiante`),
-  ADD KEY `FK_meses_pagos_ano_escolar` (`ano_escolar`),
-  ADD KEY `FK_meses_pagos_ano_seccion` (`ano_seccion`),
-  ADD KEY `FK_meses_pagos_mensualidad` (`mes`);
-
---
--- Indices de la tabla `meses_saldados`
---
-ALTER TABLE `meses_saldados`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_meses_saldados_estudiante` (`cedula_estudiante`);
-
---
--- Indices de la tabla `pagos`
---
-ALTER TABLE `pagos`
-  ADD PRIMARY KEY (`idPago`);
-
---
 -- Indices de la tabla `personas`
 --
 ALTER TABLE `personas`
@@ -923,20 +667,6 @@ ALTER TABLE `profesores_materias`
   ADD KEY `FK_profesores_materias_asignatura` (`materia`);
 
 --
--- Indices de la tabla `representante`
---
-ALTER TABLE `representante`
-  ADD PRIMARY KEY (`cedula_representante`);
-
---
--- Indices de la tabla `representante-representado`
---
-ALTER TABLE `representante-representado`
-  ADD PRIMARY KEY (`cedula_estudiante`),
-  ADD KEY `FK_representante-representado_representante` (`cedula_representante`),
-  ADD KEY `FK2_cedula_estudiante` (`cedula_estudiante`);
-
---
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -944,7 +674,7 @@ ALTER TABLE `representante-representado`
 -- AUTO_INCREMENT de la tabla `ano_escolar`
 --
 ALTER TABLE `ano_escolar`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `ano_seccion`
@@ -983,18 +713,6 @@ ALTER TABLE `login`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT de la tabla `mensualidad`
---
-ALTER TABLE `mensualidad`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `pagos`
---
-ALTER TABLE `pagos`
-  MODIFY `idPago` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT de la tabla `preguntas_seguridad`
 --
 ALTER TABLE `preguntas_seguridad`
@@ -1009,12 +727,6 @@ ALTER TABLE `profesores_materias`
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `estudiante`
---
-ALTER TABLE `estudiante`
-  ADD CONSTRAINT `FK_estudiante_ano_escolar` FOREIGN KEY (`ano`) REFERENCES `ano_escolar` (`nombre`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `horario_estudiante`
@@ -1033,39 +745,11 @@ ALTER TABLE `login`
   ADD CONSTRAINT `login_personas` FOREIGN KEY (`username`) REFERENCES `personas` (`cedula`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `mensualidad`
---
-ALTER TABLE `mensualidad`
-  ADD CONSTRAINT `FK_mensualidad_ano_escolar` FOREIGN KEY (`ano_escolar`) REFERENCES `ano_escolar` (`codigo`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `meses_pagos`
---
-ALTER TABLE `meses_pagos`
-  ADD CONSTRAINT `FK_meses_pagos_ano_escolar` FOREIGN KEY (`ano_escolar`) REFERENCES `ano_escolar` (`codigo`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_meses_pagos_ano_seccion` FOREIGN KEY (`ano_seccion`) REFERENCES `ano_seccion` (`codigo`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_meses_pagos_estudiante` FOREIGN KEY (`cedula_estudiante`) REFERENCES `estudiante` (`cedula_estudiante`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_meses_pagos_mensualidad` FOREIGN KEY (`mes`) REFERENCES `mensualidad` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `meses_saldados`
---
-ALTER TABLE `meses_saldados`
-  ADD CONSTRAINT `FK_meses_saldados_estudiante` FOREIGN KEY (`cedula_estudiante`) REFERENCES `estudiante` (`cedula_estudiante`) ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
   ADD CONSTRAINT `FK_profesores_materias_asignatura` FOREIGN KEY (`materia`) REFERENCES `asignatura` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_profesores_materias_personas` FOREIGN KEY (`profesor`) REFERENCES `personas` (`cedula`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `representante-representado`
---
-ALTER TABLE `representante-representado`
-  ADD CONSTRAINT `FK2_cedula_estudiante` FOREIGN KEY (`cedula_estudiante`) REFERENCES `estudiante` (`cedula_estudiante`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_representante-representado_representante` FOREIGN KEY (`cedula_representante`) REFERENCES `representante` (`cedula_representante`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
