@@ -22,34 +22,33 @@ if (isset($_POST["ope"])) {
 	
 function Registra()
 {
-	session_start();
-
 	$objeto = new escolar();
 	$objeto->setDatos($_POST["nom"], $_POST["fecI"], $_POST["fecF"]);
 	$objeto->incluye();
     require_once("c_bitacora.php");
-    insertBitacora($_SESSION['username'], "insertar", $_SESSION['username']." ha agregado el año escolar ".$_POST["nom"].".");
+    insertBitacora($_SESSION['username'], "insertar", "Agregó el año escolar ".$_POST["nom"].".");
 	header("Location: ../Vista/escolar/v_escolar.php");
+    exit();
 }
 
 function Modifica()
 {
-	session_start();
 	$objeto = new escolar();
 	$objeto->setDatos($_POST["nom"], $_POST["fecI"], $_POST["fecF"]);
 	$objeto->modificar($_POST["origin"]);
     require_once("c_bitacora.php");
-    insertBitacora($_SESSION['username'], "modificar", $_SESSION['username']." ha modificado el año escolar ".$_POST["nom"].".");
+    insertBitacora($_SESSION['username'], "modificar", "Modificó el año escolar ".$_POST["nom"].".");
 	header("Location: ../Vista/escolar/v_escolar.php");
+    exit();
 }
 
 function Elimina()
 {	
-    session_start();
 	$objeto = new escolar();
 	$objeto->eliminar($_POST["origin"]);
     require_once("c_bitacora.php");
-    insertBitacora($_SESSION['username'], "eliminar", $_SESSION['username']." ha eliminado el año escolar ".$_POST["nom"].".");
+    insertBitacora($_SESSION['username'], "eliminar", "Eliminó el año escolar ".$_POST["nom"].".");
 	header("Location: ../Vista/escolar/v_escolar.php");
+    exit();
 }
 ?>

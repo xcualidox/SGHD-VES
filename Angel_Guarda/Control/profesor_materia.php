@@ -47,6 +47,8 @@ if (isset($_POST["cedula"])) {
         else{
 
             $operacion->Modificar($cedula_nueva, $cedula_original);
+            require_once("c_bitacora.php");
+            insertBitacora($_SESSION['username'], "modificar", 'Movió el PEMSUN del profesor '.$cedula_original.' a '.$cedula_nueva.'.');
     
             // Ahora eliminamos las entradas antiguas asociadas a 'cedula_original'
             //$operacion->Eliminar($cedula_original);
@@ -103,7 +105,7 @@ if (isset($_POST["cedula"])) {
 
                 //Si la materia a agregar coincide con una materia ya agregada entonces desactivar el registro para esa materia.
                 for ($i2=0; $i2 < count($materias_profesor); $i2++) { 
-                    echo '|$i: '.$array[$i].', $i2: '.$materias_profesor[$i2]."</br>";
+                    //echo '|$i: '.$array[$i].', $i2: '.$materias_profesor[$i2]."</br>";
 
                     if($array[$i]==$materias_profesor[$i2]){
                         $registrar=false;
@@ -112,7 +114,11 @@ if (isset($_POST["cedula"])) {
                 }
 
                 if($registrar){
+                    
                     $operacion->registrar($cedula, $array[$i]);
+
+                    require_once("c_bitacora.php");
+                    insertBitacora($_SESSION['username'], "modificar", 'Cambió el PEMSUN del profesor '.$cedula.'.');
                 }
 
 
@@ -124,7 +130,7 @@ if (isset($_POST["cedula"])) {
 
     //Establece la variable de url a enviar en caso de exito
     $estado = 'exito';
-    header($url.'?estado='.$estado);
+    //header($url.'?estado='.$estado);
     exit(); // Es recomendable usar exit después de header para evitar que el script continúe ejecutándose
 }
 ?>

@@ -39,10 +39,18 @@ if (count($bloques) > 1) {
 
         $i = $i + 5;
     }
-    session_start();
     require_once("c_bitacora.php");
-    insertBitacora($_SESSION['username'], "add", $_SESSION['username']." ha creado el horario para el año ".$_POST["ano"]." sección ".$_POST["nom"].".");
+    //Busca los valores para la bitácora
+    $ano_array=$objeto->SelectAlgo('nombre','ano_escolar','codigo='.$ano_escolar);
+    $seccion_array=$objeto->SelectAlgo('*','ano_seccion','codigo='.$ano_seccion);
+
+    //Los saca directamente del array
+    $ano_bitacora=$ano_array[0][0];
+    $seccion_bitacora=$seccion_array[0][1].' '.$seccion_array[0][2];
+
+    insertBitacora($_SESSION['username'], "insertar", 'Creó el horario para el año "'.$ano_bitacora.'" sección "'.$seccion_bitacora.'".');
 }
 
 header("Location: ../Vista/Horario/horario.php");
+exit();
 ?>
