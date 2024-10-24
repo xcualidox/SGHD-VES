@@ -141,6 +141,7 @@ class estudiante extends database_connect
         return $anoEscolar;
     }
 
+    
     public function obtenerRepresentanteRepresentado() {
         // Consulta SQL
 
@@ -151,6 +152,7 @@ class estudiante extends database_connect
                 e.apellidos AS apellidos_estudiante,
                 e.ano,
                 e.seccion,
+                e.activo,
                 r.cedula_representante AS cedula_representante,
                 r.nombres AS nombres_representante,
                 r.apellidos AS apellidos_representante,
@@ -232,6 +234,7 @@ class estudiante extends database_connect
                 e.apellidos AS apellidos_estudiante,
                 e.ano,
                 e.seccion,
+                e.activo,
                 r.cedula_representante AS cedula_representante,
                 r.nombres AS nombres_representante,
                 r.apellidos AS apellidos_representante,

@@ -52,8 +52,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
                     
                 <div class=" flex justify-center">
-                    <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" 
-                    onclick='Eliminar(`<?php echo $resultado[$i]["nombre"]; ?>`)'  >
+               
                     <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"
                     onclick='Modificar(`<?php echo $resultado[$i]["nombre"]; ?>`,`<?php echo $resultado[$i]["fecha_inicio"];?>`,`<?php echo $resultado[$i]["fecha_fin"];?>`)'  >
                 </div>
@@ -111,7 +110,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
     let sidebar = document.querySelector('.sidebar');
 
     btn.onclick = function (){
-        sidebar.classList.toggle('active')
+        sidebar.classList.toggle('active');
     };
 </script>
 </html>

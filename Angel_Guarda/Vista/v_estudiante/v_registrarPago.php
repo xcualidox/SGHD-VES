@@ -45,8 +45,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="formulario-extenso__row">
                                 <div class="formulario-extenso__column">
                                     <label for="Pago">Forma de Pago: </label>
                                     <div class="flex">
@@ -60,25 +58,29 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="formulario-extenso__column">
-
-                                    <label for="referencia">Numero de Referencia: </label>
-                                    <input type="text" id="referencia" name="referencia" placeholder="Referencia" class="formulario-extenso__input" maxlength="">
-
-                                </div>
                             </div>
+                            <div class="formulario-extenso__row">
+                            
+                           
+                            </div>
+                          
                             <div class="formulario-extenso__row">
 
                                 <div class="formulario-extenso__column">
 
-                                    <label for="monto">Monto a Pagar: </label>
-                                    <input type="text" id="mesPagar" name="mesPagar" placeholder="Monto a Pagar" class="formulario-extenso__input" maxlength="">
+                          
+
+                    <label for="monto">Monto Total: </label>
+                    <input type="text" id="mesPagar" name="mesPagar" disabled placeholder="Monto a Pagar" class="formulario-extenso__input" maxlength="">
+
+
 
                                 </div>
                                 <div class="formulario-extenso__column">
+                                    
 
-                                    <label for="monto">Descuento: </label>
-                                    <input type="text" id="mesPagar" name="mesPagar" disabled placeholder="Descuento" class="formulario-extenso__input" maxlength="">
+                                <label for="mesDescuento">Descuento: </label>
+                                <input type="text" id="mesDescuento" name="mesDescuento" disabled placeholder="Descuento" class="formulario-extenso__input" maxlength="">
 
                                 </div>
                             </div>
@@ -92,6 +94,27 @@
                                 </div>
 
                             </div>
+                            <div class="formulario-extenso__row">
+                            <div class="formulario-extenso__column">
+
+<label for="referencia">Numero de Referencia: </label>
+<input type="text" id="referencia" name="referencia" placeholder="Referencia" class="formulario-extenso__input" maxlength="">
+
+</div>
+
+                             
+
+                            </div>
+                            <div class="formulario-extenso__row">
+
+<div class="formulario-extenso__column">
+
+    <label for="mesAbonar">Monto a Abonar: </label>
+    <input type="text" id="mesAbonar" name="mesAbonar" placeholder="Monto a Abonar" class="formulario-extenso__input" maxlength="">
+
+</div>
+
+</div>
                         </div>
 
                         <!-- Columna Derecha -->

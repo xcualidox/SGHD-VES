@@ -111,14 +111,16 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
     <!-- Ventanas de Pagos Modales -->
-    <dialog id="modalAñadir" class="relative p-6">
+     <div class="modal__Oscuro">
+        <div class='modal__Nuevo' id="modalAñadir" class="relative p-6">
 
-        <?php
+            <?php
 
-        include_once("v_modalAñadir.php");
-        ?>
+            include_once("v_modalAñadir.php");
+            ?>
 
-    </dialog>
+        </div>
+    </div>
 
 
     <!-- AQUI TERMINA EL REGISTRO DE ESTUDIANTES -->
@@ -203,6 +205,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
     <!-- INICIO MENSUALIDAD -->
+
+    
     <dialog id="modalMensualidad">
         <div class="flex justify-end items-end">
             <div class="w-10 bg-red-500 rounded-full cursor-pointer p-2" id="closeModalMensualidad">

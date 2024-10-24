@@ -1,4 +1,4 @@
-<div class="table-wrapper min-w-full">
+<div class="table-wrapper min-w-full ">
     <div class="flex flex-col sm:flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
         <h1 class="text-xl font-semibold">Mensualidad</h1>
         <!-- Botón para añadir -->

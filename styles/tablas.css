@@ -137,7 +137,7 @@
     border-radius: 2px;
     padding: 16px;
     position: fixed;
-    z-index: 1;
+    z-index: 9999;
     left: 50%;
     bottom: 30px;
     font-size: 17px;
@@ -147,7 +147,7 @@
 
 .toast.show {
     visibility: visible;
-    opacity: 1;
+    opacity: 9999;
     bottom: 50px;
 }
 
@@ -500,6 +500,7 @@ dialog {
     transform: translate(-50%, -50%);
     background-color: var(--color-background);
     transition: opacity .3s ease-in-out ;
+    z-index: 1000;
     @starting-style{
         opacity:0
       
@@ -640,4 +641,40 @@ input[type=number] { -moz-appearance:textfield; }
 img {
     width: 100%; /* Asegúrate de que la proporción se mantenga */
     height: auto; /* Evita distorsiones */
+}
+
+.modal__Nuevo {
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--color-background);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    z-index: 1000;
+    
+}
+
+.modal__Nuevo.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal__Oscuro {
+    display: none;
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }

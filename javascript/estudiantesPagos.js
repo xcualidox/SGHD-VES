@@ -10,17 +10,22 @@ const minimoNumeros=/^\d{11,}$/;
 
 
 // Modal Pago Específico
-
+const openModalAñadir = document.getElementById('openModalAñadir');
+const closeModalAñadir = document.getElementById('closeModalAñadir');
+const modalAñadir = document.getElementById('modalAñadir');
 // Eventos para abrir y cerrar los modales
 //MODAL DE REGISTRO ESTUDIANTE REPRESENTANTE
 openModalAñadir.addEventListener('click', () => {
-    modalAñadir.showModal(); // Abrir el modal
+    modalAñadir.classList.add('show');// Abrir el modal
+    document.querySelector(".modal__Oscuro").style.display = "block";
 });
 
 closeModalAñadir.addEventListener('click', () => {
     document.getElementById("formRegistroEstudiante").reset();
-    modalAñadir.close(); // Cerrar el modal
+    modalAñadir.classList.remove('show'); // Cerrar el modal // Cerrar el modal
+    document.querySelector(".modal__Oscuro").style.display = "none";
 });
+
 openModalMensualidad.addEventListener('click', () => {
     modalMensualidad.showModal(); // Abrir el modal
 });
@@ -281,25 +286,30 @@ function llenarFormulario(element) {
     document.querySelector('#cedulaEstudianteActual').value = cedulaEstudianteActual;
 
     // Abrir el modal
-    modalAñadir.showModal();
+    modalAñadir.classList.add('show');// Abrir el modal
+    document.querySelector(".modal__Oscuro").style.display = "block";
 }
 
 
 //MODAL PAGO ESPECIFICO
 //AL agregar los pagos de este registor no olvidar los ATRIBUTOS
-function openPagoEspecificoModal(cedulaEstudiante, nombresEstudiante, apellidosEstudiante, cedulaRepresentante,nombres_representante,apellidos_representante) {
+function openPagoEspecificoModal(event) {
+
+     const datos = JSON.parse(event.target.getAttribute('data-datos'));
     const modal = document.getElementById('modalPagosEspecificos');
+    console.log(datos);
+    
     
     // Actualizar los elementos dentro del modal con los valores recibidos
 
     //AQUI SE ESTABLENCE LAS VARIABLES QUE SE MOSTRARAN EN EL MODAL PAGO REPRESENTANTE
-    document.getElementById('nombresEstudianteRegistroPago').textContent = `${nombresEstudiante} ${apellidosEstudiante}`;
+    document.getElementById('nombresEstudianteRegistroPago').textContent = datos.nombres_estudiante ;
     //CEDULA ESTUDIANTE REGISTRO PAGO
-    document.getElementById('cedulaEstudianteRegistroPago').textContent = ` ${cedulaEstudiante}`;
+    document.getElementById('cedulaEstudianteRegistroPago').textContent = datos.cedula_estudiante;
     //NOMBRE REPRESENTANTE REGISTRO PAGO
-    document.getElementById('nombresRepresentanteRegistroPago').textContent = `${nombres_representante}  ${apellidos_representante}`;
+    document.getElementById('nombresRepresentanteRegistroPago').textContent = datos.nombres_representante;
      //CEDULA ESTUDIANTE REPRESENTANTE
-    document.getElementById('cedulaRepresentanteRegistroPago').textContent = ` ${cedulaRepresentante}`;
+    document.getElementById('cedulaRepresentanteRegistroPago').textContent = datos.cedula_representante ;
     
     // Mostrar el modal
     modal.showModal();
@@ -308,7 +318,7 @@ function openPagoEspecificoModal(cedulaEstudiante, nombresEstudiante, apellidosE
 // Función para abrir el modal y mostrar los datos
 function openModalMostrarMasDatos(event) {
     const datos = JSON.parse(event.target.getAttribute('data-datos')); // Obtén los datos del atributo data-datos
-    console.log(datos); // Muestra los datos en consola
+    // console.log(datos); // Muestra los datos en consola
 
     // Aquí puedes usar los datos para mostrar en el modal
     document.getElementById('DatosCompletosMostrarMas').textContent = `
@@ -318,8 +328,9 @@ function openModalMostrarMasDatos(event) {
         Nombres Representante: ${datos.nombres_representante}
         Apellidos Representante: ${datos.apellidos_representante}
         Teléfono: ${datos.telefono}
+        Teléfono 2: ${datos.telefono_2}
     `;
-
+    //Toda esta data Sera para La Incripcion, Se mantedran Guardado de momento
     modalMostrarMas.showModal(); // Abre el modal
 }
 

@@ -28,6 +28,7 @@ function showConfirm(mensaje, onConfirm) {
 function showToast(message, success = true) {
     const toast = document.createElement('div');
     toast.className = 'toast';
+    toast.style.zIndex='9999';
     toast.textContent = message;
 
     if (success) {

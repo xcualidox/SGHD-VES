@@ -171,14 +171,9 @@ function generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$param
                     <img src='../../../images/icons/pdf.svg' class='w-8 h-8 filtro-verde cursor-pointer' alt='Borrar' title='Borrar'>
                     <img src='../../../images/icons/modificar.svg' class='w-8 h-8 filtro-azul cursor-pointer' title='Modificar' data-datos='" . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . "' onclick='llenarFormulario(this)'>
                     <img src='../../../images/icons/moreGrid.svg' class='w-8 h-8 filtro-negro cursor-pointer' title='Mostrar Más' data-datos='" . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . "' onclick='openModalMostrarMasDatos(event)'>
-                    <img src='../../../images/icons/credit-card.svg' class='w-8 h-8 filtro-negro cursor-pointer' onclick='openPagoEspecificoModal(
-                        \"" . htmlspecialchars($dato['cedula_estudiante']) . "\",
-                        \"" . htmlspecialchars($dato['nombres_estudiante']) . "\",
-                        \"" . htmlspecialchars($dato['apellidos_estudiante']) . "\",
-                        \"" . htmlspecialchars($dato['cedula_representante']) . "\",
-                        \"" . htmlspecialchars($dato['nombres_representante']) . "\",
-                        \"" . htmlspecialchars($dato['apellidos_representante']) . "\"
-                    )' alt='Pago Especifico' title='Pago Especifico'>
+                    <img src='../../../images/icons/credit-card.svg' class='w-8 h-8 filtro-negro cursor-pointer' 
+                    data-datos='" . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . "'
+                    onclick='openPagoEspecificoModal( event)' alt='Pago Especifico' title='Pago Especifico'>
                 </div>
             </td>";
             $html .= "</tr>";
