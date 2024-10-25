@@ -643,14 +643,14 @@ img {
     height: auto; /* Evita distorsiones */
 }
 
-.modal__Nuevo {
+ .modal__Nuevo {
     border: none;
     outline: none;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 100%;
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -658,7 +658,7 @@ img {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-    z-index: 1000;
+    z-index: 5000;
     
 }
 
@@ -666,6 +666,9 @@ img {
     opacity: 1;
     visibility: visible;
 }
+
+
+
 
 .modal__Oscuro {
     display: none;

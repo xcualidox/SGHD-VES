@@ -13,6 +13,10 @@ const minimoNumeros=/^\d{11,}$/;
 const openModalAñadir = document.getElementById('openModalAñadir');
 const closeModalAñadir = document.getElementById('closeModalAñadir');
 const modalAñadir = document.getElementById('modalAñadir');
+
+const openModalMensualidad = document.getElementById('openModalMensualidad');
+const closeModalMensualidad = document.getElementById('closeModalMensualidad');
+const modalMensualidad = document.getElementById('modalMensualidad');
 // Eventos para abrir y cerrar los modales
 //MODAL DE REGISTRO ESTUDIANTE REPRESENTANTE
 openModalAñadir.addEventListener('click', () => {
@@ -27,11 +31,14 @@ closeModalAñadir.addEventListener('click', () => {
 });
 
 openModalMensualidad.addEventListener('click', () => {
-    modalMensualidad.showModal(); // Abrir el modal
+    modalMensualidad.classList.add('show');
+  
+    document.querySelector(".modal__Oscuro").style.display = "block";
 });
 
 closeModalMensualidad.addEventListener('click', () => {
-    modalMensualidad.close(); // Cerrar el modal
+    modalMensualidad.classList.remove('show');
+    document.querySelector(".modal__Oscuro").style.display = "none";
 });
 
 
@@ -49,7 +56,8 @@ closeModalPagos.addEventListener('click', () => {
 
 document.getElementById('closePagosEspecificos').addEventListener('click', () => {
     const modal = document.getElementById('modalPagosEspecificos');
-    modal.close();
+    modal.classList.remove('show');
+    document.querySelector(".modal__Oscuro").style.display = "none";
 });
 
 
@@ -294,8 +302,10 @@ function llenarFormulario(element) {
 //MODAL PAGO ESPECIFICO
 //AL agregar los pagos de este registor no olvidar los ATRIBUTOS
 function openPagoEspecificoModal(event) {
+   
 
      const datos = JSON.parse(event.target.getAttribute('data-datos'));
+     
     const modal = document.getElementById('modalPagosEspecificos');
     console.log(datos);
     
@@ -312,7 +322,10 @@ function openPagoEspecificoModal(event) {
     document.getElementById('cedulaRepresentanteRegistroPago').textContent = datos.cedula_representante ;
     
     // Mostrar el modal
-    modal.showModal();
+
+    modal.classList.add('show');// Abrir el modal
+    document.querySelector(".modal__Oscuro").style.display = "block";
+ 
 }
 
 // Función para abrir el modal y mostrar los datos

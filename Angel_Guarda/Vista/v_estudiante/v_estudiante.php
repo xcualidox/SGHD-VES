@@ -23,6 +23,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
 <div class="main-content">
+<div class="modal__Oscuro">    </div>
 <div class="flex absolute mt-3 ">
             <h3 class=" font-semibold  ">
                 Dólar BCV: <input type="text" class=" text-balance  w-28  border  font-normal  outline-none px-2 py-1 mb-2 md:mb-0" id="DolarBCV" maxlength="9" onblur="actualizarDolar()">
@@ -111,8 +112,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
     <!-- Ventanas de Pagos Modales -->
-     <div class="modal__Oscuro">
-        <div class='modal__Nuevo' id="modalAñadir" class="relative p-6">
+  
+        <div class='modal__Nuevo' id="modalAñadir" >
 
             <?php
 
@@ -120,7 +121,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
             ?>
 
         </div>
-    </div>
+
 
 
     <!-- AQUI TERMINA EL REGISTRO DE ESTUDIANTES -->
@@ -146,8 +147,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <p id="DatosCompletosMostrarMas"></p>
     </dialog>
     <!-- MODAL PAGO ESPECIFICO -->
+ 
 
-    <dialog id="modalPagosEspecificos">
+  
+    <div class="modal__Nuevo" id="modalPagosEspecificos">
 
         <div class="flex justify-between">
             <!-- Título y descripción -->
@@ -200,14 +203,18 @@ include_once('../v_Sidebar/v_Sidebar.php');
             ?>
         </details>
 
-    </dialog>
+
+
+    </div>
     <!-- MODAL PAGO ESPECIFICO -->
 
 
     <!-- INICIO MENSUALIDAD -->
 
-    
-    <dialog id="modalMensualidad">
+  
+    <div class="modal__Nuevo" id="modalMensualidad">
+
+
         <div class="flex justify-end items-end">
             <div class="w-10 bg-red-500 rounded-full cursor-pointer p-2" id="closeModalMensualidad">
                 <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
@@ -221,7 +228,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
         ?>
 
      
-    </dialog>
+    </div>
+
     <!-- FINAL MENSUALIDAD -->
 
 </div>
