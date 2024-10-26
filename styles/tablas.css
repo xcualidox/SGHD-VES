@@ -681,3 +681,28 @@ img {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
+
+
+.mes-item {
+    display: inline-block;
+    margin: 2px;
+    padding: 4px 8px;
+    background-color: var(--color-highlight);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out,   background-color 0.3s ease-in-out;
+  }
+  .mes-item:hover {
+
+    background-color: var(--color-rojo);
+
+  }
+
+
+  .SelectMesesPagar{
+    display: flex; 
+    flex-wrap: wrap;
+    background: var(--color-text);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }

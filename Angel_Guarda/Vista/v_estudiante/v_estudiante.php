@@ -188,7 +188,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <img src="../../../images/icons/error.svg" class="filtro-blanco w-full h-full" alt="Cerrar" title="Cerrar">
             </div>
         </div>
-        <details>
+        <details open>
             <?php
 
             include_once("v_registrarPago.php");
@@ -239,6 +239,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 <!-- Llamado JavaScriptEstudiantes -->
 <script type="text/javascript" src="../../../javascript/estudiantesPagos.js"></script>
 <script type="text/javascript" src="../../../javascript/mensualidad.js"></script>
+<script type="text/javascript" src="../../../javascript/registrarPagos.js"></script>
 <script src="../../../javascript/jquery-3.7.1.min.js"></script>
 
 </html>
