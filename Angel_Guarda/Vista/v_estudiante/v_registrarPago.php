@@ -33,11 +33,15 @@
                             <option value="Mayo">Mayo</option>
                             <option value="Junio">Junio</option>
                             <option value="Julio">Julio</option>
+                            <option value="Agosto">Agosto</option>
+                            <option value="Septiembre">Septiembre</option>
+                            <option value="Octubre">Octubre</option>
+                            <option value="Noviembre">Noviembre</option>
                             <!-- Agrega el resto de los meses -->
                         </select>
                     </div>
                     <div class="formulario-extenso__column">
-                        <label for="mesPagar">Meses a Pagar:</label>
+                        <label for="mesesSeleccionados">Meses a Pagar:</label>
                       
                         <div id="mesesSeleccionados" class="SelectMesesPagar" ></div>
                   

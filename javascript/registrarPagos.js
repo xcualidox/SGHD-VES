@@ -7,6 +7,14 @@ const preciosMeses = {
   "Enero": 40,
   "Febrero": 40,
   "Marzo": 40,
+  "Abril":40,
+  "Junio":40,
+  "Julio":40,
+  "Agosto":40,
+  "Septiembre":40,
+  "Octubre":40,
+  "Noviembre":40
+
   // Agrega el resto de los meses con sus precios
 };
 
