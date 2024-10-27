@@ -2,6 +2,8 @@ const selectMes = document.getElementById('mes');
 const mesesSeleccionados = document.getElementById('mesesSeleccionados');
 let totalMonto = 0;
 
+
+
 // Definir los precios para cada mes
 const preciosMeses = {
   "Enero": 40,
@@ -18,8 +20,28 @@ const preciosMeses = {
   // Agrega el resto de los meses con sus precios
 };
 
+function verificarSeleccionado() {
+
+  const mostrarDivPagos=document.querySelector('#mostrarDivPagos');
+  const seleccion = document.querySelector('input[name="FormaPago"]:checked');
+  const seleccionDescuento = document.querySelector('input[name="descuento"]:checked');
+  if (seleccion && seleccionDescuento) {
+
+    mostrarDivPagos.classList.add('block');
+    let enviar = [seleccion.value, seleccionDescuento.value];
+    console.log("Valores en el array enviar:", enviar);
+
+    
+      return enviar
+  }
+}
+
+
+
 // Función para añadir mes seleccionado
 selectMes.addEventListener('change', function () {
+  const precioDolarCal=document.getElementById('DolarBCV').value;
+   //Este array dira si el Pago es en Divisas o Bolivares
   const mes = selectMes.value;
   if (mes) {
     // Verificar si el mes ya está seleccionado
@@ -54,7 +76,8 @@ selectMes.addEventListener('change', function () {
     mesItem.onclick = function () {
       mesesSeleccionados.removeChild(mesItem);
       totalMonto -= precioMes; // Restar el precio del mes eliminado
-      document.getElementById('mesPagar').value=totalMonto;
+      actualizarMesPagar(precioDolarCal);
+
 
       // Reactivar la opción en el select
       Array.from(selectMes.options).forEach(option => {
@@ -63,8 +86,8 @@ selectMes.addEventListener('change', function () {
         }
       });
     };
-    document.getElementById('mesPagar').value=totalMonto;
-
+  
+    actualizarMesPagar(precioDolarCal);
     // Añadir el mes al contenedor
     mesesSeleccionados.appendChild(mesItem);
 
@@ -79,3 +102,19 @@ selectMes.addEventListener('change', function () {
     selectMes.value = '';
   }
 });
+
+function actualizarMesPagar(precioDolarCal) {
+
+  const formaPago = verificarSeleccionado(); //Llamo la funcion para traerme lo que retorna
+  const tipoPago =formaPago[0]; //Accediendo a Pago si es divisa o Transferencia
+  
+
+
+  if (tipoPago === 'divisas') {
+   
+    document.getElementById('mesPagar').value = totalMonto;
+  } else if (tipoPago === 'transferencia') {
+    
+    document.getElementById('mesPagar').value = precioDolarCal * totalMonto;
+  }
+}

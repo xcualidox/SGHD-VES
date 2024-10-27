@@ -1,3 +1,205 @@
+openModalMensualidad.addEventListener('click', () => {
+    modalMensualidad.classList.add('show');
+  
+    document.querySelector(".modal__Oscuro").style.display = "block";
+    recargarTablaMensualidad('tbody_mensualidad');
+});
+
+closeModalMensualidad.addEventListener('click', () => {
+    modalMensualidad.classList.remove('show');
+    document.querySelector(".modal__Oscuro").style.display = "none";
+});
+
+//Ejemplo de uso de esta funcion:
+//
+//  crearSelect( ['opcion1','opcion2'], 1,  [ {'value': 1, 'id':'select'}, {'value':2, 'name':'XD'} ], )
+
+
+//"seleccionado" funciona como Indice
+
+//no se pa q hice esto mano help X'''''d se me fue como una hora en esta pendejada, ahi la dejo por si sirve x'''''d
+
+function crearSelect(options = [], seleccionado, parametros_option = [{}], parametros_select = {}) {
+    let nuevo_select = document.createElement('select');
+
+    for (let i = 0; i < options.length; i++) {
+        //se crea la opcion
+        const nuevo_option = document.createElement('option');
+        
+        if (seleccionado == options[i]) {
+            nuevo_option.selected = true;
+        }
+
+        //Aplicar los parametros de option
+        if (parametros_option.length != 0){
+
+            for (const key in parametros_option) {
+                
+                nuevo_option.setAttribute(key, parametros_option[key])
+                
+            }
+        }
+
+        nuevo_select.appendChild(nuevo_option);
+    }
+
+    //Aplica los parametros del select
+    if(parametros_select.length != 0){
+
+        for(const key in parametros_select){
+            nuevo_select.setAttribute(key,parametros_select[key])
+        }
+
+    }
+
+    return nuevo_select;
+}
+
+function recargarTablaMensualidad(tbody_id, ano_escolar = undefined) {
+
+    vaciarTabla(tbody_id);
+    let resultados;
+    
+    //establece los parametros de insertarTr
+    let parametros = [
+        '<input disabled="" type="text" class=" formulario-extenso__input" value="?" readonly="">',
+    
+        `<select class="formMensu formulario-extenso__input month-select" value='?'>
+                <option value="" selected disabled>Seleccionar mes...</option>
+                <option value="inscripcion">Inscripción</option>
+                <option value="enero">Enero</option>
+                <option value="febrero">Febrero</option>
+                <option value="marzo">Marzo</option>
+                <option value="abril">Abril</option>
+                <option value="mayo">Mayo</option>
+                <option value="junio">Junio</option>
+                <option value="julio">Julio</option>
+                <option value="agosto">Agosto</option>
+                <option value="septiembre">Septiembre</option>
+                <option value="octubre">Octubre</option>
+                <option value="noviembre">Noviembre</option>
+                <option value="diciembre">Diciembre</option>
+            </select>`,
+        
+            '<input type="number" class="formMensu formulario-extenso__input" maxlength="8" placeholder="Monto" value="?">',
+
+            `<div class='flex justify-center items-center ' style='margin-top: 15px' id="quitarBotonMens">
+                <img src='../../../images/icons/removeIcon.svg' class='w-10 h-8 filtro-rojo-SinScale cursor-pointer' alt='Borrar' title='Borrar' value='?'>
+            </div>`
+            
+        
+    ]
+
+    //Pide la mensualidad del controlador y la almacena en la variable "resultados", es un callback
+    pedirMensualidad(ano_escolar,
+        function(mensualidad){
+            if (mensualidad){
+
+                resultados = mensualidad;
+                //Inserta el nuevo TR
+                insertarTr(tbody_id, resultados, parametros);
+
+                //Setea de nuevo los Select porque no quiere agarrarse el value='' al crear el elemento, sendo gei vale
+                tabla=document.querySelector('#mensualidadTable');
+                selects=tabla.querySelectorAll('select');
+
+                for (let i = 0; i < selects.length; i++) {
+                    selects[i].value=resultados[i]['mes'];
+                    console.log(selects[i]);
+                    console.log(resultados[i]['mes'])
+                    
+                }
+            }
+        }
+    );
+
+}
+
+function vaciarTabla(tbody_id) {
+    tbody=document.getElementById(tbody_id);
+    tbody.innerText='';
+}
+//esta funcion esta hecha para que sea universal y la podamos usar donde queramos
+
+//Formato:
+//insertarTr(id_del_tbody, td_de_la_tabla, parametro_extra)
+
+//El parametro_extra funciona para reemplazar texto en varios strings similar a las funciones del modelo,
+//en este caso esta configurado para reemplazar signos de interrogación '?'
+
+
+//Ejemplo:
+//insertarTr('tbodyid',['Rafael','Molina','27216803],['Nombre: ?','Apellido: ?', 'Cedula: ?'])
+
+//El ejemplo insertaría una fila de la tabla así:
+// Campo 1        | Campo 2          | Campo 3          |
+// Nombre: Rafael | Apellido: Molina | Cedula: 27216803 |
+
+//Está hecho así para poder insertar codigo html como inputs con variables
+
+function insertarTr(tbody_id, array = [], extra_parametros = []) {
+
+    if (array.length === 0){
+        console.log('Array Vacía');
+        return;
+    }
+
+    const tbody=document.getElementById(tbody_id);
+
+    for (let i = 0; i < array.length; i++) {
+
+        //Primer fase de Array
+        let nueva_columna = document.createElement('tr');
+
+        //Agarra solo los valores del diccionario
+        let valores = Object.values(array[i]);
+
+        for (let i2 = 0; i2 < valores.length; i2++) {
+        
+            //Campos especificos
+            const nuevo_campo = document.createElement('td');
+            if (extra_parametros.length != 0) {
+
+                let parametro = extra_parametros[i2];
+                nuevo_campo.innerHTML = parametro.replace('?', valores[i2])
+
+            }else{
+                nuevo_campo.innerHTML = valores[i2];
+            }
+            nueva_columna.appendChild(nuevo_campo);
+        }
+        
+        tbody.appendChild(nueva_columna);
+    }
+    
+}
+
+function pedirMensualidad(ano_escolar = '%%', callback) {
+    $.ajax({
+        url: '../../Control/c_mensualidad.php', 
+        type: 'POST',
+        data: { anoescolar: ano_escolar },
+        dataType: 'json',  // Esperamos una respuesta JSON
+        success: function(response) {
+            // Manejar la respuesta del servidor
+            if (response.success) {
+                console.log(response.mensualidad) 
+                callback(response.mensualidad); //response.mensualidad es lo mismo que usar response['mensualidad']
+            } else {
+                showToast('Error al obtener los datos de mensualidad', false);
+                callback(null);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
+            console.log('Respuesta del servidor:', jqXHR.responseText);
+            // Aquí puedes agregar más depuración si la respuesta no es JSON válido
+            showToast('Error en la comunicación con el servidor.', false);
+            callback(null);
+        }
+    })   
+}
+
 // Función que agrega una fila vacía con los inputs
 function addEmptyRow() {
     const selectedAnoEscolar = getSelectedAnoEscolar();
@@ -31,19 +233,19 @@ function createEmptyRow(selectedAnoEscolar) {
         <td class="flex items-center justify-center">
             <select class="formMensu formulario-extenso__input month-select">
                 <option value="" disabled selected>Seleccionar mes...</option>
-                <option value="Inscripción">Inscripción</option>
-                <option value="Enero">Enero</option>
-                <option value="Febrero">Febrero</option>
-                <option value="Marzo">Marzo</option>
-                <option value="Abril">Abril</option>
-                <option value="Mayo">Mayo</option>
-                <option value="Junio">Junio</option>
-                <option value="Julio">Julio</option>
-                <option value="Agosto">Agosto</option>
-                <option value="Septiembre">Septiembre</option>
-                <option value="Octubre">Octubre</option>
-                <option value="Noviembre">Noviembre</option>
-                <option value="Diciembre">Diciembre</option>
+                <option value="inscripcion">Inscripción</option>
+                <option value="enero">Enero</option>
+                <option value="febrero">Febrero</option>
+                <option value="marzo">Marzo</option>
+                <option value="abril">Abril</option>
+                <option value="mayo">Mayo</option>
+                <option value="junio">Junio</option>
+                <option value="julio">Julio</option>
+                <option value="agosto">Agosto</option>
+                <option value="septiembre">Septiembre</option>
+                <option value="octubre">Octubre</option>
+                <option value="noviembre">Noviembre</option>
+                <option value="diciembre">Diciembre</option>
             </select>
             <p class="month-count text-xl font-bold  ml-4 mb-4">1</p>
         </td>

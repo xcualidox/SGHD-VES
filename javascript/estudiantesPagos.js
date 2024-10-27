@@ -30,17 +30,6 @@ closeModalAñadir.addEventListener('click', () => {
     document.querySelector(".modal__Oscuro").style.display = "none";
 });
 
-openModalMensualidad.addEventListener('click', () => {
-    modalMensualidad.classList.add('show');
-  
-    document.querySelector(".modal__Oscuro").style.display = "block";
-});
-
-closeModalMensualidad.addEventListener('click', () => {
-    modalMensualidad.classList.remove('show');
-    document.querySelector(".modal__Oscuro").style.display = "none";
-});
-
 
 openModalPagos.addEventListener('click', () => {
     modalPagos.showModal(); // Abrir el modal

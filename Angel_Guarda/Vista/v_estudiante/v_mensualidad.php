@@ -32,10 +32,8 @@
                 </td>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody_mensualidad">
             <!-- Filas generadas dinámicamente -->
-
-         
         </tbody>
      
     </table>
