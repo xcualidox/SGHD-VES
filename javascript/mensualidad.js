@@ -1,10 +1,13 @@
 openModalMensualidad.addEventListener('click', () => {
-    modalMensualidad.showModal(); // Abrir el modal
+    modalMensualidad.classList.add('show');
+  
+    document.querySelector(".modal__Oscuro").style.display = "block";
     recargarTablaMensualidad('tbody_mensualidad');
 });
 
 closeModalMensualidad.addEventListener('click', () => {
-    modalMensualidad.close(); // Cerrar el modal
+    modalMensualidad.classList.remove('show');
+    document.querySelector(".modal__Oscuro").style.display = "none";
 });
 
 //Ejemplo de uso de esta funcion:
