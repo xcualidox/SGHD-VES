@@ -21,13 +21,6 @@ closeModalAñadir.addEventListener('click', () => {
     document.getElementById("formRegistroEstudiante").reset();
     modalAñadir.close(); // Cerrar el modal
 });
-openModalMensualidad.addEventListener('click', () => {
-    modalMensualidad.showModal(); // Abrir el modal
-});
-
-closeModalMensualidad.addEventListener('click', () => {
-    modalMensualidad.close(); // Cerrar el modal
-});
 
 
 openModalPagos.addEventListener('click', () => {

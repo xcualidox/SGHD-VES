@@ -145,7 +145,7 @@ if (isset($_POST["cedula"])) {
 
     //Establece la variable de url a enviar en caso de exito
     $estado = 'exito';
-    //header($url.'?estado='.$estado);
+    header($url.'?estado='.$estado);
     exit(); // Es recomendable usar exit después de header para evitar que el script continúe ejecutándose
 }
 ?>

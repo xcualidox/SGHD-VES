@@ -128,7 +128,7 @@ class estudiante extends database_connect
     }
     public function obtenerAnoEscolar()
     {
-        $sql = "SELECT `nombre` FROM `ano_escolar` ORDER BY `nombre` DESC";
+        $sql = "SELECT `nombre`,`codigo`,`activo` FROM `ano_escolar` ORDER BY `activo` DESC, `nombre` DESC";
         $result = $this->query($sql, []);  // Ejecuta la consulta
 
         $anoEscolar = [];
