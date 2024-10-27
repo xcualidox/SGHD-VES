@@ -20,8 +20,6 @@
     --filtroCeleste:brightness(0) saturate(100%) invert(57%) sepia(12%) saturate(7414%) hue-rotate(167deg) brightness(94%) contrast(89%);
     --filtro-Gris: brightness(0) saturate(100%) invert(71%) sepia(6%) saturate(93%) hue-rotate(131deg) brightness(82%) contrast(83%);
     --filtro--negro:brightness(0) saturate(100%);
-
-
     --color-background: #e0f2f1;  /* Fondo claro */
     --color-text: #ffffff;  /* Texto blanco */
     --color-text-dark: #004d40;  /* Texto verde oscuro */
@@ -644,6 +642,8 @@ img {
 }
 
  .modal__Nuevo {
+    margin-top: 1rem;
+    min-width:70%;
     border: none;
     outline: none;
     border-radius: 8px;
@@ -660,6 +660,10 @@ img {
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     z-index: 5000;
     
+}
+
+.block {
+    display: block;
 }
 
 .modal__Nuevo.show {

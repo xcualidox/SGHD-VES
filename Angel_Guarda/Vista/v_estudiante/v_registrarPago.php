@@ -23,6 +23,43 @@
                 </div>
                 <div class="formulario-extenso__row">
                     <div class="formulario-extenso__column">
+
+                        <label for="Pago">Descuento: </label>
+                        <div class="flex">
+                            <div class="custom-radio">
+                                <input type="radio" id="total" value="0" name="descuento">
+                                <label for="total">Ninguno</label>
+                            </div>
+
+
+                            <div class="custom-radio">
+                                <input type="radio" id="descuento" value="0.50" name="descuento">
+                                <label for="descuento-50">50%</label>
+                            </div>
+
+                            <div class="custom-radio">
+                                <input type="radio" id="descuento-becado" value="Becado" name="descuento">
+                                <label for="descuento-becado">Becado</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="formulario-extenso__column">
+                        <label for="Pago">Forma de Pago: </label>
+                        <div class="flex">
+                            <div class="custom-radio">
+                                <input type="radio" id="divisas" value="divisas" name="FormaPago" onchange="verificarSeleccionado()">
+                                <label for="divisas">Divisas ($)</label>
+                            </div>
+                            <div class="custom-radio">
+                                <input type="radio" id="transferencia" value="transferencia" name="FormaPago" onchange="verificarSeleccionado()">
+                                <label for="transferencia"> Transferencia (BS)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden" id="mostrarDivPagos">
+                <div class="formulario-extenso__row">
+                    <div class="formulario-extenso__column">
                         <label for="mes">Mes:</label>
                         <select id="mes" class="formulario-extenso__input">
                             <option value="" disabled selected>---Selecciona Mes---</option>
@@ -42,68 +79,20 @@
                     </div>
                     <div class="formulario-extenso__column">
                         <label for="mesesSeleccionados">Meses a Pagar:</label>
-                      
-                        <div id="mesesSeleccionados" class="SelectMesesPagar" ></div>
-                  
+
+                        <div id="mesesSeleccionados" class="SelectMesesPagar"></div>
+
                     </div>
                 </div>
 
 
-
-
-
-
-                <div class="formulario-extenso__row">
-                    <div class="formulario-extenso__column">
-
-                        <label for="Pago">Descuento: </label>
-                        <div class="flex">
-                            <div class="custom-radio">
-                                <input type="radio" id="total" value="0" name="descuento">
-                                <label for="total">Total</label>
-                            </div>
-
-
-                            <div class="custom-radio">
-                                <input type="radio" id="descuento-50" value="50%" name="descuento">
-                                <label for="descuento-50">50%</label>
-                            </div>
-
-                            <div class="custom-radio">
-                                <input type="radio" id="descuento-becado" value="Becado" name="descuento">
-                                <label for="descuento-becado">Becado</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="formulario-extenso__column">
-                        <label for="Pago">Forma de Pago: </label>
-                        <div class="flex">
-                            <div class="custom-radio">
-                                <input type="radio" id="divisas" value="divisas" name="FormaPago">
-                                <label for="divisas">Divisas</label>
-                            </div>
-                            <div class="custom-radio">
-                                <input type="radio" id="transferencia" value="transferencia" name="FormaPago">
-                                <label for="transferencia">Transferencia</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="formulario-extenso__row">
-
-
-                </div>
-
+              
                 <div class="formulario-extenso__row">
 
                     <div class="formulario-extenso__column">
 
-
-
-                        <label for="monto">Monto Total: </label>
+                        <label for="monto">Monto a Pagar: </label>
                         <input type="text" id="mesPagar" name="mesPagar" disabled placeholder="Monto a Pagar" class="formulario-extenso__input" maxlength="">
-
-
 
                     </div>
                     <div class="formulario-extenso__column">
@@ -127,10 +116,7 @@
 
                         <label for="referencia">Numero de Referencia: </label>
                         <input type="text" id="referencia" name="referencia" placeholder="Referencia" class="formulario-extenso__input" maxlength="">
-
                     </div>
-
-
 
                 </div>
                 <div class="formulario-extenso__row">
@@ -143,12 +129,16 @@
                     </div>
 
                 </div>
+                <input type="button" id="" value="Guardar" class="table_button w-full">
+                </div>
+
             </div>
+
 
             <!-- Columna Derecha -->
 
         </div>
 
-        <input type="button" id="" value="Guardar" class="table_button w-full">
+       
     </form>
 </div>
