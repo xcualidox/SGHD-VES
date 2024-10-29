@@ -246,7 +246,7 @@ thead {
 }
 .table_button:disabled {
     cursor:default;
-    opacity: 0.6; /* Reduce la opacidad */
+    opacity: 0.4; /* Reduce la opacidad */
 }
 .table_button:disabled:hover {
     background-color: var(--color-primary);
@@ -257,6 +257,8 @@ thead {
     background-color: var(--color-verdeOscuro);
   
 }
+
+
 
 .desactivar {
     background-color: #e57373;  /* Color rojo */
@@ -649,8 +651,10 @@ img {
 }
 
  .modal__Nuevo {
+   
     margin-top: 1rem;
     min-width:70%;
+ 
     border: none;
     outline: none;
     border-radius: 8px;

@@ -309,6 +309,10 @@ function openPagoEspecificoModal(event) {
     document.getElementById('nombresRepresentanteRegistroPago').textContent = datos.nombres_representante;
      //CEDULA ESTUDIANTE REPRESENTANTE
     document.getElementById('cedulaRepresentanteRegistroPago').textContent = datos.cedula_representante ;
+  
+    document.getElementById('direccionRepresentanteRegistroPago').textContent= datos.direccion;
+    document.getElementById('telefonoRepresentanteRegistroPago').textContent=datos.telefono;
+
     
     // Mostrar el modal
 

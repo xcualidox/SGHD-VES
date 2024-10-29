@@ -4,6 +4,7 @@ window.onload= function () {
         function(anos_escolares)
         {
             select_anos=document.getElementById('AnoEscolarMensualidad');
+            select_anosPagos=document.getElementById('AnoEscolarPago');
 
             for (let i = 0; i < anos_escolares.length; i++) {
                 nueva_option=document.createElement('option');
@@ -18,6 +19,7 @@ window.onload= function () {
                 nueva_option.setAttribute('data-info',valores[2]);
 
                 select_anos.appendChild(nueva_option);
+                select_anosPagos.appendChild(nueva_option);
             }
         });
 }

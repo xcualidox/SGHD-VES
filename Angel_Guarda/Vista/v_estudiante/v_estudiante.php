@@ -180,6 +180,18 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <span id="nombresRepresentanteRegistroPago" class="font-semibold"></span>
 
                 </div>
+                <div class="flex  flex-wrap mb-1">
+                    <!-- NOMBRE REPRESENTANTE REGISTRO PAGO -->
+                    <span class="font-bold mr-1">Direccion :</span>
+                    <span id="direccionRepresentanteRegistroPago" class="font-semibold"></span>
+
+                </div>
+                <div class="flex  flex-wrap mb-1">
+                    <!-- NOMBRE REPRESENTANTE REGISTRO PAGO -->
+                    <span class="font-bold mr-1">Teléfono:</span>
+                    <span id="telefonoRepresentanteRegistroPago" class="font-semibold"></span>
+
+                </div>
 
             </div>
 

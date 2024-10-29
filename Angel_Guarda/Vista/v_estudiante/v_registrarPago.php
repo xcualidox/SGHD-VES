@@ -13,10 +13,9 @@
                     <div class="formulario-extenso__column">
                         <label for="AnoEscolarPago">Año Escolar: </label>
                         <select name="AnoEscolarPago" id="AnoEscolarPago" class="formulario-extenso__input">
-                            <option value="" disabled selected> ---Selecciona---</option>
-                            <?php foreach ($anosEscolares as $ano): ?>
-                                <option value="<?php echo htmlspecialchars($ano); ?>"><?php echo htmlspecialchars($ano); ?></option>
-                            <?php endforeach; ?>
+              
+                             
+                   
                         </select>
                     </div>
 
@@ -27,18 +26,18 @@
                         <label for="Pago">Descuento: </label>
                         <div class="flex">
                             <div class="custom-radio">
-                                <input type="radio" id="total" value="0" name="descuento">
+                                <input type="radio" id="total" value="0" name="descuento" checked onchange="verificarSeleccionado()">
                                 <label for="total">Ninguno</label>
                             </div>
 
 
                             <div class="custom-radio">
-                                <input type="radio" id="descuento" value="0.50" name="descuento">
+                                <input type="radio" id="descuento" value="0.50" name="descuento" onchange="verificarSeleccionado()">
                                 <label for="descuento-50">50%</label>
                             </div>
 
                             <div class="custom-radio">
-                                <input type="radio" id="descuento-becado" value="Becado" name="descuento">
+                                <input type="radio" id="descuento-becado" value="Becado" name="descuento" onchange="verificarSeleccionado()">
                                 <label for="descuento-becado">Becado</label>
                             </div>
                         </div>
@@ -47,11 +46,11 @@
                         <label for="Pago">Forma de Pago: </label>
                         <div class="flex">
                             <div class="custom-radio">
-                                <input type="radio" id="divisas" value="divisas" name="FormaPago" onchange="verificarSeleccionadoTipo()">
+                                <input type="radio" id="divisas" value="divisas" name="FormaPago" onchange="verificarSeleccionado()">
                                 <label for="divisas">Divisas ($)</label>
                             </div>
                             <div class="custom-radio">
-                                <input type="radio" id="transferencia" value="transferencia" name="FormaPago" onchange="verificarSeleccionadoTipo()">
+                                <input type="radio" id="transferencia" value="transferencia" name="FormaPago" onchange="verificarSeleccionado()">
                                 <label for="transferencia"> Transferencia (BS)</label>
                             </div>
                         </div>
@@ -78,7 +77,9 @@
                         </select>
                     </div>
                     <div class="formulario-extenso__column">
-                        <label for="mesesSeleccionados">Meses a Pagar:</label>
+              
+                            <label for="monto" >Monto en $: <span id="mesPagar" name="mesPagar"  class=" text-black"></span> </label>
+                        <label for="mesPagarBolivar">Monto en Bs:  <span id="mesPagarBolivar" name="mesPagarBolivar" class=" text-black"></span></label></label>
 
                         <div id="mesesSeleccionados" class="SelectMesesPagar"></div>
 
@@ -91,15 +92,15 @@
 
                     <div class="formulario-extenso__column">
 
-                        <label for="monto">Monto en Bs: </label>
-                        <input type="text" id="mesPagar" name="mesPagar" disabled placeholder="Monto a Pagar" class="formulario-extenso__input" maxlength="">
+                   
+                    
 
                     </div>
                     <div class="formulario-extenso__column">
 
 
-                        <label for="mesPagarDolar">Monto en $: </label>
-                        <input type="text" id="mesPagarDolar" name="mesPagarDolar" disabled placeholder="mesPagarDolar" class="formulario-extenso__input" maxlength="">
+                        
+                       
 
                     </div>
                 </div>
@@ -109,7 +110,7 @@
                     <div class="formulario-extenso__column">
 
                         <label for="mesAbonar">Monto a Abonar: </label>
-                        <input type="text" id="mesAbonar" name="mesAbonar" placeholder="Monto a Abonar" class="formulario-extenso__input" maxlength="" oninput="abonadoMes()" >
+                        <input type="number" id="mesAbonar" name="mesAbonar" placeholder="Monto a Abonar" class="numeroMax formulario-extenso__input" maxlength="50" oninput="abonadoMes()" >
 
                     </div>
                     <div class="formulario-extenso__column">
@@ -129,7 +130,7 @@
                     </div>
 
                 </div>
-                <input type="button" id="" disabled value="Guardar" class="table_button w-full">
+                <input type="button" id="guardarRegistroPago" disabled value="Guardar" class="table_button w-full">
                 </div>
 
             </div>
