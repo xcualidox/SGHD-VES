@@ -107,7 +107,7 @@ selectMes.addEventListener('change', function () {
 
 function tipoPago() {
 
-  const formaPago = verificarSeleccionado(); //Llamo la funcion para traerme lo que retorna
+  const formaPago = verificarSeleccionadoTipo(); //Llamo la funcion para traerme lo que retorna
   const tipoPago =formaPago[0]; //Accediendo a Pago si es divisa o Transferencia
   return tipoPago
 }
