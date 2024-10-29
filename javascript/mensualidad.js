@@ -1,10 +1,41 @@
+//Cargar los años escolares al abrir la pagina
+window.onload= function () {
+    pedirAnosEscolares(
+        function(anos_escolares)
+        {
+            select_anos=document.getElementById('AnoEscolarMensualidad');
+
+            for (let i = 0; i < anos_escolares.length; i++) {
+                nueva_option=document.createElement('option');
+
+                //Obtener solo los valores del diccionario
+                valores = Object.values(anos_escolares[i]);
+
+                nueva_option.value=valores[0];
+                nueva_option.innerHTML=valores[1];
+
+                //ano activo:
+                nueva_option.setAttribute('data-info',valores[2]);
+
+                select_anos.appendChild(nueva_option);
+            }
+        });
+}
+
 openModalMensualidad.addEventListener('click', () => {
     modalMensualidad.showModal(); // Abrir el modal
-    recargarTablaMensualidad('tbody_mensualidad');
+    let ano_escolar=document.getElementById('AnoEscolarMensualidad').value;
+    recargarTablaMensualidad('tbody_mensualidad',ano_escolar);
 });
 
 closeModalMensualidad.addEventListener('click', () => {
     modalMensualidad.close(); // Cerrar el modal
+});
+
+
+AnoEscolarMensualidad.addEventListener('change', () => {
+    let ano_escolar=document.getElementById('AnoEscolarMensualidad').value;
+    recargarTablaMensualidad('tbody_mensualidad',ano_escolar);
 });
 
 //Ejemplo de uso de esta funcion:
@@ -17,7 +48,7 @@ closeModalMensualidad.addEventListener('click', () => {
 //no se pa q hice esto mano help X'''''d se me fue como una hora en esta pendejada, ahi la dejo por si sirve x'''''d
 
 function crearSelect(options = [], seleccionado, parametros_option = [{}], parametros_select = {}) {
-    let nuevo_select = document.createElement('select');
+    const nuevo_select = document.createElement('select');
 
     for (let i = 0; i < options.length; i++) {
         //se crea la opcion
@@ -52,6 +83,34 @@ function crearSelect(options = [], seleccionado, parametros_option = [{}], param
     return nuevo_select;
 }
 
+function eliminarMensualidad(id, callback) {    
+    $.ajax({
+    url: '../../Control/c_mensualidad.php', 
+    type: 'POST',
+    data: { id_mensualidad: id },
+    dataType: 'json',  // Esperamos una respuesta JSON
+    success: function(response) {
+        // Manejar la respuesta del servidor
+        console.log(response);
+        if (response.success) {
+            showToast('Eliminado correctamente', true);
+            callback(response.success)
+        } else {
+            showToast('Error al eliminar, verifique que la mensualidad no esté en uso', false);
+            callback(null)
+        }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
+        console.log('Respuesta del servidor:', jqXHR.responseText);
+        // Aquí puedes agregar más depuración si la respuesta no es JSON válido
+        showToast('Error en la comunicación con el servidor.', false);
+        callback(null)
+    }
+});   
+    
+}
+
 function recargarTablaMensualidad(tbody_id, ano_escolar = undefined) {
 
     vaciarTabla(tbody_id);
@@ -76,12 +135,14 @@ function recargarTablaMensualidad(tbody_id, ano_escolar = undefined) {
                 <option value="octubre">Octubre</option>
                 <option value="noviembre">Noviembre</option>
                 <option value="diciembre">Diciembre</option>
-            </select>`,
+            </select>
+            <p class="month-count text-xl font-bold  ml-4 mb-4">1</p>`,
         
             '<input type="number" class="formMensu formulario-extenso__input" maxlength="8" placeholder="Monto" value="?">',
 
             `<div class='flex justify-center items-center ' style='margin-top: 15px' id="quitarBotonMens">
-                <img src='../../../images/icons/removeIcon.svg' class='w-10 h-8 filtro-rojo-SinScale cursor-pointer' alt='Borrar' title='Borrar' value='?'>
+                <img src='../../../images/icons/removeIcon.svg' class='w-10 h-8 filtro-rojo-SinScale cursor-pointer' alt='Borrar' title='Borrar' data-info='?' onclick='eliminarMensualidad("?", function(mensualidad){
+            recargarTablaMensualidad("tbody_mensualidad");})'>
             </div>`
             
         
@@ -92,25 +153,37 @@ function recargarTablaMensualidad(tbody_id, ano_escolar = undefined) {
         function(mensualidad){
             if (mensualidad){
 
-                resultados = mensualidad;
+                let resultados = mensualidad;
                 //Inserta el nuevo TR
                 insertarTr(tbody_id, resultados, parametros);
 
                 //Setea de nuevo los Select porque no quiere agarrarse el value='' al crear el elemento, sendo gei vale
-                tabla=document.querySelector('#mensualidadTable');
-                selects=tabla.querySelectorAll('select');
+                let tabla=document.querySelector('#mensualidadTable');
+                let selects=tabla.querySelectorAll('select');
 
                 for (let i = 0; i < selects.length; i++) {
                     selects[i].value=resultados[i]['mes'];
-                    console.log(selects[i]);
-                    console.log(resultados[i]['mes'])
-                    
                 }
+            //Mostrar boton de guardar
+                const select_ano_escolar = document.getElementById('AnoEscolarMensualidad');
+
+                //Agarrar el nombre del select del año escolar en vez del id
+                const selected = select_ano_escolar[select_ano_escolar.selectedIndex]
+                const es_activo = selected.dataset.info;
+                if(es_activo < 1){
+                    desactivarGuardarButton();
+                }
+                else{
+                    activarGuardarButton();
+                }
+
+                updateMonthCounts();
             }
         }
     );
-
 }
+
+
 
 function vaciarTabla(tbody_id) {
     tbody=document.getElementById(tbody_id);
@@ -155,10 +228,16 @@ function insertarTr(tbody_id, array = [], extra_parametros = []) {
         
             //Campos especificos
             const nuevo_campo = document.createElement('td');
+
+            //Eliminar si se va a reutilizar la funcion
+            if(i2==1){
+                nuevo_campo.setAttribute('class','flex items-center justify-center');
+            }
+
             if (extra_parametros.length != 0) {
 
                 let parametro = extra_parametros[i2];
-                nuevo_campo.innerHTML = parametro.replace('?', valores[i2])
+                nuevo_campo.innerHTML = parametro.split('?').join(valores[i2])
 
             }else{
                 nuevo_campo.innerHTML = valores[i2];
@@ -180,10 +259,37 @@ function pedirMensualidad(ano_escolar = '%%', callback) {
         success: function(response) {
             // Manejar la respuesta del servidor
             if (response.success) {
-                console.log(response.mensualidad) 
+                //console.log(response.mensualidad) 
                 callback(response.mensualidad); //response.mensualidad es lo mismo que usar response['mensualidad']
             } else {
                 showToast('Error al obtener los datos de mensualidad', false);
+                callback(null);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
+            console.log('Respuesta del servidor:', jqXHR.responseText);
+            // Aquí puedes agregar más depuración si la respuesta no es JSON válido
+            showToast('Error en la comunicación con el servidor.', false);
+            callback(null);
+        }
+    })   
+}
+
+function pedirAnosEscolares(callback) {
+    $.ajax({
+        url: '../../Control/c_mensualidad.php', 
+        type: 'POST',
+        data: { agarrar_anos: true },
+        dataType: 'json',  // Esperamos una respuesta JSON
+        success: function(response) {
+            // Manejar la respuesta del servidor
+            if (response.success) {
+                console.log(response) 
+                callback(response.anos_escolares);
+            } else {
+                console.log(response);
+                showToast('Error al obtener los Años Escolares', false);
                 callback(null);
             }
         },
@@ -216,7 +322,12 @@ function addEmptyRow() {
 
 // Función que obtiene el año escolar seleccionado
 function getSelectedAnoEscolar() {
-    return document.getElementById('AnoEscolarMensualidad').value;
+    const select_ano_escolar = document.getElementById('AnoEscolarMensualidad');
+    
+    //Agarrar el nombre del select del año escolar en vez del id
+    const selected = select_ano_escolar[select_ano_escolar.selectedIndex]
+    const innertext_select = selected.innerText;
+    return innertext_select;
 }
 
 
@@ -249,14 +360,14 @@ function createEmptyRow(selectedAnoEscolar) {
         <td><input type="number" class="formMensu formulario-extenso__input" maxlength="8" placeholder="Monto"></td>
         <td>
             <div class='flex justify-center items-center ' style='margin-top: 15px' id="quitarBotonMens">
-                <img src='../../../images/icons/removeIcon.svg' class='w-10 h-8 filtro-rojo-SinScale cursor-pointer' alt='Borrar' title='Borrar'>
+                <img src='../../../images/icons/removeIcon.svg' class='w-10 h-8 filtro-rojo-SinScale cursor-pointer' alt='Borrar' title='Borrar' data-info=''>
             </div>
         </td>
     `;
     return nuevaFila;
 }
 
-function guardarMensualidad() {
+function guardarMensualidad(callback) {
     const dataToSend = [];
 
     // Recorrer todas las filas de la tabla
@@ -269,6 +380,8 @@ function guardarMensualidad() {
         const selectedMonth = row.querySelector('.month-select').value;
         // Capturar el monto ingresado
         const amount = row.querySelector('input[type="number"]').value;
+        // Capturar el ID
+        const id_mensualidad = row.querySelector('img').dataset.info;
 
         if (!selectedMonth || !amount) {
             allFieldsFilled = false;  // Si algún campo está vacío, cambia la variable a falso
@@ -278,7 +391,8 @@ function guardarMensualidad() {
         if (selectedMonth && amount) {
             dataToSend.push({
                 mes: selectedMonth,
-                monto: amount
+                monto: amount,
+                id: id_mensualidad
             });
         }
     });
@@ -292,22 +406,31 @@ function guardarMensualidad() {
     }
  
     if (dataToSend.length > 0) {
+        let anoescolar = document.getElementById('AnoEscolarMensualidad').value;
         // Enviar los datos mediante AJAX usando jQuery
         $.ajax({
             url: '../../Control/c_mensualidad.php',  // Cambia esto a la URL de tu backend
             type: 'POST',
-            data: { mensualidades: JSON.stringify(dataToSend) },
+            data: { mensualidades: JSON.stringify(dataToSend),  ano_escolar: anoescolar},
             dataType: 'json',  // Esperamos una respuesta JSON
             success: function(response) {
                 // Manejar la respuesta del servidor
-                if (response.success) {
-                    showToast('Datos guardados exitosamente', true);
-                    console.log(response);
-               
-                    
-                } else {
-                    showToast('Error al guardar los datos', false);
+                let intentos = response.success.length;
+                let exitos = 0;
+                console.log(intentos);
+
+                //Calcular los exitos
+                for (let i = 0; i < response.success.length; i++) {
+
+                    if(response.success[i]){
+                        exitos++;
+                    }
+   
                 }
+
+
+                showToast(exitos + ' Éxitos de ' + intentos + ' intentos.', true);
+                    callback(true)
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
@@ -324,11 +447,21 @@ function toggleGuardarButton() {
     const guardarBtn = document.getElementById('guardarBtnMensualidad');
     
     // Si hay filas en el tbody, mostrar el botón; de lo contrario, ocultarlo
-    if (tableBody.querySelectorAll('tr').length > 0) {
+    if (guardarBtn.style.display == 'none') {
         guardarBtn.style.display = 'block'; // Muestra el botón
     } else {
         guardarBtn.style.display = 'none'; // Oculta el botón
     }
+}
+
+function activarGuardarButton() {
+    const guardarBtn = document.getElementById('guardarBtnMensualidad');
+    guardarBtn.style.display = 'block'; // Muestra el botón
+}
+
+function desactivarGuardarButton() {
+    const guardarBtn = document.getElementById('guardarBtnMensualidad');
+    guardarBtn.style.display = 'none'; // Muestra el botón
 }
 
    
@@ -368,9 +501,6 @@ function updateMonthCounts() {
         }
     });
 }
-
-
-toggleGuardarButton();
 
 // Evento de clic para añadir la fila vacía
 document.getElementById('addRowBtn').addEventListener('click', addEmptyRow);

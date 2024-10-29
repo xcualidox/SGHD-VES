@@ -4,12 +4,29 @@ require_once("basedatos.php");
 class mensualidad extends database_connect
 {
 
-    public function obtenerAnoEscolar($activo)
+    public function obtenerAnoEscolar()
     {
-        $sql = "SELECT `nombre` FROM `ano_Escolar` WHERE `activo` = ?";
-        $result = $this->query($sql, [$activo]); // $activo es bool
+        $sql = "SELECT `codigo`,`nombre`,`activo` FROM `ano_Escolar` ORDER BY `activo` DESC";
+        $result = $this->fetch_all_query($this->query($sql, []));
 
         return $result;
+    }
+
+    public function verificarMensualidad($ano,$mes,$monto,$id){
+
+        $sql = "SELECT `ano_escolar`.`nombre`,`mensualidad`.`mes`,`mensualidad`.`monto`,`mensualidad`.`id`
+                FROM `mensualidad`
+                JOIN `ano_escolar`
+                ON `ano_escolar`.`codigo` = `mensualidad`.`ano_escolar`
+                WHERE 
+                `mensualidad`.`ano_escolar`LIKE ? AND
+                `mensualidad`.`mes` LIKE ? AND
+                `mensualidad`.`monto` LIKE ? AND
+                `mensualidad`.`id` LIKE ?"; 
+        $result = $this->fetch_all_query($this->query($sql, [$ano,$mes,$monto,$id]));  // id de ano_escolar
+
+        return $result;
+
     }
     
     public function obtenerMensualidad($ano)

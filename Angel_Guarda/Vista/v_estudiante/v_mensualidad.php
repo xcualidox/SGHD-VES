@@ -9,10 +9,7 @@
         <!-- Formulario de selección del año escolar -->
         <div class="mt-4">
             <select name="AnoEscolarMensualidad" id="AnoEscolarMensualidad" class="formulario-extenso__input">
-                <option value="" disabled > ---Selecciona---</option>
-                <?php foreach ($anosEscolares as $ano): ?>
-                    <option value="<?php echo htmlspecialchars($ano); ?>"><?php echo htmlspecialchars($ano); ?></option>
-                <?php endforeach; ?>
+                <option value="" disabled > ---Año Escolar---</option>
             </select>
         </div>
     </div>
@@ -40,4 +37,5 @@
 
    
 </div>
-<input type="button" id="guardarBtnMensualidad" value="Guardar" class="table_button w-full"  onclick="guardarMensualidad()">
+<!-- el onclick es un callback, por eso es asi de largo -->
+<input type="button" id="guardarBtnMensualidad" value="Guardar" class="table_button w-full"onclick="guardarMensualidad(function(valor){ano_escolar=document.getElementById('AnoEscolarMensualidad').value ; recargarTablaMensualidad('tbody_mensualidad',ano_escolar);})">
