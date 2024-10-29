@@ -91,15 +91,15 @@
 
                     <div class="formulario-extenso__column">
 
-                        <label for="monto">Monto a Pagar: </label>
+                        <label for="monto">Monto en Bs: </label>
                         <input type="text" id="mesPagar" name="mesPagar" disabled placeholder="Monto a Pagar" class="formulario-extenso__input" maxlength="">
 
                     </div>
                     <div class="formulario-extenso__column">
 
 
-                        <label for="mesDescuento">Descuento: </label>
-                        <input type="text" id="mesDescuento" name="mesDescuento" disabled placeholder="Descuento" class="formulario-extenso__input" maxlength="">
+                        <label for="mesPagarDolar">Monto en $: </label>
+                        <input type="text" id="mesPagarDolar" name="mesPagarDolar" disabled placeholder="mesPagarDolar" class="formulario-extenso__input" maxlength="">
 
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                     <div class="formulario-extenso__column">
 
                         <label for="mesAbonar">Monto a Abonar: </label>
-                        <input type="text" id="mesAbonar" name="mesAbonar" placeholder="Monto a Abonar" class="formulario-extenso__input" maxlength="">
+                        <input type="text" id="mesAbonar" name="mesAbonar" placeholder="Monto a Abonar" class="formulario-extenso__input" maxlength="" oninput="abonadoMes()" >
 
                     </div>
                     <div class="formulario-extenso__column">
@@ -129,7 +129,7 @@
                     </div>
 
                 </div>
-                <input type="button" id="" value="Guardar" class="table_button w-full">
+                <input type="button" id="" disabled value="Guardar" class="table_button w-full">
                 </div>
 
             </div>
