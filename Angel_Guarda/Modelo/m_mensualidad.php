@@ -12,7 +12,25 @@ class mensualidad extends database_connect
         return $result;
     }
 
-    public function verificarMensualidad($ano,$mes,$monto,$id){
+    public function obtenerMensualidadPorId($id){
+        $sql="SELECT `mensualidad`.`id`,`ano_escolar`.`nombre` as `ano_escolar`,`mensualidad`.`mes`,`mensualidad`.`monto`
+        FROM `mensualidad`
+        JOIN `ano_escolar`
+        ON `ano_escolar`.`codigo`=`mensualidad`.`ano_escolar`
+        WHERE `mensualidad`.`id`
+        LIKE ?";
+        $result = $this->fetch_query($this->query($sql, [$id]));
+
+        return $result;
+    }
+
+    public function agarrarAnoPorId($id){
+        $sql="SELECT * FROM `ano_escolar` WHERE `codigo` LIKE ?";
+        $result = $this->fetch_query($this->query($sql, [$id]));
+        return $result;
+    }
+
+    public function verificarMensualidad($ano = '%%',$mes = '%%',$monto = '%%',$id = '%%'){
 
         $sql = "SELECT `ano_escolar`.`nombre`,`mensualidad`.`mes`,`mensualidad`.`monto`,`mensualidad`.`id`
                 FROM `mensualidad`

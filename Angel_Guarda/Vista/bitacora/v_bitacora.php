@@ -57,7 +57,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
   </tbody>
 </table>
 <!-- Aparecera cuando no se encuentren resultados -->
-<p class="mx-auto text-center block hidden" style="margin-top:5rem;" id="noResultMsg">No se encontraron resultados...</p>
+<p class="mx-auto text-center hidden" style="margin-top:5rem;" id="noResultMsg">No se encontraron resultados...</p>
 <!-- Aqui va los controles del paginado -->
 <div id="pagination-container" class="mx-auto flex justify-center mt-8"></div> 
 
