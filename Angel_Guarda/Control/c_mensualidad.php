@@ -59,9 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $objeto = new mensualidad;
 
         $id_borrar=$_POST['id_mensualidad'];
+        $aEliminar=$objeto->obtenerMensualidadPorId($id_borrar);
         $resultado=$objeto->eliminarMensualidad($id_borrar);            
 
         if (!$resultado){
+
             $response = [
                 'success' => false,
                 'message' => 'No se pudo mano.'
@@ -72,6 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'success' => true,
                 'message' => 'Eliminado correctamente.'
             ];
+
+            require_once("c_bitacora.php");
+            insertBitacora($_SESSION['username'], "eliminar", ' Eliminó la mensualidad de '. ucFirst($aEliminar['mes']) .' del Año Escolar "'.$aEliminar['ano_escolar'].'"');
         }
         echo json_encode($response);
         exit();
@@ -86,9 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         //resultados para toast
         $resultados = [];
-
+        $idesxd = [];
         for ($i=0; $i < count($mensualidades); $i++) { 
-            
             $datos=$mensualidades[$i];
 
             $ano=$_POST['ano_escolar'];
@@ -96,33 +100,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $monto=$datos['monto'];
             $id_mensualidad=$datos['id'];
 
+            if ($id_mensualidad!=''){
+                $aUsar=$objeto->obtenerMensualidadPorId($id_mensualidad);
+            }
+            else{
+                $aUsar['mes']=$mes;
+                $aUsar['ano_escolar']=$ano;
+            }
+
+            //Para el Toast
             $ya_registrado=$objeto->verificarMensualidad($ano,$mes,$monto,$id_mensualidad);
 
+            //If para evitar conteo innecesario cuando ya esta registrado, para exitos e intentos en la vista
             if(count($ya_registrado) == 0){
 
-                //Insertar
-                if (empty($datos['id'])){
-    
+                
+                if (empty($id_mensualidad)) {
+
                     $resultado=$objeto->insertarMensualidad($ano,$mes,$monto);
-                    array_push($resultados,$resultado);
-    
+                    array_push($resultados,$resultado);   
+
+                    if($resultado){
+                        require_once("c_bitacora.php");
+                        //$anoescolar_bitacora=$objeto->agarrarAnoPorId($aUsar['ano_escolar']);
+                        $anoescolar_bitacora=['nombre'=>'Lmao'];
+                        $anoescolar_bitacora=$anoescolar_bitacora['nombre'];
+                        insertBitacora($_SESSION['username'], "insertar", ' Insertó la mensualidad de '. ucFirst($aUsar['mes']) .' del Año Escolar "'.$anoescolar_bitacora.'"');
+                    }
+
+
                 }
-    
-                //Modificar
                 else{
-    
+                    //Obtener el ID original para la bitácora
+                    $fila_original=$objeto->verificarMensualidad(id: $id_mensualidad);
+                    
+                    $mes_original=$fila_original[0]['mes'];
+                    $ano_original=$fila_original[0]['nombre'];
+                    $monto_original=$fila_original[0]['monto'];
+
                     $resultado=$objeto->actualizarMensualidad($ano,$mes,$monto,$id_mensualidad);
                     array_push($resultados,$resultado);
-    
+
+                    if($resultado){
+                        require_once("c_bitacora.php");
+                        $anoescolar_bitacora_query=$objeto->agarrarAnoPorId($ano);
+                        //$anoescolar_bitacora=['nombre'=>'Lmao'];
+                        $anoescolar_bitacora=$anoescolar_bitacora_query['nombre'];
+                        
+
+                        insertBitacora($_SESSION['username'], "modificar", ' Modificó la mensualidad de '. ucFirst($mes_original) .' del A.Escolar "'.$ano_original.'" ('.$monto_original.'$) por '. ucFirst($mes). ' del A.Escolar "'.$anoescolar_bitacora.'" ('.$monto.'$)');
+                    }
+
                 }
+
             }
+            
+            
         }
      
+
         $response = [
             'success' => $resultados,
             'message' => 'Que sea lo que dios quiera mano'
         ];
-
 
 
         echo json_encode($response);

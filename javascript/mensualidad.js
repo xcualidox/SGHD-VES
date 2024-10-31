@@ -46,6 +46,11 @@ AnoEscolarMensualidad.addEventListener('change', () => {
     recargarTablaMensualidad('tbody_mensualidad',ano_escolar);
 });
 
+mes = document.getElementById('mes');
+mes.addEventListener('click', (event) => {
+    event.stopPropagation();
+});
+
 //Ejemplo de uso de esta funcion:
 //
 //  crearSelect( ['opcion1','opcion2'], 1,  [ {'value': 1, 'id':'select'}, {'value':2, 'name':'XD'} ], )
@@ -99,12 +104,12 @@ function eliminarMensualidad(id, callback) {
     dataType: 'json',  // Esperamos una respuesta JSON
     success: function(response) {
         // Manejar la respuesta del servidor
-        console.log(response);
         if (response.success) {
             showToast('Eliminado correctamente', true);
-            callback(response.success)
+            callback(response.success);
         } else {
             showToast('Error al eliminar, verifique que la mensualidad no esté en uso', false);
+            console.log(response);
             callback(null)
         }
     },
@@ -425,7 +430,7 @@ function guardarMensualidad(callback) {
                 // Manejar la respuesta del servidor
                 let intentos = response.success.length;
                 let exitos = 0;
-                console.log(intentos);
+                console.log(response);
 
                 //Calcular los exitos
                 for (let i = 0; i < response.success.length; i++) {
