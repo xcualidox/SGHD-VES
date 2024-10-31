@@ -23,22 +23,25 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
 <div class="main-content">
-<div class="modal__Oscuro">    </div>
-<div class="flex absolute mt-3 ">
-            <h3 class=" font-semibold  ">
-                Dólar BCV: <input type="text" class=" text-balance  w-28  border  font-normal  outline-none px-2 py-1 mb-2 md:mb-0" id="DolarBCV" maxlength="9" onblur="actualizarDolar()">
-            </h3>
-        </div>
+    <div class="modal__Oscuro"> </div>
+    <div class="flex absolute mt-3 ">
+        <h3 class=" font-semibold  ">
+            Dólar BCV: <input type="text" class=" text-balance  w-28  border  font-normal  outline-none px-2 py-1 mb-2 md:mb-0" id="DolarBCV" maxlength="9" onblur="actualizarDolar()">
+        </h3>
+    </div>
 
     <div class="flex flex-col sm:flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
         <h1 class="text-xl font-semibold mb-2 md:mb-0"><?php echo $title; ?></h1>
-    
+
         <!-- Primer botón que abre el modal de "Añadir" -->
         <div class="bg-gray-100 rounded-full cursor-pointer" id="openModalAñadir">
             <img src="../../../images/icons/añadir.svg" class="w-10 filtro-verde" alt="Añadir" title="Añadir">
         </div>
         <div class="bg-gray-100 rounded-full cursor-pointer" id="openModalMensualidad">
             <img src="../../../images/icons/calendario.svg" class="w-10 filtro-verde" alt="openModalMensualidad" title="Mensualidad">
+        </div>
+        <div class="bg-gray-100 rounded-full cursor-pointer" id="openModalMesesPS">
+            <img src="../../../images/icons/portapapeles.svg" class="w-10 filtro-verde" alt="openModalMesesPS" title="Modal Meses PS">
         </div>
 
         <!-- Segundo botón que abre el modal de "Ver Pagos" -->
@@ -94,12 +97,12 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
 
-               
+
                 <?php
-             
+
 
                 echo $tablaHTML;
-                 ?>
+                ?>
 
 
 
@@ -112,15 +115,15 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
     <!-- Ventanas de Pagos Modales -->
-  
-        <div class='modal__Nuevo' id="modalAñadir" >
 
-            <?php
+    <div class='modal__Nuevo' id="modalAñadir">
 
-            include_once("v_modalAñadir.php");
-            ?>
+        <?php
 
-        </div>
+        include_once("v_modalAñadir.php");
+        ?>
+
+    </div>
 
 
 
@@ -147,9 +150,9 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <p id="DatosCompletosMostrarMas"></p>
     </dialog>
     <!-- MODAL PAGO ESPECIFICO -->
- 
 
-  
+
+
     <div class="modal__Nuevo" id="modalPagosEspecificos">
 
         <div class="flex justify-between">
@@ -200,6 +203,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <img src="../../../images/icons/error.svg" class="filtro-blanco w-full h-full" alt="Cerrar" title="Cerrar">
             </div>
         </div>
+
         <details open>
             <?php
 
@@ -221,9 +225,35 @@ include_once('../v_Sidebar/v_Sidebar.php');
     <!-- MODAL PAGO ESPECIFICO -->
 
 
-    <!-- INICIO MENSUALIDAD -->
+      <!-- Meses Pagos y Saldados -->
 
-  
+    <div class="modal__Nuevo" id="modalMesesPS">
+
+        <div class="flex justify-end items-end">
+            <div class="w-10 bg-red-500 rounded-full cursor-pointer p-2" id="closeMesesPS">
+                <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
+            </div>
+        </div>
+        <details open>
+            <?php
+
+            include_once("v_mesesPagos.php");
+            ?>
+
+        </details>
+
+        <details>
+            <?php
+
+            include_once("v_mesesSaldados.php");
+            ?>
+        </details>
+
+
+
+    </div>
+<!-- INICIO MENSUALIDAD -->
+
     <div class="modal__Nuevo" id="modalMensualidad">
 
 
@@ -232,17 +262,20 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
             </div>
         </div>
-    
-        
-        <?php 
 
-            include_once('v_mensualidad.php');
+
+        <?php
+
+        include_once('v_mensualidad.php');
         ?>
 
-     
-    </div>
 
+    </div>
+      
     <!-- FINAL MENSUALIDAD -->
+
+
+
 
 </div>
 

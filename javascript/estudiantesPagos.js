@@ -14,9 +14,9 @@ const openModalAñadir = document.getElementById('openModalAñadir');
 const closeModalAñadir = document.getElementById('closeModalAñadir');
 const modalAñadir = document.getElementById('modalAñadir');
 
-const openModalMensualidad = document.getElementById('openModalMensualidad');
-const closeModalMensualidad = document.getElementById('closeModalMensualidad');
-const modalMensualidad = document.getElementById('modalMensualidad');
+
+
+
 // Eventos para abrir y cerrar los modales
 //MODAL DE REGISTRO ESTUDIANTE REPRESENTANTE
 openModalAñadir.addEventListener('click', () => {
@@ -29,6 +29,19 @@ closeModalAñadir.addEventListener('click', () => {
     modalAñadir.classList.remove('show'); // Cerrar el modal // Cerrar el modal
     document.querySelector(".modal__Oscuro").style.display = "none";
 });
+
+//MODALES SALDADOS Y PAGO
+
+openModalMesesPS.addEventListener('click', () => {
+    modalMesesPS.classList.add('show');// Abrir el modal
+    document.querySelector(".modal__Oscuro").style.display = "block";
+});
+closeMesesPS.addEventListener('click', () => {
+
+    modalMesesPS.classList.remove('show'); // Cerrar el modal 
+    document.querySelector(".modal__Oscuro").style.display = "none";
+});
+//MODALES SALDADOS Y PAGO
 
 
 openModalPagos.addEventListener('click', () => {
