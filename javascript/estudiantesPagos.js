@@ -1,6 +1,7 @@
 //Regex solo numeros enteros sin .
 const regexSoloNumeros = /^\d+$/;
 const minimoNumeros=/^\d{11,}$/;
+let globalDataEstudianteRepresentante={}
 // Modal Añadir
 
 // Modal Pagos
@@ -309,7 +310,8 @@ function openPagoEspecificoModal(event) {
      const datos = JSON.parse(event.target.getAttribute('data-datos'));
      
     const modal = document.getElementById('modalPagosEspecificos');
-    console.log(datos);
+   
+    globalDataEstudianteRepresentante=datos;
     
     
     // Actualizar los elementos dentro del modal con los valores recibidos
