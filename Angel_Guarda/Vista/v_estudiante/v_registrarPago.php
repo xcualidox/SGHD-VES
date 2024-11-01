@@ -26,18 +26,18 @@
                         <label for="Pago">Descuento: </label>
                         <div class="flex">
                             <div class="custom-radio">
-                                <input type="radio" id="total" value="0" name="descuento" checked onchange="verificarSeleccionado()">
+                                <input type="radio" id="total" value="" name="descuento" checked onchange="verificarSeleccionado()">
                                 <label for="total">Ninguno</label>
                             </div>
 
 
                             <div class="custom-radio">
-                                <input type="radio" id="descuento" value="0.50" name="descuento" onchange="verificarSeleccionado()">
+                                <input type="radio" id="descuento" value="0.5" name="descuento" onchange="verificarSeleccionado()">
                                 <label for="descuento-50">50%</label>
                             </div>
 
                             <div class="custom-radio">
-                                <input type="radio" id="descuento-becado" value="Becado" name="descuento" onchange="verificarSeleccionado()">
+                                <input type="radio" id="descuento-becado" value="0" name="descuento" onchange="verificarSeleccionado()">
                                 <label for="descuento-becado">Becado</label>
                             </div>
                         </div>
@@ -88,22 +88,7 @@
 
 
               
-                <div class="formulario-extenso__row">
-
-                    <div class="formulario-extenso__column">
-
-                   
-                    
-
-                    </div>
-                    <div class="formulario-extenso__column">
-
-
-                        
-                       
-
-                    </div>
-                </div>
+       
 
                 <div class="formulario-extenso__row">
 
@@ -130,7 +115,8 @@
                     </div>
 
                 </div>
-                <input type="button" id="guardarRegistroPago" disabled value="Guardar" class="table_button w-full">
+                <input type="hidden" id="valorPagoEnviar"  >
+                <input type="button" id="guardarRegistroPago" onclick="enviarPago()" disabled value="Guardar" class="table_button w-full">
                 </div>
 
             </div>
