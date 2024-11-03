@@ -129,7 +129,190 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
+// ESTO ES PARA COLOCAR S
+ // Seleccionar elementos
+ const nuevoInput = document.getElementById('nuevoRepresentante');
+ const existenteInput = document.getElementById('existenteRepresentante');
+ const cedulaInput = document.getElementById('cedulaRepresentante');
+ const volverModificar=document.getElementById('volverModificacionRepresentante');
+ const nuevoImg = nuevoInput.nextElementSibling;
+ const existenteImg = existenteInput.nextElementSibling;
+ const RepresentanteExistente= document.querySelectorAll('.modificacionRepresentante');
+ const mostraRadioRepresentantes = document.querySelectorAll('.mostrarRadiosRepresentantes');
+ // Imágenes alternas para los estados
+ const imgSeleccionado = '../../../images/icons/checkRadius.svg';
+ const imgNoSeleccionado = '../../../images/icons/noCheckRadius.svg';
 
+
+ // Datos de representante
+const datosRepresentantesConsultaData = {
+    "653261516": {
+        nombreRepresentante: "Juan",
+        apellidosRepresentantes: "Pérez García",
+        telefono: "5551234",
+        direccion: "Calle Falsa 123",
+        correo: "juan.perez@example.com",
+        telefonoDomicilio: "555-5678"
+    },
+    "87654321": {
+        nombreRepresentante: "María",
+        apellidosRepresentantes: "Rodríguez López",
+        telefono: "555-9876",
+        direccion: "Avenida Siempreviva 742",
+        correo: "maria.rodriguez@example.com",
+        telefonoDomicilio: "5558765"
+    },
+    "87654325": {
+        nombreRepresentante: "Carlos",
+        apellidosRepresentantes: "Ramírez Sánchez",
+        telefono: "5556543",
+        direccion: "Boulevard Los Álamos 85",
+        correo: "carlos.ramirez@example.com",
+        telefonoDomicilio: "5554321"
+    }
+};
+ // Función para cambiar el input a texto normal o datalist
+ function cambiarInput(tipo) {
+    //Tomo las Variables para añadirles el Dissable
+ 
+    const nombreRepresentante = document.querySelector('#nombresRepresentante')
+    const apellidosRepresentantes = document.querySelector('#apellidosRepresentante')
+    const telefono = document.querySelector('#telefono')
+    const direccion = document.querySelector('#direccion')
+    const correo = document.querySelector('#correo')
+    const telefonoDomicilio=document.querySelector('#telefonoDomicilio')
+
+    const campoExistencia=[
+     
+        nombreRepresentante,
+        apellidosRepresentantes,
+        telefono,
+        direccion,
+        correo,
+        telefonoDomicilio,
+        
+    ]
+    if (tipo === 'Nuevo') {
+      console.log('Presionaste: Nuevo');
+
+      
+      cedulaInput.setAttribute('type', 'text');
+      cedulaInput.removeAttribute('list'); // Quitar datalist
+      RepresentanteExistente.forEach(element => {
+        element.classList.add('hidden');
+        element.classList.remove('block');
+      });
+  
+      mostraRadioRepresentantes.forEach(element => {
+        element.classList.remove('hidden');
+        element.classList.add('flex');
+      });
+      //Contador Del Array para agregarle el Dissable
+      campoExistencia.forEach(campo => {
+        campo.disabled = false;
+
+    });
+  
+    } else if (tipo === 'Existente') {
+        console.log('Presionaste: Existente');
+        campoExistencia.forEach(campo => {
+            campo.disabled = true;
+        });
+
+        cedulaInput.setAttribute('list', 'cedulaOptions'); // Agregar datalist
+
+        RepresentanteExistente.forEach(element => {
+            element.classList.remove('hidden');
+            element.classList.add('block');
+        });
+
+        mostraRadioRepresentantes.forEach(element => {
+            element.classList.add('hidden');
+            element.classList.remove('flex');
+        });
+
+        // Crear el datalist si no existe ya
+        if (!document.getElementById('cedulaOptions')) {
+            const dataList = document.createElement('datalist');
+            dataList.id = 'cedulaOptions';
+            dataList.innerHTML = `
+                <option value="653261516">Representante 1</option>
+                <option value="87654321">Representante 2</option>
+                <option value="87654325">Representante 3</option>
+            `;
+            cedulaInput.parentNode.appendChild(dataList);
+        }
+
+        // Evento oninput para autocompletar campos
+        cedulaInput.oninput = function () {
+            const valorCedula = cedulaInput.value.trim();
+
+            // Verifica si el valor coincide con alguna clave en `datosRepresentantes`
+            if (datosRepresentantesConsultaData[valorCedula]) {
+                const datos = datosRepresentantesConsultaData[valorCedula];
+
+                // Rellena los campos con los valores correspondientes
+                nombreRepresentante.value = datos.nombreRepresentante;
+                apellidosRepresentantes.value = datos.apellidosRepresentantes;
+                telefono.value = datos.telefono;
+                direccion.value = datos.direccion;
+                correo.value = datos.correo;
+                telefonoDomicilio.value = datos.telefonoDomicilio;
+            }
+            else{
+                nombreRepresentante.value = "";
+                apellidosRepresentantes.value = "";
+                telefono.value = "";
+                direccion.value = "";
+                correo.value = "";
+                telefonoDomicilio.value = "";
+            }
+        };
+    }
+    if (tipo === 'Regresar') {
+        console.log('Presionaste: Regresar');
+        cedulaInput.setAttribute('type', 'text');
+        cedulaInput.removeAttribute('list');
+      
+        // Restablecer el estado inicial de las clases
+        RepresentanteExistente.forEach(element => {
+          element.classList.add('hidden');    // Ocultar
+          element.classList.remove('block');  // Quitar 'block' si estaba
+        });
+      
+        mostraRadioRepresentantes.forEach(element => {
+          element.classList.remove('hidden'); // Asegurar que se muestren
+          element.classList.add('flex');      // Asegurar que sean visibles como flex
+        });
+      
+        // Llamar a la función para cambiar al estado "Nuevo"
+        cambiarInput('Nuevo');
+        nuevoImg.src = imgSeleccionado;
+        existenteImg.src = imgNoSeleccionado;
+      }
+  }
+ 
+
+ // Evento de cambio para las opciones de representante
+ nuevoInput.addEventListener('click', () => {
+    cambiarInput('Nuevo');
+    nuevoImg.src = imgSeleccionado;
+    existenteImg.src = imgNoSeleccionado;
+  });
+  
+  existenteInput.addEventListener('click', () => {
+    cambiarInput('Existente');
+    existenteImg.src = imgSeleccionado;
+    nuevoImg.src = imgNoSeleccionado;
+  });
+  volverModificar.addEventListener('click', () => {
+
+    cambiarInput('Regresar');
+    nuevoImg.src = imgSeleccionado;
+    existenteImg.src = imgNoSeleccionado;
+  });
+  
+//FINAL DE NUEVO Y EXISTENTE
 
 //FORMULARIO DE REGISTRO ESTUDIANTE
 function registrarFormularioEstudiante() {
@@ -149,7 +332,8 @@ function registrarFormularioEstudiante() {
     const anoEscolar = document.querySelector('#anoEscolar').value
     const telefonoDomicilio=document.querySelector('#telefonoDomicilio').value
     const cedulaEstudianteActual=document.querySelector('#cedulaEstudianteActual').value
-
+    
+ 
 
 
     const campos = [
@@ -224,6 +408,7 @@ function registrarFormularioEstudiante() {
                         showToast("Formulario enviado correctamente", true);
             
                         // Actualizar el contenido de la tabla con el nuevo HTML
+                        document.getElementById("formRegistroEstudiante").reset();
                         document.getElementById('tablaEstudiante').innerHTML = data.html;
                         
                       
@@ -282,6 +467,8 @@ function llenarFormulario(element) {
     document.querySelector('#telefonoDomicilio').value = datos.telefono_2 ;
     document.querySelector('#direccion').value = datos.direccion ;
     document.querySelector('#correo').value = datos.correo ;
+
+   
 
 
       // Llenar los select de año y sección (asegurándote de que los valores coincidan)
