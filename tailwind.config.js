@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./**/*.php'], // Busca archivos PHP en todas las subcarpetas
+  content: ['./**/*.php','./**/*.js'], // Busca archivos PHP en todas las subcarpetas
   theme: {
     extend: {
       keyframes: {
