@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 22-10-2024 a las 21:39:34
--- Versión del servidor: 8.0.30
--- Versión de PHP: 8.1.10
+-- Host: localhost:3306
+-- Generation Time: Nov 04, 2024 at 11:12 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `proyecto`
+-- Database: `proyecto`
 --
 CREATE DATABASE IF NOT EXISTS `proyecto` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci;
 USE `proyecto`;
@@ -26,7 +26,7 @@ USE `proyecto`;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ano_escolar`
+-- Table structure for table `ano_escolar`
 --
 
 CREATE TABLE `ano_escolar` (
@@ -38,16 +38,17 @@ CREATE TABLE `ano_escolar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `ano_escolar`
+-- Dumping data for table `ano_escolar`
 --
 
 INSERT INTO `ano_escolar` (`codigo`, `nombre`, `fecha_inicio`, `fecha_fin`, `activo`) VALUES
-(18, '2024-2025', '2024-10-07', '2025-07-31', 0);
+(18, '2024-2025', '2024-10-07', '2025-07-31', 1),
+(20, 'xd', '2024-10-21', '2024-10-22', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ano_seccion`
+-- Table structure for table `ano_seccion`
 --
 
 CREATE TABLE `ano_seccion` (
@@ -57,11 +58,11 @@ CREATE TABLE `ano_seccion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `ano_seccion`
+-- Dumping data for table `ano_seccion`
 --
 
 INSERT INTO `ano_seccion` (`codigo`, `ano`, `seccion`) VALUES
-(18, '1ero', 'U'),
+(18, '1ero', 'A'),
 (19, '2do', 'U'),
 (20, '5to', 'U'),
 (21, '4to', 'U'),
@@ -70,7 +71,7 @@ INSERT INTO `ano_seccion` (`codigo`, `ano`, `seccion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `asignatura`
+-- Table structure for table `asignatura`
 --
 
 CREATE TABLE `asignatura` (
@@ -79,7 +80,7 @@ CREATE TABLE `asignatura` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `asignatura`
+-- Dumping data for table `asignatura`
 --
 
 INSERT INTO `asignatura` (`codigo`, `nombre`) VALUES
@@ -102,7 +103,7 @@ INSERT INTO `asignatura` (`codigo`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `aula`
+-- Table structure for table `aula`
 --
 
 CREATE TABLE `aula` (
@@ -113,7 +114,7 @@ CREATE TABLE `aula` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `aula`
+-- Dumping data for table `aula`
 --
 
 INSERT INTO `aula` (`codigo`, `nombre`, `descripcion`, `disponibilidad`) VALUES
@@ -129,7 +130,7 @@ INSERT INTO `aula` (`codigo`, `nombre`, `descripcion`, `disponibilidad`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bitacora`
+-- Table structure for table `bitacora`
 --
 
 CREATE TABLE `bitacora` (
@@ -142,7 +143,7 @@ CREATE TABLE `bitacora` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `bitacora`
+-- Dumping data for table `bitacora`
 --
 
 INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `user_computer`) VALUES
@@ -184,16 +185,272 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 (36, '2024-09-28 12:16:59', 27576598, 'login', '27576598 ha ingresado al sistema.', 'DESKTOP-Q1BQ71J'),
 (37, '2024-09-28 21:10:10', 27576598, 'login', '27576598 ha ingresado al sistema.', 'Tahiris-PC'),
 (38, '2024-09-29 10:25:43', 27576598, 'login', '27576598 ha ingresado al sistema.', 'Tahiris-PC'),
-(39, '2024-09-30 13:18:38', 29629080, 'login', '29629080 ha ingresado al sistema.', 'Tahiris-PC'),
-(40, '2024-09-30 15:47:00', 27576598, 'login', '27576598 ha ingresado al sistema.', 'Tahiris-PC'),
-(41, '2024-10-07 10:44:48', 29629080, 'login', '29629080 ha ingresado al sistema.', 'Tahiris-PC'),
-(42, '2024-10-07 12:12:15', 29629080, 'login', '29629080 ha ingresado al sistema.', 'Tahiris-PC'),
-(43, '2024-10-13 11:31:22', 27576598, 'login', '27576598 ha ingresado al sistema.', 'Tahiris-PC');
+(39, '2024-10-21 18:21:23', 29629080, 'insertar', '29629080 ha agregado la sección 1ero-A.', 'ZUHE2-PC'),
+(40, '2024-10-21 18:38:30', 29629080, 'insertar', '29629080 ha creado el horario para el año 18 sección 23.', 'ZUHE2-PC'),
+(41, '2024-10-21 18:55:22', 29629080, 'insertar', '29629080 ha creado el horario para el año  sección .', 'ZUHE2-PC'),
+(42, '2024-10-21 18:55:58', 29629080, 'insertar', '29629080 ha creado el horario para el año  sección .', 'ZUHE2-PC'),
+(43, '2024-10-21 18:57:25', 29629080, 'insertar', '29629080 ha creado el horario para el año  sección .', 'ZUHE2-PC'),
+(44, '2024-10-21 18:59:10', 29629080, 'insertar', '29629080 ha creado el horario para el año  sección .', 'ZUHE2-PC'),
+(45, '2024-10-21 19:01:19', 29629080, 'insertar', '29629080 ha creado el horario para el año 2024-2025 sección 1ero .', 'ZUHE2-PC'),
+(46, '2024-10-21 19:01:40', 29629080, 'insertar', '29629080 ha creado el horario para el año 2024-2025 sección 1ero A.', 'ZUHE2-PC'),
+(47, '2024-10-21 19:04:09', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero A\".', 'ZUHE2-PC'),
+(48, '2024-10-21 19:12:36', 29629080, 'eliminar', 'Eliminó el horario del año \"2024-2025\" sección \"1ero A\".', 'ZUHE2-PC'),
+(49, '2024-10-21 19:36:17', 29629080, 'insertar', 'Agregó el año escolar xd.', 'ZUHE2-PC'),
+(50, '2024-10-21 19:55:52', 29629080, 'modificar', 'Modificó al profesor 4608560.', 'ZUHE2-PC'),
+(51, '2024-10-21 20:03:02', 29629080, 'login', '29629080 ha ingresado al sistema.', 'ZUHE2-PC'),
+(52, '2024-10-21 20:03:33', 29629080, 'modificar', 'Modificó al profesor 4608560.', 'ZUHE2-PC'),
+(53, '2024-10-21 20:18:14', 29629080, 'modificar', 'Modificó la sección 1ero-U.', 'ZUHE2-PC'),
+(54, '2024-10-21 20:18:31', 29629080, 'modificar', 'Modificó la sección 1ero-A.', 'ZUHE2-PC'),
+(55, '2024-10-21 20:20:45', 29629080, 'login', 'Ingresó al sistema.', 'ZUHE2-PC'),
+(56, '2024-10-21 20:29:30', 29629080, 'modificar', 'Cambió el PEMSUN del profesor\"5945762.', 'ZUHE2-PC'),
+(57, '2024-10-21 20:31:29', 29629080, 'modificar', 'Cambió el PEMSUN del profesor\"5945762.', 'ZUHE2-PC'),
+(58, '2024-10-21 20:35:05', 29629080, 'modificar', 'Movió el PEMSUN del profesor  a 4608560.', 'ZUHE2-PC'),
+(59, '2024-10-21 20:35:05', 29629080, 'modificar', 'Cambió el PEMSUN del profesor 4608560.', 'ZUHE2-PC'),
+(60, '2024-10-21 20:35:05', 29629080, 'modificar', 'Cambió el PEMSUN del profesor 4608560.', 'ZUHE2-PC'),
+(61, '2024-10-21 20:36:46', 29629080, 'modificar', 'Movió el PEMSUN del profesor 4608560 a 29629080.', 'ZUHE2-PC'),
+(62, '2024-10-22 19:16:21', 29629080, 'modificar', 'Cambió el PEMSUN del profesor 29629080.', 'ZUHE2-PC'),
+(63, '2024-10-22 19:16:21', 29629080, 'modificar', 'Cambió el PEMSUN del profesor 29629080.', 'ZUHE2-PC'),
+(64, '2024-10-22 19:17:03', 29629080, 'modificar', 'Cambió el PEMSUN del profesor 29629080.', 'ZUHE2-PC'),
+(65, '2024-10-22 19:17:38', 29629080, 'modificar', 'Cambió el PEMSUN del profesor 29629080.', 'ZUHE2-PC'),
+(66, '2024-10-22 19:17:38', 29629080, 'modificar', 'Cambió el PEMSUN del profesor 29629080.', 'ZUHE2-PC'),
+(67, '2024-10-22 19:39:25', 29629080, 'modificar', 'Cambió el PEMSUN del profesor 29629080.', 'ZUHE2-PC'),
+(68, '2024-10-22 19:43:13', 29629080, 'modificar', 'Cambió el PEMSUN del profesor 29629080.', 'ZUHE2-PC'),
+(69, '2024-10-22 19:43:43', 29629080, 'modificar', 'Cambió el PEMSUN del profesor 29629080.', 'ZUHE2-PC'),
+(70, '2024-10-22 19:51:57', 29629080, 'modificar', 'Movió las materias del profesor 29629080 al profesor 12710000.', 'ZUHE2-PC'),
+(71, '2024-10-25 17:17:37', 29629080, 'login', 'Ingresó al sistema.', 'ZUHE2-PC'),
+(72, '2024-10-29 14:40:34', 29629080, 'insertar', 'Agregó al profesor 27216803.', 'ZUHE2-PC'),
+(73, '2024-10-29 14:41:16', 27216803, 'login', 'Ingresó al sistema.', 'ZUHE2-PC'),
+(74, '2024-10-29 18:05:15', 29629080, 'eliminar', '.', 'ZUHE2-PC'),
+(75, '2024-10-29 18:46:02', 29629080, 'eliminar', ' Eliminó la mensualidad de agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(76, '2024-10-29 18:47:22', 29629080, 'eliminar', ' Eliminó la mensualidad de junio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(77, '2024-10-29 18:51:01', 29629080, 'eliminar', ' Eliminó la mensualidad de julio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(78, '2024-10-29 18:58:36', 29629080, 'eliminar', ' Eliminó la mensualidad de Julio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(79, '2024-10-29 19:17:47', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(80, '2024-10-29 19:19:49', 29629080, 'insertar', ' Insertó la mensualidad de Junio (id:) del Año Escolar \"18\"', 'ZUHE2-PC'),
+(81, '2024-10-29 19:19:50', 29629080, 'insertar', ' Insertó la mensualidad de Junio (id:) del Año Escolar \"18\"', 'ZUHE2-PC'),
+(82, '2024-10-29 19:35:12', 29629080, 'eliminar', ' Eliminó la mensualidad de Junio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(83, '2024-10-29 19:35:14', 29629080, 'eliminar', ' Eliminó la mensualidad de Junio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(84, '2024-10-29 19:35:31', 29629080, 'insertar', ' Insertó la mensualidad de Julio del Año Escolar \"18\"', 'ZUHE2-PC'),
+(85, '2024-10-29 19:35:31', 29629080, 'insertar', ' Insertó la mensualidad de Julio del Año Escolar \"18\"', 'ZUHE2-PC'),
+(86, '2024-10-29 19:36:00', 29629080, 'insertar', ' Insertó la mensualidad de Septiembre del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(87, '2024-10-29 19:36:00', 29629080, 'insertar', ' Insertó la mensualidad de Julio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(88, '2024-10-29 19:59:16', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(89, '2024-10-29 20:00:59', 29629080, 'modificar', ' Modificó la mensualidad de  del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(90, '2024-10-29 20:02:55', 29629080, 'modificar', ' Modificó la mensualidad de 1 del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(91, '2024-10-29 20:04:08', 29629080, 'modificar', ' Modificó la mensualidad de  del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(92, '2024-10-29 20:04:24', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(93, '2024-10-29 20:05:30', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(94, '2024-10-29 20:06:43', 29629080, 'modificar', ' Modificó la mensualidad de  del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(95, '2024-10-29 20:08:01', 29629080, 'modificar', ' Modificó la mensualidad de  del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(96, '2024-10-29 20:08:15', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(97, '2024-10-29 20:08:36', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(98, '2024-10-29 20:09:16', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(99, '2024-10-29 20:09:40', 29629080, 'modificar', ' Modificó la mensualidad de  del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(100, '2024-10-29 20:19:04', 29629080, 'modificar', ' Modificó la mensualidad de  del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(101, '2024-10-29 20:19:20', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(102, '2024-10-29 20:19:50', 29629080, 'modificar', ' Modificó la mensualidad de Lol del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(103, '2024-10-29 20:23:26', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(104, '2024-10-29 20:23:26', 29629080, 'insertar', ' Insertó la mensualidad de Enero del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(105, '2024-10-29 20:23:26', 29629080, 'modificar', ' Modificó la mensualidad de Lol del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(106, '2024-10-29 20:23:26', 29629080, 'insertar', ' Insertó la mensualidad de Julio del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(107, '2024-10-29 20:23:26', 29629080, 'insertar', ' Insertó la mensualidad de Julio del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(108, '2024-10-29 20:23:26', 29629080, 'insertar', ' Insertó la mensualidad de Septiembre del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(109, '2024-10-29 20:23:26', 29629080, 'insertar', ' Insertó la mensualidad de Julio del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(110, '2024-10-29 20:23:26', 29629080, 'insertar', ' Insertó la mensualidad de Enero del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(111, '2024-10-29 20:23:27', 29629080, 'insertar', ' Insertó la mensualidad de Enero del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(112, '2024-10-29 20:23:27', 29629080, 'insertar', ' Insertó la mensualidad de Enero del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(113, '2024-10-29 20:23:27', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(114, '2024-10-29 20:23:27', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(115, '2024-10-29 20:25:06', 29629080, 'eliminar', ' Eliminó la mensualidad de Enero del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(116, '2024-10-29 20:25:07', 29629080, 'eliminar', ' Eliminó la mensualidad de Enero del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(117, '2024-10-29 20:25:08', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(118, '2024-10-29 20:25:09', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(119, '2024-10-29 20:25:10', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(120, '2024-10-29 20:25:10', 29629080, 'eliminar', ' Eliminó la mensualidad de Enero del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(121, '2024-10-29 20:25:11', 29629080, 'eliminar', ' Eliminó la mensualidad de Enero del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(122, '2024-10-29 20:25:12', 29629080, 'eliminar', ' Eliminó la mensualidad de Julio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(123, '2024-10-29 20:25:13', 29629080, 'eliminar', ' Eliminó la mensualidad de Julio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(124, '2024-10-29 20:25:14', 29629080, 'eliminar', ' Eliminó la mensualidad de Septiembre del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(125, '2024-10-29 20:25:14', 29629080, 'eliminar', ' Eliminó la mensualidad de Julio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(126, '2024-10-29 20:25:15', 29629080, 'eliminar', ' Eliminó la mensualidad de Julio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(127, '2024-10-29 20:25:16', 29629080, 'eliminar', ' Eliminó la mensualidad de Julio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(128, '2024-10-29 20:25:17', 29629080, 'eliminar', ' Eliminó la mensualidad de Julio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(129, '2024-10-29 20:25:18', 29629080, 'eliminar', ' Eliminó la mensualidad de Enero del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(130, '2024-10-29 20:25:18', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(131, '2024-10-29 20:25:19', 29629080, 'eliminar', ' Eliminó la mensualidad de Enero del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(132, '2024-10-29 20:25:20', 29629080, 'eliminar', ' Eliminó la mensualidad de Septiembre del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(133, '2024-10-29 20:25:21', 29629080, 'eliminar', ' Eliminó la mensualidad de Enero del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(134, '2024-10-29 20:25:22', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(135, '2024-10-29 20:25:26', 29629080, 'modificar', ' Modificó la mensualidad de Lol del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(136, '2024-10-29 20:25:26', 29629080, 'insertar', ' Insertó la mensualidad de Enero del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(137, '2024-10-29 20:25:26', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(138, '2024-10-29 20:25:36', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(139, '2024-10-29 20:26:41', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(140, '2024-10-29 20:26:46', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(141, '2024-10-29 20:26:49', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(142, '2024-10-29 20:26:51', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(143, '2024-10-29 20:27:01', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(144, '2024-10-29 20:27:04', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(145, '2024-10-29 20:27:32', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(146, '2024-10-29 20:28:14', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(147, '2024-10-29 20:28:16', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(148, '2024-10-29 20:28:42', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(149, '2024-10-29 20:28:45', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(150, '2024-10-29 20:28:47', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(151, '2024-10-29 20:34:23', 29629080, 'modificar', ' Modificó la mensualidad de Lol del Año Escolar \"\"', 'ZUHE2-PC'),
+(152, '2024-10-29 20:38:14', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(153, '2024-10-29 20:38:33', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(154, '2024-10-29 20:38:35', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(155, '2024-10-29 20:38:37', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(156, '2024-10-29 20:38:39', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(157, '2024-10-29 20:38:41', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(158, '2024-10-29 20:40:34', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(159, '2024-10-29 20:40:57', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(160, '2024-10-29 20:41:00', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(161, '2024-10-29 20:43:11', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(162, '2024-10-29 20:43:14', 29629080, 'eliminar', ' Eliminó la mensualidad de Enero del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(163, '2024-10-29 20:43:16', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(164, '2024-10-29 20:44:03', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(165, '2024-10-29 20:44:05', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(166, '2024-10-29 20:47:12', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(167, '2024-10-29 20:47:14', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(168, '2024-10-29 20:48:49', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(169, '2024-10-29 20:48:50', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(170, '2024-10-29 20:49:10', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(171, '2024-10-29 20:49:12', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(172, '2024-10-29 20:50:02', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(173, '2024-10-29 20:50:32', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(174, '2024-10-29 20:50:34', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(175, '2024-10-29 20:52:22', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(176, '2024-10-29 20:53:14', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(177, '2024-10-29 20:55:08', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(178, '2024-10-29 20:55:15', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(179, '2024-10-29 20:57:54', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(180, '2024-10-29 20:58:22', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(181, '2024-10-29 20:58:24', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(182, '2024-10-29 20:59:09', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(183, '2024-10-29 20:59:11', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(184, '2024-10-29 21:01:06', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(185, '2024-10-29 21:01:09', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(186, '2024-10-29 21:05:32', 29629080, 'modificar', ' Modificó la mensualidad de Lol del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(187, '2024-10-29 21:05:32', 29629080, 'insertar', ' Insertó la mensualidad de Enero del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(188, '2024-10-29 21:05:32', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(189, '2024-10-29 21:05:32', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(190, '2024-10-29 21:05:36', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(191, '2024-10-29 21:05:38', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(192, '2024-10-29 21:05:39', 29629080, 'eliminar', ' Eliminó la mensualidad de Enero del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(193, '2024-10-29 21:05:42', 29629080, 'modificar', ' Modificó la mensualidad de Lol del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(194, '2024-10-29 21:05:42', 29629080, 'insertar', ' Insertó la mensualidad de Enero del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(195, '2024-10-29 21:05:42', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(196, '2024-10-29 21:05:42', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(197, '2024-10-29 21:05:45', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(198, '2024-10-29 21:05:46', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(199, '2024-10-29 21:05:47', 29629080, 'eliminar', ' Eliminó la mensualidad de Enero del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(200, '2024-10-29 21:05:49', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(201, '2024-10-29 21:09:20', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(202, '2024-10-29 21:09:20', 29629080, 'insertar', ' Insertó la mensualidad de Enero del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(203, '2024-10-29 21:09:21', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(204, '2024-10-29 21:09:23', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(205, '2024-10-29 21:09:24', 29629080, 'eliminar', ' Eliminó la mensualidad de Enero del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(206, '2024-10-29 21:09:25', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(207, '2024-10-29 21:09:54', 29629080, 'modificar', ' Modificó la mensualidad de Lol del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(208, '2024-10-29 21:09:59', 29629080, 'modificar', ' Modificó la mensualidad de Lol del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(209, '2024-10-29 21:10:20', 29629080, 'insertar', ' Insertó la mensualidad de Julio del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(210, '2024-10-29 21:10:20', 29629080, 'insertar', ' Insertó la mensualidad de Junio del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(211, '2024-10-29 21:10:32', 29629080, 'eliminar', ' Eliminó la mensualidad de Junio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(212, '2024-10-29 21:10:33', 29629080, 'eliminar', ' Eliminó la mensualidad de Julio del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(213, '2024-10-29 21:10:41', 29629080, 'insertar', ' Insertó la mensualidad de Enero del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(214, '2024-10-29 21:10:41', 29629080, 'insertar', ' Insertó la mensualidad de Febrero del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(215, '2024-10-29 21:11:14', 29629080, 'eliminar', ' Eliminó la mensualidad de Febrero del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(216, '2024-10-29 21:11:15', 29629080, 'eliminar', ' Eliminó la mensualidad de Enero del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(217, '2024-10-29 21:11:17', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(218, '2024-10-29 21:11:39', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(219, '2024-10-29 21:11:39', 29629080, 'insertar', ' Insertó la mensualidad de Noviembre del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(220, '2024-10-29 21:13:47', 29629080, 'eliminar', ' Eliminó la mensualidad de Noviembre del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(221, '2024-10-29 21:14:03', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(222, '2024-10-29 21:14:19', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(223, '2024-10-29 21:14:54', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(224, '2024-10-29 21:22:23', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(225, '2024-10-29 21:22:25', 29629080, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(226, '2024-10-29 21:22:29', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(227, '2024-10-29 21:23:13', 29629080, 'modificar', ' Modificó la mensualidad de  del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(228, '2024-10-29 21:24:17', 29629080, 'modificar', ' Modificó la mensualidad de  del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(229, '2024-10-29 21:24:43', 29629080, 'modificar', ' Modificó la mensualidad de  del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(230, '2024-10-29 21:30:22', 29629080, 'modificar', ' Modificó la mensualidad de agosto del Año Escolar \"Lmao\"', 'ZUHE2-PC'),
+(231, '2024-10-29 21:34:02', 29629080, 'modificar', ' Modificó la mensualidad de agosto del A.Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(232, '2024-10-29 21:39:39', 29629080, 'modificar', ' Modificó la mensualidad de \"Agosto del A.Escolar \"agosto\" por \"\"Agosto del A.Escolar \"18\"', 'ZUHE2-PC'),
+(233, '2024-10-29 21:41:33', 29629080, 'modificar', ' Modificó la mensualidad de \"Agosto del A.Escolar \"agosto\" por \"Agosto del A.Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(234, '2024-10-29 21:42:29', 29629080, 'modificar', ' Modificó la mensualidad de \"Agosto del A.Escolar \"2024-2025\" por \"Agosto del A.Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(235, '2024-10-29 21:43:06', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del A.Escolar \"2024-2025\" por Agosto del A.Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(236, '2024-10-29 21:47:54', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del A.Escolar \"\" () por Agosto del A.Escolar \"2024-2025\" (222)', 'ZUHE2-PC'),
+(237, '2024-10-29 21:49:55', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del A.Escolar \"2024-2025\" () por Agosto del A.Escolar \"2024-2025\" (111)', 'ZUHE2-PC'),
+(238, '2024-10-29 21:51:33', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del A.Escolar \"2024-2025\" (111) por Agosto del A.Escolar \"2024-2025\" (444)', 'ZUHE2-PC'),
+(239, '2024-10-29 21:53:08', 29629080, 'modificar', ' Modificó la mensualidad de Agosto del A.Escolar \"2024-2025\" (444$) por Agosto del A.Escolar \"2024-2025\" (111$)', 'ZUHE2-PC'),
+(240, '2024-11-03 16:57:19', 29629080, 'modificar', 'Modificó la sección 1ero-U.', 'ZUHE2-PC'),
+(241, '2024-11-03 16:57:21', 29629080, 'eliminar', 'Eliminó la sección 1ero-A.', 'ZUHE2-PC'),
+(242, '2024-11-03 16:57:26', 29629080, 'eliminar', 'Eliminó la sección 1ero-A.', 'ZUHE2-PC'),
+(243, '2024-11-03 17:18:31', 29629080, 'insertar', ' Insertó al estudiante 3 3(3) correctamente.', 'ZUHE2-PC'),
+(244, '2024-11-03 17:24:41', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(245, '2024-11-03 17:28:44', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(246, '2024-11-03 17:28:59', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(247, '2024-11-03 17:29:09', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(248, '2024-11-03 17:29:30', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(249, '2024-11-03 17:30:19', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(250, '2024-11-03 17:36:41', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(251, '2024-11-03 17:39:11', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(252, '2024-11-03 17:46:43', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(253, '2024-11-03 17:46:47', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(254, '2024-11-03 17:47:06', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(255, '2024-11-03 17:49:43', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(256, '2024-11-03 17:50:01', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(257, '2024-11-03 17:52:16', 29629080, 'modificar', ' Modificó al estudiante 2 1(1) correctamente.', 'ZUHE2-PC'),
+(258, '2024-11-03 17:53:01', 29629080, 'insertar', ' Insertó al estudiante 1 1(1) correctamente.', 'ZUHE2-PC'),
+(259, '2024-11-03 17:56:16', 29629080, 'modificar', ' Modificó al estudiante 1 1(1) correctamente.', 'ZUHE2-PC'),
+(260, '2024-11-03 18:00:13', 29629080, 'modificar', ' Modificó al estudiante Lol Lolol(123456) correctamente.', 'ZUHE2-PC'),
+(261, '2024-11-03 18:02:20', 29629080, 'modificar', ' Modificó al estudiante Lol Lolol(123456) correctamente.', 'ZUHE2-PC'),
+(262, '2024-11-03 18:04:22', 29629080, 'modificar', ' Modificó al estudiante Lol Lolol(123456) correctamente.', 'ZUHE2-PC'),
+(263, '2024-11-03 18:04:40', 29629080, 'modificar', ' Modificó al estudiante Lol Lolol(123456) correctamente.', 'ZUHE2-PC'),
+(264, '2024-11-03 18:05:00', 29629080, 'modificar', ' Modificó al estudiante Lol Lolol(123456) correctamente.', 'ZUHE2-PC'),
+(265, '2024-11-03 18:06:10', 29629080, 'modificar', ' Modificó al estudiante Lol Lolol(123456) correctamente.', 'ZUHE2-PC'),
+(266, '2024-11-03 18:07:12', 29629080, 'modificar', ' Modificó al estudiante Lol Lolol(123456) correctamente.', 'ZUHE2-PC'),
+(267, '2024-11-03 18:07:16', 29629080, 'modificar', ' Modificó al estudiante Lol Lolol(123456) correctamente.', 'ZUHE2-PC'),
+(268, '2024-11-03 18:12:28', 29629080, 'insertar', ' Insertó al estudiante cedulaRepresentante nombresRepresentante apellidosRepresentante telefono telefonoDomicilio direccion correo correctamente.', 'ZUHE2-PC'),
+(269, '2024-11-03 18:13:35', 29629080, 'insertar', ' Insertó al estudiante 6 6 6 6 6 6 6 correctamente.', 'ZUHE2-PC'),
+(270, '2024-11-03 18:15:46', 29629080, 'insertar', ' Insertó al estudiante 456 nombreR apellidoR 111 222 enrique segoviano cojggeo 456 nombreR apellidoR 111 222 enrique segoviano cojggeo correctamente.', 'ZUHE2-PC'),
+(271, '2024-11-03 18:18:20', 29629080, 'insertar', ' Insertó al estudiante  3 nombreE apellidoE 1ero A 2024-2025 3 nombreR apellidoR 111 222 enrique segoviaNO cojggeo correctamente.', 'ZUHE2-PC'),
+(272, '2024-11-03 18:20:43', 29629080, 'insertar', ' Insertó al estudiante cedulaEstudianteActual: \"\" cedulaEstudiante: \"5125\" nombres: \"asd1\" apellidos: \"asd2\" anoSeccion: \"1ero A\" anoEscolar: \"2024-2025\" 5125 asd3 asd4 111 222 asd7 asd8 correctamente.', 'ZUHE2-PC'),
+(273, '2024-11-03 18:21:37', 29629080, 'insertar', ' Insertó al estudiante cedulaEstudianteActual: \"\" <br>cedulaEstudiante: \"125125\" <br>nombres: \"asdas\" <br>apellidos: \"asdas\" <br>anoSeccion: \"1ero A\" <br>anoEscolar: \"2024-2025\" <br>1251251 asdas dasdsa 111 222 asdas asdas correctamente.', 'ZUHE2-PC'),
+(274, '2024-11-03 18:22:31', 29629080, 'insertar', ' Insertó al estudiante cedulaEstudianteActual: \"\" <br>cedulaEstudiante: \"12125\" <br>nombres: \"asd\" <br>apellidos: \"asdas\" <br>anoSeccion: \"1ero A\" <br>anoEscolar: \"2024-2025\" <br>cedulaRepresentante: \"125125\" <br>nombresRepresentante: \"dasd\" <br>apellidosRepresentante: \"asdas\" <br>telefono: \"111\" <br>telefonoDomicilio: \"222\" <br>direccion: \"asdas\" <br>correo: \"asdas\" <br>correctamente.', 'ZUHE2-PC'),
+(275, '2024-11-03 18:26:31', 29629080, 'modificar', ' Modificó al estudiante cedulaEstudianteActual: \"1\" <br>cedulaEstudiante: \"1\" <br>nombres: \"1\" <br>apellidos: \"1\" <br>anoSeccion: \"1ero A\" <br>anoEscolar: \"2024-2025\" <br><br>cedulaRepresentante: \"2\" <br>nombresRepresentante: \"1\" <br>apellidosRepresentante: \"1\" <br>telefono: \"1\" <br>telefonoDomicilio: \"1\" <br>direccion: \"1\" <br>correo: \"1\" <br> correctamente.', 'ZUHE2-PC'),
+(276, '2024-11-03 18:27:08', 29629080, 'modificar', ' Modificó al estudiante <br>cedulaEstudianteActual: \"1\"<br>cedulaEstudiante: \"1\"<br>nombres: \"1\"<br>apellidos: \"1\"<br>anoSeccion: \"1ero A\"<br>anoEscolar: \"2024-2025\"<br><br>cedulaRepresentante: \"3\"<br>nombresRepresentante: \"1\"<br>apellidosRepresentante: \"1\"<br>telefono: \"1\"<br>telefonoDomicilio: \"1\"<br>direccion: \"1\"<br>correo: \"1\" correctamente.', 'ZUHE2-PC'),
+(277, '2024-11-03 18:36:42', 29629080, 'modificar', ' Modificó al estudiante <br>cedulaEstudianteActual: \"3\"<br>cedulaEstudiante: \"3\"<br>nombres: \"nombreE\"<br>apellidos: \"apellidoE\"<br>anoSeccion: \"1ero A\"<br>anoEscolar: \"2024-2025\"<br><br>cedulaRepresentante: \"7\"<br>nombresRepresentante: \"1\"<br>apellidosRepresentante: \"1\"<br>telefono: \"1\"<br>telefonoDomicilio: \"1\"<br>direccion: \"1\"<br>correo: \"1\" correctamente.', 'ZUHE2-PC'),
+(278, '2024-11-03 18:37:06', 29629080, 'modificar', ' Modificó al estudiante <br>cedulaEstudianteActual: \"1\"<br>cedulaEstudiante: \"1\"<br>nombres: \"1\"<br>apellidos: \"1\"<br>anoSeccion: \"1ero A\"<br>anoEscolar: \"2024-2025\"<br><br>cedulaRepresentante: \"5\"<br>nombresRepresentante: \"1\"<br>apellidosRepresentante: \"1\"<br>telefono: \"1\"<br>telefonoDomicilio: \"1\"<br>direccion: \"1\"<br>correo: \"1\" correctamente.', 'ZUHE2-PC'),
+(279, '2024-11-03 18:37:19', 29629080, 'modificar', ' Modificó al estudiante <br>cedulaEstudianteActual: \"1\"<br>cedulaEstudiante: \"1\"<br>nombres: \"1\"<br>apellidos: \"1\"<br>anoSeccion: \"1ero A\"<br>anoEscolar: \"2024-2025\"<br><br>cedulaRepresentante: \"10\"<br>nombresRepresentante: \"1\"<br>apellidosRepresentante: \"1\"<br>telefono: \"1\"<br>telefonoDomicilio: \"1\"<br>direccion: \"1\"<br>correo: \"1\" correctamente.', 'ZUHE2-PC'),
+(280, '2024-11-03 18:37:35', 29629080, 'modificar', ' Modificó al estudiante <br>cedulaEstudianteActual: \"2\"<br>cedulaEstudiante: \"2\"<br>nombres: \"2\"<br>apellidos: \"2\"<br>anoSeccion: \"1ero A\"<br>anoEscolar: \"2024-2025\"<br><br>cedulaRepresentante: \"5\"<br>nombresRepresentante: \"1\"<br>apellidosRepresentante: \"1\"<br>telefono: \"1\"<br>telefonoDomicilio: \"1\"<br>direccion: \"1\"<br>correo: \"1\" correctamente.', 'ZUHE2-PC'),
+(281, '2024-11-03 18:37:43', 29629080, 'modificar', ' Modificó al estudiante <br>cedulaEstudianteActual: \"1\"<br>cedulaEstudiante: \"1\"<br>nombres: \"1\"<br>apellidos: \"1\"<br>anoSeccion: \"1ero A\"<br>anoEscolar: \"2024-2025\"<br><br>cedulaRepresentante: \"2\"<br>nombresRepresentante: \"1\"<br>apellidosRepresentante: \"1\"<br>telefono: \"1\"<br>telefonoDomicilio: \"1\"<br>direccion: \"1\"<br>correo: \"1\" correctamente.', 'ZUHE2-PC'),
+(282, '2024-11-03 18:37:50', 29629080, 'modificar', ' Modificó al estudiante <br>cedulaEstudianteActual: \"2\"<br>cedulaEstudiante: \"2\"<br>nombres: \"2\"<br>apellidos: \"2\"<br>anoSeccion: \"1ero A\"<br>anoEscolar: \"2024-2025\"<br><br>cedulaRepresentante: \"2\"<br>nombresRepresentante: \"1\"<br>apellidosRepresentante: \"1\"<br>telefono: \"1\"<br>telefonoDomicilio: \"1\"<br>direccion: \"1\"<br>correo: \"1\" correctamente.', 'ZUHE2-PC'),
+(283, '2024-11-03 18:37:55', 29629080, 'modificar', ' Modificó al estudiante <br>cedulaEstudianteActual: \"3\"<br>cedulaEstudiante: \"3\"<br>nombres: \"nombreE\"<br>apellidos: \"apellidoE\"<br>anoSeccion: \"1ero A\"<br>anoEscolar: \"2024-2025\"<br><br>cedulaRepresentante: \"2\"<br>nombresRepresentante: \"1\"<br>apellidosRepresentante: \"1\"<br>telefono: \"1\"<br>telefonoDomicilio: \"1\"<br>direccion: \"1\"<br>correo: \"1\" correctamente.', 'ZUHE2-PC'),
+(284, '2024-11-03 18:38:02', 29629080, 'modificar', ' Modificó al estudiante <br>cedulaEstudianteActual: \"5\"<br>cedulaEstudiante: \"5\"<br>nombres: \"5\"<br>apellidos: \"5\"<br>anoSeccion: \"1ero A\"<br>anoEscolar: \"2024-2025\"<br><br>cedulaRepresentante: \"2\"<br>nombresRepresentante: \"1\"<br>apellidosRepresentante: \"1\"<br>telefono: \"1\"<br>telefonoDomicilio: \"1\"<br>direccion: \"1\"<br>correo: \"1\" correctamente.', 'ZUHE2-PC'),
+(285, '2024-11-03 18:38:16', 29629080, 'modificar', ' Modificó al estudiante <br>cedulaEstudianteActual: \"1\"<br>cedulaEstudiante: \"1\"<br>nombres: \"1\"<br>apellidos: \"1\"<br>anoSeccion: \"1ero A\"<br>anoEscolar: \"2024-2025\"<br><br>cedulaRepresentante: \"1\"<br>nombresRepresentante: \"1\"<br>apellidosRepresentante: \"1\"<br>telefono: \"1\"<br>telefonoDomicilio: \"1\"<br>direccion: \"1\"<br>correo: \"1\" correctamente.', 'ZUHE2-PC'),
+(286, '2024-11-03 19:51:39', 29629080, 'insertar', ' Insertó al estudiante 123 123(12345656) correctamente.', 'ZUHE2-PC'),
+(287, '2024-11-03 20:02:23', 29629080, 'insertar', ' Insertó al estudiante  () correctamente.', 'ZUHE2-PC'),
+(288, '2024-11-03 20:02:42', 29629080, 'insertar', ' Insertó al estudiante  () correctamente.', 'ZUHE2-PC'),
+(289, '2024-11-03 20:04:03', 29629080, 'insertar', ' Insertó al estudiante  () correctamente.', 'ZUHE2-PC'),
+(290, '2024-11-03 20:05:14', 29629080, 'eliminar', ' Eliminó al estudiante 5 5() correctamente.', 'ZUHE2-PC'),
+(291, '2024-11-03 20:05:27', 29629080, 'eliminar', ' Eliminó al estudiante 6 6(6) correctamente.', 'ZUHE2-PC'),
+(292, '2024-11-03 20:10:56', 29629080, 'eliminar', ' Eliminó al estudiante NombreE ApellidoE(123) correctamente.', 'ZUHE2-PC'),
+(293, '2024-11-03 20:12:06', 29629080, 'eliminar', ' Eliminó al estudiante Asd1 Asd2(5125) correctamente.', 'ZUHE2-PC'),
+(294, '2024-11-03 20:12:24', 29629080, 'eliminar', ' Eliminó al estudiante Asd Asdas(12125) correctamente.', 'ZUHE2-PC'),
+(295, '2024-11-03 20:12:29', 29629080, 'eliminar', ' Eliminó al estudiante Angel Orlando Mendez Mendoza(29629080) correctamente.', 'ZUHE2-PC'),
+(296, '2024-11-03 21:56:08', 29629080, 'modificar', ' Modificó al estudiante <br>cedulaEstudianteActual: \"123456\"<br>cedulaEstudiante: \"123456\"<br>nombres: \"lol\"<br>apellidos: \"lolol\"<br>anoSeccion: \"1ero A\"<br>anoEscolar: \"2024-2025\"<br><br>cedulaRepresentante: \"125124\"<br>nombresRepresentante: \"5125\"<br>apellidosRepresentante: \"125125\"<br>telefono: \"12512\"<br>telefonoDomicilio: \"51251\"<br>direccion: \"125125\"<br>correo: \"12512\" correctamente.', 'ZUHE2-PC'),
+(297, '2024-11-03 22:33:26', 29629080, 'modificar', ' Modificó al estudiante <br>cedulaEstudianteActual: \"125125\"<br>cedulaEstudiante: \"125125\"<br>nombres: \"asdas\"<br>apellidos: \"asdas\"<br>anoSeccion: \"1ero A\"<br>anoEscolar: \"2024-2025\"<br><br>cedulaRepresentante: \"125\"<br>nombresRepresentante: \"125\"<br>apellidosRepresentante: \"125\"<br>telefono: \"125\"<br>telefonoDomicilio: \"125\"<br>direccion: \"125\"<br>correo: \"125\" correctamente.', 'ZUHE2-PC'),
+(298, '2024-11-04 18:20:41', 29629080, 'eliminar', ' Eliminó la mensualidad de Agosto del Año Escolar \"2024-2025\"', 'ZUHE2-PC'),
+(299, '2024-11-04 18:20:43', 29629080, 'eliminar', ' Eliminó la mensualidad de Enero del Año Escolar \"2024-2025\"', 'ZUHE2-PC');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `datos_inst`
+-- Table structure for table `datos_inst`
 --
 
 CREATE TABLE `datos_inst` (
@@ -204,17 +461,21 @@ CREATE TABLE `datos_inst` (
   `codigo_plantel` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
---
--- Volcado de datos para la tabla `datos_inst`
---
-
 INSERT INTO `datos_inst` (`rif`, `direccion`, `telefono`, `nombre_institucion`, `codigo_plantel`) VALUES
 ('J-30053973-3\r\n', 'Calle 28, Av. Esquina 37 , Acarigua', '0255-6153561', 'U.E. COLEGIO \"VICENTE EMILIO SOJO\"\n', 'P.D.00511808\n');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `disponibilidad`
+
+--
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `disponibilidad`
 --
 
 CREATE TABLE `disponibilidad` (
@@ -223,7 +484,7 @@ CREATE TABLE `disponibilidad` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `disponibilidad`
+-- Dumping data for table `disponibilidad`
 --
 
 INSERT INTO `disponibilidad` (`codigo_id`, `disponible`) VALUES
@@ -233,7 +494,7 @@ INSERT INTO `disponibilidad` (`codigo_id`, `disponible`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `dolar`
+-- Table structure for table `dolar`
 --
 
 CREATE TABLE `dolar` (
@@ -242,7 +503,7 @@ CREATE TABLE `dolar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `dolar`
+-- Dumping data for table `dolar`
 --
 
 INSERT INTO `dolar` (`id`, `precio`) VALUES
@@ -251,7 +512,7 @@ INSERT INTO `dolar` (`id`, `precio`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `estudiante`
+-- Table structure for table `estudiante`
 --
 
 CREATE TABLE `estudiante` (
@@ -264,7 +525,7 @@ CREATE TABLE `estudiante` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `estudiante`
+-- Dumping data for table `estudiante`
 --
 
 INSERT INTO `estudiante` (`cedula_estudiante`, `nombres`, `apellidos`, `ano`, `seccion`, `activo`) VALUES
@@ -278,7 +539,7 @@ INSERT INTO `estudiante` (`cedula_estudiante`, `nombres`, `apellidos`, `ano`, `s
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `horario_estudiante`
+-- Table structure for table `horario_estudiante`
 --
 
 CREATE TABLE `horario_estudiante` (
@@ -295,7 +556,7 @@ CREATE TABLE `horario_estudiante` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `horario_estudiante`
+-- Dumping data for table `horario_estudiante`
 --
 
 INSERT INTO `horario_estudiante` (`codigo`, `codigo_a_escolar`, `codigo_a_y_seccion`, `codigo_asignatura`, `codigo_aula`, `codigo_dia`, `grupo`, `profesor`, `intervalo`, `receso`) VALUES
@@ -487,7 +748,7 @@ INSERT INTO `horario_estudiante` (`codigo`, `codigo_a_escolar`, `codigo_a_y_secc
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `intervalo`
+-- Table structure for table `intervalo`
 --
 
 CREATE TABLE `intervalo` (
@@ -497,7 +758,7 @@ CREATE TABLE `intervalo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `intervalo`
+-- Dumping data for table `intervalo`
 --
 
 INSERT INTO `intervalo` (`id`, `intervalo`, `estado`) VALUES
@@ -508,7 +769,7 @@ INSERT INTO `intervalo` (`id`, `intervalo`, `estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `login`
+-- Table structure for table `login`
 --
 
 CREATE TABLE `login` (
@@ -526,9 +787,8 @@ CREATE TABLE `login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `login`
+-- Dumping data for table `login`
 --
-
 INSERT INTO `login` (`id`, `username`, `password`, `security_q_1`, `security_q_2`, `security_q_3`, `security_a_1`, `security_a_2`, `security_a_3`, `rol`, `status`) VALUES
 (5, 29629080, '$2y$10$iztSmb7xT9arACvPGNiLmuVu.IPZfpPCRrquHgPpKXfkWMrCOU7f6', '¿Cual es su color favorito?', '¿Cual es fue su primera mascota?', '¿Cual es su comida favorita?', '$2y$10$MKhsRwZ/V6pN2POJ3eete..IigsrkWdUtDOVRA7.Tlfy9ZGp4w.8O', '$2y$10$T6PjmXUjButQzVO8FIV0UOvnYsD2Em153oEi9Cv6J/0Pdk5EGdelm', '$2y$10$llAi/KhMxhEj5YtessVBe.vfpnESeMO16Sh0NdoDnfhcWSPoWGS.2', 'admin', 'active'),
 (12, 12710000, '$2y$10$rk1LVXZoN56cdb1UOT7VO.J3j4Vi39g.1LqGaNEiN6dPB17UDTh1G', '', '', '', '', '', '', 'admin', 'new'),
@@ -546,28 +806,28 @@ INSERT INTO `login` (`id`, `username`, `password`, `security_q_1`, `security_q_2
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `mensualidad`
+-- Table structure for table `mensualidad`
 --
 
 CREATE TABLE `mensualidad` (
   `id` bigint NOT NULL,
   `ano_escolar` int NOT NULL,
   `mes` enum('inscripcion','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `monto` float NOT NULL DEFAULT '0'
+  `monto` double NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `mensualidad`
+-- Dumping data for table `mensualidad`
 --
 
 INSERT INTO `mensualidad` (`id`, `ano_escolar`, `mes`, `monto`) VALUES
-(1, 18, 'agosto', 200),
-(2, 18, 'agosto', 200);
+(1, 18, 'agosto', 111),
+(2, 18, 'agosto', 20);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `meses_pagos`
+-- Table structure for table `meses_pagos`
 --
 
 CREATE TABLE `meses_pagos` (
@@ -580,7 +840,7 @@ CREATE TABLE `meses_pagos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `meses_pagos`
+-- Dumping data for table `meses_pagos`
 --
 
 INSERT INTO `meses_pagos` (`cedula_estudiante`, `mes`, `ano_escolar`, `ano_seccion`, `abonado`, `maximo`) VALUES
@@ -589,22 +849,22 @@ INSERT INTO `meses_pagos` (`cedula_estudiante`, `mes`, `ano_escolar`, `ano_secci
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `meses_saldados`
+-- Table structure for table `meses_saldados`
 --
 
 CREATE TABLE `meses_saldados` (
   `id` bigint NOT NULL DEFAULT '0',
   `cedula_estudiante` bigint NOT NULL,
-  `mes` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
-  `ano_escolar` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
-  `ano_seccion` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
+  `mes` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
+  `ano_escolar` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
+  `ano_seccion` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
   `fecha` date NOT NULL,
   `MontoBS` double NOT NULL,
   `MontoBCV` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `meses_saldados`
+-- Dumping data for table `meses_saldados`
 --
 
 INSERT INTO `meses_saldados` (`id`, `cedula_estudiante`, `mes`, `ano_escolar`, `ano_seccion`, `fecha`, `MontoBS`, `MontoBCV`) VALUES
@@ -613,32 +873,39 @@ INSERT INTO `meses_saldados` (`id`, `cedula_estudiante`, `mes`, `ano_escolar`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pagos`
+-- Table structure for table `pagos`
 --
 
 CREATE TABLE `pagos` (
   `idPago` bigint NOT NULL,
   `cedula_estudiante` bigint NOT NULL,
   `cedula_representante` bigint NOT NULL DEFAULT '0',
-  `monto` float NOT NULL DEFAULT '0',
   `fecha` date NOT NULL,
   `referencia_id` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
-  `ano_escolar` int NOT NULL DEFAULT '0',
-  `mes` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
-  `detalles` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL
+  `ano_escolar` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
+  `mes` bigint NOT NULL DEFAULT '0',
+  `detalles` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `descuento` float NOT NULL DEFAULT '1',
+  `nombresE` varchar(141) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `nombresR` varchar(141) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `telefono` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `direccion` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `monto` double DEFAULT '0',
+  `tipo_pago` enum('dolar','bolivar') COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `dolarBCV` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `pagos`
+-- Dumping data for table `pagos`
 --
 
-INSERT INTO `pagos` (`idPago`, `cedula_estudiante`, `cedula_representante`, `monto`, `fecha`, `referencia_id`, `ano_escolar`, `mes`, `detalles`) VALUES
-(1, 8585684, 7595362, 200, '2024-10-18', 'XD', 18, '2', 'LOL');
+INSERT INTO `pagos` (`idPago`, `cedula_estudiante`, `cedula_representante`, `fecha`, `referencia_id`, `ano_escolar`, `mes`, `detalles`, `descuento`, `nombresE`, `nombresR`, `telefono`, `direccion`, `monto`, `tipo_pago`, `dolarBCV`) VALUES
+(1, 8585684, 7595362, '2024-10-18', 'XD', '2024-2025', 1, 'LOL', 1, 'Carlos', 'Diaz', '0424', 'enrique segomviano', 200, 'dolar', 38.7);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `personas`
+-- Table structure for table `personas`
 --
 
 CREATE TABLE `personas` (
@@ -651,8 +918,9 @@ CREATE TABLE `personas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `personas`
+-- Dumping data for table `personas`
 --
+
 
 INSERT INTO `personas` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono`, `correo`) VALUES
 (4608560, 'VICTOR', 'MENDOZA', 'ACARIGUA', '04121864925', 'correo'),
@@ -671,7 +939,7 @@ INSERT INTO `personas` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `preguntas_seguridad`
+-- Table structure for table `preguntas_seguridad`
 --
 
 CREATE TABLE `preguntas_seguridad` (
@@ -680,7 +948,7 @@ CREATE TABLE `preguntas_seguridad` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `preguntas_seguridad`
+-- Dumping data for table `preguntas_seguridad`
 --
 
 INSERT INTO `preguntas_seguridad` (`id`, `pregunta`) VALUES
@@ -692,7 +960,7 @@ INSERT INTO `preguntas_seguridad` (`id`, `pregunta`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `profesores_materias`
+-- Table structure for table `profesores_materias`
 --
 
 CREATE TABLE `profesores_materias` (
@@ -702,7 +970,7 @@ CREATE TABLE `profesores_materias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `profesores_materias`
+-- Dumping data for table `profesores_materias`
 --
 
 INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
@@ -744,7 +1012,7 @@ INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `representante`
+-- Table structure for table `representante`
 --
 
 CREATE TABLE `representante` (
@@ -758,7 +1026,7 @@ CREATE TABLE `representante` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `representante`
+-- Dumping data for table `representante`
 --
 
 INSERT INTO `representante` (`cedula_representante`, `nombres`, `apellidos`, `correo`, `direccion`, `telefono`, `telefono_2`) VALUES
@@ -770,7 +1038,7 @@ INSERT INTO `representante` (`cedula_representante`, `nombres`, `apellidos`, `co
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `representante-representado`
+-- Table structure for table `representante-representado`
 --
 
 CREATE TABLE `representante-representado` (
@@ -779,7 +1047,7 @@ CREATE TABLE `representante-representado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
--- Volcado de datos para la tabla `representante-representado`
+-- Dumping data for table `representante-representado`
 --
 
 INSERT INTO `representante-representado` (`cedula_estudiante`, `cedula_representante`) VALUES
@@ -788,13 +1056,12 @@ INSERT INTO `representante-representado` (`cedula_estudiante`, `cedula_represent
 (29629080, 7595365),
 (74545958, 7595365),
 (30294676, 75953625);
+--
+-- Indexes for dumped tables
+--
 
 --
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `ano_escolar`
+-- Indexes for table `ano_escolar`
 --
 ALTER TABLE `ano_escolar`
   ADD PRIMARY KEY (`codigo`),
@@ -803,52 +1070,55 @@ ALTER TABLE `ano_escolar`
   ADD UNIQUE KEY `nombre_2` (`nombre`,`fecha_inicio`,`fecha_fin`);
 
 --
--- Indices de la tabla `ano_seccion`
+-- Indexes for table `ano_seccion`
 --
 ALTER TABLE `ano_seccion`
   ADD PRIMARY KEY (`codigo`);
 
 --
--- Indices de la tabla `asignatura`
+-- Indexes for table `asignatura`
 --
 ALTER TABLE `asignatura`
   ADD PRIMARY KEY (`codigo`),
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
--- Indices de la tabla `aula`
+-- Indexes for table `aula`
 --
 ALTER TABLE `aula`
   ADD PRIMARY KEY (`codigo`),
   ADD KEY `disponibilidad` (`disponibilidad`);
 
 --
--- Indices de la tabla `bitacora`
+-- Indexes for table `bitacora`
 --
 ALTER TABLE `bitacora`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `disponibilidad`
+
+
+--
+-- Indexes for table `disponibilidad`
 --
 ALTER TABLE `disponibilidad`
   ADD PRIMARY KEY (`codigo_id`);
 
 --
--- Indices de la tabla `dolar`
+-- Indexes for table `dolar`
 --
 ALTER TABLE `dolar`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `estudiante`
+-- Indexes for table `estudiante`
 --
 ALTER TABLE `estudiante`
   ADD PRIMARY KEY (`cedula_estudiante`),
   ADD KEY `FK_estudiante_ano_escolar` (`ano`);
 
 --
--- Indices de la tabla `horario_estudiante`
+-- Indexes for table `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
   ADD PRIMARY KEY (`codigo`),
@@ -859,27 +1129,27 @@ ALTER TABLE `horario_estudiante`
   ADD KEY `FK_horario_estudiante_ano_seccion` (`codigo_a_y_seccion`);
 
 --
--- Indices de la tabla `intervalo`
+-- Indexes for table `intervalo`
 --
 ALTER TABLE `intervalo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `login`
+-- Indexes for table `login`
 --
 ALTER TABLE `login`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indices de la tabla `mensualidad`
+-- Indexes for table `mensualidad`
 --
 ALTER TABLE `mensualidad`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_mensualidad_ano_escolar` (`ano_escolar`);
 
 --
--- Indices de la tabla `meses_pagos`
+-- Indexes for table `meses_pagos`
 --
 ALTER TABLE `meses_pagos`
   ADD PRIMARY KEY (`cedula_estudiante`,`ano_escolar`),
@@ -889,33 +1159,37 @@ ALTER TABLE `meses_pagos`
   ADD KEY `FK_meses_pagos_mensualidad` (`mes`);
 
 --
--- Indices de la tabla `meses_saldados`
+-- Indexes for table `meses_saldados`
 --
 ALTER TABLE `meses_saldados`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_meses_saldados_estudiante` (`cedula_estudiante`);
 
 --
--- Indices de la tabla `pagos`
+-- Indexes for table `pagos`
 --
 ALTER TABLE `pagos`
-  ADD PRIMARY KEY (`idPago`);
+  ADD PRIMARY KEY (`idPago`),
+  ADD KEY `FK_pagos_estudiante` (`cedula_estudiante`),
+  ADD KEY `FK_pagos_representante` (`cedula_representante`),
+  ADD KEY `FK_pagos_ano_escolar` (`ano_escolar`),
+  ADD KEY `FK_pagos_mensualidad` (`mes`);
 
 --
--- Indices de la tabla `personas`
+-- Indexes for table `personas`
 --
 ALTER TABLE `personas`
   ADD PRIMARY KEY (`cedula`),
   ADD UNIQUE KEY `cedula` (`cedula`);
 
 --
--- Indices de la tabla `preguntas_seguridad`
+-- Indexes for table `preguntas_seguridad`
 --
 ALTER TABLE `preguntas_seguridad`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `profesores_materias`
+-- Indexes for table `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
   ADD PRIMARY KEY (`id`),
@@ -923,13 +1197,13 @@ ALTER TABLE `profesores_materias`
   ADD KEY `FK_profesores_materias_asignatura` (`materia`);
 
 --
--- Indices de la tabla `representante`
+-- Indexes for table `representante`
 --
 ALTER TABLE `representante`
   ADD PRIMARY KEY (`cedula_representante`);
 
 --
--- Indices de la tabla `representante-representado`
+-- Indexes for table `representante-representado`
 --
 ALTER TABLE `representante-representado`
   ADD PRIMARY KEY (`cedula_estudiante`),
@@ -937,87 +1211,87 @@ ALTER TABLE `representante-representado`
   ADD KEY `FK2_cedula_estudiante` (`cedula_estudiante`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `ano_escolar`
+-- AUTO_INCREMENT for table `ano_escolar`
 --
 ALTER TABLE `ano_escolar`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT de la tabla `ano_seccion`
+-- AUTO_INCREMENT for table `ano_seccion`
 --
 ALTER TABLE `ano_seccion`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT de la tabla `aula`
+-- AUTO_INCREMENT for table `aula`
 --
 ALTER TABLE `aula`
   MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT de la tabla `bitacora`
+-- AUTO_INCREMENT for table `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=300;
 
 --
--- AUTO_INCREMENT de la tabla `horario_estudiante`
+-- AUTO_INCREMENT for table `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6161;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3970;
 
 --
--- AUTO_INCREMENT de la tabla `intervalo`
+-- AUTO_INCREMENT for table `intervalo`
 --
 ALTER TABLE `intervalo`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `login`
+-- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT de la tabla `mensualidad`
+-- AUTO_INCREMENT for table `mensualidad`
 --
 ALTER TABLE `mensualidad`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
--- AUTO_INCREMENT de la tabla `pagos`
+-- AUTO_INCREMENT for table `pagos`
 --
 ALTER TABLE `pagos`
-  MODIFY `idPago` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idPago` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `preguntas_seguridad`
+-- AUTO_INCREMENT for table `preguntas_seguridad`
 --
 ALTER TABLE `preguntas_seguridad`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `profesores_materias`
+-- AUTO_INCREMENT for table `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=296;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=297;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `estudiante`
+-- Constraints for table `estudiante`
 --
 ALTER TABLE `estudiante`
   ADD CONSTRAINT `FK_estudiante_ano_escolar` FOREIGN KEY (`ano`) REFERENCES `ano_escolar` (`nombre`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `horario_estudiante`
+-- Constraints for table `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
   ADD CONSTRAINT `FK_horario_estudiante_ano_escolar` FOREIGN KEY (`codigo_a_escolar`) REFERENCES `ano_escolar` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -1027,19 +1301,19 @@ ALTER TABLE `horario_estudiante`
   ADD CONSTRAINT `FK_horario_estudiante_profesores_materias` FOREIGN KEY (`profesor`) REFERENCES `profesores_materias` (`profesor`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `login`
+-- Constraints for table `login`
 --
 ALTER TABLE `login`
   ADD CONSTRAINT `login_personas` FOREIGN KEY (`username`) REFERENCES `personas` (`cedula`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `mensualidad`
+-- Constraints for table `mensualidad`
 --
 ALTER TABLE `mensualidad`
   ADD CONSTRAINT `FK_mensualidad_ano_escolar` FOREIGN KEY (`ano_escolar`) REFERENCES `ano_escolar` (`codigo`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `meses_pagos`
+-- Constraints for table `meses_pagos`
 --
 ALTER TABLE `meses_pagos`
   ADD CONSTRAINT `FK_meses_pagos_ano_escolar` FOREIGN KEY (`ano_escolar`) REFERENCES `ano_escolar` (`codigo`) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -1048,20 +1322,29 @@ ALTER TABLE `meses_pagos`
   ADD CONSTRAINT `FK_meses_pagos_mensualidad` FOREIGN KEY (`mes`) REFERENCES `mensualidad` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `meses_saldados`
+-- Constraints for table `meses_saldados`
 --
 ALTER TABLE `meses_saldados`
   ADD CONSTRAINT `FK_meses_saldados_estudiante` FOREIGN KEY (`cedula_estudiante`) REFERENCES `estudiante` (`cedula_estudiante`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `profesores_materias`
+-- Constraints for table `pagos`
+--
+ALTER TABLE `pagos`
+  ADD CONSTRAINT `FK_pagos_ano_escolar` FOREIGN KEY (`ano_escolar`) REFERENCES `ano_escolar` (`nombre`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_pagos_estudiante` FOREIGN KEY (`cedula_estudiante`) REFERENCES `estudiante` (`cedula_estudiante`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_pagos_mensualidad` FOREIGN KEY (`mes`) REFERENCES `mensualidad` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_pagos_representante` FOREIGN KEY (`cedula_representante`) REFERENCES `representante` (`cedula_representante`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
   ADD CONSTRAINT `FK_profesores_materias_asignatura` FOREIGN KEY (`materia`) REFERENCES `asignatura` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_profesores_materias_personas` FOREIGN KEY (`profesor`) REFERENCES `personas` (`cedula`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `representante-representado`
+-- Constraints for table `representante-representado`
 --
 ALTER TABLE `representante-representado`
   ADD CONSTRAINT `FK2_cedula_estudiante` FOREIGN KEY (`cedula_estudiante`) REFERENCES `estudiante` (`cedula_estudiante`) ON UPDATE CASCADE,
