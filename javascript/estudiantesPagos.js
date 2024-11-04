@@ -63,6 +63,41 @@ document.getElementById('closePagosEspecificos').addEventListener('click', () =>
     document.querySelector(".modal__Oscuro").style.display = "none";
 });
 
+function EliminarEstudiante(cedula) {    
+        
+    $.ajax({
+        url: '../../Control/c_estudiantes.php',
+        type: 'POST',
+        data: {
+            cedulaEliminar: cedula
+        },
+        success: function (response) {
+            try {
+                const data = JSON.parse(response);
+                
+                if (data.status === 'success') {
+                    // Mostrar el toast de éxito
+                    location.href+'?estado=correcto';
+                    location.reload();
+             
+                } else {
+                    // Mostrar mensaje de error del servidor
+                    showToast("Error fas: " + data.message, false);
+                }
+            } catch (mensageError) {
+                // Capturar errores de JSON.parse o formato inválido
+                console.error('Error al procesar la respuesta:', mensageError);
+                console.log(response);
+                showToast("Estudiante ya Registrado", false);
+            }
+        },
+        error: function (error) {
+            console.error('Error al enviar los datos:', error);
+            showToast("Hubo un error al enviar los datos", false);
+        }
+    });
+    
+}
 
 function cargarDolar() {
     $.ajax({
@@ -224,6 +259,7 @@ function registrarFormularioEstudiante() {
                         showToast("Formulario enviado correctamente", true);
             
                         // Actualizar el contenido de la tabla con el nuevo HTML
+                        document.getElementById("formRegistroEstudiante").reset();
                         document.getElementById('tablaEstudiante').innerHTML = data.html;
                         
                       
@@ -241,6 +277,7 @@ function registrarFormularioEstudiante() {
                 } catch (mensageError) {
                     // Capturar errores de JSON.parse o formato inválido
                     console.error('Error al procesar la respuesta:', mensageError);
+                    console.log(response);
                     showToast("Estudiante ya Registrado", false);
                 }
             },

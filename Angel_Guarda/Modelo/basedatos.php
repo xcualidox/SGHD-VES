@@ -119,7 +119,13 @@ class database_connect{
     }
     // Hace el fetch de registros individuales 
     protected function fetch_query($record){
-        return $record->fetch(PDO::FETCH_ASSOC);
+        if ($record === null || empty($record)) {
+            return array();
+        }
+        else {
+            return $record->fetch(PDO::FETCH_ASSOC);
+        }
+        
     }
     // Hace el fetch de multiples registros
     protected function fetch_all_query($record){

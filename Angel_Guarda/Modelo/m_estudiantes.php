@@ -90,7 +90,8 @@ class estudiante extends database_connect
         if (!$result) {
             // Si no existe, insertar la relación
             $sqlInsert = "INSERT INTO `representante-representado` (cedula_estudiante, cedula_representante) VALUES (?, ?)";
-            $this->query($sqlInsert, [$cedulaEstudiante, $cedulaRepresentante]);
+            $resultado=$this->query($sqlInsert, [$cedulaEstudiante, $cedulaRepresentante]);
+            return $resultado;
         }
     }
 
@@ -101,13 +102,52 @@ class estudiante extends database_connect
         $sqlUpdate = "UPDATE `representante-representado`
                       SET cedula_representante = ?
                       WHERE cedula_estudiante = ?";
-        $this->query($sqlUpdate, [$cedulaRepresentanteNueva, $cedulaEstudiante]);
-
+        $result=$this->query($sqlUpdate, [$cedulaRepresentanteNueva, $cedulaEstudiante]);
+        return $result;
        
     }
 
-    
+    public function verificarEstudiante($cedula){
+        $sql = "SELECT * FROM `estudiante` WHERE `cedula_estudiante` = ?";
+        $resultado = $this->fetch_query($this->query($sql, [$cedula]));
+        return $resultado;
+    }
 
+    public function verificarRepresentante($cedula){
+        $sql = "SELECT * FROM `representante` WHERE `cedula_representante` = ?";
+        $resultado = $this->fetch_query($this->query($sql, [$cedula]));
+        return $resultado;
+    }   
+    
+    public function verificarRelacion($cedulaEstudiante,$cedulaRepresentante){
+        $sql = "SELECT * FROM `representante-representado` WHERE `cedula_estudiante` LIKE ? AND `cedula_representante` LIKE ?";
+        $resultado = $this->fetch_query($this->query($sql, [$cedulaEstudiante,$cedulaRepresentante]));
+        return $resultado;
+    }
+
+    public function verificarRelacionEstudiante($cedulaEstudiante){
+        $sql = "SELECT * FROM `representante-representado` WHERE `cedula_estudiante` LIKE ?";
+        $resultado = $this->fetch_query($this->query($sql, [$cedulaEstudiante]));
+        return $resultado;
+    }
+    
+    function eliminarEstudiante($cedula) {
+        $sql= "DELETE FROM `estudiante` WHERE `cedula_estudiante`=?";
+        $resultado=$this->query($sql,[$cedula]);
+        return $resultado;
+    }
+
+    function eliminarRepresentante($cedula) {
+        $sql= "DELETE FROM `representante` WHERE `cedula_representante`=?";
+        $resultado=$this->query($sql,[$cedula]);
+        return $resultado;
+    }
+
+    function eliminarRelacion($cedula){
+        $sql= "DELETE FROM `representante-representado` WHERE `cedula_estudiante`=?";
+        $resultado=$this->query($sql,[$cedula]);
+        return $resultado;
+    }
 
 
     // Método para obtener el precio actual del dólar
@@ -242,10 +282,9 @@ class estudiante extends database_connect
                 r.direccion,
                 r.telefono,
                 r.telefono_2
-              
-            FROM `representante-representado` rr 
-            JOIN estudiante e ON rr.cedula_estudiante = e.cedula_estudiante 
-            JOIN representante r ON rr.cedula_representante = r.cedula_representante
+            FROM `estudiante` e
+            LEFT JOIN `representante-representado` rr ON e.cedula_estudiante = rr.cedula_estudiante
+			LEFT JOIN representante r ON rr.cedula_representante = r.cedula_representante
             WHERE 1=1";  // Esto garantiza que se pueda agregar condicionales de manera flexible
     
         // Array para almacenar los parámetros de la consulta
