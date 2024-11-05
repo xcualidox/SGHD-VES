@@ -284,7 +284,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 <!-- Llamado JavaScriptEstudiantes -->
 <script type="text/javascript" src="../../../javascript/estudiantesPagos.js"></script>
 <script type="text/javascript" src="../../../javascript/mensualidad.js"></script>
-<script type="text/javascript" src="../../../javascript/registrarPagos.js"></script>
+<script type="text/javascript" src="../../../javascript/pagos.js"></script>
 <script src="../../../javascript/jquery-3.7.1.min.js"></script>
 
 </html>

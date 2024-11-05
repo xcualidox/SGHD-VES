@@ -177,7 +177,6 @@ function recargarTablaMensualidad(tbody_id, ano_escolar = undefined) {
                 for (let i = 0; i < selects.length; i++) {
                     selects[i].value=resultados[i]['mes'];
                 }
-            //Mostrar boton de guardar
                 const select_ano_escolar = document.getElementById('AnoEscolarMensualidad');
 
                 //Agarrar el nombre del select del año escolar en vez del id
@@ -192,8 +191,20 @@ function recargarTablaMensualidad(tbody_id, ano_escolar = undefined) {
 
                 updateMonthCounts();
             }
+
+            let tablaMensualidad = document.querySelector('#mensualidadTable');
+            let selects = tablaMensualidad.querySelectorAll('select');
+            console.log(tablaMensualidad);
+        
+            for (let i = 0; i < selects.length; i++) {
+                let td = selects[i].parentElement;
+                console.log(td);
+                td.setAttribute('class','flex items-center justify-center');
+            }
         }
     );
+
+
 }
 
 
@@ -242,12 +253,7 @@ function insertarTr(tbody_id, array = [], extra_parametros = []) {
             //Campos especificos
             const nuevo_campo = document.createElement('td');
 
-            //Eliminar si se va a reutilizar la funcion
-            if(i2==1){
-                nuevo_campo.setAttribute('class','flex items-center justify-center');
-            }
-
-            if (extra_parametros.length != 0) {
+            if (extra_parametros.length > 0) {
 
                 let parametro = extra_parametros[i2];
                 nuevo_campo.innerHTML = parametro.split('?').join(valores[i2])
@@ -329,8 +335,6 @@ function addEmptyRow() {
     tableBody.appendChild(nuevaFila);
     attachRemoveEvent(nuevaFila);
     attachMonthChangeEvent(nuevaFila);  // Añadir la verificación de duplicados al seleccionar un mes
-
-    toggleGuardarButton(); // Verificar si mostrar el botón de guardar
 }
 
 // Función que obtiene el año escolar seleccionado
@@ -455,18 +459,6 @@ function guardarMensualidad(callback) {
     }
 }
 
-function toggleGuardarButton() {
-    const tableBody = document.querySelector('#mensualidadTable tbody');
-    const guardarBtn = document.getElementById('guardarBtnMensualidad');
-    
-    // Si hay filas en el tbody, mostrar el botón; de lo contrario, ocultarlo
-    if (guardarBtn.style.display == 'none') {
-        guardarBtn.style.display = 'block'; // Muestra el botón
-    } else {
-        guardarBtn.style.display = 'none'; // Oculta el botón
-    }
-}
-
 function activarGuardarButton() {
     const guardarBtn = document.getElementById('guardarBtnMensualidad');
     guardarBtn.style.display = 'block'; // Muestra el botón
@@ -486,7 +478,6 @@ function attachRemoveEvent(fila) {
     quitarBotonMens.addEventListener('click', function() {
         fila.remove();
         updateMonthCounts(); // Actualiza los contadores después de eliminar una fila
-        toggleGuardarButton();
     });
 }
 

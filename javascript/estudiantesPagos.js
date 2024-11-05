@@ -42,17 +42,6 @@ closeMesesPS.addEventListener('click', () => {
     modalMesesPS.classList.remove('show'); // Cerrar el modal 
     document.querySelector(".modal__Oscuro").style.display = "none";
 });
-//MODALES SALDADOS Y PAGO
-
-
-openModalPagos.addEventListener('click', () => {
-    modalPagos.showModal(); // Abrir el modal
-});
-
-closeModalPagos.addEventListener('click', () => {
-    modalPagos.close(); // Cerrar el modal
-});
-
 
 
 
@@ -528,9 +517,19 @@ function llenarFormulario(element) {
 //MODAL PAGO ESPECIFICO
 //AL agregar los pagos de este registor no olvidar los ATRIBUTOS
 function openPagoEspecificoModal(event) {
-   
 
-     const datos = JSON.parse(event.target.getAttribute('data-datos'));
+    vaciarSelect('mes',{innerHTML: '---Seleccionar Mes---', disabled: '', selected: ''});
+
+    let anoEscolar = document.getElementById('AnoEscolarPago').value;
+
+    //Llenar con Mensualidad
+    pedirMensualidad(anoEscolar, //callback
+        function(mensualidad){
+            console.log(mensualidad)
+        })
+    
+
+    const datos = JSON.parse(event.target.getAttribute('data-datos'));
      
     const modal = document.getElementById('modalPagosEspecificos');
    

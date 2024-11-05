@@ -26,8 +26,8 @@
                         <label for="Pago">Descuento: </label>
                         <div class="flex">
                             <div class="custom-radio">
-                                <input type="radio" id="total" value="" name="descuento" checked onchange="verificarSeleccionado()">
-                                <label for="total">Ninguno</label>
+                                <input type="radio" id="ninguno" value="" name="descuento" checked onchange="verificarSeleccionado()">
+                                <label for="ninguno">Ninguno</label>
                             </div>
 
 
@@ -78,8 +78,8 @@
                     </div>
                     <div class="formulario-extenso__column">
               
-                            <label for="monto" >Monto en $: <span id="mesPagar" name="mesPagar"  class=" text-black"></span> </label>
-                        <label for="mesPagarBolivar">Monto en Bs:  <span id="mesPagarBolivar" name="mesPagarBolivar" class=" text-black"></span></label></label>
+                            <label for="monto" >Monto en $: <span id="mesPagar" name="mesPagar"  class=" text-black">0.0</span></label>
+                        <label for="mesPagarBolivar">Monto en Bs:  <span id="mesPagarBolivar" name="mesPagarBolivar" class=" text-black">0.00</span></label></label>
 
                         <div id="mesesSeleccionados" class="SelectMesesPagar"></div>
 

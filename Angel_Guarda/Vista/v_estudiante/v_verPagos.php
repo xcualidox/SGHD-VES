@@ -27,7 +27,7 @@
                                     <label for="Pago">Descuento: </label>
                                     <div class="flex">
                                         <div class="custom-radio">
-                                            <input type="radio" id="total" value="0" name="descuento">
+                                            <input type="radio" id="ninguno" value="0" name="descuento">
                                             <label for="total">Total</label>
                                         </div>
                                         <div class="custom-radio">
