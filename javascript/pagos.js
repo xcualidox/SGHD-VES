@@ -1,13 +1,22 @@
-//MODALES SALDADOS Y PAGO
+botonesPagos=document.querySelectorAll("img[alt='Pago Especifico']"); //Todos los botones de Pago de Estudiante
 
+//Activar boton al terminar de cargar la pagina (creo que no sirve xd)
+window.addEventListener("load", function() {
+  for (let i = 0; i < botonesPagos.length; i++) {
+    botonesPagos[i].style.display='block';
+    
+  }
+})
+//MODALES SALDADOS Y PAGO
 
 openModalPagos.addEventListener('click', () => {
     modalPagos.showModal(); // Abrir el modal
 
-    //Obtiene el nombre de las columnas
     vaciarTabla('theadPagos');
     vaciarTabla('tbodyPagos');
     vaciarSelect('selectPagos',{innerHTML: '--Seleccionar Filtro--', value: ''});
+
+    //Obtiene el nombre de las columnas
     pedirColumnasPago( //callback
         function(columnas){
         insertarTrHeader('theadPagos',columnas);
@@ -65,32 +74,42 @@ function insertarOptionGeneral(idSelect = '',array = {}) {
     
 }
 
+function llenarOptionPagos() {
+  
+  vaciarSelect('mes',{innerHTML: '---Seleccionar Mes---', disabled: '', selected: ''});
+
+  let anoEscolar = document.getElementById('AnoEscolarPago').value;
+
+  //Llenar con Mensualidad
+  pedirMensualidad(anoEscolar, //callback
+      function(mensualidad){
+
+          console.log(mensualidad);
+          let atributos=[];
+          for (let i = 0; i < mensualidad.length; i++) {
+              
+              atributos.push({innerHTML: mensualidad[i]['mes'], value: mensualidad[i]['monto'],'data-id': mensualidad[i]['id']})
+
+          }
+ 
+          console.log(atributos)
+          insertarOptionGeneral('mes',atributos);
+
+
+      })
+
+}
+
+AnoEscolarPago=document.getElementById('AnoEscolarPago');
+AnoEscolarPago.addEventListener('change',() => {
+  llenarOptionPagos();
+})
+
 //MODAL PAGO ESPECIFICO
 //AL agregar los pagos de este registor no olvidar los ATRIBUTOS
 function openPagoEspecificoModal(event) {
 
-    vaciarSelect('mes',{innerHTML: '---Seleccionar Mes---', disabled: '', selected: ''});
-
-    let anoEscolar = document.getElementById('AnoEscolarPago').value;
-
-    //Llenar con Mensualidad
-    pedirMensualidad(anoEscolar, //callback
-        function(mensualidad){
-
-            console.log(mensualidad);
-            let atributos=[];
-            for (let i = 0; i < mensualidad.length; i++) {
-                
-                atributos.push({innerHTML: mensualidad[i]['mes'], value: mensualidad[i]['monto'],'data-id': mensualidad[i]['id']})
-
-            }
-   
-            console.log(atributos)
-            insertarOptionGeneral('mes',atributos);
-
-
-        })
-    
+    llenarOptionPagos();
 
     const datos = JSON.parse(event.target.getAttribute('data-datos'));
      
@@ -502,10 +521,13 @@ function enviarPago() {
 
   // Enviar la solicitud AJAX
   $.ajax({
-      url: '../../Control/c_registrarPago.php',
+      url: '../../Control/c_pagos.php',
       type: 'POST',
      
-      data: JSON.stringify(datos),
+      data: {
+        registrarPago: true,
+        datos: JSON.stringify(datos)
+      },
       dataType: 'json',
       success: function(response) {
           if (response.success) {

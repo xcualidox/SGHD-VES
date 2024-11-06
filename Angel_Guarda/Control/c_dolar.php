@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     } else {
         echo json_encode(['error' => 'No se pudo obtener el precio del dólar']);
     }
+    exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -37,5 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo json_encode(['error' => 'Datos inválidos']);
     }
+    exit();
 }
 ?>

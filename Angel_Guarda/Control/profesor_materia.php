@@ -11,6 +11,7 @@ if (isset($_POST["cedula"])) {
     // Si se recibe una cédula, selecciona las materias del profesor
     $dato = $operacion->SeleccionarMaterias($_POST["cedula"]);
     echo json_encode($dato);
+    exit();
 } else {
     // Determina si se utiliza el valor de 'profesor' o 'origin'
     if ($_POST["profesor"] != "") {
