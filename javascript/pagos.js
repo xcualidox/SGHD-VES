@@ -10,7 +10,9 @@ window.addEventListener("load", function() {
 //MODALES SALDADOS Y PAGO
 
 openModalPagos.addEventListener('click', () => {
-  modalPagos.showModal(); // Abrir el modal
+
+  modalPagos.classList.add('show');// Abrir el modal
+  document.querySelector(".modal__Oscuro").style.display = "block";
 
   //Obtiene el nombre de las columnas
   vaciarTabla('theadPagos');
@@ -29,7 +31,14 @@ openModalPagos.addEventListener('click', () => {
 
 
 });
+closeModalPagos.addEventListener('click', () => {
 
+  modalPagos.classList.remove('show');// Abrir el modal
+  document.querySelector(".modal__Oscuro").style.display = "none";
+});
+
+
+//Cerrar Modal de Pagos en Especifico y limpiarlo
 closePagosEspecificos.addEventListener('click', () => {
 
 
@@ -569,7 +578,7 @@ function enviarPago() {
 
   // Enviar la solicitud AJAX
   $.ajax({
-    url: '../../Control/c_registrarPago.php',
+    url: '../../Control/c_pagos.php',
     type: 'POST',
 
     data: JSON.stringify(datos),

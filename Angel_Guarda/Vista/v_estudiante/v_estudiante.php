@@ -131,13 +131,13 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 
     <!-- MODAL VER PAGOS" -->
-    <dialog id="modalPagos">
+    <div class="modal__Nuevo" id="modalPagos">
         <?php
 
         include_once("v_modalPagos.php");
         ?>
 
-    </dialog>
+    </div>
     <!-- MOSTRAR MAS-->
     <dialog id="modalMostrarMas">
         <div class="flex justify-end items-end">
