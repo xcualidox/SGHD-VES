@@ -4,6 +4,8 @@ require_once(__DIR__ . "/../Modelo/m_pagos.php");
 
 $pagos = new pagos();
 
+
+
 $resultados_por_pagina = 10;
 if(isset($_POST['pagina'])){
     $pagina = $_POST['pagina'];
@@ -13,6 +15,26 @@ else{
 }
 
 $offset = ($pagina-1)*$resultados_por_pagina;
+
+//registrarPago
+if(isset($_POST['registrarPago'])){
+    // Establecer la cabecera para que el navegador interprete el contenido como JSON
+
+
+    // Captura los datos JSON enviados en la solicitud
+    $data = json_decode($_POST['datos'], true);
+
+
+    $response = [
+        'success' => true,
+        'data' => $data // Esto devuelve todos los datos recibidos
+    ];
+
+    // Responder con los datos procesados
+    echo json_encode($response);
+    exit();
+}
+
 
 if (isset($_POST['obtenerColumnasPagos'])){
 

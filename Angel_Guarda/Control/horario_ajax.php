@@ -13,6 +13,7 @@ if (isset($_POST["bloques"])) {
     $dato_diff=array_values(array_diff($datoAplanado,$mismaAulaAplanada));
 
     echo json_encode($dato_diff);
+    exit();
 }
 else if (isset($_POST["materia"])) {
     $array= array();
@@ -39,14 +40,17 @@ else if (isset($_POST["materia"])) {
         $array=array_values($array);
     }
     echo json_encode($array);
+    exit();
 }
 else if(isset($_POST["ano_solo"])) {
     $dato=$objeto->BorrarBloque($_POST["ano_solo"],$_POST["block"],$_POST["seccion_solo"]);
     echo json_encode($dato);
+    exit();
 }
 else if (isset($_POST["anos_crear"])) {
     $dato=$objeto->VerificarAno($_POST["anos_crear"]);
     echo json_encode($dato);
+    exit();
 }
 else if(isset($_POST["anos_borrar"]) && isset($_POST["seccion_borrar"])){
     $dato=$objeto->eliminar($_POST["anos_borrar"], $_POST["seccion_borrar"]);
@@ -61,10 +65,12 @@ else if(isset($_POST["anos_borrar"]) && isset($_POST["seccion_borrar"])){
 
     insertBitacora($_SESSION['username'], "eliminar", 'Eliminó el horario del año "'.$ano_bitacora.'" sección "'.$seccion_bitacora.'".');
     echo json_encode($dato);
+    exit();
 }
 else {
     $dato=$objeto->BloquesHorario($_POST["anos"],$_POST["seccion"]);
     echo json_encode($dato);
+    exit();
 }
 
 ?>

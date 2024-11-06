@@ -1,5 +1,13 @@
-//MODALES SALDADOS Y PAGO
+botonesPagos=document.querySelectorAll("img[alt='Pago Especifico']"); //Todos los botones de Pago de Estudiante
 
+//Activar boton al terminar de cargar la pagina (creo que no sirve xd)
+window.addEventListener("load", function() {
+  for (let i = 0; i < botonesPagos.length; i++) {
+    botonesPagos[i].style.display='block';
+    
+  }
+})
+//MODALES SALDADOS Y PAGO
 
 openModalPagos.addEventListener('click', () => {
   modalPagos.showModal(); // Abrir el modal
@@ -85,6 +93,37 @@ function insertarOptionGeneral(idSelect = '', array = {}) {
 
 }
 
+function llenarOptionPagos() {
+  
+  vaciarSelect('mes',{innerHTML: '---Seleccionar Mes---', disabled: '', selected: ''});
+
+  let anoEscolar = document.getElementById('AnoEscolarPago').value;
+
+  //Llenar con Mensualidad
+  pedirMensualidad(anoEscolar, //callback
+      function(mensualidad){
+
+          console.log(mensualidad);
+          let atributos=[];
+          for (let i = 0; i < mensualidad.length; i++) {
+              
+              atributos.push({innerHTML: mensualidad[i]['mes'], value: mensualidad[i]['monto'],'data-id': mensualidad[i]['id']})
+
+          }
+ 
+          console.log(atributos)
+          insertarOptionGeneral('mes',atributos);
+
+
+      })
+
+}
+
+AnoEscolarPago=document.getElementById('AnoEscolarPago');
+AnoEscolarPago.addEventListener('change',() => {
+  llenarOptionPagos();
+})
+
 //MODAL PAGO ESPECIFICO
 //AL agregar los pagos de este registor no olvidar los ATRIBUTOS
 function openPagoEspecificoModal(event) {
@@ -100,7 +139,7 @@ function openPagoEspecificoModal(event) {
       console.log(mensualidad);
       let atributos = [];
       const contadorMeses = {}
-
+      llenarOptionPagos();
       for (let i = 0; i < mensualidad.length; i++) {
         //Agregas para tenga una letra en mayuscula
         mensualidadCapitalize = mensualidad[i]['mes'].charAt(0).toUpperCase() + mensualidad[i]['mes'].slice(1)

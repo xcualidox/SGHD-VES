@@ -6,7 +6,8 @@ class pagos extends database_connect{
     public function obtenerColumnasPagos(){
         $sql="SELECT COLUMN_NAME
               FROM INFORMATION_SCHEMA.COLUMNS
-              WHERE TABLE_NAME = 'pagos'";
+              WHERE TABLE_NAME = 'pagos'
+              ORDER BY ORDINAL_POSITION"; //ORDER BY ORDINAL_POSITION preserva el orden de las columnas
         $query=$this->query($sql,[]);
         $result=$this->fetch_all_query($query);
         return $result;
