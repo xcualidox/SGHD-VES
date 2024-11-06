@@ -2,7 +2,7 @@
 <div class="content__details">
 
 
-    <form id="" class="space-y-4" method="POST" action="#">
+    <form id="registrarPagoForm" class="space-y-4" method="POST" action="#">
         <!-- Contenedor principal con flex para dividir izquierda y derecha -->
 
         <div class="flex space-x-8">
@@ -26,11 +26,17 @@
                         <label for="Pago">Descuento: </label>
                         <div class="flex">
                             <div class="custom-radio">
-                                <input type="radio" id="ninguno" value="" name="descuento" checked onchange="verificarSeleccionado()">
+                                <input type="radio" id="ninguno" value="1" name="descuento" checked onchange="verificarSeleccionado()">
                                 <label for="ninguno">Ninguno</label>
                             </div>
-
-
+                            <div class="custom-radio">
+                                <input type="radio" id="descuento" value="0.90" name="descuento" onchange="verificarSeleccionado()">
+                                <label for="descuento-10">10%</label>
+                            </div>
+                            <div class="custom-radio">
+                                <input type="radio" id="descuento" value="0.80" name="descuento" onchange="verificarSeleccionado()">
+                                <label for="descuento-20">20%</label>
+                            </div>
                             <div class="custom-radio">
                                 <input type="radio" id="descuento" value="0.5" name="descuento" onchange="verificarSeleccionado()">
                                 <label for="descuento-50">50%</label>
@@ -62,17 +68,7 @@
                         <label for="mes">Mes:</label>
                         <select id="mes" class="formulario-extenso__input">
                             <option value="" disabled selected>---Selecciona Mes---</option>
-                            <option value="Enero">Enero</option>
-                            <option value="Febrero">Febrero</option>
-                            <option value="Marzo">Marzo</option>
-                            <option value="Abril">Abril</option>
-                            <option value="Mayo">Mayo</option>
-                            <option value="Junio">Junio</option>
-                            <option value="Julio">Julio</option>
-                            <option value="Agosto">Agosto</option>
-                            <option value="Septiembre">Septiembre</option>
-                            <option value="Octubre">Octubre</option>
-                            <option value="Noviembre">Noviembre</option>
+                          
                             <!-- Agrega el resto de los meses -->
                         </select>
                     </div>
