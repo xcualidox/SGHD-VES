@@ -581,7 +581,10 @@ function enviarPago() {
     url: '../../Control/c_pagos.php',
     type: 'POST',
 
-    data: JSON.stringify(datos),
+    data: {
+      registrarPago: true,
+      datos: JSON.stringify(datos)
+    },
     dataType: 'json',
     success: function (response) {
       if (response.success) {
