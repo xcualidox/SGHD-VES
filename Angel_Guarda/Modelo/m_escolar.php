@@ -26,7 +26,7 @@ class escolar extends database_connect{
 		return $this->query($sql,$origin);
     }
     function tabla($offset, $limit) {
-      $sql= "SELECT `nombre`, `fecha_inicio`, `fecha_inicio`, `fecha_fin` from ano_escolar LIMIT $offset,$limit";
+      $sql= "SELECT `nombre`, `fecha_inicio`, `fecha_inicio`, `fecha_fin`, `activo` from ano_escolar LIMIT $offset,$limit";
 		return $this->fetch_all_query($this->query($sql,""));
     }
     function TotaldePagina() {

@@ -1,10 +1,10 @@
-botonesPagos=document.querySelectorAll("img[alt='Pago Especifico']"); //Todos los botones de Pago de Estudiante
+botonesPagos = document.querySelectorAll("img[alt='Pago Especifico']"); //Todos los botones de Pago de Estudiante
 
 //Activar boton al terminar de cargar la pagina (creo que no sirve xd)
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
   for (let i = 0; i < botonesPagos.length; i++) {
-    botonesPagos[i].style.display='block';
-    
+    botonesPagos[i].style.display = 'block';
+
   }
 })
 //MODALES SALDADOS Y PAGO
@@ -103,39 +103,6 @@ function insertarOptionGeneral(idSelect = '', array = {}) {
 }
 
 function llenarOptionPagos() {
-  
-  vaciarSelect('mes',{innerHTML: '---Seleccionar Mes---', disabled: '', selected: ''});
-
-  let anoEscolar = document.getElementById('AnoEscolarPago').value;
-
-  //Llenar con Mensualidad
-  pedirMensualidad(anoEscolar, //callback
-      function(mensualidad){
-
-          console.log(mensualidad);
-          let atributos=[];
-          for (let i = 0; i < mensualidad.length; i++) {
-              
-              atributos.push({innerHTML: mensualidad[i]['mes'], value: mensualidad[i]['monto'],'data-id': mensualidad[i]['id']})
-
-          }
- 
-          console.log(atributos)
-          insertarOptionGeneral('mes',atributos);
-
-
-      })
-
-}
-
-AnoEscolarPago=document.getElementById('AnoEscolarPago');
-AnoEscolarPago.addEventListener('change',() => {
-  llenarOptionPagos();
-})
-
-//MODAL PAGO ESPECIFICO
-//AL agregar los pagos de este registor no olvidar los ATRIBUTOS
-function openPagoEspecificoModal(event) {
 
   vaciarSelect('mes', { innerHTML: '---Seleccionar Mes---', disabled: '', selected: '' });
 
@@ -148,7 +115,7 @@ function openPagoEspecificoModal(event) {
       console.log(mensualidad);
       let atributos = [];
       const contadorMeses = {}
-      llenarOptionPagos();
+    
       for (let i = 0; i < mensualidad.length; i++) {
         //Agregas para tenga una letra en mayuscula
         mensualidadCapitalize = mensualidad[i]['mes'].charAt(0).toUpperCase() + mensualidad[i]['mes'].slice(1)
@@ -166,14 +133,31 @@ function openPagoEspecificoModal(event) {
         atributos.push(
           { innerHTML: mensualidadCapitalize, value: mensualidad[i]['monto'], 'data-id': mensualidad[i]['id'] }
         )
-
       }
-
       console.log(atributos)
       insertarOptionGeneral('mes', atributos);
 
 
     })
+
+}
+
+AnoEscolarPago = document.getElementById('AnoEscolarPago');
+AnoEscolarPago.addEventListener('change', () => {
+  llenarOptionPagos();
+})
+
+//MODAL PAGO ESPECIFICO
+//AL agregar los pagos de este registor no olvidar los ATRIBUTOS
+function openPagoEspecificoModal(event) {
+
+  vaciarSelect('mes', { innerHTML: '---Seleccionar Mes---', disabled: '', selected: '' });
+
+  let anoEscolar = document.getElementById('AnoEscolarPago').value;
+
+  //Llenar con Mensualidad
+  llenarOptionPagos();
+
 
 
   const datos = JSON.parse(event.target.getAttribute('data-datos'));
@@ -421,12 +405,12 @@ selectMes.addEventListener('change', function () {
   const precioMes = valorMes || 0; // Usar 0 si no está definido
   totalMonto += precioMes;
 
-    // Crear un nuevo elemento para el mes
-    const mesItem = document.createElement('span');
-    mesItem.textContent = selected.innerText;
-    mesItem.classList.add('mes-item');
-    mesItem.setAttribute('data-precio', precioMes);
-    mesItem.setAttribute('data-id', mesId); // Asignar `data-id` al elemento
+  // Crear un nuevo elemento para el mes
+  const mesItem = document.createElement('span');
+  mesItem.textContent = selected.innerText;
+  mesItem.classList.add('mes-item');
+  mesItem.setAttribute('data-precio', precioMes);
+  mesItem.setAttribute('data-id', mesId); // Asignar `data-id` al elemento
 
   // Crear objeto del mes seleccionado
   const mesObjeto = {
@@ -439,8 +423,10 @@ selectMes.addEventListener('change', function () {
   console.log('Monto total acumulado:', totalMonto);
 
   // Actualizar el valor a mostrar con el descuento (si aplica)
-  document.getElementById('mesPagar').innerText = formaPagoDescuento[1] === '' ? totalMonto.toFixed(2) : (totalMonto * formaPagoDescuento[1]).toFixed(2);
-  document.getElementById('mesPagarBolivar').innerText = formaPagoDescuento[1] === '' ? (precioDolarCal * totalMonto).toFixed(2) : (precioDolarCal * totalMonto * formaPagoDescuento[1]).toFixed(2);
+    if (formaPagoDescuento[1] ) {
+      document.getElementById('mesPagar').innerText = (totalMonto * formaPagoDescuento[1]).toFixed(2);
+      document.getElementById('mesPagarBolivar').innerText = (precioDolarCal * totalMonto * formaPagoDescuento[1]).toFixed(2);
+  } 
   valorEnviar = totalMonto;
 
   abonadoMes(); // Llama a la función para verificar el monto después de añadir el mes
@@ -451,8 +437,13 @@ selectMes.addEventListener('change', function () {
     totalMonto -= precioMes; // Restar el precio del mes eliminado
 
     // Actualizar el valor a mostrar después de eliminar el mes
-    document.getElementById('mesPagar').innerText = formaPagoDescuento[1] === '' ? totalMonto.toFixed(2) : (totalMonto * formaPagoDescuento[1]).toFixed(2);
-    document.getElementById('mesPagarBolivar').innerText = formaPagoDescuento[1] === '' ? (precioDolarCal * totalMonto).toFixed(2) : (precioDolarCal * totalMonto * formaPagoDescuento[1]).toFixed(2);
+    if (formaPagoDescuento[1] ) {
+      document.getElementById('mesPagar').innerText = (totalMonto * formaPagoDescuento[1]).toFixed(2);
+      document.getElementById('mesPagarBolivar').innerText = (precioDolarCal * totalMonto * formaPagoDescuento[1]).toFixed(2);
+    } 
+  
+
+
     valorEnviar = totalMonto;
     abonadoMes(); // Verificar si el monto sigue siendo válido después de la eliminación
 
@@ -591,7 +582,7 @@ function enviarPago() {
         showToast('Pago registrado exitosamente', true);
         console.log(response);
         limpiarFormPagos()
-      
+
 
 
       } else {
