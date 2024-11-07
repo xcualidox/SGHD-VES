@@ -162,9 +162,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <label for="profesorRol">Rol: </label>
                 <select name="rol" id="profesorRol">
 
-                    <option value="coordinador">Coordinador</option>
-                    <option value="administrador">Administrador</option>
-                    <option value="profesor" selected>Profesor</option>
+                    <option value="coordinador">Coordinador(a)</option>
+                    <option value="administrador">Administrador(a)</option>
+                    <option value="profesor" selected>Profesor(a)</option>
+                    <option value="secretario" >Secretario(a)</option>
                     <?php if ($_SESSION["sesion"] == "admin") {
                         echo ' <option value="admin" >Master</option>';
                     } ?>

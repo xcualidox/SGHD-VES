@@ -97,6 +97,8 @@ function crearSelect(options = [], seleccionado, parametros_option = [{}], param
 }
 
 function eliminarMensualidad(id, callback) {    
+    showConfirm("¿Está seguro de que desea eliminar Esta Mensualidad?",()=>{
+  
     $.ajax({
     url: '../../Control/c_mensualidad.php', 
     type: 'POST',
@@ -121,7 +123,7 @@ function eliminarMensualidad(id, callback) {
         callback(null)
     }
 });   
-    
+});
 }
 
 function recargarTablaMensualidad(tbody_id, ano_escolar = undefined) {

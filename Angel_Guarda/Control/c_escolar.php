@@ -40,7 +40,10 @@ if (isset($_POST["nombre"]) && isset($_POST["activo"])) {
     }
 
     // Cambiar el estado del año escolar seleccionado
+
     $objeto->cambiarEstado($nombre, $activo);
+    require_once("c_bitacora.php");
+    insertBitacora($_SESSION['username'], "modificar", "Activo Año Escolar: ".$nombre. ".");
 
     header("Location: ../Vista/escolar/v_escolar.php");
     exit();

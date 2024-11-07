@@ -31,7 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $precio = $dolarModel->obtenerPrecio();
 
         if ($resultado) {
-            echo json_encode(['success' => 'El precio del dólar se ha actualizado a: '.$precio]);
+            echo json_encode(['success' => 'El precio del dólar se ha actualizado a: '.$precio.'$']);
+            require_once("c_bitacora.php");
+            insertBitacora($_SESSION['username'], "modificar", "El precio del Dolar se ha Actualizado a: ".$precio."$");
         } else {
             echo json_encode(['error' => 'Error al actualizar el precio del dólar']);
         }

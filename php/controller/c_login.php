@@ -229,6 +229,11 @@ function login($username, $pw, $op)
                 insertBitacora($username, "login", "Ingresó al sistema.");
                 header("Location: ../..//Angel_guarda/Vista/Horario/horario.php");
             }
+            else if ($_SESSION['sesion'] == "secretario" ){
+                require_once("../../Angel_Guarda/Control/c_bitacora.php");
+                insertBitacora($username, "login", "Ingresó al sistema.");
+                header("Location: ../..//Angel_guarda/Vista/v_estudiante/v_estudiante.php");
+            }
             exit();
         }
         else if($loginResult[0] && $loginResult[2] == "new")

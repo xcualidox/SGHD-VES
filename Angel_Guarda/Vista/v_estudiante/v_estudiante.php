@@ -7,7 +7,7 @@ include_once("../../Control/c_estudiantes.php");
 
 
 
-if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador") {
+if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador" || $_SESSION["sesion"] == "secretario" ) {
 } else {
     header("Location: ../../../index.php");
 }
@@ -37,9 +37,20 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <div class="bg-gray-100 rounded-full cursor-pointer" id="openModalAñadir">
             <img src="../../../images/icons/añadir.svg" class="w-10 filtro-verde" alt="Añadir" title="Añadir">
         </div>
-        <div class="bg-gray-100 rounded-full cursor-pointer" id="openModalMensualidad">
+        <?php 
+            //Declaro las Variables Aca, para que sean mas faciles de modificar
+         $mensualidadBoton = '<div class="bg-gray-100 rounded-full cursor-pointer" id="openModalMensualidad">
             <img src="../../../images/icons/calendario.svg" class="w-10 filtro-verde" alt="openModalMensualidad" title="Mensualidad">
-        </div>
+        </div>';
+          if ($_SESSION["sesion"] == "admin") {
+
+            
+            echo $mensualidadBoton;
+          
+            } 
+        
+        ?>
+   
         <div class="bg-gray-100 rounded-full cursor-pointer" id="openModalMesesPS">
             <img src="../../../images/icons/portapapeles.svg" class="w-10 filtro-verde" alt="openModalMesesPS" title="Modal Meses PS">
         </div>

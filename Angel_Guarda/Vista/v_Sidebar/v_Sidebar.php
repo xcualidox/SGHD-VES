@@ -148,6 +148,20 @@
                         <span class="tooltip">Horario</span>
                     </li>';
                 }
+                if ($_SESSION["sesion"] == "secretario") {
+                    echo '             
+                    <li>
+                <a href="../v_estudiante/v_estudiante.php" class="flex items-center" title="Estudiante y Representante">
+                     <i class="flex  justify-center  items-center ">
+                        <img src="../../../images/icons/estudianteRepresentante.svg" class="w-8  filtro-blanco">
+                    </i>
+                    <span class="nav-item">Estudiante/Reg</span>
+                </a>
+                <span class="tooltip">Estudiante/Reg</span>
+            </li> ';
+                }
+
+               
             }
             ?>
 

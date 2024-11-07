@@ -53,7 +53,8 @@ document.getElementById('closePagosEspecificos').addEventListener('click', () =>
 });
 
 function EliminarEstudiante(cedula) {    
-        
+    showConfirm("¿Está seguro de que desea eliminar este Estudiante?",()=>{
+   
     $.ajax({
         url: '../../Control/c_estudiantes.php',
         type: 'POST',
@@ -85,7 +86,7 @@ function EliminarEstudiante(cedula) {
             showToast("Hubo un error al enviar los datos", false);
         }
     });
-    
+});
 }
 
 function cargarDolar() {
