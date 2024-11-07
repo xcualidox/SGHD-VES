@@ -19,6 +19,32 @@ if (isset($_POST["ope"])) {
             break;
     }
 }
+if (isset($_POST["nombre"]) && isset($_POST["activo"])) {
+    $nombre = $_POST["nombre"];
+    $activo = $_POST["activo"];
+
+    // Crear una instancia de la clase escolar
+    $objeto = new escolar();
+
+    if ($activo == 0) {
+        // Si se intenta desactivar un año escolar, verificamos si es el único activo
+        $activoActual = $objeto->contarActivos();
+        if ($activoActual <= 1) {
+            // Si solo hay un año escolar activo, no permitimos desactivarlo
+            header("Location: ../Vista/escolar/v_escolar.php");
+            exit();
+        }
+    } else {
+        // Si activamos un nuevo año escolar, desactivamos todos los demás
+        $objeto->desactivarTodos();
+    }
+
+    // Cambiar el estado del año escolar seleccionado
+    $objeto->cambiarEstado($nombre, $activo);
+
+    header("Location: ../Vista/escolar/v_escolar.php");
+    exit();
+}
 	
 function Registra()
 {

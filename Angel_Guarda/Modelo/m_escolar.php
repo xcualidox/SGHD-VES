@@ -20,6 +20,28 @@ class escolar extends database_connect{
                 WHERE `nombre`=?";
 		return $this->query($sql,[$this->nom,$this->fecI,$this->fechaF,$origin]);
     }
+    function desactivarTodos() {
+      $sql = "UPDATE ano_escolar SET activo = 0";
+      return $this->query($sql,[]);
+  }
+
+  function cambiarEstado($nombre, $activo) {
+      $sql = "UPDATE ano_escolar SET activo = ? WHERE nombre = ?";
+      return $this->query($sql, [$activo, $nombre]);
+  }
+  function contarActivos() {
+    $sql = "SELECT COUNT(*) as total FROM ano_escolar WHERE activo = 1";
+    $result = $this->query($sql, null); // Ejecutamos la consulta sin parámetros adicionales
+
+    // Usamos fetch_query para obtener el resultado
+    if ($result) {
+        $row = $this->fetch_query($result);
+        return $row['total'] ?? 0; // Devolvemos el total o 0 si no existe
+    }
+
+
+    return 0;
+}
     
     function eliminar($origin) {
       $sql= "DELETE FROM `ano_escolar` WHERE `nombre`=?";

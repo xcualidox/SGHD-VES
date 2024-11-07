@@ -50,7 +50,22 @@ include_once('../v_Sidebar/v_Sidebar.php');
     			    <td class="border px-4 py-2"><?php echo $resultado[$i]["nombre"]?></td>
     			    <td class="border px-4 py-2"><?php echo $resultado[$i]["fecha_inicio"]?></td>
                     <td class="border px-4 py-2"><?php echo $resultado[$i]["fecha_fin"]?></td>
-                    <td class="border px-4 py-2"><?php echo $resultado[$i]["activo"] == 1 ? "Activo" : "Inactivo"; ?></td>
+                    <td class="border px-4 py-2"><button>  
+                        <form method="POST" action="../../Control/c_escolar.php">
+                        <input type="hidden" name="nombre" value="<?php echo $resultado[$i]["nombre"] ?>">
+                        <input type="hidden" name="activo" value="<?php echo $resultado[$i]["activo"] == 1 ? 0 : 1 ?>">
+                        <button type="submit">
+                       
+                      
+                        <!-- RAFA, ESO ES UN TERNARIO PARA -->
+                            <?php 
+                            $chequeado="<img src='../../../images/icons/checkRadius.svg' class='w-8 h-8 filtro-verde cursor-pointer' alt='Activo' title='Activo'>";
+                            $NoChequeado="<img src='../../../images/icons/noCheckRadius.svg' class='w-8 h-8 filtro-verde cursor-pointer' alt='Inactivo' title='Inactivo'>";
+                            //Lo hice asi para que entiendas este Ternario, si es Verdadero Marcara el chequeado si es falso , marcara el nochequeado
+                            echo $resultado[$i]["activo"] == 1  ? "$chequeado"  : "$NoChequeado"; ?>
+                        </button>
+                    </form>
+        </td>
                     <td >
 
                     
