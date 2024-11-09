@@ -21,7 +21,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <option value="" default>Seleccione el tipo de operacion</option>
                 <option value="login">Inicios de sesión</option>
                 <option value="error">Errores</option>
-                <option value="actualizar">Datos actualizados</option>
+                <option value="modificar">Datos actualizados</option>
                 <option value="eliminar">Datos eliminados</option>
                 <option value="insertar">Datos agregados</option>
             </select>
