@@ -574,17 +574,21 @@ function openModalMostrarMasDatos(event) {
         Teléfono: ${datos.telefono}
         Teléfono 2: ${datos.telefono_2}
     `;
+    document.getElementById('nombreEstudianteMostrar').textContent = `Nombres Estudiante: ${datos.nombres_estudiante} ${datos.apellidos_estudiante}`;
     //Toda esta data Sera para La Incripcion, Se mantedran Guardado de momento
-    modalMostrarMas.showModal(); // Abre el modal
+    modalMostrarMas.classList.add('show');// Abrir el modal
+    document.querySelector(".modal__Oscuro").style.display = "block";
 }
 
 // Obtener el modal y el botón de cerrar por su ID
 
-const closeBtn = document.getElementById('closeMostrarMas');
 
 // Cerrar el modal al hacer clic en el botón de cerrar (X)
-closeBtn.addEventListener('click', () => {
-    modalMostrarMas.close(); // Cierra el modal
+closeMostrarMas.addEventListener('click', () => {
+
+    
+    modalMostrarMas.classList.remove('show'); // Cerrar el modal 
+    document.querySelector(".modal__Oscuro").style.display = "none";
 });
 
 

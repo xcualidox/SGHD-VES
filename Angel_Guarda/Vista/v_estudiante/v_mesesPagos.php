@@ -1,4 +1,4 @@
-<summary>Meses Saldados</summary>
+<summary>Meses Pagos</summary>
             <div class="content__details">
                 <div class="flex flex-col sm:flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
 
