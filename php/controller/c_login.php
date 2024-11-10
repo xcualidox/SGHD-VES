@@ -187,7 +187,7 @@ function changePw($username, $pw)
 
 function validateInput($username, $pw)
 {
-    $pwRegex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_])[A-Za-z\d!@#$%^&*()\-_]{8,20}$/';
+    $pwRegex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*().\-_])[A-Za-z\d!@#$%^&*().\-_]{8,20}$/';
     $usernameRegex = '/^\d{7,10}$/';
     return preg_match($usernameRegex, $username) && preg_match($pwRegex, $pw);
 }
