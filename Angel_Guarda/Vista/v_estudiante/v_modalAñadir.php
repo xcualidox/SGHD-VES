@@ -80,10 +80,18 @@
                         <img src='../../../images/icons/noCheckRadius.svg' class='w-8 h-8 filtro-verde cursor-pointer' alt='Existente' title='Existente'>
                         Existe
                     </label>
+                        <?php 
 
-                    <img src='../../../images/icons/papelera.svg' id="borrarRepresentante" class='w-8 h-8 filtro-rojo cursor-pointer modificacionRepresentante hidden' alt='Borrar' title='Borrar'>
+                        $borrarBotonRepresentanteForm = " <img src='../../../images/icons/papelera.svg' id='borrarRepresentante' class='w-8 h-8 filtro-rojo cursor-pointer modificacionRepresentante hidden' alt='Borrar' title='Borrar'>";
+                        $botonModificarRepresentanteForm=" <img src='../../../images/icons/modificar.svg' id='modificarRepresentanteForm' class='w-8 h-8 filtro-verde cursor-pointer modificacionRepresentante hidden' alt='Modificar' title='Modificar'>";
+                        if ($_SESSION["sesion"] == "admin") {
+                        echo $borrarBotonRepresentanteForm;
+                        echo $botonModificarRepresentanteForm;
+                        
+                        } ?>
+                   
 
-                    <img src='../../../images/icons/modificar.svg' id="modificarRepresentanteForm" class='w-8 h-8 filtro-verde cursor-pointer modificacionRepresentante hidden' alt='Modificar' title='Modificar'>
+                   
                     <img src='../../../images/icons/return.svg' id="volverModificacionRepresentante" class='w-8 h-8 filtro-azul cursor-pointer  modificacionRepresentante hidden' alt='Volver' title='Volver'>
                 </div>
             </div>
