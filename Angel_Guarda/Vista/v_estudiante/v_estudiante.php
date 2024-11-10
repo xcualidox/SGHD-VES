@@ -151,12 +151,14 @@ include_once('../v_Sidebar/v_Sidebar.php');
     </div>
     <!-- MOSTRAR MAS-->
     <div class="modal__Nuevo"  id="modalMostrarMas">
+
         <div class="flex justify-end items-end">
             <div class="w-10 bg-red-500 rounded-full cursor-pointer p-2" id="closeMostrarMas">
                 <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
             </div>
         </div>
-        <h2 class="text-xl font-semibold mb-4">Mostrar Más</h2>
+        <h2 class="text-xl font-semibold mb-4" id="nombreEstudianteMostrar"></h2>
+        
 
         <details>
         <summary>Datos Estudiante</summary>

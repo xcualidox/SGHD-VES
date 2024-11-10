@@ -574,6 +574,7 @@ function openModalMostrarMasDatos(event) {
         Teléfono: ${datos.telefono}
         Teléfono 2: ${datos.telefono_2}
     `;
+    document.getElementById('nombreEstudianteMostrar').textContent = `Nombres Estudiante: ${datos.nombres_estudiante} ${datos.apellidos_estudiante}`;
     //Toda esta data Sera para La Incripcion, Se mantedran Guardado de momento
     modalMostrarMas.classList.add('show');// Abrir el modal
     document.querySelector(".modal__Oscuro").style.display = "block";
