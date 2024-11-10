@@ -44,7 +44,7 @@ closePagosEspecificos.addEventListener('click', () => {
 
   limpiarFormPagos()
   console.log('cerrar Modal');
-  modalPagos.close(); // Cerrar el modal
+ 
 });
 
 

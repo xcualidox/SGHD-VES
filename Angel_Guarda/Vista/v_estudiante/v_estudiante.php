@@ -150,16 +150,28 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
     </div>
     <!-- MOSTRAR MAS-->
-    <dialog id="modalMostrarMas">
+    <div class="modal__Nuevo"  id="modalMostrarMas">
         <div class="flex justify-end items-end">
             <div class="w-10 bg-red-500 rounded-full cursor-pointer p-2" id="closeMostrarMas">
                 <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
             </div>
         </div>
         <h2 class="text-xl font-semibold mb-4">Mostrar Más</h2>
-        <!-- Imprimiendo Datos Para Mostrar -->
+
+        <details>
+        <summary>Datos Estudiante</summary>
         <p id="DatosCompletosMostrarMas"></p>
-    </dialog>
+        </details>
+        <details>
+        <summary>Meses Saldados Estudiante</summary>
+            <?php 
+    //Se usa Include para que se cargue en ambos sitios
+        include("v_mesesSaldados.php");
+            ?>
+        </details>
+        <!-- Imprimiendo Datos Para Mostrar -->
+
+    </div>
     <!-- MODAL PAGO ESPECIFICO -->
 
 
@@ -254,9 +266,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
         </details>
 
         <details>
+            <summary>Meses Saldados</summary>
             <?php
 
-            include_once("v_mesesSaldados.php");
+include("v_mesesSaldados.php");
             ?>
         </details>
 
