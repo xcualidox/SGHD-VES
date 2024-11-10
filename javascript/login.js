@@ -70,29 +70,31 @@ firstPw.addEventListener("input", (e) =>
     let pwStrength = firstPw.parentElement.nextElementSibling;
     passwordStrength(e.target.value, pwStrength);
 });
-function passwordStrength(value, pwStrength)
-{
-    let patterns = [/^.{8,}$/, /^.{0,20}$/, /[0-9]/, /[!@#$%^&*()\-_]/ , /[a-z]/, /[A-Z]/ ];
+function passwordStrength(value, pwStrength) {
+    let patterns = [
+        /^.{8,}$/,        // Al menos 8 caracteres
+        /^.{0,20}$/,      // Máximo 20 caracteres
+        /[0-9]/,          // Al menos un número
+        /[!@#$%^&*().]/,  // Al menos un carácter especial (!@#$%^&*.)
+        /[a-z]/,          // Al menos una letra minúscula
+        /[A-Z]/           // Al menos una letra mayúscula
+    ];
+    
     let strengths = pwStrength.querySelectorAll(".strength");
-    strengths.forEach((element, index) =>
-        {
-            if (patterns[index].test(value)){
-                if (element.querySelector(".check").classList.contains("hidden")) 
-                {
-                    element.querySelector(".invalid-pw").classList.add("hidden");
-                    element.querySelector(".check").classList.remove("hidden");
-                }
+    
+    strengths.forEach((element, index) => {
+        if (patterns[index].test(value)) {
+            if (element.querySelector(".check").classList.contains("hidden")) {
+                element.querySelector(".invalid-pw").classList.add("hidden");
+                element.querySelector(".check").classList.remove("hidden");
             }
-            else
-            {
-                if (element.querySelector(".invalid-pw").classList.contains("hidden")) 
-                {
-                    element.querySelector(".check").classList.add("hidden");
-                    element.querySelector(".invalid-pw").classList.remove("hidden");
-                }
+        } else {
+            if (element.querySelector(".invalid-pw").classList.contains("hidden")) {
+                element.querySelector(".check").classList.add("hidden");
+                element.querySelector(".invalid-pw").classList.remove("hidden");
             }
         }
-    );
+    });
 }
 
 function checkLogin()
@@ -240,7 +242,8 @@ function validateSecurityA()
 }
 function validatePw(pw, pwConfirm)
 {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_])[A-Za-z\d!@#$%^&*()\-_]{8,20}$/
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*.])[A-Za-z\d!@#$%^&*.]{8,20}$/;
+
     if(pw.length==0)
     {
         return [false, "Ingrese la nueva contraseña!"];

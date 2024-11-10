@@ -164,7 +164,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <summary>Datos Estudiante</summary>
         <p id="DatosCompletosMostrarMas"></p>
         </details>
-        <details>
+        <details >
         <summary>Meses Saldados Estudiante</summary>
             <?php 
     //Se usa Include para que se cargue en ambos sitios
@@ -271,7 +271,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <summary>Meses Saldados</summary>
             <?php
 
-include("v_mesesSaldados.php");
+            include("v_mesesSaldados.php");
             ?>
         </details>
 
