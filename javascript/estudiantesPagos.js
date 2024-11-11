@@ -22,6 +22,7 @@ const modalAñadir = document.getElementById('modalAñadir');
 openModalAñadir.addEventListener('click', () => {
     modalAñadir.classList.add('show');// Abrir el modal
     document.querySelector(".modal__Oscuro").style.display = "block";
+    cambiarInput('Nuevo');
 });
 
 closeModalAñadir.addEventListener('click', () => {
@@ -638,7 +639,8 @@ function recargarDatalistRepresentantes(){
 
 // Función para llenar el formulario y abrir el modal al modificar
 function llenarFormulario(element) {
-;
+
+    cambiarInput('Existente');
 
     // Obtener los datos del atributo 'data-datos'
     const datos = JSON.parse(element.getAttribute('data-datos'));
