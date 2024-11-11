@@ -13,6 +13,28 @@ class pagos extends database_connect{
         return $result;
     }
 
+    public function insertarPagos($datos){
+        $sql="INSERT INTO pagos (
+        cedula_estudiante,
+        cedula_representante,
+        fecha,
+        referencia_id,
+        ano_escolar,
+        mes,
+        detalles,
+        descuento,
+        nombres_estudiante,
+        nombres_representante,
+        telefono,
+        direccion,
+        monto,
+        tipo_pago,
+        dolarBCV
+        ) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $query=$this->query($sql, $datos);
+        return $query;
+    }
+
     public function obtenerPagos($parametros,$limit,$offset){
 
         $sql='SELECT * from pagos WHERE 1=1';

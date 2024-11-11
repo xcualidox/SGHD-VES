@@ -52,11 +52,11 @@
                         <label for="Pago">Forma de Pago: </label>
                         <div class="flex">
                             <div class="custom-radio">
-                                <input type="radio" id="divisas" value="divisas" name="FormaPago" onchange="verificarSeleccionado()">
+                                <input type="radio" id="divisas" value="dolar" name="FormaPago" onchange="verificarSeleccionado()">
                                 <label for="divisas">Divisas ($)</label>
                             </div>
                             <div class="custom-radio">
-                                <input type="radio" id="transferencia" value="transferencia" name="FormaPago" onchange="verificarSeleccionado()">
+                                <input type="radio" id="transferencia" value="bolivar" name="FormaPago" onchange="verificarSeleccionado()">
                                 <label for="transferencia"> Transferencia (BS)</label>
                             </div>
                         </div>

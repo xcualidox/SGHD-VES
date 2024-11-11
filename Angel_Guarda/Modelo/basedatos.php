@@ -67,6 +67,10 @@ class database_connect{
             return false;
         }
     }
+    //Returnea el ID del AUTO_INCREMENT de la ultima operacion
+    public function lastId(){
+        return $this->connect()->lastInsertId();
+    }
     // Ejecuta queries SQL sencillas
     protected function query($query , $data){
         try {

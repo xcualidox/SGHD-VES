@@ -16,6 +16,85 @@ $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $resultados_por_pagina = 10;
 $offset = 0;
 
+if (isset($_POST['cedulaEliminarRepresentante'])){
+    $cedula = $_POST['cedulaEliminarRepresentante'];
+    $datosBitacora=$estudiante->verificarRepresentante($cedula);
+
+    $relacion = $estudiante->verificarRelacionRepresentante($cedula);
+    if(count($relacion) > 0){
+        $eliminarRelacion=$estudiante->eliminarRelacion($relacion['cedula_estudiante']);
+    }
+    else{
+        $eliminarRelacion=true;
+    }
+
+    $representante=$estudiante->eliminarRepresentante($cedula);
+
+    if ($representante && $eliminarRelacion){
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Representante eliminado'
+        ]);
+
+        require_once(__DIR__.'/c_bitacora.php');
+        $nombre_representante=$datosBitacora['nombres'].' '.$datosBitacora['apellidos'];
+        insertBitacora($_SESSION['username'],'eliminar','Eliminó al representante: '.$cedula.'('.$nombre_representante.').');
+    }
+
+    else{
+        echo json_encode([
+        'status' => 'error',
+        'message' => 'Error al eliminar representante'
+        ]);
+    }
+    
+    exit();
+}
+
+if (isset($_POST['obtenerRepresentanteUnico'])){
+
+    $representantes=$estudiante->obtenerRepresentanteUnico($_POST['cedula']);
+
+    if ($representantes){
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Representante obtenido',
+            'response' => $representantes
+        ]);
+    }
+
+    else{
+        echo json_encode([
+        'status' => 'error',
+        'message' => 'Error al obtener representantes',
+        'response' => null
+        ]);
+    }
+    
+    exit();
+}
+if (isset($_POST['obtenerRepresentanteCedulaNombre'])){
+
+    $representantes=$estudiante->obtenerRepresentanteNombreCedula();
+
+    if ($representantes){
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Representantes obtenidos',
+            'response' => $representantes
+        ]);
+    }
+
+    else{
+        echo json_encode([
+        'status' => 'error',
+        'message' => 'Error al obtener representantes',
+        'response' => null
+        ]);
+    }
+    
+    exit();
+}
 if (isset($_GET['pagina'])){
     $pagina=$_GET['pagina']-1;
 

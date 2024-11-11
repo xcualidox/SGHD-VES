@@ -27,7 +27,19 @@ class estudiante extends database_connect
 
     // Método para modificar el precio del dólar
 
+    public function obtenerRepresentanteNombreCedula(){
+        $sql="SELECT `cedula_representante`, CONCAT(`nombres`,' ', `apellidos`) AS `nombres` FROM `representante` WHERE 1=1";
+        $query=$this->query($sql,[]);
+        $result=$this->fetch_all_query($query);
+        return $result;
+    }
 
+    public function obtenerRepresentanteUnico($cedula){
+        $sql='SELECT * FROM representante WHERE cedula_representante LIKE ?';
+        $query=$this->query($sql,[$cedula]);
+        $result=$this->fetch_query($query);
+        return $result;
+    }
 
     public function insertEstudiante($cedulaEstudianteActual, $cedulaEstudiante, $nombres, $apellidos, $anoSeccion, $anoEscolar, $cedulaRepresentante)
     {
@@ -131,6 +143,12 @@ class estudiante extends database_connect
         return $resultado;
     }
     
+    public function verificarRelacionRepresentante($cedulaRepresentante){
+        $sql = "SELECT * FROM `representante-representado` WHERE `cedula_representante` LIKE ?";
+        $resultado = $this->fetch_query($this->query($sql, [$cedulaRepresentante]));
+        return $resultado;
+    }
+
     function eliminarEstudiante($cedula) {
         $sql= "DELETE FROM `estudiante` WHERE `cedula_estudiante`=?";
         $resultado=$this->query($sql,[$cedula]);
