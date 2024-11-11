@@ -327,6 +327,10 @@ function getQueryParam(param) {
     const correo = document.querySelector('#correo')
     const telefonoDomicilio=document.querySelector('#telefonoDomicilio')
 
+    const borrarRepresentante=document.querySelector('#borrarRepresentante')
+    const modificarRepresentanteForm=document.querySelector('#modificarRepresentanteForm')
+
+
     const campoExistencia=[
      
         nombreRepresentante,
@@ -337,16 +341,81 @@ function getQueryParam(param) {
         telefonoDomicilio,
         
     ]
+    function toggleCampos() {
+        campoExistencia.forEach(campo => {
+            campo.disabled = !campo.disabled;
+        });
+    }
+    modificarRepresentanteForm
+    if (!document.getElementById('cedulaOptions')) {
+        const dataList = document.createElement('datalist');
+        dataList.id = 'cedulaOptions';
+        dataList.innerHTML = `
+            <option value="653261516">Representante 1</option>
+            <option value="87654321">Representante 2</option>
+            <option value="87654325">Representante 3</option>
+        `;
+        cedulaInput.parentNode.appendChild(dataList);
+    }
+    
+    recargarDatalistRepresentantes();
+     // Verifica si el valor coincide con alguna opción en el datalist
+
+
+    // Evento oninput para autocompletar campos
+    cedulaInput.oninput = function () {
+        const valorCedula = cedulaInput.value.trim();
+        let datalist = document.querySelector('#cedulaOptions');
+        let options = Array.from(datalist.children);
+    
+        // Verifica si el valor coincide con alguna opción en el datalist
+        const match = options.some(option => option.value === valorCedula);
+        if (match) {
+            // Cambia automáticamente al estado "Existente" si coincide
+          
+    
+            // Muestra los botones de modificar y borrar
+            borrarRepresentante.classList.remove('hidden');
+            modificarRepresentanteForm.classList.remove('hidden');
+    
+            // Aquí puedes hacer la solicitud para obtener los datos y rellenar los campos
+            pedirRepresentanteSingular(valorCedula, function(datos) {
+                nombreRepresentante.value = datos.nombres;
+                apellidosRepresentantes.value = datos.apellidos;
+                telefono.value = datos.telefono;
+                direccion.value = datos.direccion;
+                correo.value = datos.correo;
+                telefonoDomicilio.value = datos.telefono_2;
+            });
+              cambiarInput('Existente');
+            nuevoImg.src = imgNoSeleccionado;
+            existenteImg.src = imgSeleccionado;
+        } else {
+            // Si no coincide, oculta los botones y limpia los campos
+            borrarRepresentante.classList.add('hidden');
+            modificarRepresentanteForm.classList.add('hidden');
+            
+            nombreRepresentante.value = "";
+            apellidosRepresentantes.value = "";
+            telefono.value = "";
+            direccion.value = "";
+            correo.value = "";
+            telefonoDomicilio.value = "";
+        }
+    };
     if (tipo === 'Nuevo') {
       console.log('Presionaste: Nuevo');
-
+        borrarRepresentante.classList.add('hidden');
+        borrarRepresentante.classList.remove('block');
+        modificarRepresentanteForm.classList.add('hidden')
+        modificarRepresentanteForm.classList.remove('block')
+        volverModificar.classList.add('hidden');
+        volverModificar.classList.remove('block');
       
       cedulaInput.setAttribute('type', 'text');
       cedulaInput.removeAttribute('list'); // Quitar datalist
-      RepresentanteExistente.forEach(element => {
-        element.classList.add('hidden');
-        element.classList.remove('block');
-      });
+      //Muestra el boton de Modificar
+    
   
       mostraRadioRepresentantes.forEach(element => {
         element.classList.remove('hidden');
@@ -366,10 +435,10 @@ function getQueryParam(param) {
 
         cedulaInput.setAttribute('list', 'cedulaOptions'); // Agregar datalist
 
-        RepresentanteExistente.forEach(element => {
-            element.classList.remove('hidden');
-            element.classList.add('block');
-        });
+     
+            volverModificar.classList.remove('hidden');
+            volverModificar.classList.add('block');
+ 
 
         mostraRadioRepresentantes.forEach(element => {
             element.classList.add('hidden');
@@ -377,54 +446,7 @@ function getQueryParam(param) {
         });
 
         // Crear el datalist si no existe ya
-        if (!document.getElementById('cedulaOptions')) {
-            const dataList = document.createElement('datalist');
-            dataList.id = 'cedulaOptions';
-            dataList.innerHTML = `
-                <option value="653261516">Representante 1</option>
-                <option value="87654321">Representante 2</option>
-                <option value="87654325">Representante 3</option>
-            `;
-            cedulaInput.parentNode.appendChild(dataList);
-        }
-        
-        recargarDatalistRepresentantes();
-
-        // Evento oninput para autocompletar campos
-        cedulaInput.oninput = function () {
-            const valorCedula = cedulaInput.value.trim();
-            let datalist = document.querySelector('#cedulaOptions');
-            let options = datalist.children;
-
-
-            // Verifica si el valor coincide con alguna clave en `datosRepresentantes`
-            for (const indice of array = options){
-
-                if (indice.value == valorCedula) {
-                    pedirRepresentanteSingular(valorCedula,function(datos){
-        
-                        // Rellena los campos con los valores correspondientes
-                        nombreRepresentante.value = datos.nombres;
-                        apellidosRepresentantes.value = datos.apellidos;
-                        telefono.value = datos.telefono;
-                        direccion.value = datos.direccion;
-                        correo.value = datos.correo;
-                        telefonoDomicilio.value = datos.telefono_2;
-                    });
-    
-                }
-                else{
-                    nombreRepresentante.value = "";
-                    apellidosRepresentantes.value = "";
-                    telefono.value = "";
-                    direccion.value = "";
-                    correo.value = "";
-                    telefonoDomicilio.value = "";
-                }
-
-            }
-
-        };
+       
     }
     if (tipo === 'Regresar') {
         console.log('Presionaste: Regresar');
@@ -447,6 +469,7 @@ function getQueryParam(param) {
         nuevoImg.src = imgSeleccionado;
         existenteImg.src = imgNoSeleccionado;
       }
+      modificarRepresentanteForm.addEventListener('click', toggleCampos);
   }
  
 
@@ -464,10 +487,11 @@ function getQueryParam(param) {
   });
   volverModificar.addEventListener('click', () => {
 
-    cambiarInput('Regresar');
+    cambiarInput('Nuevo');
     nuevoImg.src = imgSeleccionado;
     existenteImg.src = imgNoSeleccionado;
   });
+  
   
 //FINAL DE NUEVO Y EXISTENTE
 
@@ -645,6 +669,14 @@ function llenarFormulario(element) {
     // Obtener los datos del atributo 'data-datos'
     const datos = JSON.parse(element.getAttribute('data-datos'));
     console.log(datos);
+
+
+    //Esto es para que salga el Boton de Modificar y
+
+    borrarRepresentante.classList.remove('hidden');
+    modificarRepresentanteForm.classList.remove('hidden');
+    
+
 
     // Rellenar los campos del formulario con los datos recibidos
     document.querySelector('#cedulaEstudiante').value = datos.cedula_estudiante ;

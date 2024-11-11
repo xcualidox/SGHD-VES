@@ -886,8 +886,8 @@ CREATE TABLE `pagos` (
   `mes` bigint NOT NULL DEFAULT '0',
   `detalles` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   `descuento` float NOT NULL DEFAULT '1',
-  `nombresE` varchar(141) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `nombresR` varchar(141) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `nombres_estudiante` varchar(141) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `nombres_representante` varchar(141) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `telefono` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `direccion` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `monto` double DEFAULT '0',
@@ -899,7 +899,7 @@ CREATE TABLE `pagos` (
 -- Dumping data for table `pagos`
 --
 
-INSERT INTO `pagos` (`idPago`, `cedula_estudiante`, `cedula_representante`, `fecha`, `referencia_id`, `ano_escolar`, `mes`, `detalles`, `descuento`, `nombresE`, `nombresR`, `telefono`, `direccion`, `monto`, `tipo_pago`, `dolarBCV`) VALUES
+INSERT INTO `pagos` (`idPago`, `cedula_estudiante`, `cedula_representante`, `fecha`, `referencia_id`, `ano_escolar`, `mes`, `detalles`, `descuento`, `nombres_estudiante`, `nombres_representante`, `telefono`, `direccion`, `monto`, `tipo_pago`, `dolarBCV`) VALUES
 (1, 8585684, 7595362, '2024-10-18', 'XD', '2024-2025', 1, 'LOL', 1, 'Carlos', 'Diaz', '0424', 'enrique segomviano', 200, 'dolar', 38.7);
 
 -- --------------------------------------------------------

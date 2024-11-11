@@ -82,17 +82,26 @@
                     </label>
                         <?php 
 
-                        $borrarBotonRepresentanteForm = " <img src='../../../images/icons/papelera.svg' id='borrarRepresentante' class='w-8 h-8 filtro-rojo cursor-pointer modificacionRepresentante hidden' alt='Borrar' title='Borrar'>";
-                        $botonModificarRepresentanteForm=" <img src='../../../images/icons/modificar.svg' id='modificarRepresentanteForm' class='w-8 h-8 filtro-verde cursor-pointer modificacionRepresentante hidden' alt='Modificar' title='Modificar'>";
+                       
                         if ($_SESSION["sesion"] == "admin") {
+                            $borrarBotonRepresentanteForm = " <img src='../../../images/icons/papelera.svg' id='borrarRepresentante' class='w-8 h-8 filtro-rojo cursor-pointer  hidden' alt='Borrar' title='Borrar'>";
+                            $botonModificarRepresentanteForm=" <img src='../../../images/icons/modificar.svg' id='modificarRepresentanteForm' class='w-8 h-8 filtro-verde cursor-pointer   hidden' alt='Modificar' title='Modificar'>";
+                      
+                        
+                        } 
+                        else{
+                            //Establezco los id en hidden ya que si no lo hago asi el JS no funciona
+                            $borrarBotonRepresentanteForm= " <input type='hidden' id='borrarRepresentante'>";
+                            $botonModificarRepresentanteForm="  <input type='hidden' id='modificarRepresentanteForm'>";
+                        }
                         echo $borrarBotonRepresentanteForm;
                         echo $botonModificarRepresentanteForm;
-                        
-                        } ?>
-                   
+                        ?>
 
-                   
+                  
+         
                     <img src='../../../images/icons/return.svg' id="volverModificacionRepresentante" class='w-8 h-8 filtro-azul cursor-pointer  modificacionRepresentante hidden' alt='Volver' title='Volver'>
+                    <!-- <img src='../../../images/icons/eraser.svg' id="limpiarRepresentante" class='w-8 h-8 filtro-azul cursor-pointer   ' alt='limpiarRepresentante' title='limpiarRepresentante'> -->
                 </div>
             </div>
             <div class="formulario-extenso__row">
