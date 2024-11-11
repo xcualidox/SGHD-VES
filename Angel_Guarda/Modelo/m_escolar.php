@@ -9,6 +9,13 @@ class escolar extends database_connect{
     $this->fechaF=$fechaF;
 	  }
 
+    function buscarAno($anoId){
+      $sql="SELECT * FROM ano_escolar WHERE codigo LIKE ?";
+      $query=$this->query($sql,[$anoId]);
+      $result=$this->fetch_query($query);
+      return $result;
+    }
+
     function incluye(){
         $sql= "insert into ano_escolar(nombre, fecha_inicio, fecha_fin) values(?,?,?)";
 		return $this->query($sql,[$this->nom,$this->fecI,$this->fechaF]);

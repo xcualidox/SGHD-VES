@@ -193,20 +193,23 @@ function openPagoEspecificoModal(event) {
 
 //Se puede darle nombre con innerHTML, ejemplo: {innerHTML: --Seleccionar Opcion--, value: 'lol'}
 
-function vaciarSelect(idSelect, placeholder = {}) {
+function vaciarSelect(idSelect, placeholder = false) {
   let select = document.getElementById(idSelect);
   select.innerHTML = '';
-  campo_placeholder = document.createElement('option');
+  if(placeholder){
+    
+    campo_placeholder = document.createElement('option');
 
-  for (let valor in placeholder) {
-    if (valor == 'innerHTML') {
-      campo_placeholder.innerHTML = placeholder[valor];
+    for (let valor in placeholder) {
+      if (valor == 'innerHTML') {
+        campo_placeholder.innerHTML = placeholder[valor];
+      }
+      else {
+        campo_placeholder.setAttribute(valor, placeholder[valor])
+      }
     }
-    else {
-      campo_placeholder.setAttribute(valor, placeholder[valor])
-    }
+    select.appendChild(campo_placeholder);
   }
-  select.appendChild(campo_placeholder);
 
 }
 
@@ -489,14 +492,14 @@ function abonadoMes() {
 
 
 
-  if (formaPago[0] === 'divisas') {
+  if (formaPago[0] === 'dolar') {
     mesPagar = mesPagarDolar;
     mesPagoField = mesPagarDolarField
     valorEnviar = abonadoMes.toFixed(2)
 
 
 
-  } else if (formaPago[0] === 'transferencia') {
+  } else if (formaPago[0] === 'bolivar') {
     mesPagar = mesPagarBolivar
     mesPagoField = mesPagarBolivarField
     valorEnviar = (abonadoMes / precioDolarCal).toFixed(2)
@@ -555,16 +558,16 @@ function enviarPago() {
 
   // Preparar los datos para enviar
   const datos = {
+    cedula: data.cedula_estudiante,
     ano_escolar: anoEscolar,
+    numero_referencia: referencia,
     descuento: descuento,
     forma_pago: formaPago,
-    numero_referencia: referencia,
     nota_pago: notaPago,
     valor_pago_enviar: valorPagoEnviar,
     meses: mesesSeleccionados,
-    estudiante_Representante: data
-  };
-
+    dolarBCV: DolarBCV.value
+  }
 
 
   // Enviar la solicitud AJAX
@@ -578,18 +581,11 @@ function enviarPago() {
     },
     dataType: 'json',
     success: function (response) {
-      if (response.success) {
-        showToast('Pago registrado exitosamente', true);
         console.log(response);
+        let exitos = response.success;
+        showToast(exitos+' de', true);
         limpiarFormPagos()
 
-
-
-      } else {
-        console.log(response.message);
-
-        showToast('Hubo un error al registrar el pago: ', false);
-      }
     },
     error: function (xhr, status, error) {
       console.error('Error:', xhr.responseText);

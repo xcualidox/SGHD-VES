@@ -24,10 +24,56 @@ if(isset($_POST['registrarPago'])){
     // Captura los datos JSON enviados en la solicitud
     $data = json_decode($_POST['datos'], true);
 
+    //Obtener datos restantes
+    require_once(__DIR__.'/../Modelo/m_estudiantes.php');
+    require_once(__DIR__ . "/../Modelo/m_escolar.php");
+    $objetoEstudiante = new estudiante();
+    $estudiante=$objetoEstudiante->verificarEstudiante($data['cedula']);
+    $relacion=$objetoEstudiante->verificarRelacionEstudiante($data['cedula']);
+    $objetoAno = new escolar();
+
+    //Setear datos a enviar
+    $exitos = 0;
+    for ($i=0; $i < count($data['meses']); $i++) { 
+
+        $aEnviar=[];
+        $aEnviar[]=$data['cedula'];
+        $aEnviar[]=$relacion['cedula_representante'];
+        $aEnviar[]=date('Y-m-d');
+        $aEnviar[]=$data['numero_referencia'];
+        $ano_escolar = $objetoAno->buscarAno($data['ano_escolar'])['nombre'];
+        $aEnviar[]=$ano_escolar;
+        $aEnviar[]=$data['meses'][$i]['id'];
+        $aEnviar[]=$data['nota_pago'];
+        $aEnviar[]=$data['descuento'];
+        $aEnviar[]=$estudiante['nombres'].' '.$estudiante['apellidos'];
+
+        $representante = $objetoEstudiante->verificarRepresentante($relacion['cedula_representante']);
+        $aEnviar[]=$representante['nombres'].' '.$representante['apellidos'];
+        $aEnviar[]=$representante['telefono'];
+        $aEnviar[]=$representante['direccion'];
+
+        $aEnviar[]=$data['valor_pago_enviar'];
+        $aEnviar[]=$data['forma_pago'];
+        $aEnviar[]=$data['dolarBCV'];
+        
+        $pago=$pagos->insertarPagos($aEnviar);
+        //$pago=false;
+        if($pago){
+            require_once(__DIR__.'/c_bitacora.php');
+            $id=$pagos->lastId();
+            insertBitacora($_SESSION['username'], "insertar", ' Registró el pago ID: '. $id .' del estudiante "'.$estudiante['nombres'].' '.$estudiante['apellidos'].'"');
+            $exitos++;
+        }
+        
+
+    }
+
+    $intentos = count($data['meses']);
+
 
     $response = [
-        'success' => true,
-        'data' => $data // Esto devuelve todos los datos recibidos
+        'success' => $exitos." exitos de ".$intentos." intentos."
     ];
 
     // Responder con los datos procesados

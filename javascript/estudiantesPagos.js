@@ -17,12 +17,12 @@ const modalAñadir = document.getElementById('modalAñadir');
 
 
 
-
 // Eventos para abrir y cerrar los modales
 //MODAL DE REGISTRO ESTUDIANTE REPRESENTANTE
 openModalAñadir.addEventListener('click', () => {
     modalAñadir.classList.add('show');// Abrir el modal
     document.querySelector(".modal__Oscuro").style.display = "block";
+    cambiarInput('Nuevo');
 });
 
 closeModalAñadir.addEventListener('click', () => {
@@ -52,6 +52,151 @@ document.getElementById('closePagosEspecificos').addEventListener('click', () =>
     document.querySelector(".modal__Oscuro").style.display = "none";
 });
 
+
+borrarRepresentante.addEventListener(('click'),()=>{
+    cedulaRepresentante=document.getElementById('cedulaRepresentante').value;
+    console.log(cedulaRepresentante);
+    eliminarRepresentante(cedulaRepresentante,()=>{
+        limpiarFormRepresentante();
+        recargarDatalistRepresentantes();
+    });
+
+});
+
+function limpiarFormRepresentante(){
+    cedulaRepresentante=document.getElementById('cedulaRepresentante');
+    nombresRepresentante=document.getElementById('nombresRepresentante');
+    apellidosRepresentante=document.getElementById('apellidosRepresentante');
+    telefono=document.getElementById('telefono');
+    telefonoDomicilio=document.getElementById('telefonoDomicilio');
+    correo=document.getElementById('correo');
+    direccion=document.getElementById('direccion');
+
+    cedulaRepresentante.value='';
+    nombresRepresentante.value='';
+    apellidosRepresentante.value='';
+    telefono.value='';
+    telefonoDomicilio.value='';
+    correo.value='';
+    direccion.value='';
+};
+
+function eliminarRepresentante(cedula,callback) {    
+    showConfirm("¿Está seguro de que desea eliminar este Representante?",()=>{
+   
+    $.ajax({
+        url: '../../Control/c_estudiantes.php',
+        type: 'POST',
+        data: {
+            cedulaEliminarRepresentante: cedula
+        },
+        success: function (response) {
+            try {
+                const data = JSON.parse(response);
+                
+                if (data.status === 'success') {
+                    // Mostrar el toast de éxito
+                    callback(data);
+                    
+                } else {
+                    // Mostrar mensaje de error del servidor
+                    showToast("Error fas: " + data.message, false);
+                    callback(null);
+                }
+            } catch (mensageError) {
+                // Capturar errores de JSON.parse o formato inválido
+                console.error('Error al procesar la respuesta:', mensageError);
+                console.log(response);
+                showToast("Problema al procesar la respuesta: ", false);
+                callback(null);
+            }
+        },
+        error: function (error) {
+            console.error('Error al enviar los datos:', error);
+            showToast("Hubo un error al enviar los datos", false);
+            callback(null);
+        }
+    });
+});
+}
+
+function pedirRepresentanteSingular(cedula, callback){
+    
+    $.ajax({
+        url: '../../Control/c_estudiantes.php',
+        type: 'POST',
+        data: {
+            obtenerRepresentanteUnico: true,
+            cedula: cedula
+        },
+        success: function (response) {
+            try {
+                const data = JSON.parse(response);
+
+                if (data.status === 'success') {
+                    callback(data.response);
+                } else {
+                    // Mostrar mensaje de error del servidor
+                    showToast("Error fas: " + data.message, false);
+                    console.log('pedirRepresentante')
+                    console.log(data);
+                    callback(null);
+                }
+            } catch (mensageError) {
+                // Capturar errores de JSON.parse o formato inválido
+                console.error('Error al procesar la respuesta:', mensageError);
+                console.log(data);
+                showToast("Error al obtener datos del representante", false);
+                callback(null);
+            }
+        },
+        error: function (error) {
+            console.error('Error al enviar los datos:', error);
+            showToast("Hubo un error al enviar los datos", false);
+            callback(null);
+        }
+    });
+
+}
+
+function pedirRepresentanteNombreCedula(callback){
+    
+    $.ajax({
+        url: '../../Control/c_estudiantes.php',
+        type: 'POST',
+        data: {
+            obtenerRepresentanteCedulaNombre: true
+        },
+        success: function (response) {
+            try {
+                const data = JSON.parse(response);
+
+                if (data.status === 'success') {
+                    callback(data.response);
+                } else {
+                    // Mostrar mensaje de error del servidor
+                    showToast("Error fas: " + data.message, false);
+                    console.log('pedirRepresentante')
+                    console.log(data);
+                    callback(null);
+                }
+            } catch (mensageError) {
+                // Capturar errores de JSON.parse o formato inválido
+                console.error('Error al procesar la respuesta:', mensageError);
+                console.log(data);
+                showToast("Error al obtener datalist de Representante", false);
+                callback(null);
+            }
+        },
+        error: function (error) {
+            console.error('Error al enviar los datos:', error);
+            showToast("Hubo un error al enviar los datos", false);
+            callback(null);
+        }
+    });
+
+}
+
 function EliminarEstudiante(cedula) {    
     showConfirm("¿Está seguro de que desea eliminar este Estudiante?",()=>{
    
@@ -78,7 +223,7 @@ function EliminarEstudiante(cedula) {
                 // Capturar errores de JSON.parse o formato inválido
                 console.error('Error al procesar la respuesta:', mensageError);
                 console.log(response);
-                showToast("Estudiante ya Registrado", false);
+                showToast("Problema al procesar la respuesta: ", false);
             }
         },
         error: function (error) {
@@ -169,33 +314,8 @@ function getQueryParam(param) {
  const imgNoSeleccionado = '../../../images/icons/noCheckRadius.svg';
 
 
- // Datos de representante
-const datosRepresentantesConsultaData = {
-    "653261516": {
-        nombreRepresentante: "Juan",
-        apellidosRepresentantes: "Pérez García",
-        telefono: "5551234",
-        direccion: "Calle Falsa 123",
-        correo: "juan.perez@example.com",
-        telefonoDomicilio: "555-5678"
-    },
-    "87654321": {
-        nombreRepresentante: "María",
-        apellidosRepresentantes: "Rodríguez López",
-        telefono: "555-9876",
-        direccion: "Avenida Siempreviva 742",
-        correo: "maria.rodriguez@example.com",
-        telefonoDomicilio: "5558765"
-    },
-    "87654325": {
-        nombreRepresentante: "Carlos",
-        apellidosRepresentantes: "Ramírez Sánchez",
-        telefono: "5556543",
-        direccion: "Boulevard Los Álamos 85",
-        correo: "carlos.ramirez@example.com",
-        telefonoDomicilio: "5554321"
-    }
-};
+
+
  // Función para cambiar el input a texto normal o datalist
  function cambiarInput(tipo) {
     //Tomo las Variables para añadirles el Dissable
@@ -267,31 +387,43 @@ const datosRepresentantesConsultaData = {
             `;
             cedulaInput.parentNode.appendChild(dataList);
         }
+        
+        recargarDatalistRepresentantes();
 
         // Evento oninput para autocompletar campos
         cedulaInput.oninput = function () {
             const valorCedula = cedulaInput.value.trim();
+            let datalist = document.querySelector('#cedulaOptions');
+            let options = datalist.children;
+
 
             // Verifica si el valor coincide con alguna clave en `datosRepresentantes`
-            if (datosRepresentantesConsultaData[valorCedula]) {
-                const datos = datosRepresentantesConsultaData[valorCedula];
+            for (const indice of array = options){
 
-                // Rellena los campos con los valores correspondientes
-                nombreRepresentante.value = datos.nombreRepresentante;
-                apellidosRepresentantes.value = datos.apellidosRepresentantes;
-                telefono.value = datos.telefono;
-                direccion.value = datos.direccion;
-                correo.value = datos.correo;
-                telefonoDomicilio.value = datos.telefonoDomicilio;
+                if (indice.value == valorCedula) {
+                    pedirRepresentanteSingular(valorCedula,function(datos){
+        
+                        // Rellena los campos con los valores correspondientes
+                        nombreRepresentante.value = datos.nombres;
+                        apellidosRepresentantes.value = datos.apellidos;
+                        telefono.value = datos.telefono;
+                        direccion.value = datos.direccion;
+                        correo.value = datos.correo;
+                        telefonoDomicilio.value = datos.telefono_2;
+                    });
+    
+                }
+                else{
+                    nombreRepresentante.value = "";
+                    apellidosRepresentantes.value = "";
+                    telefono.value = "";
+                    direccion.value = "";
+                    correo.value = "";
+                    telefonoDomicilio.value = "";
+                }
+
             }
-            else{
-                nombreRepresentante.value = "";
-                apellidosRepresentantes.value = "";
-                telefono.value = "";
-                direccion.value = "";
-                correo.value = "";
-                telefonoDomicilio.value = "";
-            }
+
         };
     }
     if (tipo === 'Regresar') {
@@ -472,12 +604,44 @@ function registrarFormularioEstudiante() {
     }
 }
 
-// Función para actualizar la tabla
+function insertarOptionSingular(selectId, diccionario={}) {
 
+    let nueva_option=document.createElement('option');
+    for (const entrada in atributos = diccionario){
+        if (entrada == 'innerHTML'){
+            nueva_option.innerHTML=diccionario[entrada];
+        }
+        else{
+            nueva_option.setAttribute(entrada,diccionario[entrada]);
+        }
+    }
+    select=document.getElementById(selectId);
+    select.append(nueva_option);
+    
+  }
+
+function recargarDatalistRepresentantes(){
+    vaciarSelect('cedulaOptions');
+    
+    pedirRepresentanteNombreCedula(function(representantes){ 
+        for (let i = 0; i < representantes.length; i++) {
+            const cedula = representantes[i]['cedula_representante'];
+            const nombres = representantes[i]['nombres'];
+            insertarOptionSingular('cedulaOptions', {value: cedula, innerHTML: nombres});
+            
+        }
+
+    });
+}
+
+// Función para actualizar la tabla
 
 
 // Función para llenar el formulario y abrir el modal al modificar
 function llenarFormulario(element) {
+
+    cambiarInput('Existente');
+
     // Obtener los datos del atributo 'data-datos'
     const datos = JSON.parse(element.getAttribute('data-datos'));
     console.log(datos);
@@ -519,11 +683,13 @@ function llenarFormulario(element) {
 //AL agregar los pagos de este registor no olvidar los ATRIBUTOS
 function openPagoEspecificoModal(event) {
 
+
+
     vaciarSelect('mes',{innerHTML: '---Seleccionar Mes---', disabled: '', selected: ''});
 
     let anoEscolar = document.getElementById('AnoEscolarPago').value;
 
-    //Llenar con Mensualidad
+    //Llenar option con Mensualidad
     pedirMensualidad(anoEscolar, //callback
         function(mensualidad){
             console.log(mensualidad)
