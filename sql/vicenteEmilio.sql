@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 14-10-2024 a las 12:59:40
+-- Tiempo de generación: 11-11-2024 a las 23:54:28
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -33,15 +33,16 @@ CREATE TABLE `ano_escolar` (
   `codigo` int NOT NULL,
   `nombre` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `fecha_inicio` date NOT NULL,
-  `fecha_fin` date NOT NULL
+  `fecha_fin` date NOT NULL,
+  `activo` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ano_escolar`
 --
 
-INSERT INTO `ano_escolar` (`codigo`, `nombre`, `fecha_inicio`, `fecha_fin`) VALUES
-(18, '2024-2025', '2024-10-07', '2025-07-31');
+INSERT INTO `ano_escolar` (`codigo`, `nombre`, `fecha_inicio`, `fecha_fin`, `activo`) VALUES
+(18, '2024-2025', '2024-10-07', '2025-07-31', 1);
 
 -- --------------------------------------------------------
 
@@ -145,49 +146,31 @@ CREATE TABLE `bitacora` (
 --
 
 INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `user_computer`) VALUES
-(1, '2024-07-16 20:22:23', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-D2HTI36'),
-(2, '2024-07-16 20:23:43', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-D2HTI36'),
-(3, '2024-08-24 11:41:17', 19282324, 'login', '19282324 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(4, '2024-08-24 11:42:26', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(5, '2024-09-04 13:06:37', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(6, '2024-09-05 10:24:46', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(7, '2024-09-06 08:15:57', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(8, '2024-09-07 15:54:05', 29629080, 'login', '29629080 ha ingresado al sistema.', 'ZUHE2-PC'),
-(9, '2024-09-15 20:13:38', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(10, '2024-09-15 20:13:52', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(11, '2024-09-15 20:14:51', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(12, '2024-09-17 18:27:56', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(13, '2024-09-19 09:33:40', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(14, '2024-09-20 14:12:22', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(15, '2024-09-21 09:34:55', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(16, '2024-09-22 09:52:57', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(17, '2024-09-22 13:19:42', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(18, '2024-09-23 09:46:30', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(19, '2024-09-24 12:16:58', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(20, '2024-09-24 13:20:04', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(21, '2024-09-24 22:49:50', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(22, '2024-09-25 09:13:44', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(23, '2024-09-25 09:39:30', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(24, '2024-09-26 08:54:31', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(25, '2024-09-26 09:05:01', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(26, '2024-09-26 09:07:49', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(27, '2024-09-26 09:14:10', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-F3R7OPU'),
-(28, '2024-09-27 11:14:41', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-Q1BQ71J'),
-(29, '2024-09-27 11:15:33', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-Q1BQ71J'),
-(30, '2024-09-27 11:16:49', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-Q1BQ71J'),
-(31, '2024-09-27 11:18:48', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-Q1BQ71J'),
-(32, '2024-09-27 11:34:57', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-Q1BQ71J'),
 (33, '2024-09-27 12:15:32', 27576598, 'login', '27576598 ha ingresado al sistema.', 'DESKTOP-Q1BQ71J'),
-(34, '2024-09-27 12:42:17', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-Q1BQ71J'),
-(35, '2024-09-27 12:50:41', 29629080, 'login', '29629080 ha ingresado al sistema.', 'DESKTOP-Q1BQ71J'),
 (36, '2024-09-28 12:16:59', 27576598, 'login', '27576598 ha ingresado al sistema.', 'DESKTOP-Q1BQ71J'),
 (37, '2024-09-28 21:10:10', 27576598, 'login', '27576598 ha ingresado al sistema.', 'Tahiris-PC'),
-(38, '2024-09-29 10:25:43', 27576598, 'login', '27576598 ha ingresado al sistema.', 'Tahiris-PC'),
-(39, '2024-09-30 13:18:38', 29629080, 'login', '29629080 ha ingresado al sistema.', 'Tahiris-PC'),
-(40, '2024-09-30 15:47:00', 27576598, 'login', '27576598 ha ingresado al sistema.', 'Tahiris-PC'),
-(41, '2024-10-07 10:44:48', 29629080, 'login', '29629080 ha ingresado al sistema.', 'Tahiris-PC'),
-(42, '2024-10-07 12:12:15', 29629080, 'login', '29629080 ha ingresado al sistema.', 'Tahiris-PC'),
-(43, '2024-10-13 11:31:22', 27576598, 'login', '27576598 ha ingresado al sistema.', 'Tahiris-PC');
+(38, '2024-09-29 10:25:43', 27576598, 'login', '27576598 ha ingresado al sistema.', 'Tahiris-PC');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `datos_inst`
+--
+
+CREATE TABLE `datos_inst` (
+  `rif` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `direccion` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `telefono` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `nombre_institucion` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `codigo_plantel` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `datos_inst`
+--
+
+INSERT INTO `datos_inst` (`rif`, `direccion`, `telefono`, `nombre_institucion`, `codigo_plantel`) VALUES
+('J-30053973-3\r\n', 'Calle 28, Av. Esquina 37 , Acarigua', '0255-6153561', 'U.E. COLEGIO \"VICENTE EMILIO SOJO\"\n', 'P.D.00511808\n');
 
 -- --------------------------------------------------------
 
@@ -207,6 +190,39 @@ CREATE TABLE `disponibilidad` (
 INSERT INTO `disponibilidad` (`codigo_id`, `disponible`) VALUES
 (0, 'No disponible'),
 (1, 'Disponible');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `dolar`
+--
+
+CREATE TABLE `dolar` (
+  `id` int NOT NULL,
+  `precio` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `dolar`
+--
+
+INSERT INTO `dolar` (`id`, `precio`) VALUES
+(1, 36.8);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estudiante`
+--
+
+CREATE TABLE `estudiante` (
+  `cedula_estudiante` bigint NOT NULL DEFAULT '0',
+  `nombres` varchar(70) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `apellidos` varchar(70) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `ano` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `seccion` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `activo` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -479,6 +495,76 @@ INSERT INTO `login` (`id`, `username`, `password`, `security_q_1`, `security_q_2
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `mensualidad`
+--
+
+CREATE TABLE `mensualidad` (
+  `id` bigint NOT NULL,
+  `ano_escolar` int NOT NULL,
+  `mes` enum('inscripcion','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `monto` double NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `meses_pagos`
+--
+
+CREATE TABLE `meses_pagos` (
+  `cedula_estudiante` bigint NOT NULL,
+  `mes` bigint NOT NULL DEFAULT '0',
+  `ano_escolar` int NOT NULL,
+  `ano_seccion` int NOT NULL,
+  `abonado` float NOT NULL,
+  `maximo` float NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `meses_saldados`
+--
+
+CREATE TABLE `meses_saldados` (
+  `id` bigint NOT NULL DEFAULT '0',
+  `cedula_estudiante` bigint NOT NULL,
+  `mes` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
+  `ano_escolar` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
+  `ano_seccion` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
+  `fecha` date NOT NULL,
+  `MontoBS` double NOT NULL,
+  `MontoBCV` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pagos`
+--
+
+CREATE TABLE `pagos` (
+  `idPago` bigint NOT NULL,
+  `cedula_estudiante` bigint NOT NULL,
+  `cedula_representante` bigint NOT NULL DEFAULT '0',
+  `fecha` date NOT NULL,
+  `referencia_id` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
+  `ano_escolar` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
+  `mes` bigint NOT NULL DEFAULT '0',
+  `detalles` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `descuento` float NOT NULL DEFAULT '1',
+  `nombres_estudiante` varchar(141) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `nombres_representante` varchar(141) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `telefono` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `direccion` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `monto` double DEFAULT '0',
+  `tipo_pago` enum('dolar','bolivar') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `dolarBCV` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `personas`
 --
 
@@ -487,7 +573,7 @@ CREATE TABLE `personas` (
   `nombres` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `apellidos` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `direccion` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `telefono` varchar(14) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `telefono` varchar(17) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `correo` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
@@ -506,7 +592,7 @@ INSERT INTO `personas` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono
 (15214479, 'AURORA', 'RIOS', 'ACARIGUA', '04145342254', 'correo'),
 (25347183, 'LEONELBYS', 'LUCENA', 'ACARIGUA', '04123459120', 'correo'),
 (27576598, 'VICTOR JULIO', 'MENDOZA VARGAS', 'ACARIGUA', '04125157986', 'correo'),
-(29629080, 'ANGEL', 'MENDEZ', 'LA CORTEZA', '04122696463', 'angeles7595@gmail.com'),
+(29629080, 'ANGEL', 'MENDEZ', 'ENRIQUE SEGOVIANO', '0424', 'irechamo@yolewadesi.unawaina'),
 (29800040, 'VENUS', 'MARTINEZ', 'ACARIGUA', '04125304708', 'correo');
 
 -- --------------------------------------------------------
@@ -548,8 +634,14 @@ CREATE TABLE `profesores_materias` (
 
 INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
 (219, 15071661, 'BI'),
+(220, 15071661, 'CN'),
 (227, 14091761, 'CT'),
 (228, 14091761, 'QU'),
+(266, 5945762, 'EF'),
+(267, 5945762, 'FSN'),
+(268, 5945762, 'OC'),
+(269, 5945762, 'PGCRP'),
+(270, 5945762, 'TC'),
 (271, 10143237, 'CA'),
 (272, 10143237, 'OC'),
 (273, 10143237, 'PGCRP'),
@@ -575,6 +667,33 @@ INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
 (293, 5945762, 'TC'),
 (294, 14091761, 'CN'),
 (295, 15071661, 'CN');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `representante`
+--
+
+CREATE TABLE `representante` (
+  `cedula_representante` bigint NOT NULL DEFAULT '0',
+  `nombres` varchar(70) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `apellidos` varchar(70) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `correo` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `direccion` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `telefono` varchar(17) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
+  `telefono_2` varchar(17) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `representante-representado`
+--
+
+CREATE TABLE `representante-representado` (
+  `cedula_estudiante` bigint NOT NULL,
+  `cedula_representante` bigint NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
 -- Índices para tablas volcadas
@@ -622,6 +741,19 @@ ALTER TABLE `disponibilidad`
   ADD PRIMARY KEY (`codigo_id`);
 
 --
+-- Indices de la tabla `dolar`
+--
+ALTER TABLE `dolar`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `estudiante`
+--
+ALTER TABLE `estudiante`
+  ADD PRIMARY KEY (`cedula_estudiante`),
+  ADD KEY `FK_estudiante_ano_escolar` (`ano`);
+
+--
 -- Indices de la tabla `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
@@ -646,6 +778,40 @@ ALTER TABLE `login`
   ADD UNIQUE KEY `username` (`username`);
 
 --
+-- Indices de la tabla `mensualidad`
+--
+ALTER TABLE `mensualidad`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_mensualidad_ano_escolar` (`ano_escolar`);
+
+--
+-- Indices de la tabla `meses_pagos`
+--
+ALTER TABLE `meses_pagos`
+  ADD PRIMARY KEY (`cedula_estudiante`,`ano_escolar`),
+  ADD KEY `FK_meses_pagos_estudiante` (`cedula_estudiante`),
+  ADD KEY `FK_meses_pagos_ano_escolar` (`ano_escolar`),
+  ADD KEY `FK_meses_pagos_ano_seccion` (`ano_seccion`),
+  ADD KEY `FK_meses_pagos_mensualidad` (`mes`);
+
+--
+-- Indices de la tabla `meses_saldados`
+--
+ALTER TABLE `meses_saldados`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_meses_saldados_estudiante` (`cedula_estudiante`);
+
+--
+-- Indices de la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  ADD PRIMARY KEY (`idPago`),
+  ADD KEY `FK_pagos_estudiante` (`cedula_estudiante`),
+  ADD KEY `FK_pagos_representante` (`cedula_representante`),
+  ADD KEY `FK_pagos_ano_escolar` (`ano_escolar`),
+  ADD KEY `FK_pagos_mensualidad` (`mes`);
+
+--
 -- Indices de la tabla `personas`
 --
 ALTER TABLE `personas`
@@ -667,6 +833,20 @@ ALTER TABLE `profesores_materias`
   ADD KEY `FK_profesores_materias_asignatura` (`materia`);
 
 --
+-- Indices de la tabla `representante`
+--
+ALTER TABLE `representante`
+  ADD PRIMARY KEY (`cedula_representante`);
+
+--
+-- Indices de la tabla `representante-representado`
+--
+ALTER TABLE `representante-representado`
+  ADD PRIMARY KEY (`cedula_estudiante`),
+  ADD KEY `FK_representante-representado_representante` (`cedula_representante`),
+  ADD KEY `FK2_cedula_estudiante` (`cedula_estudiante`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -674,13 +854,13 @@ ALTER TABLE `profesores_materias`
 -- AUTO_INCREMENT de la tabla `ano_escolar`
 --
 ALTER TABLE `ano_escolar`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `ano_seccion`
 --
 ALTER TABLE `ano_seccion`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `aula`
@@ -692,7 +872,7 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=306;
 
 --
 -- AUTO_INCREMENT de la tabla `horario_estudiante`
@@ -710,7 +890,19 @@ ALTER TABLE `intervalo`
 -- AUTO_INCREMENT de la tabla `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT de la tabla `mensualidad`
+--
+ALTER TABLE `mensualidad`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+
+--
+-- AUTO_INCREMENT de la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  MODIFY `idPago` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas_seguridad`
@@ -722,11 +914,17 @@ ALTER TABLE `preguntas_seguridad`
 -- AUTO_INCREMENT de la tabla `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=296;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=297;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `estudiante`
+--
+ALTER TABLE `estudiante`
+  ADD CONSTRAINT `FK_estudiante_ano_escolar` FOREIGN KEY (`ano`) REFERENCES `ano_escolar` (`nombre`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `horario_estudiante`
@@ -745,11 +943,48 @@ ALTER TABLE `login`
   ADD CONSTRAINT `login_personas` FOREIGN KEY (`username`) REFERENCES `personas` (`cedula`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `mensualidad`
+--
+ALTER TABLE `mensualidad`
+  ADD CONSTRAINT `FK_mensualidad_ano_escolar` FOREIGN KEY (`ano_escolar`) REFERENCES `ano_escolar` (`codigo`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `meses_pagos`
+--
+ALTER TABLE `meses_pagos`
+  ADD CONSTRAINT `FK_meses_pagos_ano_escolar` FOREIGN KEY (`ano_escolar`) REFERENCES `ano_escolar` (`codigo`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_meses_pagos_ano_seccion` FOREIGN KEY (`ano_seccion`) REFERENCES `ano_seccion` (`codigo`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_meses_pagos_estudiante` FOREIGN KEY (`cedula_estudiante`) REFERENCES `estudiante` (`cedula_estudiante`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_meses_pagos_mensualidad` FOREIGN KEY (`mes`) REFERENCES `mensualidad` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `meses_saldados`
+--
+ALTER TABLE `meses_saldados`
+  ADD CONSTRAINT `FK_meses_saldados_estudiante` FOREIGN KEY (`cedula_estudiante`) REFERENCES `estudiante` (`cedula_estudiante`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  ADD CONSTRAINT `FK_pagos_ano_escolar` FOREIGN KEY (`ano_escolar`) REFERENCES `ano_escolar` (`nombre`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_pagos_estudiante` FOREIGN KEY (`cedula_estudiante`) REFERENCES `estudiante` (`cedula_estudiante`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_pagos_mensualidad` FOREIGN KEY (`mes`) REFERENCES `mensualidad` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_pagos_representante` FOREIGN KEY (`cedula_representante`) REFERENCES `representante` (`cedula_representante`) ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
   ADD CONSTRAINT `FK_profesores_materias_asignatura` FOREIGN KEY (`materia`) REFERENCES `asignatura` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_profesores_materias_personas` FOREIGN KEY (`profesor`) REFERENCES `personas` (`cedula`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `representante-representado`
+--
+ALTER TABLE `representante-representado`
+  ADD CONSTRAINT `FK2_cedula_estudiante` FOREIGN KEY (`cedula_estudiante`) REFERENCES `estudiante` (`cedula_estudiante`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_representante-representado_representante` FOREIGN KEY (`cedula_representante`) REFERENCES `representante` (`cedula_representante`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
