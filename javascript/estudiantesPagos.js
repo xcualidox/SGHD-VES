@@ -16,7 +16,10 @@ const closeModalAñadir = document.getElementById('closeModalAñadir');
 const modalAñadir = document.getElementById('modalAñadir');
 
 
-
+function redirigirEstudiantePDF(cedula) {
+    const url = `../pdf/estudianteRepresentantePDF.php?cedula=${cedula}`;
+    window.open(url, '_blank'); // Abre en una nueva pestaña
+}
 // Eventos para abrir y cerrar los modales
 //MODAL DE REGISTRO ESTUDIANTE REPRESENTANTE
 openModalAñadir.addEventListener('click', () => {

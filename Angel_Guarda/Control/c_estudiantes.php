@@ -397,7 +397,9 @@ function generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$param
             $html .= "<td class='border px-4 py-2 text-center'>
                         <div class='flex justify-center items-center space-x-4'>
                             $botonBorrar
-                            <img src='../../../images/icons/pdf.svg' class='w-8 h-8 filtro-verde cursor-pointer' alt='PDF' title='PDF'>
+                       
+                             <img src='../../../images/icons/pdf.svg' onclick=\"redirigirEstudiantePDF('" . $dato['cedula_estudiante'] . "')\" class='w-8 h-8 filtro-verde cursor-pointer' alt='PDF' title='PDF'>
+                     
                             $botonModificar
                             <img src='../../../images/icons/moreGrid.svg' class='w-8 h-8 filtro-negro cursor-pointer' title='Mostrar Más' data-datos='" . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . "' onclick='openModalMostrarMasDatos(event)'>
                             <img src='../../../images/icons/credit-card.svg' class='w-8 h-8 filtro-negro cursor-pointer' data-datos='" . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . "' onclick='openPagoEspecificoModal(event)' alt='Pago Especifico' title='Pago Especifico'>
