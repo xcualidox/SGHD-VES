@@ -18,18 +18,17 @@ function generarFooter() {
     $nombreInst = $obteniendoData['nombre_institucion'] ?? '';
     $codigo = $obteniendoData['codigo_plantel'] ?? '';
 
+    date_default_timezone_set('America/Caracas'); //ESTABLECIENDO LA ZONA HORARIA A Venezuela
     // Obtener la fecha y hora actuales
-    $fechaHoraActual = date("d/m/Y, g:i:s a");
+    $fechaHoraActual = date("d/m/Y, h:i:s a");
 
     // Definir el contenido HTML del footer
-    $htmlFooter = "
-   
- 
-        <p><strong>CODIGO:</strong> $codigo  <strong>RIF:</strong> $rif</p>
-        <p><strong>NOMBRE INSTITUCIÓN:</strong> $nombreInst</p>
-        <p><strong>DIRECCIÓN:</strong> $direccion</p>
-        <p><strong>TELÉFONO:</strong> $telefono <br> $fechaHoraActual</p>
-    </div>";
+    $htmlFooter = [
+        "direccion" => "Dirección: ".$direccion,
+        "telefono" => " Telefóno: ".$telefono,
+        "fechaHoraActual" => " ".$fechaHoraActual
+    ];
+
 
     return $htmlFooter;
 }
