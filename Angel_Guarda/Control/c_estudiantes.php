@@ -454,3 +454,4 @@ function generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$param
 
     return $html;
 }
+

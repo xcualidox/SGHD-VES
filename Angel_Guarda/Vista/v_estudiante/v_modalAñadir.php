@@ -27,11 +27,11 @@
             </div>
             <div class="formulario-extenso__row">
                 <div class="formulario-extenso__column">
-                    <label for="nombres">Estudiante: </label>
+                    <label for="nombres">Nombres Estudiante: </label>
                     <input type="input" name="nombres" id="nombres" placeholder="Nombres Estudiante" autocomplete="off" class="formulario-extenso__input" maxlength="70">
                 </div>
                 <div class="formulario-extenso__column">
-                    <label for="apellidos">Estudiante: </label>
+                    <label for="apellidos">Apellidos Estudiante: </label>
                     <input type="input" name="apellidos" id="apellidos" class="formulario-extenso__input" autocomplete="off" placeholder="Apellidos Estudiante" maxlength="70">
                 </div>
             </div>
@@ -106,11 +106,11 @@
             </div>
             <div class="formulario-extenso__row">
                 <div class="formulario-extenso__column">
-                    <label for="nombresRepresentante"> Representante: </label>
+                    <label for="nombresRepresentante"> Nombre Representante: </label>
                     <input type="input" name="nombresRepresentante" id="nombresRepresentante" autocomplete="off" placeholder="Nombres del Representante" class="formulario-extenso__input" maxlength="70">
                 </div>
                 <div class="formulario-extenso__column">
-                    <label for="apellidosRepresentante">Representante: </label>
+                    <label for="apellidosRepresentante">Apellido Representante: </label>
                     <input type="input" name="apellidosRepresentante" id="apellidosRepresentante" autocomplete="off" class="formulario-extenso__input" placeholder="Apellidos Representante" maxlength="70">
                 </div>
             </div>

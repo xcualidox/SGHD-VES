@@ -94,5 +94,5 @@ $canvas = $dompdf->getCanvas();
 
 
 // Generar y mostrar el PDF
-$dompdf->stream("Pagos.pdf", array("Attachment" => false));
+$dompdf->stream("Pago_".$reciboPago[0]["fecha"]."_ID".$reciboPago[0]["idPago"].".pdf", array("Attachment" => false));
 ?>
