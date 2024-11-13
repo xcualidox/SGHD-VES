@@ -547,7 +547,7 @@ CREATE TABLE `pagos` (
   `idPago` bigint NOT NULL,
   `cedula_estudiante` bigint NOT NULL,
   `cedula_representante` bigint NOT NULL DEFAULT '0',
-  `fecha` date NOT NULL,
+  `fecha` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   `referencia_id` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
   `ano_escolar` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
   `mes` bigint NOT NULL DEFAULT '0',

@@ -24,6 +24,9 @@ function generarFooter() {
 
     // Definir el contenido HTML del footer
     $htmlFooter = [
+         "rifFooter"=> "Rif:".$rif,
+         "nombreInstFooter"=> $nombreInst,
+         "codigoFooter"=> $codigo,
         "direccion" => "Dirección: ".$direccion,
         "telefono" => " Telefóno: ".$telefono,
         "fechaHoraActual" => " ".$fechaHoraActual

@@ -6,6 +6,12 @@ $pagos = new pagos();
 
 
 
+
+
+
+
+
+
 $resultados_por_pagina = 10;
 if(isset($_POST['pagina'])){
     $pagina = $_POST['pagina'];
@@ -39,7 +45,7 @@ if(isset($_POST['registrarPago'])){
         $aEnviar=[];
         $aEnviar[]=$data['cedula'];
         $aEnviar[]=$relacion['cedula_representante'];
-        $aEnviar[]=date('Y-m-d');
+        $aEnviar[]=date('d-m-Y');
         $aEnviar[]=$data['numero_referencia'];
         $ano_escolar = $objetoAno->buscarAno($data['ano_escolar'])['nombre'];
         $aEnviar[]=$ano_escolar;
@@ -134,5 +140,9 @@ if (isset($_POST['obtenerPagos'])) {
     exit();
 
 }
+
+//Esto es para el PDF de
+$obtenerPagosPDF=$pagos->obtenerPagos(['idPago' => 16],1,0);
+
 
 ?>
