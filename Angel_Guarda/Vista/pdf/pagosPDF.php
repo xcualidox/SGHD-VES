@@ -28,6 +28,7 @@ else{
 
 
 
+
 // Agregar contenido adicional al HTML del PDF
 $html =''.$headerHTML.'
 <div style="width: 100%; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; padding-left: 10px; font-family: Arial, sans-serif; font-size: 12px; color: #333;">
@@ -40,29 +41,35 @@ $html =''.$headerHTML.'
     <div style="display: flex; justify-content: space-between;">
         <!-- Detalles del Pago - Columna Izquierda -->
         <div style="width: 45%; float: left;">
-              <h3>Datos del Estudiante</h3>
-            <p><strong>Cédula del Estudiante:</strong> ' . $reciboPago[0]["cedula_estudiante"] . '</p>
-            <p><strong>Nombre del Estudiante:</strong> ' . $reciboPago[0]["nombres_estudiante"] . '</p>
-
-            <h3>Datos del Representante</h3>
+         <h3>Datos del Representante</h3>
             <p><strong>Cédula del Representante:</strong> ' . $reciboPago[0]["cedula_representante"] . '</p>
             <p><strong>Nombre del Representante:</strong> ' . $reciboPago[0]["nombres_representante"] . '</p>
             <p><strong>Teléfono:</strong> ' . $reciboPago[0]["telefono"] . '</p>
             <p><strong>Dirección:</strong> ' . $reciboPago[0]["direccion"] . '</p>
+              <h3>Datos del Estudiante</h3>
+            <p><strong>Cédula del Estudiante:</strong> ' . $reciboPago[0]["cedula_estudiante"] . '</p>
+            <p><strong>Nombre del Estudiante:</strong> ' . $reciboPago[0]["nombres_estudiante"] . '</p>
+         
+
+           
         </div>
 
         <!-- Datos del Estudiante y Representante - Columna Derecha -->
         <div style="width: 45%; float: right;">
           <h3>Detalles del Pago</h3>
           
-            <p><strong>Referencia:</strong> ' . $reciboPago[0]["referencia_id"] . '</p>
-            <p><strong>Meses Pagados:</strong> ' . $reciboPago[0]["mes"] . '</p>
-            <p><strong>Tipo de Pago:</strong> ' . $reciboPago[0]["tipo_pago"] . '</p>
-            <p><strong>Valor del Dólar BCV:</strong> $' . $reciboPago[0]["dolarBCV"] . '</p>
-            <p><strong>Detalles:</strong> ' . $reciboPago[0]["detalles"] . '</p>
            
+ 
+            <p><strong>Tipo de Pago:</strong> ' . $reciboPago[0]["tipo_pago"] . '</p>
+               <p><strong>Año Escolar:</strong> ' . $reciboPago[0]["ano_escolar"] . '</p>
+                          <p><strong>Meses Pagados:</strong> ' . $reciboPago[0]["mes"] . '</p>
+          
+          
+          
             <p><strong>Descuento:</strong> ' . floatval(1-$reciboPago[0]["descuento"])*100 . '%</p>
+              <p><strong>Referencia:</strong> ' . $reciboPago[0]["referencia_id"] . '</p>
              <p><strong>Monto Pagado:</strong> ' . $reciboPago[0]["monto"]  . '</p>
+               <p><strong>Nota de Pago:</strong> ' . $reciboPago[0]["detalles"] . '</p>
         </div>
         
     </div>
