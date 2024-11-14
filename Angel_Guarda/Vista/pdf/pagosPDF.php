@@ -4,11 +4,21 @@ include("membrete/membrete.php");
 include("membrete/footer.php");
 
 require_once(__DIR__ . '../../../Control/c_pagos.php');
+
+//Esto es para el PDF de
+
 use Dompdf\Dompdf;
 
-$consulta=3;
+
 // Crear el objeto Dompdf
 $dompdf = new Dompdf();
+
+
+if (isset($_GET['idPago'])) {
+  $idpago = $_GET['idPago'];
+}
+
+$obtenerPagosPDF=$pagos->obtenerPagos(['idPago' =>  $idpago ],1,0);
 
 // Generar el HTML para el encabezado y pie de página
 $headerHTML = generarMembreteHTML();

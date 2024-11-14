@@ -94,13 +94,14 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <td>Télefono</td>
 
                     <td class='no_style'>
-                        <div class="flex justify-center ">
+                        Acciones
+                        <!-- <div class="flex justify-center ">
 
                             <a href="#">
                                 <img src="../../../images/icons/pdf.svg" class="w-10  filtro-blanco " alt="Reporte" title="Reporte">
                             </a>
 
-                        </div>
+                        </div> -->
                     </td>
                 </tr>
             </thead>
@@ -208,18 +209,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <span id="nombresRepresentanteRegistroPago" class="font-semibold"></span>
 
                 </div>
-                <div class="flex  flex-wrap mb-1">
-                    <!-- NOMBRE REPRESENTANTE REGISTRO PAGO -->
-                    <span class="font-bold mr-1">Direccion :</span>
-                    <span id="direccionRepresentanteRegistroPago" class="font-semibold"></span>
-
-                </div>
-                <div class="flex  flex-wrap mb-1">
-                    <!-- NOMBRE REPRESENTANTE REGISTRO PAGO -->
-                    <span class="font-bold mr-1">Teléfono:</span>
-                    <span id="telefonoRepresentanteRegistroPago" class="font-semibold"></span>
-
-                </div>
+        
 
             </div>
 

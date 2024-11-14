@@ -1,3 +1,58 @@
+function recargarMesesPagos(){
+  vaciarSelect('selectMesesPagos');
+  vaciarTabla('theadMesesPagos');
+
+  pedirColumnasMesesPagos(function(columnas){
+    insertarTrHeader('theadMesesPagos', columnas);
+    insertarOptionPagos('selectMesesPagos', columnas);
+
+    //Parametros extras especificos de MesesPagos
+    
+    //cambiar mes a mensualidad.mes porque al query tener LEFT JOIN lo considera muy ambiguo (ya existe mensualidad.mes y meses_pagos.mes)
+    let selectMesesPagos=document.getElementById('selectMesesPagos');
+    let options=selectMesesPagos.children;
+    console.log('lolxdxd')
+    for(const option of options){
+      if(option.value=='mes'){
+        option.value='mensualidad.mes';
+      }
+    }
+  });
+
+
+
+  cedulaEstudiante=cedulaEstudianteRegistroPago.value;
+  pedirMesesPagos({'cedula_estudiante': cedulaEstudiante},
+    function(pagos){
+      vaciarTabla('tbodyMesesPagos');
+      if (pagos != null) {
+        insertarTr('tbodyMesesPagos', pagos);
+        }
+      else {
+        let $nada;
+        return $nada;
+        }
+    }
+  );
+}
+
+
+botonBuscarMesesPagos.addEventListener('click',()=>{
+  vaciarTabla('tbodyMesesPagos');
+  let cedula = cedulaEstudianteRegistroPago.innerHTML;
+  pedirMesesPagos({'cedula_estudiante': cedula},
+  
+    function (pagos) { //callback
+      console.log(pagos);
+      if (pagos != null) {
+        insertarTr('tbodyMesesPagos', pagos);
+      }
+      else {
+        return;
+      }
+    });
+});
+
 botonesPagos = document.querySelectorAll("img[alt='Pago Especifico']"); //Todos los botones de Pago de Estudiante
 
 //Activar boton al terminar de cargar la pagina (creo que no sirve xd)
@@ -9,6 +64,26 @@ window.addEventListener("load", function () {
 })
 //MODALES SALDADOS Y PAGO
 
+openModalMesesPS.addEventListener('click', () => {
+  modalMesesPS.classList.add('show');// Abrir el modal
+  document.querySelector(".modal__Oscuro").style.display = "block";
+  recargarMesesPagos();
+});
+
+closeMesesPS.addEventListener('click', () => {
+
+  modalMesesPS.classList.remove('show'); // Cerrar el modal 
+  document.querySelector(".modal__Oscuro").style.display = "none";
+});
+
+
+function redirigirPagoPDF(idPago) {
+
+
+
+  const url = '../pdf/pagosPDF.php?idPago='+idPago;
+  window.open(url, '_blank'); // Abre en una nueva pestaña
+}
 openModalPagos.addEventListener('click', () => {
 
   modalPagos.classList.add('show');// Abrir el modal
@@ -19,14 +94,35 @@ openModalPagos.addEventListener('click', () => {
   vaciarTabla('tbodyPagos');
   vaciarSelect('selectPagos', { innerHTML: '--Seleccionar Filtro--', value: '' });
   pedirColumnasPago( //callback
-    function (columnas) {
-      insertarTrHeader('theadPagos', columnas);
+        function (columnas) {
+
+          columnasImprimir=columnas
+        
+          
+          columnasImprimir=[
+          "idPago",
+          "cedula_estudiante",
+          "cedula_representante",
+          "fecha",
+          "monto",
+          "tipo_pago",
+          "ano_escolar",
+          "mes",
+          "Acciones"
+          
+      ];
+    
+      
+      
+      insertarTrHeader('theadPagos', columnasImprimir);
       insertarOptionPagos('selectPagos', columnas);
     });
 
   pedirPagos(
     function (pagos) {
-      insertarTr('tbodyPagos', pagos);
+  
+      cuerpoPagos(pagos);
+ 
     });
 
 
@@ -67,6 +163,9 @@ botonBuscarPagos.addEventListener('click', () => {
   pedirPagos(
     function (pagos) {
       if (pagos != null) {
+
+        console.log("Estudiante");
+        
         insertarTr('tbodyPagos', pagos);
       }
       else {
@@ -161,11 +260,46 @@ function openPagoEspecificoModal(event) {
 
 
   const datos = JSON.parse(event.target.getAttribute('data-datos'));
+  //COLUMNAS ESTUDIANTES PAGOS ESTUDIANTES
+  pedirColumnasPago( //callback
+    function (columnas) {
+      columnasImprimir=[
+        "idPago",
+        "cedula_estudiante",
+        "cedula_representante",
+        "fecha",
+        "monto",
+        "tipo_pago",
+        "ano_escolar",
+        "mes",
+        "Acciones"
+    ];
+  
+      
+      insertarTrHeader('theadPagos', columnasImprimir);
+
+      
+      insertarOptionPagos('selectPagos', columnas);
+      moverListaPagosEstudiante(); //sitio correcto dentro del callback de pedir las columnas
+    });
+  pedirPagos({'cedula_estudiante': datos['cedula_estudiante']},
+    function(pagos){
+      vaciarTabla('tbodyPagos');
+      if (pagos != null) {
+         //Viene asi para Imprimir dicha tabla en el td
+         cuerpoPagos(pagos);
+    
+        }
+      else {
+        let $nada;
+        return $nada;
+        }
+    }
+  );
 
   const modal = document.getElementById('modalPagosEspecificos');
 
   globalDataEstudianteRepresentante = datos;
-
 
   // Actualizar los elementos dentro del modal con los valores recibidos
 
@@ -178,8 +312,7 @@ function openPagoEspecificoModal(event) {
   //CEDULA ESTUDIANTE REPRESENTANTE
   document.getElementById('cedulaRepresentanteRegistroPago').textContent = datos.cedula_representante;
 
-  document.getElementById('direccionRepresentanteRegistroPago').textContent = datos.direccion;
-  document.getElementById('telefonoRepresentanteRegistroPago').textContent = datos.telefono;
+ 
 
 
   // Mostrar el modal
@@ -187,6 +320,27 @@ function openPagoEspecificoModal(event) {
   modal.classList.add('show');// Abrir el modal
   document.querySelector(".modal__Oscuro").style.display = "block";
 
+}
+function cuerpoPagos(pagos) {
+  const pagoImprimir = pagos.map((pago) => (
+        
+          
+    botonPDF=" <div class='flex justify-center items-center'> <img src='../../../images/icons/pdf.svg' onclick='redirigirPagoPDF("+pago.idPago+")' class='w-8 h-8  cursor-pointer' alt='PDF' title='PDF'>",
+    BotonMostrarMas="<img src='../../../images/icons/moreGrid.svg' class='w-8 h-8  cursor-pointer' title='Mostrar Más' data-datos=''> <div/>",
+    mezclaBotones=botonPDF+BotonMostrarMas,
+    {
+      idPago: pago.idPago,
+      cedula_estudiante: pago.cedula_estudiante,
+      cedula_representante:pago.cedula_representante,
+      fecha:pago.fecha,
+      monto:pago.monto,
+      tipo_pago:pago.tipo_pago,
+      ano_escolar:pago.ano_escolar,
+      mes:pago.mes,
+      botonera:mezclaBotones
+  }));
+
+  insertarTr('tbodyPagos', pagoImprimir);
 }
 
 //placeholder es para option de placeholder, se pueden setear valores de esta forma: {value: 'lol', class: 'hidden'}
@@ -544,6 +698,8 @@ function enviarPago() {
   const data = globalDataEstudianteRepresentante; //Esta variable se encuentra en estudiantePagos en openPagoEspecificoModal del 
   //archivo estudiantesPagos
 
+  
+
 
 
 
@@ -554,6 +710,17 @@ function enviarPago() {
       precio: parseFloat(mesItem.getAttribute('data-precio')) || 0,
       id: mesItem.getAttribute('data-id')
     };
+  });
+
+  //VALIDACION PARA  QUITAR DISSABLE
+  const selectMes = document.getElementById("mes");
+
+  // Selecciona todos los <option> dentro del <select>
+  const opciones = selectMes.querySelectorAll("option");
+
+  // Recorre todas las opciones y elimina el atributo disabled
+  opciones.forEach(option => {
+    option.removeAttribute("disabled");
   });
 
   // Preparar los datos para enviar
