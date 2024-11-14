@@ -10,9 +10,9 @@
                         <select name="campo" class='capitalize border-solid border-2  border-black' id="selectListar" name="listar" p class="border rounded px-2 py-1 w-auto">
                         </select>
 
-                        <input type="text" id="listar" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
+                        <input id="buscarMesesSaldados" type="text" name="listar" placeholder="Buscar..." class="border rounded px-2 py-1 mb-2 md:mb-0">
 
-                        <button type="button" class="bg-gray-100 rounded-full">
+                        <button id="botonBuscarMesesSaldados" type="button" class="bg-gray-100 rounded-full">
                             <img src="../../../images/icons/buscar.svg" class=" w-20 filtro-verde" alt="Buscar" title="Buscar">
                         </button>
                     </form>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="table-wrapper min-w-full">
                     <table class="fl-table">
-                        <thead>
+                        <thead id="theadMesesSaldados">
                             <tr>
                                 <td>ID</td>
                                 <td>Forma de Pago</td>
