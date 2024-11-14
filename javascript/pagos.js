@@ -36,7 +36,6 @@ function recargarMesesPagos(){
   );
 }
 
-
 botonBuscarMesesPagos.addEventListener('click',()=>{
   vaciarTabla('tbodyMesesPagos');
   let cedula = cedulaEstudianteRegistroPago.innerHTML;
@@ -86,6 +85,9 @@ function redirigirPagoPDF(idPago) {
 }
 openModalPagos.addEventListener('click', () => {
 
+  //Vaciar el
+  cedulaEstudianteRegistroPago.value='';
+
   modalPagos.classList.add('show');// Abrir el modal
   document.querySelector(".modal__Oscuro").style.display = "block";
 
@@ -118,7 +120,7 @@ openModalPagos.addEventListener('click', () => {
       insertarOptionPagos('selectPagos', columnas);
     });
 
-  pedirPagos(
+  pedirPagos({},
     function (pagos) {
   
       cuerpoPagos(pagos);
@@ -126,6 +128,7 @@ openModalPagos.addEventListener('click', () => {
     });
 
 
+  moverListaPagosGlobal();
 });
 closeModalPagos.addEventListener('click', () => {
 
@@ -160,8 +163,10 @@ function limpiarFormPagos() {
 
 botonBuscarPagos.addEventListener('click', () => {
   vaciarTabla('tbodyPagos');
-  pedirPagos(
-    function (pagos) {
+  let cedula = cedulaEstudianteRegistroPago.innerHTML;
+  pedirPagos({'cedula_estudiante': cedula},
+  
+    function (pagos) { //callback
       if (pagos != null) {
 
         console.log("Estudiante");
@@ -169,8 +174,7 @@ botonBuscarPagos.addEventListener('click', () => {
         insertarTr('tbodyPagos', pagos);
       }
       else {
-        let $nada;
-        return $nada;
+        return;
       }
     });
 });
@@ -233,7 +237,6 @@ function llenarOptionPagos() {
           { innerHTML: mensualidadCapitalize, value: mensualidad[i]['monto'], 'data-id': mensualidad[i]['id'] }
         )
       }
-      console.log(atributos)
       insertarOptionGeneral('mes', atributos);
 
 
@@ -245,10 +248,33 @@ AnoEscolarPago = document.getElementById('AnoEscolarPago');
 AnoEscolarPago.addEventListener('change', () => {
   llenarOptionPagos();
 })
+//Funcionalidad que ocurre al cambiar la lista de pagos de un sitio a otro
+
+//actualmente solo se oculta el option del estudiante
+function moverListaPagosEstudiante(){
+  listaPagos.append(contenedorListaPagos);
+  let optionsPagos=selectPagos.children;
+  for(const option of optionsPagos){
+    if (option.value == 'cedula_estudiante'){
+      option.style.display='none';
+    }
+  }
+}
+
+function moverListaPagosGlobal() {
+  modalPagos.append(contenedorListaPagos)
+  let optionsPagos=selectPagos.children;
+  for(const option of optionsPagos){
+    if (option.value == 'cedula_estudiante'){
+      option.style.display='block';
+    }
+  }
+}
 
 //MODAL PAGO ESPECIFICO
 //AL agregar los pagos de este registor no olvidar los ATRIBUTOS
 function openPagoEspecificoModal(event) {
+
 
   vaciarSelect('mes', { innerHTML: '---Seleccionar Mes---', disabled: '', selected: '' });
 
@@ -288,7 +314,6 @@ function openPagoEspecificoModal(event) {
       if (pagos != null) {
          //Viene asi para Imprimir dicha tabla en el td
          cuerpoPagos(pagos);
-    
         }
       else {
         let $nada;
@@ -406,24 +431,120 @@ function insertarTrHeader(tbody_id = '', array = []) {
 
 }
 
-function pedirPagos(callback) {
+function pedirMesesPagos(parametrosCrudos = {}, callback) {
+
+  const select = document.getElementById('selectMesesPagos');
+  const inputTextoPago = document.getElementById('inputTextoMesesPagos');
+  const tipoBusqueda = select.value;
+  const busqueda = inputTextoPago.value;
+
+  //Saber que ventana es obteniendo el id del boton de cerrar
+  const padre = contenedorListaPagos.parentNode;
+  const hermanos = padre.children;
+
+  let parametros;
+  let parametrosCrudos2={};
+  
+  if (tipoBusqueda == "" || busqueda == "") {
+    parametrosCrudos = {};
+  }
+  else {
+    //Filtrar parametros de busqueda vacíos vacíos
+    for(const parametro in parametrosCrudos){
+      if (parametro!='' && parametrosCrudos[parametro]!=''){
+        parametrosCrudos2[parametro]=parametrosCrudos[parametro];
+      }
+    }
+
+    //asignarle a parametrosCrudos los parametros del div de busqueda.
+    Object.assign(parametrosCrudos2, { [tipoBusqueda]: busqueda });
+  }
+
+  console.log('loxdl');
+  console.log(parametrosCrudos2);
+  parametros = JSON.stringify(parametrosCrudos2);
+  const pagina = 1;
+
+
+  $.ajax({
+    url: '../../Control/c_mesesPagos.php',
+    type: 'POST',
+    data: {
+      obtenerMesesPagos: true,
+      pagina: pagina,
+      parametrosBusqueda: parametros
+    },
+    dataType: 'json',  // Esperamos una respuesta JSON
+    success: function (response) {
+      // Manejar la respuesta del servidor
+      if (response.success) {
+        console.log(response);
+        callback(response.resultados);
+      } else {
+        showToast('Error al obtener los datos de pagos', false);
+        console.log(response);
+        callback(null);
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
+      console.log('Respuesta del servidor:', jqXHR.responseText);
+      // Aquí puedes agregar más depuración si la respuesta no es JSON válido
+      showToast('Error en la comunicación con el servidor.', false);
+      console.log(response);
+      callback(null);
+    }
+  })
+}
+
+function pedirPagos(parametrosCrudos = {}, callback) {
 
   const selectPagos = document.getElementById('selectPagos');
   const inputTextoPago = document.getElementById('inputTextoPagos');
   const tipoBusqueda = selectPagos.value;
   const busqueda = inputTextoPago.value;
-  let parametrosCrudos;
-  let parametros;
 
-  if (tipoBusqueda == "" || busqueda == "") {
+  //Saber que ventana es obteniendo el id del boton de cerrar
+  const padre = contenedorListaPagos.parentNode;
+  const hermanos = padre.children;
+  let cualVentana;
+  for(const hermano of hermanos){
+
+    switch (hermano.id) {
+      case 'closeModalPagos':
+        cualVentana = 'modalPagos';
+        return; //Sale del loop de for
+      case 'closePagosEspecificos':
+        cualVentana = 'modalPagosEspecificos';
+        return;
+      default:
+        cualVentana = 'ninguna';
+        break;
+    }
+
+  }
+  console.log('cualVentana');
+  console.log(cualVentana);
+  let parametros;
+  let parametrosCrudos2={};
+  if (tipoBusqueda == "" && cualVentana == 'modalPagos' || busqueda == "" && cualVentana == 'modalPagos') {
     parametrosCrudos = {};
   }
-
   else {
-    parametrosCrudos = { [tipoBusqueda]: busqueda }; //Se coloca entre [] para que utilice la constante en vez de hacer una llave con el nombre "tipoBusqueda"
+    //Filtrar parametros de busqueda vacíos vacíos
+    for(const parametro in parametrosCrudos){
+      if (parametro!='' && parametrosCrudos[parametro]!=''){
+        parametrosCrudos2[parametro]=parametrosCrudos[parametro];
+      }
+    }
+
+    //asignarle a parametrosCrudos los parametros del div de busqueda.
+    Object.assign(parametrosCrudos2, { [tipoBusqueda]: busqueda });
   }
 
-  parametros = JSON.stringify(parametrosCrudos);
+  console.log('loxdl');
+  console.log(parametrosCrudos2);
+  parametros = JSON.stringify(parametrosCrudos2);
   const pagina = 1;
 
 
@@ -458,6 +579,36 @@ function pedirPagos(callback) {
   })
 }
 
+function pedirColumnasMesesPagos(callback) {
+
+  $.ajax({
+    url: '../../Control/c_mesesPagos.php',
+    type: 'POST',
+    data: {
+      obtenerColumnasMesesPagos: true,
+    },
+    dataType: 'json',  // Esperamos una respuesta JSON
+    success: function (response) {
+      // Manejar la respuesta del servidor
+      if (response.status) {
+        callback(response.resultados)
+      } else {
+        showToast('Error al obtener los datos de Meses Pagos', false);
+        console.log(response);
+        callback(null)
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
+      console.log('Respuesta del servidor:', jqXHR.responseText);
+      // Aquí puedes agregar más depuración si la respuesta no es JSON válido
+      showToast('Error en la comunicación con el servidor.', false);
+      console.log(response);
+      callback(null)
+    }
+  })
+}
+
 function pedirColumnasPago(callback) {
 
   $.ajax({
@@ -470,7 +621,6 @@ function pedirColumnasPago(callback) {
     success: function (response) {
       // Manejar la respuesta del servidor
       if (response.status) {
-        console.log(response.resultados)
         callback(response.resultados)
       } else {
         showToast('Error al obtener los datos de mensualidad', false);
@@ -751,7 +901,7 @@ function enviarPago() {
         console.log(response);
         let exitos = response.success;
         showToast(exitos+' de', true);
-        limpiarFormPagos()
+        limpiarFormPagos();
 
     },
     error: function (xhr, status, error) {

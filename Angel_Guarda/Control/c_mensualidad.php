@@ -84,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //Insertar y Modificar
     if (isset($_POST['mensualidades'])){
+        $message='Que sea lo que dios quiera mano';
 
         $objeto = new mensualidad;
 
@@ -138,10 +139,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $ano_original=$fila_original[0]['nombre'];
                     $monto_original=$fila_original[0]['monto'];
 
-                    $resultado=$objeto->actualizarMensualidad($ano,$mes,$monto,$id_mensualidad);
-                    array_push($resultados,$resultado);
+                    require_once(__DIR__ . "/../Modelo/m_mesesPagos.php");
+                    $objMesesPagos = new mesesPagos();
+                    $mayorMesPago = $objMesesPagos->obtenerMayorMesPago($id_mensualidad,$ano);
 
-                    if($resultado){
+                    if($mayorMesPago['maximo']<=$monto){
+                        $resultado=$objeto->actualizarMensualidad($ano,$mes,$monto,$id_mensualidad);
+                        array_push($resultados,$resultado);
+                    }
+                    
+
+                    if(isset($resultado) and $resultado){
                         require_once("c_bitacora.php");
                         $anoescolar_bitacora_query=$objeto->agarrarAnoPorId($ano);
                         //$anoescolar_bitacora=['nombre'=>'Lmao'];
@@ -161,7 +169,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $response = [
             'success' => $resultados,
-            'message' => 'Que sea lo que dios quiera mano'
+            'message' => $message,
+            'response' => [$id_mensualidad,$ano]
         ];
 
 

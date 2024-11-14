@@ -7,9 +7,24 @@ class pagos extends database_connect{
         $sql="SELECT COLUMN_NAME
               FROM INFORMATION_SCHEMA.COLUMNS
               WHERE TABLE_NAME = 'pagos'
-              ORDER BY ORDINAL_POSITION"; //ORDER BY ORDINAL_POSITION preserva el orden de las columnas
+              ORDER BY ORDINAL_POSITION"; //preserva el orden de las columnas
         $query=$this->query($sql,[]);
         $result=$this->fetch_all_query($query);
+        return $result;
+    }
+
+    public function obtenerMontoPrePagadoTotal($parametros){
+
+        $meses = implode(',', array_fill(0, count($parametros[1]), '?')); //array_fill crea una array para llenar IN de placeholders(los ?) para poder insertar los meses
+
+        $sql="SELECT ROUND(SUM(monto/descuento),2) AS suma FROM pagos
+        WHERE cedula_estudiante = ?
+        AND mes IN (".$meses.")
+        AND ano_escolar = ?";
+
+        $parameters=array_merge([ $parametros[0] ],$parametros[1],[$parametros[2]]);
+        $query=$this->query($sql,$parameters);
+        $result=$this->fetch_query($query);
         return $result;
     }
 
@@ -45,14 +60,16 @@ class pagos extends database_connect{
         if (isset($parametros)) {
 
             foreach ($parametros as $clave => $valor) {
-                $sql.=' AND '.$clave.' LIKE ?';
-                $parameters[]=$valor;
+                if($clave!='' and $valor!=''){
+                    $sql.=' AND '.$clave.' LIKE ?';
+                    $parameters[]=$valor;
+                }
             }
 
         }
         
         if ($limit !== null and $offset !== null) { // !== es importante para que reconozca 0 diferente a null
-            $sql.=' LIMIT '.intval($limit).' OFFSET '.intval($offset);
+            $sql.=' ORDER BY idPago DESC'.' LIMIT '.intval($limit).' OFFSET '.intval($offset);
         }
 
         $query=$this->query($sql,$parameters);
