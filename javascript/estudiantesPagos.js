@@ -34,19 +34,6 @@ closeModalAñadir.addEventListener('click', () => {
     document.querySelector(".modal__Oscuro").style.display = "none";
 });
 
-//MODALES SALDADOS Y PAGO
-
-openModalMesesPS.addEventListener('click', () => {
-    modalMesesPS.classList.add('show');// Abrir el modal
-    document.querySelector(".modal__Oscuro").style.display = "block";
-});
-closeMesesPS.addEventListener('click', () => {
-
-    modalMesesPS.classList.remove('show'); // Cerrar el modal 
-    document.querySelector(".modal__Oscuro").style.display = "none";
-});
-
-
 
 
 document.getElementById('closePagosEspecificos').addEventListener('click', () => {

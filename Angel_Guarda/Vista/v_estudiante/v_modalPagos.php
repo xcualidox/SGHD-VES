@@ -1,9 +1,11 @@
-<div class="flex justify-end  items-end ">
+<div id="" class="flex justify-end  items-end ">
             <!-- Botón de Cerrar en la parte superior derecha -->
             <div class=" w-10  bg-red-500 rounded-full cursor-pointer p-2" id="closeModalPagos">
                 <img src="../../../images/icons/error.svg" class="filtro-blanco" alt="Cerrar" title="Cerrar">
             </div>
         </div>
+<div id="contenedorListaPagos">
+
 
         <div class="flex flex-col sm:flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
             <h1 class="text-xl font-semibold mb-2 md:mb-0">Ver Pagos</h1>
@@ -38,3 +40,4 @@
             <!--MOSTRANDO EL TOTAL DE PAGINAS-->
 
         </div>
+</div>

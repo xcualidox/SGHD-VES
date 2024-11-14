@@ -237,11 +237,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
         </details>
 
-        <details>
-            <?php
-
-            include_once("v_listaPagos.php");
-            ?>
+        <details id="listaPagos">
+            <summary>Lista de Pagos</summary>
         </details>
 
 
