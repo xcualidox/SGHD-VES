@@ -215,12 +215,17 @@ if (isset($_POST['obtenerPagos'])) {
     $parametros=json_decode($parametrosCrudos, true);
     //$listaPagos=true;
     $listaPagos=$pagos->obtenerPagos($parametros,$resultados_por_pagina,$offset);
+    $cantidadResultado=$pagos->cantidadResultados($parametros);
+    
+    
 
     if (is_array($listaPagos)) {
         echo json_encode([
             'success' => true,
             'message' => 'Fino señores',
-            'resultados' => $listaPagos
+            'resultados' => $listaPagos,
+            'maxPag'=> ceil($cantidadResultado['COUNT(*)']/$resultados_por_pagina),
+            'pagina'=> $pagina
             ]);
         
     }
@@ -237,8 +242,7 @@ if (isset($_POST['obtenerPagos'])) {
 
 }
 
-//Esto es para el PDF de
-$obtenerPagosPDF=$pagos->obtenerPagos(['idPago' => 16],1,0);
+
 
 
 ?>

@@ -35,9 +35,11 @@
 
                 <tbody id="tbodyPagos">
                 </tbody>
-
+                <input type="hidden" id="paginadoVerPagos" value="">
             </table>
-            <!--MOSTRANDO EL TOTAL DE PAGINAS-->
 
+    
+            <!--MOSTRANDO EL TOTAL DE PAGINAS-->
+            <div class="paginacion" id="paginacionContainer"></div>
         </div>
 </div>

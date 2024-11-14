@@ -49,6 +49,34 @@ class pagos extends database_connect{
         $query=$this->query($sql, $datos);
         return $query;
     }
+    public function cantidadResultados($parametros=[],$limit=null,$offset=null){
+        $sql='SELECT COUNT(*) FROM (SELECT idPago from pagos WHERE 1=1';
+        $parameters=[];
+
+        //Recorrer cada parametro y añadirlo a la lista
+
+        if (isset($parametros)) {
+
+            foreach ($parametros as $clave => $valor) {
+                if($clave!='' and $valor!=''){
+                    $sql.=' AND '.$clave.' LIKE ?';
+                    $parameters[]=$valor;
+                }
+            }
+
+        }
+        
+        if ($limit !== null and $offset !== null) { // !== es importante para que reconozca 0 diferente a null
+            $sql.=' ORDER BY idPago DESC'.' LIMIT '.intval($limit).' OFFSET '.intval($offset).') AS subquery';
+        }
+        else{
+            $sql.=' ORDER BY idPago DESC) AS subquery';
+        }
+
+        $query=$this->query($sql,$parameters);
+        $result=$this->fetch_query($query);
+        return  $result;
+    }
 
     public function obtenerPagos($parametros,$limit,$offset){
 

@@ -3,6 +3,9 @@ function recargarMesesPagos(){
   vaciarTabla('theadMesesPagos');
 
   pedirColumnasMesesPagos(function(columnas){
+
+   
+    
     insertarTrHeader('theadMesesPagos', columnas);
     insertarOptionPagos('selectMesesPagos', columnas);
 
@@ -26,7 +29,12 @@ function recargarMesesPagos(){
     function(pagos){
       vaciarTabla('tbodyMesesPagos');
       if (pagos != null) {
+        
+    
+      console.log(pagos);
+      
         insertarTr('tbodyMesesPagos', pagos);
+        
         }
       else {
         let $nada;
@@ -77,9 +85,6 @@ closeMesesPS.addEventListener('click', () => {
 
 
 function redirigirPagoPDF(idPago) {
-
-
-
   const url = '../pdf/pagosPDF.php?idPago='+idPago;
   window.open(url, '_blank'); // Abre en una nueva pestaña
 }
@@ -113,9 +118,7 @@ openModalPagos.addEventListener('click', () => {
           "Acciones"
           
       ];
-    
-      
-      
+
       insertarTrHeader('theadPagos', columnasImprimir);
       insertarOptionPagos('selectPagos', columnas);
     });
@@ -283,6 +286,7 @@ function openPagoEspecificoModal(event) {
   //Llenar con Mensualidad
   llenarOptionPagos();
 
+  vaciarTabla('theadPagos');
 
 
   const datos = JSON.parse(event.target.getAttribute('data-datos'));
@@ -300,11 +304,9 @@ function openPagoEspecificoModal(event) {
         "mes",
         "Acciones"
     ];
-  
+ 
       
       insertarTrHeader('theadPagos', columnasImprimir);
-
-      
       insertarOptionPagos('selectPagos', columnas);
       moverListaPagosEstudiante(); //sitio correcto dentro del callback de pedir las columnas
     });
@@ -497,7 +499,7 @@ function pedirMesesPagos(parametrosCrudos = {}, callback) {
   })
 }
 
-function pedirPagos(parametrosCrudos = {}, callback) {
+function pedirPagos(parametrosCrudos = {}, callback, pagina=1) {
 
   const selectPagos = document.getElementById('selectPagos');
   const inputTextoPago = document.getElementById('inputTextoPagos');
@@ -545,7 +547,8 @@ function pedirPagos(parametrosCrudos = {}, callback) {
   console.log('loxdl');
   console.log(parametrosCrudos2);
   parametros = JSON.stringify(parametrosCrudos2);
-  const pagina = 1;
+
+  
 
 
   $.ajax({
@@ -561,6 +564,10 @@ function pedirPagos(parametrosCrudos = {}, callback) {
       // Manejar la respuesta del servidor
       if (response.success) {
         console.log(response);
+  
+        
+        paginadoBotonera(response.maxPag, parseInt(response.pagina))
+        console.log(response.pagina);
         callback(response.resultados);
       } else {
         showToast('Error al obtener los datos de pagos', false);
@@ -577,6 +584,80 @@ function pedirPagos(parametrosCrudos = {}, callback) {
       callback(null);
     }
   })
+}
+function paginadoBotonera(maxPag, currentPage = 1) {
+    const paginacionContainer = document.getElementById("paginacionContainer");
+    paginacionContainer.innerHTML = ""; // Limpiar el contenedor
+
+    // Función para crear un botón de página
+    const createButton = (page) => {
+        const button = document.createElement("a");
+        button.textContent = page;
+        button.href = "#";
+        button.classList.add("pagina");
+        
+        // Añadir clase 'seleccionado' a la página actual
+        if (page === currentPage) {
+            button.classList.add("seleccionado");
+        }
+
+        button.onclick = () =>pedirPagos({"cedula_estudiante":cedulaEstudianteRegistroPago.innerHTML},
+            function (pagos) {
+              vaciarTabla('tbodyPagos');
+              cuerpoPagos(pagos);
+         
+            },page);
+        paginacionContainer.appendChild(button);
+    };
+
+    // Función para crear el indicador de "..."
+    const createEllipsis = () => {
+        const ellipsis = document.createElement("span");
+        ellipsis.textContent = "...";
+        ellipsis.classList.add("ellipsis");
+        paginacionContainer.appendChild(ellipsis);
+    };
+
+    // Lógica para mostrar las páginas con "..." cuando sea necesario
+    if (maxPag <= 7) {
+        // Mostrar todas las páginas si son 7 o menos
+        for (let i = 1; i <= maxPag; i++) {
+            createButton(i);
+        }
+    } else {
+        // Mostrar las primeras páginas
+        if (currentPage < 5) {
+            for (let i = 1; i <= 5; i++) {
+                createButton(i);
+            }
+            createEllipsis();
+            createButton(maxPag);
+        } 
+        // Mostrar las últimas páginas
+        else if (currentPage > maxPag - 4) {
+            createButton(1);
+            createEllipsis();
+            for (let i = maxPag - 4; i <= maxPag; i++) {
+                createButton(i);
+            }
+        } 
+        // Mostrar las páginas alrededor de la actual
+        else {
+            createButton(1);
+            createEllipsis();
+            for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+                createButton(i);
+            }
+            createEllipsis();
+            createButton(maxPag);
+        }
+    }
+}
+
+// Función que se llamará al hacer clic en cada botón
+function cambiarPagina(pagina) {
+  console.log("Página seleccionada:", pagina);
+  // Aquí puedes añadir la lógica para cambiar el contenido o actualizar la vista según la página
 }
 
 function pedirColumnasMesesPagos(callback) {
