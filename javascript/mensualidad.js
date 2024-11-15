@@ -196,11 +196,9 @@ function recargarTablaMensualidad(tbody_id, ano_escolar = undefined) {
 
             let tablaMensualidad = document.querySelector('#mensualidadTable');
             let selects = tablaMensualidad.querySelectorAll('select');
-            console.log(tablaMensualidad);
         
             for (let i = 0; i < selects.length; i++) {
                 let td = selects[i].parentElement;
-                console.log(td);
                 td.setAttribute('class','flex items-center justify-center');
             }
         }
@@ -236,7 +234,7 @@ function vaciarTabla(tbody_id) {
 function insertarTr(tbody_id, array = [], extra_parametros = []) {
 
     if (array.length === 0){
-        console.log('Array Vacía');
+        console.log('insertarTr: Array Vacía');
         return;
     }
 
@@ -306,7 +304,6 @@ function pedirAnosEscolares(callback) {
         success: function(response) {
             // Manejar la respuesta del servidor
             if (response.success) {
-                console.log(response) 
                 callback(response.anos_escolares);
             } else {
                 console.log(response);
@@ -436,7 +433,6 @@ function guardarMensualidad(callback) {
                 // Manejar la respuesta del servidor
                 let intentos = response.success.length;
                 let exitos = 0;
-                console.log(response);
 
                 //Calcular los exitos
                 for (let i = 0; i < response.success.length; i++) {

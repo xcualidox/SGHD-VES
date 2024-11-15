@@ -15,7 +15,12 @@ class escolar extends database_connect{
       $result=$this->fetch_query($query);
       return $result;
     }
-
+    function buscarIdAno($nombreAno){
+      $sql="SELECT * FROM ano_escolar WHERE CONCAT(ano,' ',seccion) LIKE ?";
+      $query=$this->query($sql,[$nombreAno]);
+      $result=$this->fetch_query($query);
+      return $result;
+    }
     function incluye(){
         $sql= "insert into ano_escolar(nombre, fecha_inicio, fecha_fin) values(?,?,?)";
 		return $this->query($sql,[$this->nom,$this->fecI,$this->fechaF]);

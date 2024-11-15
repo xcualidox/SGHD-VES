@@ -1,16 +1,14 @@
 <?php
 
 require_once(__DIR__ . "/../Modelo/m_pagos.php");
+require_once(__DIR__.'/../Modelo/m_mesesPagos.php');
+require_once(__DIR__ . "/../Modelo/m_escolar.php");
+require_once(__DIR__.'/../Modelo/m_mensualidad.php');
 
+$objMensualidad = new mensualidad();
 $pagos = new pagos();
-
-
-
-
-
-
-
-
+$objMesesPagos = new mesesPagos();
+$objetoAno = new escolar();
 
 $resultados_por_pagina = 10;
 if(isset($_POST['pagina'])){
@@ -22,6 +20,38 @@ else{
 
 $offset = ($pagina-1)*$resultados_por_pagina;
 
+if(isset($_POST['obtenerDeudaMes'])){
+    $idMes=$_POST['idMesPago'];
+    $cedulaEstudiante=$_POST['cedula'];
+    $ano_escolarID=$_POST['ano_escolar'];
+    $ano_escolar = $objetoAno->buscarAno($ano_escolarID)['nombre'];
+    $montoPrePagadoIndividualCrudo=$pagos->obtenerMontoPrePagadoTotal([$cedulaEstudiante,[$idMes],$ano_escolar]);
+    $mesPagoEspecifico=$objMensualidad->obtenerMensualidadPorId($idMes);
+    $mesPagoMonto=$mesPagoEspecifico['monto'];
+    if($montoPrePagadoIndividualCrudo['suma']){
+        $montoPrePagadoIndividual=$montoPrePagadoIndividualCrudo['suma'];
+    }
+    else{
+        $montoPrePagadoIndividual=0;
+    }
+    $deudaMesIndividual=bcsub($mesPagoMonto,$montoPrePagadoIndividual,2);
+    if(true){;
+    //if (is_array($deudaMes)) {
+        echo json_encode([
+            'success' => true,
+            'message' => 'Exito broder',
+            'resultados' => $deudaMesIndividual
+        ]);        
+    }
+    else{
+        echo json_encode([
+            'success' => false,
+            'message' => 'Error',
+            'resultados' => 'xd'
+        ]);
+    }
+}
+
 //registrarPago
 if(isset($_POST['registrarPago'])){
     // Establecer la cabecera para que el navegador interprete el contenido como JSON
@@ -32,20 +62,14 @@ if(isset($_POST['registrarPago'])){
 
     //Obtener datos restantes
     require_once(__DIR__.'/../Modelo/m_estudiantes.php');
-    require_once(__DIR__ . "/../Modelo/m_escolar.php");
     $objetoEstudiante = new estudiante();
     $estudiante=$objetoEstudiante->verificarEstudiante($data['cedula']);
     $relacion=$objetoEstudiante->verificarRelacionEstudiante($data['cedula']);
-    $objetoAno = new escolar();
 
     //Setear datos a enviar
     $exitos = 0;
     
     //VERIFICAR QUE EL MONTO TOTAL NO EXCEDA LA DEUDA AQUI
-    require_once(__DIR__.'/../Modelo/m_mensualidad.php');
-    require_once(__DIR__.'/../Modelo/m_mesesPagos.php');
-    $objMensualidad = new mensualidad();
-    $objMesesPagos = new mesesPagos();
 
     $mensualidad = $objMensualidad->obtenerMensualidad($data['ano_escolar']);
     $ano_escolar = $objetoAno->buscarAno($data['ano_escolar'])['nombre'];
@@ -54,11 +78,11 @@ if(isset($_POST['registrarPago'])){
 
     $precioMensualidades=0;
     foreach ($mensualidad as $mesMensualidad) {
-        $precioMensualidades += floatval($mesMensualidad['monto']);
+        $precioMensualidades = bcadd($precioMensualidades, $mesMensualidad['monto'],2);
     }
 
     if($montoPrePagadoTotal['suma']){
-        $deuda=$precioMensualidades-$montoPrePagadoTotal['suma'];
+        $deuda=bcsub($precioMensualidades,$montoPrePagadoTotal['suma'],2);
     }
     else{
         $deuda=$precioMensualidades;
@@ -86,15 +110,17 @@ if(isset($_POST['registrarPago'])){
             $aEnviar[]=$representante['telefono'];
             $aEnviar[]=$representante['direccion'];
 
-            $montoMes=$data['meses'][$i]['precio'];
+            $mesId=$data['meses'][$i]['id'];
+            $montoMesQuery=$objMensualidad->obtenerMensualidadPorId($mesId);
+            $montoMes=$montoMesQuery['monto'];
             $montoPagar=$data['valor_pago_enviar'];
 
 
             if($montoPagar >= $montoMes){
-                $montoEnviar = floatval($montoMes);
+                $montoEnviar = $montoMes;
             }
             else{
-                $montoEnviar = floatval($montoPagar);
+                $montoEnviar = $montoPagar;
             }
 
             $aEnviar[]=$montoEnviar;
@@ -102,7 +128,7 @@ if(isset($_POST['registrarPago'])){
             $aEnviar[]=$data['dolarBCV'];
             //$deudaMes=-1;
             $mesPrePagado=$pagos->obtenerMontoPrePagadoTotal([$data['cedula'],[$data['meses'][$i]['id']],$ano_escolar])['suma'];
-            $deudaMes=$montoMes-$mesPrePagado;
+            $deudaMes=bcsub($montoMes,$mesPrePagado,2);
             if ($montoPagar>0 and $montoPagar<=$deudaMes){
                 $pago=$pagos->insertarPagos($aEnviar);
 
@@ -130,7 +156,7 @@ if(isset($_POST['registrarPago'])){
                 if(count($verificarMesesPagos)>0){
                     $mesVerificado=$verificarMesesPagos[0]; //obtenerMesesPagos utiliza fetch_all_query lo cual returnea array multidimensional
                     $montoAbonadoOriginal=floatval($mesVerificado['abonado']);
-                    $montoNuevo=[$montoAbonadoOriginal+$montoEnviar];
+                    $montoNuevo=[bcadd($montoAbonadoOriginal,$montoEnviar,2)];
                     $parametrosActualizar=array_merge($montoNuevo,$parametrosVerificarProcesados); //mezcla las array para enviar al query
                     $operacionMes=$objMesesPagos->actualizarAbonado($parametrosActualizar);
 
@@ -138,7 +164,8 @@ if(isset($_POST['registrarPago'])){
                 else{
                     $vueltas=$verificarMesesPagos;
                     $montoMaximo=$objMensualidad->obtenerMensualidadPorId($data['meses'][$i]['id']);
-                    $idSeccion=18;
+                    $ano_seccionQuery=$objetoAno->buscarIdAno($estudiante['ano_seccion']);
+                    $idSeccion=$ano_seccionQuery['codigo'];
                     $parametrosInsertar=[
                         $idSeccion, //Ano_seccion aqui
                         $montoEnviar
@@ -163,7 +190,7 @@ if(isset($_POST['registrarPago'])){
 
         $response = [
             'success' => $exitos." exitos de ".$intentos." intentos.",
-            'test' => $deudaMes
+            'test' => [$deudaMes,$montoEnviar]
         ];
 
         // Responder con los datos procesados
@@ -174,7 +201,7 @@ if(isset($_POST['registrarPago'])){
         $response = [
             'success' => 'error',
             'message' => 'Valor a Pagar mayor a deuda',
-            'response' => $deudaMes
+            'response' => [$precioMensualidades,$montoPrePagadoTotal['suma']]
         ];
 
         // Responder con los datos procesados

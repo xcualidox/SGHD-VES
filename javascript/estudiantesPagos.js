@@ -45,7 +45,6 @@ document.getElementById('closePagosEspecificos').addEventListener('click', () =>
 
 borrarRepresentante.addEventListener(('click'),()=>{
     cedulaRepresentante=document.getElementById('cedulaRepresentante').value;
-    console.log(cedulaRepresentante);
     eliminarRepresentante(cedulaRepresentante,()=>{
         limpiarFormRepresentante();
         recargarDatalistRepresentantes();
@@ -658,8 +657,6 @@ function llenarFormulario(element) {
 
     // Obtener los datos del atributo 'data-datos'
     const datos = JSON.parse(element.getAttribute('data-datos'));
-    console.log(datos);
-
 
     //Esto es para que salga el Boton de Modificar y
 
@@ -712,11 +709,6 @@ function openPagoEspecificoModal(event) {
     let anoEscolar = document.getElementById('AnoEscolarPago').value;
 
     //Llenar option con Mensualidad
-    pedirMensualidad(anoEscolar, //callback
-        function(mensualidad){
-            console.log(mensualidad)
-        })
-    
 
     const datos = JSON.parse(event.target.getAttribute('data-datos'));
      
