@@ -42,10 +42,10 @@
                                 <label for="descuento-50">50%</label>
                             </div>
 
-                            <div class="custom-radio">
+                            <!-- <div class="custom-radio">
                                 <input type="radio" id="descuento-becado" value="0" name="descuento" onchange="verificarSeleccionado()">
                                 <label for="descuento-becado">Becado</label>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="formulario-extenso__column">

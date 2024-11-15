@@ -911,7 +911,7 @@ function abonadoMes() {
   document.getElementById('valorPagoEnviar').value = valorEnviar
 
 
-  if (abonadoMes <= mesPagar && 0 <= abonadoMes) {
+  if (abonadoMes <= mesPagar && 0 < abonadoMes) {
     guardarRegistroPago.disabled = false; // Habilitar el botón si el monto abonado es menor que el monto a pagar
     abonadoMesField.style.border = '';
 
