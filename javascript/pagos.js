@@ -14,7 +14,6 @@ function recargarMesesPagos(){
     //cambiar mes a mensualidad.mes porque al query tener LEFT JOIN lo considera muy ambiguo (ya existe mensualidad.mes y meses_pagos.mes)
     let selectMesesPagos=document.getElementById('selectMesesPagos');
     let options=selectMesesPagos.children;
-    console.log('lolxdxd')
     for(const option of options){
       if(option.value=='mes'){
         option.value='mensualidad.mes';
@@ -29,9 +28,6 @@ function recargarMesesPagos(){
     function(pagos){
       vaciarTabla('tbodyMesesPagos');
       if (pagos != null) {
-        
-    
-      console.log(pagos);
       
         insertarTr('tbodyMesesPagos', pagos);
         
@@ -50,7 +46,6 @@ botonBuscarMesesPagos.addEventListener('click',()=>{
   pedirMesesPagos({'cedula_estudiante': cedula},
   
     function (pagos) { //callback
-      console.log(pagos);
       if (pagos != null) {
         insertarTr('tbodyMesesPagos', pagos);
       }
@@ -91,7 +86,7 @@ function redirigirPagoPDF(idPago) {
 openModalPagos.addEventListener('click', () => {
 
   //Vaciar el
-  cedulaEstudianteRegistroPago.value='';
+  cedulaEstudianteRegistroPago.innerHTML='';
 
   modalPagos.classList.add('show');// Abrir el modal
   document.querySelector(".modal__Oscuro").style.display = "block";
@@ -142,7 +137,6 @@ closeModalPagos.addEventListener('click', () => {
 
 //Cerrar Modal de Pagos en Especifico y limpiarlo
 closePagosEspecificos.addEventListener('click', () => {
-
 
   limpiarFormPagos()
   console.log('cerrar Modal');
@@ -218,7 +212,6 @@ function llenarOptionPagos() {
   pedirMensualidad(anoEscolar, //callback
     function (mensualidad) {
 
-      console.log(mensualidad);
       let atributos = [];
       const contadorMeses = {}
     
@@ -404,7 +397,6 @@ function insertarOptionPagos(idSelect = '', array = []) {
     let nuevo_option = document.createElement('option');
     nuevo_option.value = array[i];
     nuevo_option.innerHTML = array[i].toUpperCase();
-    console.log(nuevo_option.innerHTML);
 
 
     selectPagos.appendChild(nuevo_option);
@@ -461,9 +453,6 @@ function pedirMesesPagos(parametrosCrudos = {}, callback) {
     //asignarle a parametrosCrudos los parametros del div de busqueda.
     Object.assign(parametrosCrudos2, { [tipoBusqueda]: busqueda });
   }
-
-  console.log('loxdl');
-  console.log(parametrosCrudos2);
   parametros = JSON.stringify(parametrosCrudos2);
   const pagina = 1;
 
@@ -480,7 +469,6 @@ function pedirMesesPagos(parametrosCrudos = {}, callback) {
     success: function (response) {
       // Manejar la respuesta del servidor
       if (response.success) {
-        console.log(response);
         callback(response.resultados);
       } else {
         showToast('Error al obtener los datos de pagos', false);
@@ -498,6 +486,44 @@ function pedirMesesPagos(parametrosCrudos = {}, callback) {
     }
   })
 }
+
+function pedirDeuda(idMesPago, callback) {
+
+  let cedula = document.getElementById('cedulaEstudianteRegistroPago').innerHTML;
+  let anoEscolar = document.getElementById('AnoEscolarPago').value;
+
+  $.ajax({
+    url: '../../Control/c_pagos.php',
+    type: 'POST',
+    data: {
+      obtenerDeudaMes: true,
+      idMesPago: idMesPago,
+      cedula: cedula,
+      ano_escolar: anoEscolar
+      
+    },
+    dataType: 'json',  // Esperamos una respuesta JSON
+    success: function (response) {
+      // Manejar la respuesta del servidor
+      if (response.success) {
+        callback(response.resultados);
+      } else {
+        showToast('Error al obtener los datos de pagos', false);
+        console.log(response);
+        callback(null);
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
+      console.log('Respuesta del servidor:', jqXHR.responseText);
+      // Aquí puedes agregar más depuración si la respuesta no es JSON válido
+      showToast('Error en la comunicación con el servidor.', false);
+      console.log(response);
+      callback(null);
+    }
+  })
+}
+
 
 function pedirPagos(parametrosCrudos = {}, callback, pagina=1) {
 
@@ -525,8 +551,6 @@ function pedirPagos(parametrosCrudos = {}, callback, pagina=1) {
     }
 
   }
-  console.log('cualVentana');
-  console.log(cualVentana);
   let parametros;
   let parametrosCrudos2={};
   if (tipoBusqueda == "" && cualVentana == 'modalPagos' || busqueda == "" && cualVentana == 'modalPagos') {
@@ -544,8 +568,6 @@ function pedirPagos(parametrosCrudos = {}, callback, pagina=1) {
     Object.assign(parametrosCrudos2, { [tipoBusqueda]: busqueda });
   }
 
-  console.log('loxdl');
-  console.log(parametrosCrudos2);
   parametros = JSON.stringify(parametrosCrudos2);
 
   
@@ -563,11 +585,8 @@ function pedirPagos(parametrosCrudos = {}, callback, pagina=1) {
     success: function (response) {
       // Manejar la respuesta del servidor
       if (response.success) {
-        console.log(response);
-  
         
         paginadoBotonera(response.maxPag, parseInt(response.pagina))
-        console.log(response.pagina);
         callback(response.resultados);
       } else {
         showToast('Error al obtener los datos de pagos', false);
@@ -772,75 +791,76 @@ selectMes.addEventListener('change', function () {
 
   const selectedIndex = selectMes.selectedIndex;
   const selected = selectMes.options[selectedIndex];
-
-  // Verificar si el mes tiene un data-id
-  const mesId = selected.getAttribute('data-id');
-  if (!mesId) {
-    return;
-  }
-
-  // Verificar si el mes ya está seleccionado utilizando `data-id`
-  const mesExistente = Array.from(mesesSeleccionados.children).find(child => child.getAttribute('data-id') === mesId);
-  if (mesExistente) {
-    selectMes.value = ''; // Resetear select
-    return;
-  }
-
-
-
-  // Obtener el precio del mes y sumarlo al total
-  const valorMes = parseFloat(selected.value);
-  const precioMes = valorMes || 0; // Usar 0 si no está definido
-  totalMonto += precioMes;
-
-  // Crear un nuevo elemento para el mes
-  const mesItem = document.createElement('span');
-  mesItem.textContent = selected.innerText;
-  mesItem.classList.add('mes-item');
-  mesItem.setAttribute('data-precio', precioMes);
-  mesItem.setAttribute('data-id', mesId); // Asignar `data-id` al elemento
-
-  // Crear objeto del mes seleccionado
-  const mesObjeto = {
-    nombre: selected.innerText,
-    precio: precioMes,
-    id: mesId
-  };
-
-  console.log('Mes agregado:', mesObjeto);
-  console.log('Monto total acumulado:', totalMonto);
-
-  // Actualizar el valor a mostrar con el descuento (si aplica)
-    if (formaPagoDescuento[1] ) {
-      document.getElementById('mesPagar').innerText = (totalMonto * formaPagoDescuento[1]).toFixed(2);
-      document.getElementById('mesPagarBolivar').innerText = (precioDolarCal * totalMonto * formaPagoDescuento[1]).toFixed(2);
-  } 
-  valorEnviar = totalMonto;
-
-  abonadoMes(); // Llama a la función para verificar el monto después de añadir el mes
-
-  // Permitir eliminar el mes al hacer clic
-  mesItem.onclick = function () {
-    mesesSeleccionados.removeChild(mesItem);
-    totalMonto -= precioMes; // Restar el precio del mes eliminado
-
-    // Actualizar el valor a mostrar después de eliminar el mes
-    if (formaPagoDescuento[1] ) {
-      document.getElementById('mesPagar').innerText = (totalMonto * formaPagoDescuento[1]).toFixed(2);
-      document.getElementById('mesPagarBolivar').innerText = (precioDolarCal * totalMonto * formaPagoDescuento[1]).toFixed(2);
-    } 
   
+  pedirDeuda(selected.getAttribute('data-id'),function(deuda){  
 
 
+    // Verificar si el mes tiene un data-id
+    const mesId = selected.getAttribute('data-id');
+    if (!mesId) {
+      return;
+    }
+
+    // Verificar si el mes ya está seleccionado utilizando `data-id`
+    const mesExistente = Array.from(mesesSeleccionados.children).find(child => child.getAttribute('data-id') === mesId);
+    if (mesExistente) {
+      selectMes.value = ''; // Resetear select
+      return;
+    }
+
+    // Obtener el precio del mes y sumarlo al total
+    const valorMes = parseFloat(selected.value);
+    const precioMes = deuda || 0; // Usar 0 si no está definido
+    totalMonto += parseFloat(precioMes);
+  
+    // Crear un nuevo elemento para el mes
+    const mesItem = document.createElement('span');
+    mesItem.textContent = selected.innerText;
+    mesItem.classList.add('mes-item');
+    mesItem.setAttribute('data-precio', precioMes);
+    mesItem.setAttribute('data-id', mesId); // Asignar `data-id` al elemento
+
+    // Crear objeto del mes seleccionado
+    const mesObjeto = {
+      nombre: selected.innerText,
+      precio: precioMes,
+      id: mesId
+    };
+
+    console.log('Mes agregado:', mesObjeto);
+    console.log('Monto total acumulado:', totalMonto);
+
+    // Actualizar el valor a mostrar con el descuento (si aplica)
+      if (formaPagoDescuento[1] ) {
+        document.getElementById('mesPagar').innerText = (totalMonto * formaPagoDescuento[1]).toFixed(2);
+        document.getElementById('mesPagarBolivar').innerText = (precioDolarCal * totalMonto * formaPagoDescuento[1]).toFixed(2);
+    } 
     valorEnviar = totalMonto;
-    abonadoMes(); // Verificar si el monto sigue siendo válido después de la eliminación
 
-    // Reactivar la opción en el select
-    Array.from(selectMes.options).forEach(option => {
-      if (option.getAttribute('data-id') === mesId) {
-        option.disabled = false;
-      }
-    });
+    abonadoMes(); // Llama a la función para verificar el monto después de añadir el mes
+
+    // Permitir eliminar el mes al hacer clic
+    mesItem.onclick = function () {
+      mesesSeleccionados.removeChild(mesItem);
+      totalMonto -= precioMes; // Restar el precio del mes eliminado
+
+      // Actualizar el valor a mostrar después de eliminar el mes
+      if (formaPagoDescuento[1] ) {
+        document.getElementById('mesPagar').innerText = (totalMonto * formaPagoDescuento[1]).toFixed(2);
+        document.getElementById('mesPagarBolivar').innerText = (precioDolarCal * totalMonto * formaPagoDescuento[1]).toFixed(2);
+      } 
+    
+
+
+      valorEnviar = totalMonto;
+      abonadoMes(); // Verificar si el monto sigue siendo válido después de la eliminación
+
+      // Reactivar la opción en el select
+      Array.from(selectMes.options).forEach(option => {
+        if (option.getAttribute('data-id') === mesId) {
+          option.disabled = false;
+        }
+      });
   };
 
   // Añadir el mes al contenedor de meses seleccionados
@@ -856,7 +876,7 @@ selectMes.addEventListener('change', function () {
   // Resetear el select
   selectMes.value = '';
 });
-
+});
 
 
 function abonadoMes() {
@@ -979,7 +999,6 @@ function enviarPago() {
     },
     dataType: 'json',
     success: function (response) {
-        console.log(response);
         let exitos = response.success;
         showToast(exitos+' de', true);
         limpiarFormPagos();
