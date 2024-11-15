@@ -166,9 +166,7 @@ botonBuscarPagos.addEventListener('click', () => {
     function (pagos) { //callback
       if (pagos != null) {
 
-        console.log("Estudiante");
-        
-        insertarTr('tbodyPagos', pagos);
+        cuerpoPagos(pagos);
       }
       else {
         return;
@@ -1002,6 +1000,19 @@ function enviarPago() {
         let exitos = response.success;
         showToast(exitos+' de', true);
         limpiarFormPagos();
+        pedirPagos({'cedula_estudiante': datos['cedula_estudiante']},
+          function(pagos){
+            vaciarTabla('tbodyPagos');
+            if (pagos != null) {
+               //Viene asi para Imprimir dicha tabla en el td
+               cuerpoPagos(pagos);
+              }
+            else {
+              let $nada;
+              return $nada;
+              }
+          }
+        );
 
     },
     error: function (xhr, status, error) {
