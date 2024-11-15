@@ -792,7 +792,6 @@ selectMes.addEventListener('change', function () {
   
   pedirDeuda(selected.getAttribute('data-id'),function(deuda){  
 
-
     // Verificar si el mes tiene un data-id
     const mesId = selected.getAttribute('data-id');
     if (!mesId) {
@@ -805,10 +804,10 @@ selectMes.addEventListener('change', function () {
       selectMes.value = ''; // Resetear select
       return;
     }
-
+    selected.value = deuda;
     // Obtener el precio del mes y sumarlo al total
     const valorMes = parseFloat(selected.value);
-    const precioMes = deuda || 0; // Usar 0 si no está definido
+    const precioMes = valorMes || 0; // Usar 0 si no está definido
     totalMonto += parseFloat(precioMes);
   
     // Crear un nuevo elemento para el mes
@@ -998,9 +997,10 @@ function enviarPago() {
     dataType: 'json',
     success: function (response) {
         let exitos = response.success;
+        console.log(response);
         showToast(exitos+' de', true);
         limpiarFormPagos();
-        pedirPagos({'cedula_estudiante': datos['cedula_estudiante']},
+        pedirPagos({'cedula_estudiante': datos['cedula']},
           function(pagos){
             vaciarTabla('tbodyPagos');
             if (pagos != null) {
@@ -1016,6 +1016,7 @@ function enviarPago() {
 
     },
     error: function (xhr, status, error) {
+      
       console.error('Error:', xhr.responseText);
       showToast('Error en la solicitud:', false);
     }
