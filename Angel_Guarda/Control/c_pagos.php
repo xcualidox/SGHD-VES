@@ -91,6 +91,7 @@ if(isset($_POST['registrarPago'])){
     //if(!true){
     if($deuda>=$data['valor_pago_enviar']){
         $montoPagar=$data['valor_pago_enviar'];
+        $montoPagarDebug=[];
         for ($i=0; $i < count($data['meses']); $i++) { 
             $montoXD[]=$montoPagar;
             $aEnviar=[];
@@ -114,35 +115,37 @@ if(isset($_POST['registrarPago'])){
             $montoMes=$montoMesQuery['monto'];
 
 
-            if($montoPagar >= $montoMes){
-                $montoEnviar = $montoMes;
+            $mesPrePagado=$pagos->obtenerMontoPrePagadoTotal([$data['cedula'],[$data['meses'][$i]['id']],$ano_escolar])['suma'];
+            //$deudaMes=-1;
+            if (!$mesPrePagado) {
+                $mesPrePagado=0;
+            }
+            $deudaMes=bcsub($montoMes,$mesPrePagado,2);
+            $montoPagarDebug[]=$montoPagar;
+            if($montoPagar >= $deudaMes){
+                $montoEnviar = $deudaMes;
             }
             else{
                 $montoEnviar = $montoPagar;
             }
 
+            $montoEnviarDebug[]=$deudaMes.$montoEnviar;
             $aEnviar[]=$montoEnviar;
             $aEnviar[]=$data['forma_pago'];
             $aEnviar[]=$data['dolarBCV'];
-            //$deudaMes=-1;
-            $mesPrePagado=$pagos->obtenerMontoPrePagadoTotal([$data['cedula'],[$data['meses'][$i]['id']],$ano_escolar])['suma'];
-            if (!$mesPrePagado) {
-                $mesPrePagado=0;
-            }
-            $deudaMes=bcsub($montoMes,$mesPrePagado,2);
-            if ($montoPagar>0 and $montoPagar<=$deudaMes){
+            if ($montoEnviar>0 and $montoEnviar<=$deudaMes){
                 $pago=$pagos->insertarPagos($aEnviar);
 
             }
             //$pago=false;
             if(isset($pago) and $pago){
 
-                if($montoPagar >= $montoMes){
-                    $montoPagar = bcsub($montoPagar, $montoMes);
+                if($montoPagar >= $deudaMes){
+                    $montoPagar = bcsub($montoPagar, $montoEnviar,2);
                     
                 }
                 else{
-                    $montoPagar= bcsub($montoPagar, $montoPagar);
+                    $montoPagar= bcsub($montoPagar, $montoPagar,2);
                 }
                 //meses_pagos
                 $parametrosVerificar=[
@@ -190,7 +193,8 @@ if(isset($_POST['registrarPago'])){
 
         $response = [
             'success' => $exitos." exitos de ".$intentos." intentos.",
-            'response' => [$precioMensualidades,$montoPrePagadoTotal['suma']]
+            'montoEnviarDebug' => [$montoEnviarDebug],
+            'montoPagarDebug' => $montoPagarDebug
         ];
 
         // Responder con los datos procesados
