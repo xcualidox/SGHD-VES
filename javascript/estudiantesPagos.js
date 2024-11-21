@@ -29,6 +29,7 @@ openModalAñadir.addEventListener('click', () => {
 });
 
 closeModalAñadir.addEventListener('click', () => {
+    document.getElementById('cedulaEstudianteActual').value='';
     document.getElementById("formRegistroEstudiante").reset();
     modalAñadir.classList.remove('show'); // Cerrar el modal // Cerrar el modal
     document.querySelector(".modal__Oscuro").style.display = "none";
