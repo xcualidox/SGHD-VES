@@ -35,7 +35,7 @@
 
                 <tbody id="tbodyPagos">
                 </tbody>
-                <input type="hidden" id="paginadoVerPagos" value="">
+             
             </table>
 
     

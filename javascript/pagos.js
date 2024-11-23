@@ -423,7 +423,7 @@ function insertarTrHeader(tbody_id = '', array = []) {
 
 }
 
-function pedirMesesPagos(parametrosCrudos = {}, callback) {
+function pedirMesesPagos(parametrosCrudos = {}, callback, pagina=1) {
 
   const select = document.getElementById('selectMesesPagos');
   const inputTextoPago = document.getElementById('inputTextoMesesPagos');
@@ -452,7 +452,7 @@ function pedirMesesPagos(parametrosCrudos = {}, callback) {
     Object.assign(parametrosCrudos2, { [tipoBusqueda]: busqueda });
   }
   parametros = JSON.stringify(parametrosCrudos2);
-  const pagina = 1;
+
 
 
   $.ajax({
@@ -467,6 +467,13 @@ function pedirMesesPagos(parametrosCrudos = {}, callback) {
     success: function (response) {
       // Manejar la respuesta del servidor
       if (response.success) {
+    
+
+        console.log(response);
+        paginadoBotoneraMesesPagos(response.maxPag, parseInt(response.pagina))
+        
+        
+        
         callback(response.resultados);
       } else {
         showToast('Error al obtener los datos de pagos', false);
@@ -602,7 +609,7 @@ function pedirPagos(parametrosCrudos = {}, callback, pagina=1) {
     }
   })
 }
-function paginadoBotonera(maxPag, currentPage = 1) {
+function paginadoBotonera(maxPag, currentPage = 1 ) {
     const paginacionContainer = document.getElementById("paginacionContainer");
     paginacionContainer.innerHTML = ""; // Limpiar el contenedor
 
@@ -670,12 +677,84 @@ function paginadoBotonera(maxPag, currentPage = 1) {
         }
     }
 }
+function paginadoBotoneraMesesPagos(maxPag, currentPage = 1 ) {
+    const paginacionContainer = document.getElementById("paginacionContainerMesesPagos");
+    paginacionContainer.innerHTML = ""; // Limpiar el contenedor
 
-// Función que se llamará al hacer clic en cada botón
-function cambiarPagina(pagina) {
-  console.log("Página seleccionada:", pagina);
-  // Aquí puedes añadir la lógica para cambiar el contenido o actualizar la vista según la página
+    // Función para crear un botón de página
+    const createButton = (page) => {
+        const button = document.createElement("a");
+        button.textContent = page;
+        button.href = "#";
+        button.classList.add("pagina");
+        
+        // Añadir clase 'seleccionado' a la página actual
+        if (page === currentPage) {
+            button.classList.add("seleccionado");
+        }
+
+        button.onclick = () =>pedirMesesPagos({"cedula_estudiante":cedulaEstudianteRegistroPago.innerHTML},
+          function(pagos){
+            vaciarTabla('tbodyMesesPagos');
+            if (pagos != null) {
+            
+              insertarTr('tbodyMesesPagos', pagos);
+              
+              }
+            else {
+              let $nada;
+              return $nada;
+              }
+         
+            },page);
+        paginacionContainer.appendChild(button);
+    };
+
+    // Función para crear el indicador de "..."
+    const createEllipsis = () => {
+        const ellipsis = document.createElement("span");
+        ellipsis.textContent = "...";
+        ellipsis.classList.add("ellipsis");
+        paginacionContainer.appendChild(ellipsis);
+    };
+
+    // Lógica para mostrar las páginas con "..." cuando sea necesario
+    if (maxPag <= 7) {
+        // Mostrar todas las páginas si son 7 o menos
+        for (let i = 1; i <= maxPag; i++) {
+            createButton(i);
+        }
+    } else {
+        // Mostrar las primeras páginas
+        if (currentPage < 5) {
+            for (let i = 1; i <= 5; i++) {
+                createButton(i);
+            }
+            createEllipsis();
+            createButton(maxPag);
+        } 
+        // Mostrar las últimas páginas
+        else if (currentPage > maxPag - 4) {
+            createButton(1);
+            createEllipsis();
+            for (let i = maxPag - 4; i <= maxPag; i++) {
+                createButton(i);
+            }
+        } 
+        // Mostrar las páginas alrededor de la actual
+        else {
+            createButton(1);
+            createEllipsis();
+            for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+                createButton(i);
+            }
+            createEllipsis();
+            createButton(maxPag);
+        }
+    }
 }
+
+
 
 function pedirColumnasMesesPagos(callback) {
 

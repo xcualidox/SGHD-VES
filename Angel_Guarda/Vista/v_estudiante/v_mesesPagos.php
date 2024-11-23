@@ -41,30 +41,15 @@
 
                             </tr>
                         </thead>
+                        <!-- CUERPO MESES PAGOS -->
                         <tbody id="tbodyMesesPagos">
 
-
-
-                            <tr>
-                                <td class="border px-4 py-2"> Año Escolar</td>
-                                <td class="border px-4 py-2">Nombre y Apellido </td>
-                                <td class="border px-4 py-2">Año Sección</td>
-                                <td class="border px-4 py-2">Telefono Representante</td>
-
-                                <td class="border px-4 py-2 text-center">
-                                    <div class="flex justify-center items-center space-x-4">
-                                        <img src="../../../images/icons/pdf.svg" class="w-8 h-8 filtro-rojo cursor-pointer" alt="PDF" title="PDF">
-                                        <img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar">
-
-                                    </div>
-                                </td>
-                                <td class="border px-4 py-2">1/12</td>
-                            </tr>
-
-
+             
                         </tbody>
                     </table>
                     <!-- Mostrando El total de Paginas -->
+
+                      <div class="paginacion" id="paginacionContainerMesesPagos"></div>
 
                 </div>
             </div>

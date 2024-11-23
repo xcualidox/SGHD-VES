@@ -47,6 +47,31 @@ class mesesPagos extends database_connect
         return $result;
 
     }
+    public function cantidadResultados($parametros=[],$limit=null,$offset=null){
+        $sql='SELECT COUNT(*) FROM (SELECT meses_pagos.cedula_estudiante from meses_pagos WHERE 1=1';
+        $parameters=[];
+        //Recorrer cada parametro y añadirlo a la lista
+        if (isset($parametros)) {
+            foreach ($parametros as $clave => $valor) {
+                if($clave!='' and $valor!=''){
+                    $sql.=' AND '.$clave.' LIKE ?';
+                    $parameters[]=$valor;
+                }
+            }
+        }
+        
+        if ($limit !== null and $offset !== null) { // !== es importante para que reconozca 0 diferente a null
+            $sql.=' ORDER BY meses_pagos.cedula_estudiante DESC'.' LIMIT '.intval($limit).' OFFSET '.intval($offset).') AS subquery';
+        }
+        else{
+            $sql.=' ORDER BY meses_pagos.cedula_estudiante DESC) AS subquery';
+        }
+        $query=$this->query($sql,$parameters);
+        $result=$this->fetch_query($query);
+        return  $result;
+    }
+
+    
 
     public function obtenerMesesPagos($parametros,$limit = 1,$offset = 0){
 

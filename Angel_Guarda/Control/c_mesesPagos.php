@@ -44,12 +44,15 @@ if (isset($_POST['obtenerMesesPagos'])) {
     $parametros=json_decode($parametrosCrudos, true);
     //$listaPagos=true;
     $listaMesesPagos=$objMesesPagos->obtenerMesesPagos($parametros,$resultados_por_pagina,$offset);
+    $cantidadResultado=$objMesesPagos->cantidadResultados($parametros);
 
     if (is_array($listaMesesPagos)) {
         echo json_encode([
             'success' => true,
             'message' => 'Fino señores',
-            'resultados' => $listaMesesPagos
+            'resultados' => $listaMesesPagos,
+            'maxPag'=> ceil($cantidadResultado['COUNT(*)']/$resultados_por_pagina),
+            'pagina'=> $pagina
             ]);
         
     }
