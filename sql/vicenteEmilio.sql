@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 11-11-2024 a las 23:54:28
+-- Tiempo de generación: 15-11-2024 a las 16:57:53
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -149,7 +149,14 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 (33, '2024-09-27 12:15:32', 27576598, 'login', '27576598 ha ingresado al sistema.', 'DESKTOP-Q1BQ71J'),
 (36, '2024-09-28 12:16:59', 27576598, 'login', '27576598 ha ingresado al sistema.', 'DESKTOP-Q1BQ71J'),
 (37, '2024-09-28 21:10:10', 27576598, 'login', '27576598 ha ingresado al sistema.', 'Tahiris-PC'),
-(38, '2024-09-29 10:25:43', 27576598, 'login', '27576598 ha ingresado al sistema.', 'Tahiris-PC');
+(38, '2024-09-29 10:25:43', 27576598, 'login', '27576598 ha ingresado al sistema.', 'Tahiris-PC'),
+(306, '2024-11-12 10:30:38', 27576598, 'login', 'Ingresó al sistema.', 'Tahiris-PC'),
+(307, '2024-11-12 10:33:47', 27576598, 'insertar', 'Agregó al profesor 30743410.', 'Tahiris-PC'),
+(308, '2024-11-12 12:42:23', 30743410, 'login', 'Ingresó al sistema.', 'Tahiris-PC'),
+(309, '2024-11-12 12:43:56', 30743410, 'modificar', 'El precio del Dolar se ha Actualizado a: 44.75$', 'Tahiris-PC'),
+(310, '2024-11-12 12:45:08', 27576598, 'login', 'Ingresó al sistema.', 'Tahiris-PC'),
+(311, '2024-11-15 12:21:23', 29629080, 'login', 'Ingresó al sistema.', 'Tahiris-PC'),
+(312, '2024-11-15 12:55:25', 29629080, 'login', 'Ingresó al sistema.', 'Tahiris-PC');
 
 -- --------------------------------------------------------
 
@@ -207,7 +214,7 @@ CREATE TABLE `dolar` (
 --
 
 INSERT INTO `dolar` (`id`, `precio`) VALUES
-(1, 36.8);
+(1, 44.75);
 
 -- --------------------------------------------------------
 
@@ -489,8 +496,9 @@ INSERT INTO `login` (`id`, `username`, `password`, `security_q_1`, `security_q_2
 (20, 5945762, '$2y$10$5s5O94wcje2uKuN8Unc7E.E01sPXKQedJ2kwwsx3A5U8X4qp9vN66', '', '', '', '', '', '', 'profesor', 'new'),
 (21, 10143237, '$2y$10$sfa3mZOpK7yhzEZwwkKmhOr43sO/0hjxM52DXsU2Y3tiOl4DjsxfS', '', '', '', '', '', '', 'profesor', 'new'),
 (22, 4608560, '$2y$10$kYE/QOWeyuOwsZVyZrYMVeRKDb0WLM7fl7BuJP.Wt5w/RC4lnxkg2', '', '', '', '', '', '', 'admin', 'new'),
-(23, 27576598, '$2y$10$aWAaKkzN5ZH3PZhhJCbWcOkfx8cYQ2oPyyeDF77KJkPA9NNAODEWG', '¿En qué ciudad naciste?', '¿Cuál es el nombre de tu mejor amigo de la infancia?', '¿Cuál es el nombre de tu escuela primaria?', '$2y$10$oyreTRaPRJIJpcvrlgCn8uGreex5GTAkYifkGdtw0Qlwdvv8/S4JS', '$2y$10$wCOboA6GSoqSlNxwmkQAuOQvA8MvHIiEetAXgq7EwVmBaQSFbFqOe', '$2y$10$N2VPQmeU/PThXn9LBwtTDOcbrAN7zI3RH.928zd2BWn9y4YJC5RCG', 'admin', 'active'),
-(24, 5950682, '$2y$10$zQPpvq5dO1ChBMDTCKB2tuMg8dQ4lFz5FWJ7iPZAgNKSNfOEZ1r6a', '', '', '', '', '', '', 'coordinador', 'new');
+(23, 27576598, '$2y$10$ejPPrAWqtZCISNZyvEZeV.Ow7H.SQn3GQE7fHILVuxS/T/Q.nia8m', '¿En qué ciudad naciste?', '¿Cuál es el nombre de tu mejor amigo de la infancia?', '¿Cuál es el nombre de tu escuela primaria?', '$2y$10$oyreTRaPRJIJpcvrlgCn8uGreex5GTAkYifkGdtw0Qlwdvv8/S4JS', '$2y$10$wCOboA6GSoqSlNxwmkQAuOQvA8MvHIiEetAXgq7EwVmBaQSFbFqOe', '$2y$10$N2VPQmeU/PThXn9LBwtTDOcbrAN7zI3RH.928zd2BWn9y4YJC5RCG', 'admin', 'active'),
+(24, 5950682, '$2y$10$zQPpvq5dO1ChBMDTCKB2tuMg8dQ4lFz5FWJ7iPZAgNKSNfOEZ1r6a', '', '', '', '', '', '', 'coordinador', 'new'),
+(26, 30743410, '$2y$10$l3QvvPB.0EX2k7lU8HoUmOwyqvwzANQqjLiRwFJrssH5EYvxqNCJ6', '¿Cuál es el nombre de tu primera mascota?', '¿En qué ciudad naciste?', '¿Cuál es el nombre de tu mejor amigo de la infancia?', '$2y$10$75P72bnT5Q3/aYIDa4gz9ODhG4yU2bhocN/IB9A3YaHz449J5nipW', '$2y$10$rY0kLr/JFITb6BXUBU9e2eKtqNswTjeYvWEGdOkHv2Vr9wjWRknVC', '$2y$10$5aXLzjotuwZtInEYeqzSqOQWa2gU.HjUqu22WEfYHgJKM12r4Give', 'secretario', 'active');
 
 -- --------------------------------------------------------
 
@@ -502,7 +510,7 @@ CREATE TABLE `mensualidad` (
   `id` bigint NOT NULL,
   `ano_escolar` int NOT NULL,
   `mes` enum('inscripcion','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `monto` double NOT NULL DEFAULT '0'
+  `monto` decimal(20,2) NOT NULL DEFAULT '0.00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- --------------------------------------------------------
@@ -516,8 +524,7 @@ CREATE TABLE `meses_pagos` (
   `mes` bigint NOT NULL DEFAULT '0',
   `ano_escolar` int NOT NULL,
   `ano_seccion` int NOT NULL,
-  `abonado` float NOT NULL,
-  `maximo` float NOT NULL DEFAULT '0'
+  `abonado` decimal(20,2) NOT NULL DEFAULT '0.00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- --------------------------------------------------------
@@ -533,8 +540,8 @@ CREATE TABLE `meses_saldados` (
   `ano_escolar` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
   `ano_seccion` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
   `fecha` date NOT NULL,
-  `MontoBS` double NOT NULL,
-  `MontoBCV` double NOT NULL
+  `MontoBS` decimal(20,2) NOT NULL DEFAULT '0.00',
+  `MontoBCV` decimal(20,2) NOT NULL DEFAULT '0.00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- --------------------------------------------------------
@@ -547,19 +554,19 @@ CREATE TABLE `pagos` (
   `idPago` bigint NOT NULL,
   `cedula_estudiante` bigint NOT NULL,
   `cedula_representante` bigint NOT NULL DEFAULT '0',
-  `fecha` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `fecha` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
   `referencia_id` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '',
   `ano_escolar` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT '0',
   `mes` bigint NOT NULL DEFAULT '0',
   `detalles` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `descuento` float NOT NULL DEFAULT '1',
+  `descuento` decimal(20,2) NOT NULL DEFAULT '1.00',
   `nombres_estudiante` varchar(141) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `nombres_representante` varchar(141) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `telefono` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `direccion` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `monto` double DEFAULT '0',
+  `monto` decimal(20,2) DEFAULT NULL,
   `tipo_pago` enum('dolar','bolivar') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `dolarBCV` double DEFAULT NULL
+  `dolarBCV` decimal(20,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- --------------------------------------------------------
@@ -593,7 +600,8 @@ INSERT INTO `personas` (`cedula`, `nombres`, `apellidos`, `direccion`, `telefono
 (25347183, 'LEONELBYS', 'LUCENA', 'ACARIGUA', '04123459120', 'correo'),
 (27576598, 'VICTOR JULIO', 'MENDOZA VARGAS', 'ACARIGUA', '04125157986', 'correo'),
 (29629080, 'ANGEL', 'MENDEZ', 'ENRIQUE SEGOVIANO', '0424', 'irechamo@yolewadesi.unawaina'),
-(29800040, 'VENUS', 'MARTINEZ', 'ACARIGUA', '04125304708', 'correo');
+(29800040, 'VENUS', 'MARTINEZ', 'ACARIGUA', '04125304708', 'correo'),
+(30743410, 'VALENTINA', 'HERRERA', 'SAN VICENTE 1 ACARIGUA', '04125510589', 'cypherlenherrera@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -788,7 +796,7 @@ ALTER TABLE `mensualidad`
 -- Indices de la tabla `meses_pagos`
 --
 ALTER TABLE `meses_pagos`
-  ADD PRIMARY KEY (`cedula_estudiante`,`ano_escolar`),
+  ADD PRIMARY KEY (`cedula_estudiante`,`ano_escolar`,`mes`) USING BTREE,
   ADD KEY `FK_meses_pagos_estudiante` (`cedula_estudiante`),
   ADD KEY `FK_meses_pagos_ano_escolar` (`ano_escolar`),
   ADD KEY `FK_meses_pagos_ano_seccion` (`ano_seccion`),
@@ -872,7 +880,7 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=306;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=313;
 
 --
 -- AUTO_INCREMENT de la tabla `horario_estudiante`
@@ -890,7 +898,7 @@ ALTER TABLE `intervalo`
 -- AUTO_INCREMENT de la tabla `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad`
