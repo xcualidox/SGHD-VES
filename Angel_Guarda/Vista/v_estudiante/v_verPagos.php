@@ -24,26 +24,9 @@
                             <div class="formulario-extenso__row">
                                 <div class="formulario-extenso__column">
 
-                                    <label for="Pago">Descuento: </label>
+                                    <label for="Pago">Descuento Actual: </label>
                                     <div class="flex">
-                                        <div class="custom-radio">
-                                            <input type="radio" id="ninguno" value="0" name="descuento">
-                                            <label for="total">Total</label>
-                                        </div>
-                                        <div class="custom-radio">
-                                            <input type="radio" id="descuento-10" value="10%" name="descuento">
-                                            <label for="descuento-10">10%</label>
-                                        </div>
 
-                                        <div class="custom-radio">
-                                            <input type="radio" id="descuento-20" value="20%" name="descuento">
-                                            <label for="descuento-20">20%</label>
-                                        </div>
-
-                                        <div class="custom-radio">
-                                            <input type="radio" id="descuento-50" value="50%" name="descuento">
-                                            <label for="descuento-50">50%</label>
-                                        </div>
 
                                         <div class="custom-radio">
                                             <input type="radio" id="descuento-becado" value="Becado" name="descuento">
@@ -83,7 +66,7 @@
                                 </div>
                                 <div class="formulario-extenso__column">
 
-                                    <label for="monto">Descuento: </label>
+                                    <label for="monto">Descuento Actual: </label>
                                     <input type="text" id="mesPagar" name="mesPagar" disabled placeholder="Descuento" class="formulario-extenso__input" maxlength="">
 
                                 </div>

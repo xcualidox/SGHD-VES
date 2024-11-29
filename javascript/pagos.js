@@ -18,6 +18,9 @@ function recargarMesesPagos(){
       if(option.value=='mes'){
         option.value='mensualidad.mes';
       }
+      if(option.value=='ano_seccion'){
+        option.value='anoseccion_concat';
+      }
     }
   });
 
@@ -139,6 +142,7 @@ closeModalPagos.addEventListener('click', () => {
 closePagosEspecificos.addEventListener('click', () => {
 
   limpiarFormPagos()
+  descuentoActual.innerHTML='...';
   console.log('cerrar Modal');
  
 });
@@ -146,6 +150,13 @@ closePagosEspecificos.addEventListener('click', () => {
 
 function limpiarFormPagos() {
   document.getElementById("registrarPagoForm").reset();
+  seleccionDescuento.value='...';
+  descuentoActual.innerHTML='...';
+  pedirDescuentoActual(function(pedido){
+    let descuento = 1-pedido.response.descuento
+    descuentoActual.innerHTML=((descuento.toFixed(2))*100)+'%';
+    seleccionDescuento.value=pedido.response.descuento;
+  }); 
   //Remueve todos los meses Añadidos
   while (mesesSeleccionados.firstChild) {
     mesesSeleccionados.removeChild(mesesSeleccionados.firstChild);
@@ -268,7 +279,13 @@ function moverListaPagosGlobal() {
 //MODAL PAGO ESPECIFICO
 //AL agregar los pagos de este registor no olvidar los ATRIBUTOS
 function openPagoEspecificoModal(event) {
-
+  
+//pedir el descuento y colocarlo como innerHTML en descuentoActual
+  pedirDescuentoActual(function(pedido){
+    let descuento = 1-pedido.response.descuento
+    descuentoActual.innerHTML=((descuento.toFixed(2))*100)+'%';
+    seleccionDescuento.value=pedido.response.descuento;
+  }); 
 
   vaciarSelect('mes', { innerHTML: '---Seleccionar Mes---', disabled: '', selected: '' });
 
@@ -423,12 +440,42 @@ function insertarTrHeader(tbody_id = '', array = []) {
 
 }
 
+function pedirDescuentoActual(callback) {
+
+  $.ajax({
+    url: '../../Control/c_descuentos.php',
+    type: 'POST',
+    data: {
+      accion: 'descuentoActual'
+    },
+    dataType: 'json',  // Esperamos una respuesta JSON
+    success: function (response) {
+      // Manejar la respuesta del servidor
+      if (response.success) {
+        callback(response);
+      } else {
+        showToast('Error al obtener la hora de internet.', false);
+        console.log(response);
+        callback(null);
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.error('Error en la solicitud AJAX:', textStatus, errorThrown);
+      console.log('Respuesta del servidor:', jqXHR.responseText);
+      // Aquí puedes agregar más depuración si la respuesta no es JSON válido
+      showToast('Error en la comunicación con el servidor.', false);
+      console.log(response);
+      callback(null);
+    }
+  })
+}
+
 function pedirMesesPagos(parametrosCrudos = {}, callback) {
 
   const select = document.getElementById('selectMesesPagos');
   const inputTextoPago = document.getElementById('inputTextoMesesPagos');
   const tipoBusqueda = select.value;
-  const busqueda = inputTextoPago.value;
+  const busqueda = '%'+inputTextoPago.value+'%';
 
   //Saber que ventana es obteniendo el id del boton de cerrar
   const padre = contenedorListaPagos.parentNode;
@@ -753,14 +800,12 @@ function verificarSeleccionado() {
 
   const mostrarDivPagos = document.querySelector('#mostrarDivPagos');
   const seleccion = document.querySelector('input[name="FormaPago"]:checked');
-  const seleccionDescuento = document.querySelector('input[name="descuento"]:checked');
 
-  if (seleccion && seleccionDescuento) {
+  if (seleccion) {
 
     mostrarDivPagos.classList.add('block');
+
     let enviar = [seleccion.value, seleccionDescuento.value];
-
-
 
     return enviar
   }
@@ -936,7 +981,6 @@ function abonadoMes() {
 
 function enviarPago() {
   const anoEscolar = document.getElementById('AnoEscolarPago').value;
-  const descuento = document.querySelector('input[name="descuento"]:checked')?.value;
   const formaPago = document.querySelector('input[name="FormaPago"]:checked')?.value;
   const referencia = document.getElementById('referencia').value;
   const notaPago = document.getElementById('notaPago').value;
@@ -976,7 +1020,6 @@ function enviarPago() {
     cedula: data.cedula_estudiante,
     ano_escolar: anoEscolar,
     numero_referencia: referencia,
-    descuento: descuento,
     forma_pago: formaPago,
     nota_pago: notaPago,
     valor_pago_enviar: valorPagoEnviar,
@@ -1021,4 +1064,7 @@ function enviarPago() {
       showToast('Error en la solicitud:', false);
     }
   });
+
+
+
 }

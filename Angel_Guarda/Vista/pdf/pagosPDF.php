@@ -76,7 +76,7 @@ $html =''.$headerHTML.'
           
           
           
-            <p><strong>Descuento:</strong> ' . floatval(1-$reciboPago[0]["descuento"])*100 . '%</p>
+            <p><strong>Descuentoasd:</strong> ' . floatval(1-$reciboPago[0]["descuento"])*100 . '%</p>
               <p><strong>Referencia:</strong> ' . $reciboPago[0]["referencia_id"] . '</p>
              <p><strong>Monto Pagado:</strong> ' . $reciboPago[0]["monto"]  . '</p>
                <p><strong>Nota de Pago:</strong> ' . $reciboPago[0]["detalles"] . '</p>

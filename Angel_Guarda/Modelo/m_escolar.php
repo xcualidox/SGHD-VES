@@ -16,7 +16,7 @@ class escolar extends database_connect{
       return $result;
     }
     function buscarIdAno($nombreAno){
-      $sql="SELECT * FROM ano_seccion WHERE CONCAT(ano,' ',seccion) LIKE ?";
+      $sql="SELECT * FROM ano_seccion WHERE anoseccion_concat LIKE ?";
       $query=$this->query($sql,[$nombreAno]);
       $result=$this->fetch_query($query);
       return $result;

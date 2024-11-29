@@ -4,8 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13c2ea380f6f598f89b9cfcbd5fd6457",
+    "content-hash": "9b016e2d4b45003491c3e4cb9b3a7304",
     "packages": [
+        {
+            "name": "bt51/ntp",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bt51/ntp.git",
+                "reference": "74041299558d8defa8eae4590839bf66692de32f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bt51/ntp/zipball/74041299558d8defa8eae4590839bf66692de32f",
+                "reference": "74041299558d8defa8eae4590839bf66692de32f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "2.0.*@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bt51\\NTP\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Tollakson",
+                    "email": "ben.tollakson@gmail.com"
+                }
+            ],
+            "description": "PHP library for interacting with ntp servers",
+            "homepage": "https://github.com/bt51/ntp",
+            "keywords": [
+                "network time protocol",
+                "ntp",
+                "ntp client"
+            ],
+            "support": {
+                "issues": "https://github.com/bt51/ntp/issues",
+                "source": "https://github.com/bt51/ntp/tree/master"
+            },
+            "time": "2014-05-13T21:11:11+00:00"
+        },
         {
             "name": "dompdf/dompdf",
             "version": "v3.0.0",
@@ -297,10 +346,10 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
