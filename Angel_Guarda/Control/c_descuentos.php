@@ -1,6 +1,5 @@
 <?php
 
-error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING); //quitar para debug
 include_once(__DIR__ . '/../Modelo/m_descuentos.php');
 include_once(__DIR__ . '/../Control/c_fechaHora.php');
 

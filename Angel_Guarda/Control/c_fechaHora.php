@@ -6,7 +6,18 @@ use Bt51\NTP\Client;
 
 class ControladorFechaHora{
 
-    public function obtenerFechaOnline($maxRetries = 2, $timezone = 'America/Caracas', $tries = 0){ //tries=intentos, maxRetries = maximos reintentos
+
+
+
+    private function isDate($date) {
+            $timestamp = strtotime($date);
+            return $timestamp ? true : false;
+        }
+
+
+
+
+    public function obtenerFechaOnline($timezone = 'America/Caracas'){
 
         $port=123; //el puerto para obtener la hora, por default es 123 para los ntp
 
@@ -17,10 +28,7 @@ class ControladorFechaHora{
             'time.apple.com',
             'ntp.ubuntu.com'
         ];
-
-        while($tries<$maxRetries){ //mientras los intentos sean menores a la cantidad maxima de reintentos
             
-            $times=[];
             $errors=[];
             foreach ($servers as $server) {
                 try{
@@ -28,31 +36,24 @@ class ControladorFechaHora{
                     $ntp = new Client($socket);
                     $timeRaw=$ntp->getTime();
                     $timeRaw->setTimezone(new DateTimeZone($timezone));
-                    $times[]=$timeRaw->format('Y-m-d');
+                    $time=$timeRaw->format('Y-m-d');
+                    if($this->isDate($time)){ break; } // si es fecha entonces salirse del
                 }
 
                 catch (\Exception $e){ //Si agarra errores los almacena pa mostrarlo despues, potente pa debug supongo
                     $errors[] = $server.': '.$e->getMessage();
                 }
-            }
-
-            $countedTimes=array_count_values($times);
-            $numServers = count($servers);
+            }   
             //max() obtiene el valor mayor de la array assoc, en este caso returnea el que se repitio mas
-            if (count($countedTimes)> 0) {$maxCount = max($countedTimes);} 
-            else{$maxCount = 0;}
             
 
-            if($maxCount > $numServers/2){
-                return array_keys($countedTimes, $maxCount)[0]; //returnea fuera del while con el resultado
+            if(isset($time) && $time){ return $time;} //returnea fuera del while con el resultado
+            else{
+                return [
+                    'error' => true,
+                    'Errores al obtener la hora:' => $errors]; //espero no tener q usar esto krajo
             }
-            
-            ++$tries; //si no returneó nada pues que siga intentando
-        }
     
-        return [
-            'error' => true,
-            'Errores al obtener la hora:' => $errors]; //espero no tener q usar esto krajo
     }
 
 }
