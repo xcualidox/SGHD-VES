@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 15-11-2024 a las 16:57:53
+-- Tiempo de generación: 29-11-2024 a las 14:57:49
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -156,7 +156,23 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 (309, '2024-11-12 12:43:56', 30743410, 'modificar', 'El precio del Dolar se ha Actualizado a: 44.75$', 'Tahiris-PC'),
 (310, '2024-11-12 12:45:08', 27576598, 'login', 'Ingresó al sistema.', 'Tahiris-PC'),
 (311, '2024-11-15 12:21:23', 29629080, 'login', 'Ingresó al sistema.', 'Tahiris-PC'),
-(312, '2024-11-15 12:55:25', 29629080, 'login', 'Ingresó al sistema.', 'Tahiris-PC');
+(312, '2024-11-15 12:55:25', 29629080, 'login', 'Ingresó al sistema.', 'Tahiris-PC'),
+(313, '2024-11-29 10:30:12', 29629080, 'login', 'Ingresó al sistema.', 'Tahiris-PC'),
+(314, '2024-11-29 10:32:28', 29629080, 'login', 'Ingresó al sistema.', 'Tahiris-PC'),
+(315, '2024-11-29 10:38:22', 12710000, 'login', 'Ingresó al sistema.', 'Tahiris-PC'),
+(316, '2024-11-29 10:48:27', 12710000, 'insertar', ' Insertó la mensualidad de Inscripcion del Año Escolar \"Lmao\"', 'Tahiris-PC'),
+(317, '2024-11-29 10:48:28', 12710000, 'insertar', ' Insertó la mensualidad de Septiembre del Año Escolar \"Lmao\"', 'Tahiris-PC'),
+(318, '2024-11-29 10:48:28', 12710000, 'insertar', ' Insertó la mensualidad de Octubre del Año Escolar \"Lmao\"', 'Tahiris-PC'),
+(319, '2024-11-29 10:48:28', 12710000, 'insertar', ' Insertó la mensualidad de Noviembre del Año Escolar \"Lmao\"', 'Tahiris-PC'),
+(320, '2024-11-29 10:48:28', 12710000, 'insertar', ' Insertó la mensualidad de Diciembre del Año Escolar \"Lmao\"', 'Tahiris-PC'),
+(321, '2024-11-29 10:48:28', 12710000, 'insertar', ' Insertó la mensualidad de Enero del Año Escolar \"Lmao\"', 'Tahiris-PC'),
+(322, '2024-11-29 10:48:28', 12710000, 'insertar', ' Insertó la mensualidad de Febrero del Año Escolar \"Lmao\"', 'Tahiris-PC'),
+(323, '2024-11-29 10:48:29', 12710000, 'insertar', ' Insertó la mensualidad de Marzo del Año Escolar \"Lmao\"', 'Tahiris-PC'),
+(324, '2024-11-29 10:48:29', 12710000, 'insertar', ' Insertó la mensualidad de Abril del Año Escolar \"Lmao\"', 'Tahiris-PC'),
+(325, '2024-11-29 10:48:29', 12710000, 'insertar', ' Insertó la mensualidad de Mayo del Año Escolar \"Lmao\"', 'Tahiris-PC'),
+(326, '2024-11-29 10:48:29', 12710000, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'Tahiris-PC'),
+(327, '2024-11-29 10:48:29', 12710000, 'insertar', ' Insertó la mensualidad de Junio del Año Escolar \"Lmao\"', 'Tahiris-PC'),
+(328, '2024-11-29 10:48:29', 12710000, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'Tahiris-PC');
 
 -- --------------------------------------------------------
 
@@ -487,7 +503,7 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`id`, `username`, `password`, `security_q_1`, `security_q_2`, `security_q_3`, `security_a_1`, `security_a_2`, `security_a_3`, `rol`, `status`) VALUES
 (5, 29629080, '$2y$10$iztSmb7xT9arACvPGNiLmuVu.IPZfpPCRrquHgPpKXfkWMrCOU7f6', '¿Cual es su color favorito?', '¿Cual es fue su primera mascota?', '¿Cual es su comida favorita?', '$2y$10$MKhsRwZ/V6pN2POJ3eete..IigsrkWdUtDOVRA7.Tlfy9ZGp4w.8O', '$2y$10$T6PjmXUjButQzVO8FIV0UOvnYsD2Em153oEi9Cv6J/0Pdk5EGdelm', '$2y$10$llAi/KhMxhEj5YtessVBe.vfpnESeMO16Sh0NdoDnfhcWSPoWGS.2', 'admin', 'active'),
-(12, 12710000, '$2y$10$rk1LVXZoN56cdb1UOT7VO.J3j4Vi39g.1LqGaNEiN6dPB17UDTh1G', '', '', '', '', '', '', 'admin', 'new'),
+(12, 12710000, '$2y$10$bCOZpNIaa2JLIHAfHT9kjO9qMcr6qRT1R.DiPqK6gFYN0Wes4oemi', '¿Cuál es el nombre de tu primera mascota?', '¿En qué ciudad naciste?', '¿Cuál es el nombre de tu mejor amigo de la infancia?', '$2y$10$TJBIYuFvf4oaJduH2o6UKu4F2sQQAPToZq9Qv96DGijtVTxbVte66', '$2y$10$uaKzIagIgBMm3YkdcPieQuZhexxeU1q7SZrBSefRiIRcmSFpQ41vW', '$2y$10$wtJTCbBSryZBDqLMNDuPVuYcMo4lPlQUyMQxIGtj3nde1iVzd3s3m', 'admin', 'active'),
 (15, 15214479, '$2y$10$0AELJ3OJuaZwRxqOeRef8udxMiCE9b5/k5wMShASCzHyjFEU/sADm', '', '', '', '', '', '', 'profesor', 'new'),
 (16, 15071661, '$2y$10$jiwLP0zsQQKN33KLP.Ob..eMVcdD57haA1efWBBr2qWYbSm9Mv4vy', '', '', '', '', '', '', 'profesor', 'new'),
 (17, 14091761, '$2y$10$upjcc6Z.vBmJYRShy48Ece/z4ZuJlozIvNCDT17wRBpfZbquRjbie', '', '', '', '', '', '', 'profesor', 'new'),
@@ -512,6 +528,25 @@ CREATE TABLE `mensualidad` (
   `mes` enum('inscripcion','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `monto` decimal(20,2) NOT NULL DEFAULT '0.00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `mensualidad`
+--
+
+INSERT INTO `mensualidad` (`id`, `ano_escolar`, `mes`, `monto`) VALUES
+(92, 18, 'inscripcion', 60.00),
+(93, 18, 'septiembre', 60.00),
+(94, 18, 'octubre', 60.00),
+(95, 18, 'noviembre', 60.00),
+(96, 18, 'diciembre', 60.00),
+(97, 18, 'enero', 60.00),
+(98, 18, 'febrero', 60.00),
+(99, 18, 'marzo', 60.00),
+(100, 18, 'abril', 60.00),
+(101, 18, 'mayo', 60.00),
+(102, 18, 'agosto', 30.00),
+(103, 18, 'junio', 60.00),
+(104, 18, 'agosto', 30.00);
 
 -- --------------------------------------------------------
 
@@ -880,7 +915,7 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=313;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=329;
 
 --
 -- AUTO_INCREMENT de la tabla `horario_estudiante`
@@ -904,7 +939,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT de la tabla `mensualidad`
 --
 ALTER TABLE `mensualidad`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos`
