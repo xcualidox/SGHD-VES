@@ -54,7 +54,7 @@ class mesesPagos extends database_connect
         meses_pagos.cedula_estudiante,
 		mensualidad.mes,
 		ano_escolar.nombre AS ano_escolar,
-		CONCAT(ano_seccion.ano,' ',ano_seccion.seccion) AS 'ano_seccion',
+		anoseccion_concat AS 'ano_seccion',
 		meses_pagos.abonado,
 		mensualidad.monto as maximo
 		FROM meses_pagos

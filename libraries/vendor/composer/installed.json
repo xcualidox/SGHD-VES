@@ -1,6 +1,58 @@
 {
     "packages": [
         {
+            "name": "bt51/ntp",
+            "version": "0.1.0",
+            "version_normalized": "0.1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bt51/ntp.git",
+                "reference": "74041299558d8defa8eae4590839bf66692de32f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bt51/ntp/zipball/74041299558d8defa8eae4590839bf66692de32f",
+                "reference": "74041299558d8defa8eae4590839bf66692de32f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "2.0.*@dev"
+            },
+            "time": "2014-05-13T21:11:11+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Bt51\\NTP\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Tollakson",
+                    "email": "ben.tollakson@gmail.com"
+                }
+            ],
+            "description": "PHP library for interacting with ntp servers",
+            "homepage": "https://github.com/bt51/ntp",
+            "keywords": [
+                "network time protocol",
+                "ntp",
+                "ntp client"
+            ],
+            "support": {
+                "issues": "https://github.com/bt51/ntp/issues",
+                "source": "https://github.com/bt51/ntp/tree/master"
+            },
+            "install-path": "../bt51/ntp"
+        },
+        {
             "name": "dompdf/dompdf",
             "version": "v3.0.0",
             "version_normalized": "3.0.0.0",

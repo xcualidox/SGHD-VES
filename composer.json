@@ -1,5 +1,6 @@
 {
     "require": {
-        "dompdf/dompdf": "^3.0"
+        "dompdf/dompdf": "^3.0",
+        "bt51/ntp": "^0.1.0"
     }
 }

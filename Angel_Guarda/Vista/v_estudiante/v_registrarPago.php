@@ -23,24 +23,10 @@
                 <div class="formulario-extenso__row">
                     <div class="formulario-extenso__column">
 
-                        <label for="Pago">Descuento: </label>
+                        <label for="Pago">Descuento Actual: </label> <span id="descuentoActual" name="descuentoActual" class=" text-black">...</span>
+                        <input id="seleccionDescuento" hidden="" value="">
                         <div class="flex">
-                            <div class="custom-radio">
-                                <input type="radio" id="ninguno" value="1" name="descuento" checked onchange="verificarSeleccionado()">
-                                <label for="ninguno">Ninguno</label>
-                            </div>
-                            <div class="custom-radio">
-                                <input type="radio" id="descuento" value="0.90" name="descuento" onchange="verificarSeleccionado()">
-                                <label for="descuento-10">10%</label>
-                            </div>
-                            <div class="custom-radio">
-                                <input type="radio" id="descuento" value="0.80" name="descuento" onchange="verificarSeleccionado()">
-                                <label for="descuento-20">20%</label>
-                            </div>
-                            <div class="custom-radio">
-                                <input type="radio" id="descuento" value="0.5" name="descuento" onchange="verificarSeleccionado()">
-                                <label for="descuento-50">50%</label>
-                            </div>
+
 
                             <!-- <div class="custom-radio">
                                 <input type="radio" id="descuento-becado" value="0" name="descuento" onchange="verificarSeleccionado()">

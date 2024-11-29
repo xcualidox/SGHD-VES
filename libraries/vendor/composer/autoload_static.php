@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit13c2ea380f6f598f89b9cfcbd5fd6457
+class ComposerStaticInit39e9a013f12b452dd3e5d247279ed685
 {
     public static $prefixLengthsPsr4 = array (
         'S' => 
@@ -23,6 +23,10 @@ class ComposerStaticInit13c2ea380f6f598f89b9cfcbd5fd6457
         'D' => 
         array (
             'Dompdf\\' => 7,
+        ),
+        'B' => 
+        array (
+            'Bt51\\NTP\\' => 9,
         ),
     );
 
@@ -47,6 +51,10 @@ class ComposerStaticInit13c2ea380f6f598f89b9cfcbd5fd6457
         array (
             0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
         ),
+        'Bt51\\NTP\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bt51/ntp/src',
+        ),
     );
 
     public static $classMap = array (
@@ -57,9 +65,9 @@ class ComposerStaticInit13c2ea380f6f598f89b9cfcbd5fd6457
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit13c2ea380f6f598f89b9cfcbd5fd6457::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit13c2ea380f6f598f89b9cfcbd5fd6457::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit13c2ea380f6f598f89b9cfcbd5fd6457::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit39e9a013f12b452dd3e5d247279ed685::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit39e9a013f12b452dd3e5d247279ed685::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit39e9a013f12b452dd3e5d247279ed685::$classMap;
 
         }, null, ClassLoader::class);
     }

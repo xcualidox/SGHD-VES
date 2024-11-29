@@ -4,11 +4,13 @@ require_once(__DIR__ . "/../Modelo/m_pagos.php");
 require_once(__DIR__.'/../Modelo/m_mesesPagos.php');
 require_once(__DIR__ . "/../Modelo/m_escolar.php");
 require_once(__DIR__.'/../Modelo/m_mensualidad.php');
+require_once(__DIR__.'/../Control/c_descuentos.php');
 
 $objMensualidad = new mensualidad();
 $pagos = new pagos();
 $objMesesPagos = new mesesPagos();
 $objetoAno = new escolar();
+$objCDescuento = new ControladorDescuento();
 
 $resultados_por_pagina = 10;
 if(isset($_POST['pagina'])){
@@ -77,9 +79,15 @@ if(isset($_POST['registrarPago'])){
     $montoPrePagadoTotal = $pagos->obtenerMontoPrePagadoTotal($parametrosMontoPrePagadoTotal);
 
     $precioMensualidades=0;
-    foreach ($mensualidad as $mesMensualidad) {
-        $precioMensualidades = bcadd($precioMensualidades, $mesMensualidad['monto'],2);
-    }
+    $mesesAplanados = array_column($data['meses'], 'id');
+
+        // Sum up the prices of the months to be paid
+    $precioMensualidades = array_reduce($mensualidad, function($carry, $mes) use ($mesesAplanados) {
+        if (in_array($mes['id'], $mesesAplanados)) {
+            $carry += $mes['monto'];
+        }
+        return $carry;
+    }, 0);
 
     if($montoPrePagadoTotal['suma']){
         $deuda=bcsub($precioMensualidades,$montoPrePagadoTotal['suma'],2);
@@ -102,7 +110,9 @@ if(isset($_POST['registrarPago'])){
             $aEnviar[]=$ano_escolar;
             $aEnviar[]=$data['meses'][$i]['id'];
             $aEnviar[]=$data['nota_pago'];
-            $aEnviar[]=$data['descuento'];
+            $descuento=$objCDescuento->buscarDescuentoActual();
+            $aEnviar[]=$descuento['response']['descuento'];
+
             $aEnviar[]=$estudiante['nombres'].' '.$estudiante['apellidos'];
 
             $representante = $objetoEstudiante->verificarRepresentante($relacion['cedula_representante']);
@@ -194,7 +204,7 @@ if(isset($_POST['registrarPago'])){
         $response = [
             'success' => $exitos." exitos de ".$intentos." intentos.",
             'montoEnviarDebug' => [$montoEnviarDebug],
-            'montoPagarDebug' => $montoPagarDebug
+            'deuda' => $deuda
         ];
 
         // Responder con los datos procesados
@@ -205,7 +215,7 @@ if(isset($_POST['registrarPago'])){
         $response = [
             'success' => 'error',
             'message' => 'Valor a Pagar mayor a deuda',
-            'response' => [$deuda,$montoPagar]
+            'deuda' => $deuda
         ];
 
         // Responder con los datos procesados
