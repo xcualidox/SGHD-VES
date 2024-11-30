@@ -47,7 +47,7 @@ if(isset($_POST['obtenerDeudaMes'])){
         echo json_encode([
             'success' => false,
             'message' => 'Error',
-            'resultados' => 'xd'
+            'resultados' => [$mesPagoMonto,$montoPrePagadoIndividual]
         ]);
     }
 }
@@ -194,7 +194,7 @@ if(isset($_POST['registrarPago'])){
         $response = [
             'success' => $exitos." exitos de ".$intentos." intentos.",
             'montoEnviarDebug' => [$montoEnviarDebug],
-            'montoPagarDebug' => $montoPagarDebug
+            'deuda' => $descuento['response']['descuento']
         ];
 
         // Responder con los datos procesados
@@ -205,7 +205,7 @@ if(isset($_POST['registrarPago'])){
         $response = [
             'success' => 'error',
             'message' => 'Valor a Pagar mayor a deuda',
-            'response' => [$deuda,$montoPagar]
+            'deuda' => $descuento['response']['descuento']
         ];
 
         // Responder con los datos procesados

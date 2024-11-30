@@ -29,7 +29,7 @@ function recargarMesesPagos(){
       vaciarTabla('tbodyMesesPagos');
       if (pagos != null) {
       
-        insertarTr('tbodyMesesPagos', pagos);
+        insertarTrMesesPagos('tbodyMesesPagos', pagos);
         
         }
       else {
@@ -268,7 +268,14 @@ function moverListaPagosGlobal() {
 //MODAL PAGO ESPECIFICO
 //AL agregar los pagos de este registor no olvidar los ATRIBUTOS
 function openPagoEspecificoModal(event) {
-
+  
+//pedir el descuento y colocarlo como innerHTML en descuentoActual
+  pedirDescuentoActual(function(pedido){
+    let descuento = 1-pedido.response.descuento
+    descuentoActual.innerHTML=((descuento.toFixed(2))*100)+'%';
+    seleccionDescuento.value=pedido.response.descuento;
+    showToast()
+  }); 
 
   vaciarSelect('mes', { innerHTML: '---Seleccionar Mes---', disabled: '', selected: '' });
 
@@ -340,6 +347,7 @@ function openPagoEspecificoModal(event) {
 
 }
 function cuerpoPagos(pagos) {
+
   const pagoImprimir = pagos.map((pago) => (
         
           
@@ -492,9 +500,8 @@ function pedirMesesPagos(parametrosCrudos = {}, callback, pagina=1) {
   })
 }
 
-function pedirDeuda(idMesPago, callback) {
+function pedirDeuda(idMesPago, callback, cedula = document.getElementById('cedulaEstudianteRegistroPago').innerHTML) {
 
-  let cedula = document.getElementById('cedulaEstudianteRegistroPago').innerHTML;
   let anoEscolar = document.getElementById('AnoEscolarPago').value;
 
   $.ajax({

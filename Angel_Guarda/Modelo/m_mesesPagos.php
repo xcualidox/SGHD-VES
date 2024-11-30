@@ -81,7 +81,8 @@ class mesesPagos extends database_connect
 		ano_escolar.nombre AS ano_escolar,
 		CONCAT(ano_seccion.ano,' ',ano_seccion.seccion) AS 'ano_seccion',
 		meses_pagos.abonado,
-		mensualidad.monto as maximo
+		mensualidad.monto as maximo,
+        mensualidad.id
 		FROM meses_pagos
 		LEFT JOIN mensualidad ON mensualidad.id = meses_pagos.mes
 		LEFT JOIN ano_escolar ON ano_escolar.codigo = meses_pagos.ano_escolar
