@@ -320,14 +320,15 @@ function insertarTrMesesPagos(tbody_id, array = [], extra_parametros = []) {
         pedirDeuda(id,  (deuda) => { //Ordenar deudas con el mismo orden de ordenMeses
             deudas.push([id, cedula, deuda]);
             deudas.sort((a, b) => {
-                // Find the indices of `a` and `b` in ordenMeses
+                // Ordenar deudas de la misma forma que está ordenMeses, no entiendo 1qlo esto lo hizo chagpt
                 const indexA = ordenMeses.findIndex(([id, monthid]) => id === a[0] && monthid === a[1]);
                 const indexB = ordenMeses.findIndex(([id, monthid]) => id === b[0] && monthid === b[1]);
             
                 // Sort based on these indices
                 return indexA - indexB;
             });
-            console.log(deudas); //Acá ejecutas el script o funcion donde vas a realizar el calculo del porcentaje, etc
+            //este if es para saber si ya terminó de generar la lista completa
+            if (ordenMeses.length===deudas.length){ console.log(deudas); } //Acá ejecutas la logica que vayas a hacer con la deuda, está en formato [id,cedula,deuda], etc
         }  ,valores[0]);
     
  
