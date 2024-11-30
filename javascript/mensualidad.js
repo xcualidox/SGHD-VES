@@ -232,15 +232,18 @@ function vaciarTabla(tbody_id) {
 //Está hecho así para poder insertar codigo html como inputs con variables
 
 function insertarTr(tbody_id, array = [], extra_parametros = []) {
-
     if (array.length === 0){
         console.log('insertarTr: Array Vacía');
         return;
     }
 
     const tbody=document.getElementById(tbody_id);
+    deudas=[];//Variable global de las deudas en la tabla de meses_pagos para progreso
+    ordenMeses=[]; //Variable global del orden de los meses para poder ordenar las deudas
 
     for (let i = 0; i < array.length; i++) {
+
+
 
         //Primer fase de Array
         let nueva_columna = document.createElement('tr');
@@ -262,7 +265,72 @@ function insertarTr(tbody_id, array = [], extra_parametros = []) {
                 nuevo_campo.innerHTML = valores[i2];
             }
             nueva_columna.appendChild(nuevo_campo);
+            
+
         }
+    
+        
+        tbody.appendChild(nueva_columna);
+    }
+    
+}
+
+function insertarTrMesesPagos(tbody_id, array = [], extra_parametros = []) {
+    if (array.length === 0){
+        console.log('insertarTr: Array Vacía');
+        return;
+    }
+
+    const tbody=document.getElementById(tbody_id);
+    deudas=[];//Variable global de las deudas en la tabla de meses_pagos para progreso
+    ordenMeses=[]; //Variable global del orden de los meses para poder ordenar las deudas
+
+    for (let i = 0; i < array.length; i++) {
+
+
+
+        //Primer fase de Array
+        let nueva_columna = document.createElement('tr');
+
+        //Agarra solo los valores del diccionario
+        let valores = Object.values(array[i]);
+
+        for (let i2 = 0; i2 < valores.length; i2++) {
+        
+            //Campos especificos
+            const nuevo_campo = document.createElement('td');
+
+            if (extra_parametros.length > 0) {
+
+                let parametro = extra_parametros[i2];
+                nuevo_campo.innerHTML = parametro.split('?').join(valores[i2])
+
+            }else{
+                nuevo_campo.innerHTML = valores[i2];
+            }
+            nueva_columna.appendChild(nuevo_campo);
+            
+
+        }
+
+        let id = valores[6]
+        let cedula = valores[0]
+        ordenMeses.push([id,cedula]);
+        console.log(ordenMeses);
+        pedirDeuda(id,  (deuda) => { //Ordenar deudas con el mismo orden de ordenMeses
+            deudas.push([id, cedula, deuda]);
+            deudas.sort((a, b) => {
+                // Find the indices of `a` and `b` in ordenMeses
+                const indexA = ordenMeses.findIndex(([id, monthid]) => id === a[0] && monthid === a[1]);
+                const indexB = ordenMeses.findIndex(([id, monthid]) => id === b[0] && monthid === b[1]);
+            
+                // Sort based on these indices
+                return indexA - indexB;
+            });
+            console.log(deudas); //Acá ejecutas el script o funcion donde vas a realizar el calculo del porcentaje, etc
+        }  ,valores[0]);
+    
+ 
         
         tbody.appendChild(nueva_columna);
     }
