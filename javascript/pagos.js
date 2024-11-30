@@ -270,12 +270,7 @@ function moverListaPagosGlobal() {
 function openPagoEspecificoModal(event) {
   
 //pedir el descuento y colocarlo como innerHTML en descuentoActual
-  pedirDescuentoActual(function(pedido){
-    let descuento = 1-pedido.response.descuento
-    descuentoActual.innerHTML=((descuento.toFixed(2))*100)+'%';
-    seleccionDescuento.value=pedido.response.descuento;
-    showToast()
-  }); 
+
 
   vaciarSelect('mes', { innerHTML: '---Seleccionar Mes---', disabled: '', selected: '' });
 
