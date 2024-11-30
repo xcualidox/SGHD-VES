@@ -275,68 +275,7 @@ function insertarTr(tbody_id, array = [], extra_parametros = []) {
     
 }
 
-function insertarTrMesesPagos(tbody_id, array = [], extra_parametros = []) {
-    if (array.length === 0){
-        console.log('insertarTr: Array Vacía');
-        return;
-    }
 
-    const tbody=document.getElementById(tbody_id);
-    deudas=[];//Variable global de las deudas en la tabla de meses_pagos para progreso
-    ordenMeses=[]; //Variable global del orden de los meses para poder ordenar las deudas
-
-    for (let i = 0; i < array.length; i++) {
-
-
-
-        //Primer fase de Array
-        let nueva_columna = document.createElement('tr');
-
-        //Agarra solo los valores del diccionario
-        let valores = Object.values(array[i]);
-
-        for (let i2 = 0; i2 < valores.length; i2++) {
-        
-            //Campos especificos
-            const nuevo_campo = document.createElement('td');
-
-            if (extra_parametros.length > 0) {
-
-                let parametro = extra_parametros[i2];
-                nuevo_campo.innerHTML = parametro.split('?').join(valores[i2])
-
-            }else{
-                nuevo_campo.innerHTML = valores[i2];
-            }
-            nueva_columna.appendChild(nuevo_campo);
-            
-
-        }
-
-        let id = valores[6]
-        let cedula = valores[0]
-        ordenMeses.push([id,cedula]);
-        console.log(ordenMeses);
-        pedirDeuda(id,  (deuda) => { //Ordenar deudas con el mismo orden de ordenMeses
-            deudas.push([id, cedula, deuda]);
-            deudas.sort((a, b) => {
-                // Ordenar deudas de la misma forma que está ordenMeses, no entiendo 1qlo esto lo hizo chagpt
-                const indexA = ordenMeses.findIndex(([id, monthid]) => id === a[0] && monthid === a[1]);
-                const indexB = ordenMeses.findIndex(([id, monthid]) => id === b[0] && monthid === b[1]);
-            
-                // Sort based on these indices
-                return indexA - indexB;
-            });
-            //este if es para saber si ya terminó de generar la lista completa
-            if (ordenMeses.length===deudas.length){ console.log(deudas); } //Acá ejecutas la logica que vayas a hacer con la deuda, está en formato [id,cedula,deuda], etc
-        }  ,valores[0]);
-    
- 
-        
-        tbody.appendChild(nueva_columna);
-    }
-    
-}
 
 function pedirMensualidad(ano_escolar = '%%', callback) {
     $.ajax({

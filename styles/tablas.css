@@ -721,3 +721,32 @@ img {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
+
+  progress {
+    appearance: none;
+    -webkit-appearance: none; /* Safari/Chrome */
+    width: 100%;
+    height: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e0e0e0; /* Color de fondo del progress */
+    overflow: hidden;
+  }
+  
+  /* Estilo para el fondo de la barra (sin progreso) */
+  progress::-webkit-progress-bar {
+    background-color: #e0e0e0; /* Fondo del progress */
+    border-radius: 5px; /* Bordes redondeados */
+  }
+  
+  /* Estilo para el valor (la parte que muestra el progreso) */
+  progress::-webkit-progress-value {
+    background-color: #4caf50; /* Color verde del progreso */
+    border-radius: 5px; /* Asegura que los bordes sean redondeados */
+  }
+  
+  /* Estilo para navegadores Firefox */
+  progress::-moz-progress-bar {
+    background-color: #4caf50; /* Color verde del progreso */
+    border-radius: 5px; /* Bordes redondeados */
+  }
