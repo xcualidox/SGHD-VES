@@ -95,6 +95,16 @@ function crearSelect(options = [], seleccionado, parametros_option = [{}], param
 
     return nuevo_select;
 }
+function redirigirMensualidadPdf() {
+    const selecteMensualidad=document.querySelector('#AnoEscolarMensualidad').value;
+
+    
+    console.log(selecteMensualidad);
+    
+
+    window.open(`../pdf/mensualidadPDF.php?anoEscolar=${selecteMensualidad}`, '_blank');
+    
+}
 
 function eliminarMensualidad(id, callback) {    
     showConfirm("¿Está seguro de que desea eliminar Esta Mensualidad?",()=>{

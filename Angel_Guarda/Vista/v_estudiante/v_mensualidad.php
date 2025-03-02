@@ -25,7 +25,7 @@
                     <td>Monto</td>
                     <td class=''>
                         <div class="flex justify-center">
-                            <a href="#">
+                            <a onclick="redirigirMensualidadPdf()">
                                 <img src="../../../images/icons/pdf.svg" class="w-10 filtro-blanco" alt="Reporte" title="Reporte">
                             </a>
                         </div>
