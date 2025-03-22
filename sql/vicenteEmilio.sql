@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 29-11-2024 a las 14:57:49
+-- Tiempo de generación: 07-03-2025 a las 14:00:58
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -172,7 +172,14 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 (325, '2024-11-29 10:48:29', 12710000, 'insertar', ' Insertó la mensualidad de Mayo del Año Escolar \"Lmao\"', 'Tahiris-PC'),
 (326, '2024-11-29 10:48:29', 12710000, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'Tahiris-PC'),
 (327, '2024-11-29 10:48:29', 12710000, 'insertar', ' Insertó la mensualidad de Junio del Año Escolar \"Lmao\"', 'Tahiris-PC'),
-(328, '2024-11-29 10:48:29', 12710000, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'Tahiris-PC');
+(328, '2024-11-29 10:48:29', 12710000, 'insertar', ' Insertó la mensualidad de Agosto del Año Escolar \"Lmao\"', 'Tahiris-PC'),
+(329, '2025-02-11 08:26:31', 27576598, 'login', 'Ingresó al sistema.', 'Tahiris-PC'),
+(330, '2025-02-20 08:59:52', 27576598, 'login', 'Ingresó al sistema.', 'Tahiris-PC'),
+(331, '2025-02-20 09:16:33', 27576598, 'insertar', ' Insertó al estudiante MIRIANNYS MICHEL PACHECO PETAQUERO(34209385) correctamente.', 'Tahiris-PC'),
+(332, '2025-02-20 09:42:35', 27576598, 'insertar', ' Insertó al estudiante JOSE ANGEL LANDINEZ LINAREZ(34343385) correctamente.', 'Tahiris-PC'),
+(333, '2025-02-20 09:48:10', 27576598, 'insertar', ' Insertó al estudiante OSKEYLIS DEL CARMEN                 CEDEÑO SALAS                       (34389227) correctamente.', 'Tahiris-PC'),
+(334, '2025-02-20 12:08:43', 27576598, 'insertar', ' Insertó al estudiante LEISMAR DEL CARMEN                  RODRIGUEZ ALVARADO                 (34389441) correctamente.', 'Tahiris-PC'),
+(335, '2025-03-07 09:55:56', 29629080, 'login', 'Ingresó al sistema.', 'Tahiris-PC');
 
 -- --------------------------------------------------------
 
@@ -246,6 +253,16 @@ CREATE TABLE `estudiante` (
   `seccion` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `estudiante`
+--
+
+INSERT INTO `estudiante` (`cedula_estudiante`, `nombres`, `apellidos`, `ano`, `seccion`, `activo`) VALUES
+(34209385, 'MIRIANNYS MICHEL', 'PACHECO PETAQUERO', '2024-2025', '1ero U', 1),
+(34343385, 'JOSE ANGEL', 'LANDINEZ LINAREZ', '2024-2025', '1ero U', 1),
+(34389227, 'OSKEYLIS DEL CARMEN                ', 'CEDEÑO SALAS                       ', '2024-2025', '1ero U', 1),
+(34389441, 'LEISMAR DEL CARMEN                 ', 'RODRIGUEZ ALVARADO                 ', '2024-2025', '1ero U', 1);
 
 -- --------------------------------------------------------
 
@@ -727,6 +744,16 @@ CREATE TABLE `representante` (
   `telefono_2` varchar(17) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `representante`
+--
+
+INSERT INTO `representante` (`cedula_representante`, `nombres`, `apellidos`, `correo`, `direccion`, `telefono`, `telefono_2`) VALUES
+(16860175, 'JOSE LUIS ', 'LINAREZ MUÑOZ', 'REPRESENTACIONESLANDINEZ@GMAIL.COM', 'URB LOMAS DE SANTA SOFIA CONJ 13 N° 53 ARAURE', '04145390428', ''),
+(17276273, 'LEIDA DEL CARMEN ', 'ALVARADO', 'LEIDADELCARMENALVARADO@GMAIL.COM', 'PARROQUIA RIO ACARIGUA', '04261526325', ''),
+(20498969, 'KEILA JOANA', 'SALAS RICO', 'KEILASALASRICO@GMAIL.COM', 'BARRIO 5 DE DICIEMBRE', '04244213343', ''),
+(24020929, 'MARIA DEL CARMEN', 'PETAQUERO ALDANA', 'MPETAQUERO@GMAIL.COM', 'URB GONZALO BARRIOS  MANUELITA SAENZ', '04246394273', '');
+
 -- --------------------------------------------------------
 
 --
@@ -737,6 +764,16 @@ CREATE TABLE `representante-representado` (
   `cedula_estudiante` bigint NOT NULL,
   `cedula_representante` bigint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `representante-representado`
+--
+
+INSERT INTO `representante-representado` (`cedula_estudiante`, `cedula_representante`) VALUES
+(34343385, 16860175),
+(34389441, 17276273),
+(34389227, 20498969),
+(34209385, 24020929);
 
 --
 -- Índices para tablas volcadas
@@ -915,7 +952,7 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=329;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=336;
 
 --
 -- AUTO_INCREMENT de la tabla `horario_estudiante`

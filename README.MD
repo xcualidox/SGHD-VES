@@ -1,6 +1,7 @@
-# Nombre de tu aplicación (Agrega un nombre aquí si lo tienes)
+# Nombre de tu aplicación Software de Gestion de Horarios Docentes y Gestion de Pagos
 
 Esta aplicación se encarga de gestionar los horarios, registrar tanto a profesores como aulas, mostrar si el profesor se encuentra activo o inactivo, al igual que el aula para sus respectivas asignaciones para el horario. Además, puede imprimir un reporte completo de todos los profesores asignados en horarios con sus respectivas carreras. También cuenta con un módulo de seguridad, con preguntas de seguridad y bitácora de acceso al software.
+Tambien se encargara de gestionar los pagos de los padres Representantes
 
 
 ## Clave y Usuario

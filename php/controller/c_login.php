@@ -219,20 +219,20 @@ function login($username, $pw, $op)
             // Destruye la instancia login
             $GLOBALS["login"] = null;
             if ($_SESSION['sesion'] == "admin" || $_SESSION['sesion']=="administrador"){
-                require_once("../../Angel_Guarda/Control/c_bitacora.php");
+                require_once("../../public/Control/c_bitacora.php");
                 insertBitacora($username, "login", "Ingresó al sistema.");
-                header("Location: ../../Angel_guarda/Vista/Asignatura/v_asignatura.php");
+                header("Location: ../../public/Vista/Asignatura/v_asignatura.php");
                 // echo "angel";
             }
             else if ($_SESSION['sesion'] == "profesor" ||$_SESSION['sesion'] == "coordinador"){
-                require_once("../../Angel_Guarda/Control/c_bitacora.php");
+                require_once("../../public/Control/c_bitacora.php");
                 insertBitacora($username, "login", "Ingresó al sistema.");
-                header("Location: ../..//Angel_guarda/Vista/Horario/horario.php");
+                header("Location: ../..//public/Vista/Horario/horario.php");
             }
             else if ($_SESSION['sesion'] == "secretario" ){
-                require_once("../../Angel_Guarda/Control/c_bitacora.php");
+                require_once("../../public/Control/c_bitacora.php");
                 insertBitacora($username, "login", "Ingresó al sistema.");
-                header("Location: ../..//Angel_guarda/Vista/v_estudiante/v_estudiante.php");
+                header("Location: ../..//public/Vista/v_estudiante/v_estudiante.php");
             }
             exit();
         }
