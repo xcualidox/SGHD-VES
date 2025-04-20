@@ -21,9 +21,7 @@
                 <div class="formulario-extenso__column">
                     <label for="cedulaEstudiante">Cédula Estudiante: </label>
                     <input type="number" id="cedulaEstudiante" name="cedulaEstudiante" autocomplete="off" placeholder="Cédula del Estudiante" class="numeroMax formulario-extenso__input" maxlength="12">
-
                 </div>
-
             </div>
             <div class="formulario-extenso__row">
                 <div class="formulario-extenso__column">
@@ -59,7 +57,30 @@
                     </select>
                 </div>
 
+
             </div>
+            <div class="formulario-extenso__row">
+
+                <div class="formulario-extenso__column">
+                    <label for="tCamisa">Talla Camisa </label>
+                    <input type="input" name="tallaCamisa" id="tCamisa" class="formulario-extenso__input" autocomplete="off" placeholder="Talla Camisa" maxlength="70">
+
+                </div>
+                <div class="formulario-extenso__column">
+                    <label for="tPantalon">Talla Pantalón</label>
+                    <input type="input" name="tallaPantalon" id="tPantalon" class="formulario-extenso__input" autocomplete="off" placeholder="Talla Pantalón" maxlength="2">
+
+                </div>
+            </div>
+
+            <div class="formulario-extenso__column">
+                    <label for="anoSeccion">Fecha de Nacimiento </label>
+                    <input
+                            type="date"
+                            id="dateNacimiento"
+                            name="trip-start"
+                            />
+                </div>
         </div>
 
         <!-- Columna Derecha -->
@@ -80,26 +101,23 @@
                         <img src='../../../images/icons/noCheckRadius.svg' class='w-8 h-8 filtro-verde cursor-pointer' alt='Existente' title='Existente'>
                         Existe
                     </label>
-                        <?php 
+                    <?php
 
-                       
-                        if ($_SESSION["sesion"] == "admin") {
-                            $borrarBotonRepresentanteForm = " <img src='../../../images/icons/papelera.svg' id='borrarRepresentante' class='w-8 h-8 filtro-rojo cursor-pointer  hidden' alt='Borrar' title='Borrar'>";
-                            $botonModificarRepresentanteForm=" <img src='../../../images/icons/modificar.svg' id='modificarRepresentanteForm' class='w-8 h-8 filtro-verde cursor-pointer   hidden' alt='Modificar' title='Modificar'>";
-                      
-                        
-                        } 
-                        else{
-                            //Establezco los id en hidden ya que si no lo hago asi el JS no funciona
-                            $borrarBotonRepresentanteForm= " <input type='hidden' id='borrarRepresentante'>";
-                            $botonModificarRepresentanteForm="  <input type='hidden' id='modificarRepresentanteForm'>";
-                        }
-                        echo $borrarBotonRepresentanteForm;
-                        echo $botonModificarRepresentanteForm;
-                        ?>
 
-                  
-         
+                    if ($_SESSION["sesion"] == "admin") {
+                        $borrarBotonRepresentanteForm = " <img src='../../../images/icons/papelera.svg' id='borrarRepresentante' class='w-8 h-8 filtro-rojo cursor-pointer  hidden' alt='Borrar' title='Borrar'>";
+                        $botonModificarRepresentanteForm = " <img src='../../../images/icons/modificar.svg' id='modificarRepresentanteForm' class='w-8 h-8 filtro-verde cursor-pointer   hidden' alt='Modificar' title='Modificar'>";
+                    } else {
+                        //Establezco los id en hidden ya que si no lo hago asi el JS no funciona
+                        $borrarBotonRepresentanteForm = " <input type='hidden' id='borrarRepresentante'>";
+                        $botonModificarRepresentanteForm = "  <input type='hidden' id='modificarRepresentanteForm'>";
+                    }
+                    echo $borrarBotonRepresentanteForm;
+                    echo $botonModificarRepresentanteForm;
+                    ?>
+
+
+
                     <img src='../../../images/icons/return.svg' id="volverModificacionRepresentante" class='w-8 h-8 filtro-azul cursor-pointer  modificacionRepresentante hidden' alt='Volver' title='Volver'>
                     <!-- <img src='../../../images/icons/eraser.svg' id="limpiarRepresentante" class='w-8 h-8 filtro-azul cursor-pointer   ' alt='limpiarRepresentante' title='limpiarRepresentante'> -->
                 </div>
@@ -122,6 +140,16 @@
                 <div class="formulario-extenso__column">
                     <label for="telefonoDomicilio">telefono 2: </label>
                     <input type="number" name="telefonoDomicilio" id="telefonoDomicilio" autocomplete="off" class="numeroMax formulario-extenso__input" placeholder="telefono 2:" maxlength="17">
+                </div>
+            </div>
+            <div class="formulario-extenso__row">
+                <div class="formulario-extenso__column">
+                    <label for="dTrabajo">Donde Trabaja: </label>
+                    <input type="input" name="dTrabajo" id="dTrabajo" placeholder="Direccion Trabajo" autocomplete="off" class=" formulario-extenso__input" maxlength="80">
+                </div>
+                <div class="formulario-extenso__column">
+                    <label for="autorizacion">Personas Autorizadas</label>
+                    <input type="input" name="autorizacion" id="autorizacion" autocomplete="off" class=" formulario-extenso__input" placeholder="Para retirar al Menor" maxlength="80">
                 </div>
             </div>
         </div>

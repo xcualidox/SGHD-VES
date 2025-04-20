@@ -835,22 +835,31 @@ let totalMonto = 0;
 
 
 function verificarSeleccionado() {
-
   const mostrarDivPagos = document.querySelector('#mostrarDivPagos');
   const seleccion = document.querySelector('input[name="FormaPago"]:checked');
   const seleccionDescuento = document.querySelector('input[name="descuento"]:checked');
+  const selectMes = document.getElementById('mes');
+
+  // Verificar deuda y deshabilitar opciones con deuda 0
+  Array.from(selectMes.options).forEach(option => {
+    const mesId = option.getAttribute('data-id');
+    
+    if (mesId) {
+      pedirDeuda(mesId, function (deuda) {
+        if (parseFloat(deuda) === 0) {
+          option.disabled = true;
+          console.log(`Mes con ID ${mesId} deshabilitado por tener deuda 0`);
+        }
+      });
+    }
+  });
 
   if (seleccion && seleccionDescuento) {
-
     mostrarDivPagos.classList.add('block');
-    let enviar = [seleccion.value, seleccionDescuento.value];
-
-
-
-    return enviar
+    return [seleccion.value, seleccionDescuento.value];
   }
 
-  return null
+  return null;
 }
 //Validacion si cambio la forma de pago referente
 document.querySelectorAll('input[name="FormaPago"], input[name="descuento"]').forEach(radio => {

@@ -194,5 +194,7 @@
 
 
 </body>
-
+<div class="center__preload hidden">
+<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>
 </html>

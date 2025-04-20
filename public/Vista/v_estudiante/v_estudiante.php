@@ -24,13 +24,19 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
 <div class="main-content">
     <div class="modal__Oscuro"> </div>
-    <div class="flex absolute mt-3 ">
-        <h3 class=" font-semibold  ">
-            Dólar BCV: <input type="text" class=" text-balance  w-28  border  font-normal  outline-none px-2 py-1 mb-2 md:mb-0" id="DolarBCV" maxlength="9" onblur="actualizarDolar()">
-        </h3>
+    <div class="flex absolute mt-3 justify-between items-center w-full px-4">
+   
     </div>
-
     <div class="flex flex-col sm:flex-row justify-end items-center md:space-x-2 p-4 md:py-2">
+    <h3 class="font-semibold">
+             <button onclick="sincronizarConBCV()" class="ml-3  bg-green-700 hover:bg-green-600 text-white px-3 py-1 rounded">
+                Sincronizar 
+            </button>
+            Dólar BCV: 
+            <input type="text" class="text-balance w-28 border font-normal outline-none px-2 py-1 mb-2 md:mb-0" id="DolarBCV" maxlength="9" onblur="actualizarDolar()">
+    
+        </h3>
+    
         <h1 class="text-xl font-semibold mb-2 md:mb-0"><?php echo $title; ?></h1>
 
         <!-- Primer botón que abre el modal de "Añadir" -->
@@ -161,17 +167,17 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <h2 class="text-xl font-semibold mb-4" id="nombreEstudianteMostrar"></h2>
         
 
-        <details>
-        <summary>Datos Estudiante</summary>
-        <p id="DatosCompletosMostrarMas"></p>
+        <details class="border border-teal-600 rounded-lg p-4 bg-teal-50 mt-4">
+        <summary class="font-semibold cursor-pointer text-teal-700">Datos Estudiante</summary>
+            <p id="DatosCompletosMostrarMas" class="mt-2 p-4 rounded-lg bg-white text-gray-800 shadow-inner"></p>
         </details>
-        <details >
+        <!-- <details >
         <summary>Meses Saldados Estudiante</summary>
             <?php 
     //Se usa Include para que se cargue en ambos sitios
-        include("v_mesesSaldados.php");
+        // include("v_mesesSaldados.php");
             ?>
-        </details>
+        </details> -->
         <!-- Imprimiendo Datos Para Mostrar -->
 
     </div>

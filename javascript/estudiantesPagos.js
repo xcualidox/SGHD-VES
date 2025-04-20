@@ -224,6 +224,7 @@ function EliminarEstudiante(cedula) {
 });
 }
 
+
 function cargarDolar() {
     $.ajax({
         url: '../../Control/c_dolar.php', // Ruta al controlador PHP
@@ -241,6 +242,36 @@ function cargarDolar() {
             console.error('Error al cargar los datos del dólar:', textStatus, errorThrown);
         }
     });
+}
+
+// Sincronizar con BCV al presionar el botón
+function sincronizarConBCV() {
+    mostrarSpinner(); // Mostrar spinner mientras se sincroniza
+    fetch('../../Control/c_dolar.php?accion=sincronizar') // Asegúrate que esta sea la ruta correcta
+        .then(response => response.json())
+        .then(data => {
+            if (data.DolarBCV) {
+                const monto = parseFloat(data.DolarBCV).toFixed(2);
+                document.getElementById('DolarBCV').value = monto;
+
+                const fuente = data.fuente === 'local' ? false: true;
+
+                if (fuente) {
+                    showToast(`Tasa sincronizada correctamente `);
+                } else {
+                    showToast(`No Hubo Conexión con el Banco Central `,false);
+                    
+                }
+             
+            } else {
+                showToast('No se pudo sincronizar el dólar. Verifica tu conexión.');
+            }
+        ocultarSpinner(); // Ocultar spinner después de la sincronización
+        })
+        .catch(error => {
+            console.warn('Error al sincronizar:', error);
+            showToast('Error de red. Usando tasa local.');
+        });
 }
 
 // Función para actualizar el valor del dólar al hacer onblur en el input
@@ -275,8 +306,12 @@ function actualizarDolar() {
 }
 
 
+
 // Llamar a la función cargarDolar cuando se cargue la página
 window.onload = cargarDolar();
+
+
+
 
 function calcular() {
     const test = document.getElementById("DolarBCV").value;
@@ -357,7 +392,7 @@ function getQueryParam(param) {
         const valorCedula = cedulaInput.value.trim();
         let datalist = document.querySelector('#cedulaOptions');
         let options = Array.from(datalist.children);
-    
+
         // Verifica si el valor coincide con alguna opción en el datalist
         const match = options.some(option => option.value === valorCedula);
         if (match) {
@@ -401,7 +436,7 @@ function getQueryParam(param) {
         modificarRepresentanteForm.classList.remove('block')
         volverModificar.classList.add('hidden');
         volverModificar.classList.remove('block');
-      
+        window.onload= setMaxDateToday("dateNacimiento");
       cedulaInput.setAttribute('type', 'text');
       cedulaInput.removeAttribute('list'); // Quitar datalist
       //Muestra el boton de Modificar
@@ -461,6 +496,28 @@ function getQueryParam(param) {
       }
       modificarRepresentanteForm.addEventListener('click', toggleCampos);
   }
+
+
+  function setMaxDateToday(inputId) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+
+    const hoy = new Date();
+
+    // Formatear fecha a "YYYY-MM-DD"
+    const formatoFecha = (fecha) => {
+      const año = fecha.getFullYear();
+      const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+      const día = String(fecha.getDate()).padStart(2, "0");
+      return `${año}-${mes}-${día}`;
+    };
+
+    const fechaHoy = formatoFecha(hoy);
+
+    input.max = fechaHoy;     // Establece el máximo como hoy
+    input.value = fechaHoy;   // Asigna hoy como valor por defecto
+  }
+
  
 
  // Evento de cambio para las opciones de representante
@@ -742,22 +799,75 @@ function openPagoEspecificoModal(event) {
 
 // Función para abrir el modal y mostrar los datos
 function openModalMostrarMasDatos(event) {
-    const datos = JSON.parse(event.target.getAttribute('data-datos')); // Obtén los datos del atributo data-datos
-    // console.log(datos); // Muestra los datos en consola
+    const datos = JSON.parse(event.target.getAttribute('data-datos'));
 
-    // Aquí puedes usar los datos para mostrar en el modal
-    document.getElementById('DatosCompletosMostrarMas').textContent = `
-        Cédula Estudiante: ${datos.cedula_estudiante}
-        Nombres Estudiante: ${datos.nombres_estudiante}
-        Apellidos Estudiante: ${datos.apellidos_estudiante}
-        Nombres Representante: ${datos.nombres_representante}
-        Apellidos Representante: ${datos.apellidos_representante}
-        Teléfono: ${datos.telefono}
-        Teléfono 2: ${datos.telefono_2}
-    `;
+    document.getElementById('DatosCompletosMostrarMas').innerHTML = `
+    <div class="bg-white rounded-xl shadow-md p-4 w-full">
+      <div class="flex flex-wrap w-full gap-y-4">
+        <div class="w-full md:w-1/2">
+          <span class="font-semibold">Cédula Estudiante:</span>
+          <span>${datos.cedula_estudiante}</span>
+        </div>
+        <div class="w-full md:w-1/2 ">
+          <span class="font-semibold">Nombre Estudiante:</span>
+          <span>${datos.nombres_estudiante}</span>
+        </div>
+        <div class="w-full md:w-1/2 ">
+          <span class="font-semibold">Apellido Estudiante:</span>
+          <span>${datos.apellidos_estudiante}</span>
+        </div>
+  
+        <div class="w-full md:w-1/2">
+          <span class="font-semibold">Sección:</span>
+          <span>${datos.seccion }</span>
+        </div>
+        <div class="w-full md:w-1/2">
+          <span class="font-semibold">Año Escolar:</span>
+          <span>${datos.ano }</span>
+        </div>
+        <div class="w-full md:w-1/2">
+          <span class="font-semibold">Estado:</span>
+          <span>${datos.ano==1 ? "Inactivo": "Activo" }</span>
+        </div>
+           <div class="w-full md:w-1/2">
+          <span class="font-semibold">Direccion:</span>
+          <span>${datos.direccion }</span>
+        </div>
+      </div>
+        <hr class="my-4 border-t-2 border-gray-300" />
+    <h1 class="text-lg font-semibold p-5  text-teal-700">Datos del Representante</h1>
+        <div class="flex flex-wrap w-full gap-y-4">
+  
+        <div class="w-full md:w-1/2 ">
+          <span class="font-semibold">Nombre Representante: </span>
+          <span>${datos.nombres_representante}</span>
+        </div>
+        <div class="w-full md:w-1/2 ">
+          <span class="font-semibold">Apellido Representante:</span>
+          <span>${datos.apellidos_representante}</span>
+        </div>
+              <div class="w-full md:w-1/2 ">
+          <span class="font-semibold">Teléfono:</span>
+          <span>${datos.telefono}</span>
+        </div>
+        <div class="w-full md:w-1/2">
+          <span class="font-semibold">Teléfono 2:</span>
+          <span>${datos.telefono_2 || 'Sin teléfono'}</span>
+        </div>
+          <div class="w-full md:w-1/2">
+          <span class="font-semibold">Correo:</span>
+          <span>${datos.correo || 'Sin Registrar'}</span>
+        </div>
+         </div>
+    </div>
+  `;
+
+  
     document.getElementById('nombreEstudianteMostrar').textContent = `Nombres Estudiante: ${datos.nombres_estudiante} ${datos.apellidos_estudiante}`;
-    //Toda esta data Sera para La Incripcion, Se mantedran Guardado de momento
-    modalMostrarMas.classList.add('show');// Abrir el modal
+    document.getElementById('nombreEstudianteMostrar').textContent = `Nombres Estudiante: ${datos.nombres_estudiante} ${datos.apellidos_estudiante}`;
+    console.log(datos);
+    
+    modalMostrarMas.classList.add('show');
     document.querySelector(".modal__Oscuro").style.display = "block";
 }
 

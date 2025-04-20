@@ -105,5 +105,18 @@ function formatearNumerosCelular() {
         elemento.textContent = numeroFormateado;
     });
 }
+
+// Función para mostrar el spinner
+function mostrarSpinner() {
+    document.querySelector('.center__preload').style.display = 'flex';
+    document.querySelector('.center__preload').classList.add('show');
+  }
+  
+  // Función para ocultar el spinner
+  function ocultarSpinner() {
+    document.querySelector('.center__preload').style.display = 'none';
+    document.querySelector('.center__preload').classList.remove('show');
+  }
+  
 formatearCedulas();
 formatearNumerosCelular();
