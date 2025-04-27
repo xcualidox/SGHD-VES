@@ -10,66 +10,108 @@
     border: 1px solid #eee;
 }
 
-.sidebar{
+.sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    height: 1000%;
-    width: 95px;
+    height: 100vh;
+ 
     background-color: #12171e;
-    padding: .4rem .8rem;
-    transition: all 0.5s ease;
-}
+    padding: 1rem;
+    transition: transform 0.3s ease, width 0.3s ease;
+    overflow-y: auto;
+    z-index: 1000;
+  }
 
-.sidebar.active ~ .main-content{
-    left: 250px;
-    width: calc(100% - 250px);
-}
 
-.sidebar.active{
-    width:250px;
-}
+  .sidebar.collapsed {
+    width: 80px;
+  }
 
-.sidebar #btn{
-    position: absolute;
-    color: #fff;
-    top: .4rem;
-    left: 50%;
-    font-size: 1.2rem;
-    line-height: 50px;
-    transform: translateX(-50%);
+  .sidebar.collapsed:hover {
+    width: 250px; /* se expande al pasar el mouse */
+  }
+
+  .sidebar .logo,
+  .sidebar .user,
+  .sidebar ul {
+    transition: opacity 0.3s ease;
+  }
+
+  .sidebar.collapsed .logo p,
+  .sidebar.collapsed .user p,
+  .sidebar.collapsed ul span.nav-item {
+    display: none;
+  }
+
+  .sidebar.collapsed:hover .logo p,
+  .sidebar.collapsed:hover .user p,
+  .sidebar.collapsed:hover ul span.nav-item {
+  
+    display: flex; /* o inline, según lo que necesites */
+  }
+
+  
+
+  .sidebar .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sidebar .toggle-btn {
+    background: none;
+    border: none;
     cursor: pointer;
-}
+    width: 40px;
+  }
 
-.sidebar.active #btn{
-    left: 90%;
-}
+  .sidebar ul {
+    margin-top: 2rem;
+    list-style: none;
+    padding: 0;
+  }
 
-.sidebar .top .logo{
-    color:#fff;
+  .sidebar ul li {
+    margin-bottom: 1rem;
+  }
+
+  .sidebar ul li a {
     display: flex;
-    height: 50px;
-    width: 100%;
     align-items: center;
-    pointer-events: none;
-    opacity: 0;
-}
+    gap: 1rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+  }
 
-.sidebar.active .top .logo{
-    color:#fff;
-    display: flex;
-    height: 50px;
-    width: 100%;
-    align-items: center;
-    pointer-events: none;
-    opacity: 1;
-}
+  .sidebar ul li a img {
+    width: 24px;
+    filter: brightness(0) invert(1);
+  }
 
-.top .logo .bxs-institution{
-    font-size: 2rem;
-    margin-right: 5px;
-}
+  /* Responsive Mobile */
+  /* @media (max-width: 768px) {
+    .sidebar {
+      transform: translateX(-100%);
+    }
+    .sidebar.active {
+      transform: translateX(0);
+    }
+  } */
 
+  .main-content {
+ 
+    transition: margin-left 0.3s ease;
+  }
+
+
+
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 0;
+    }
+  }
 .user{
     display: flex;
     align-items: center;
@@ -91,12 +133,12 @@
 .main-content{
     position: relative;
     background-color: #fff;
-    min-height: 100vh;
+    max-height: 100vh;
     top: 0;
     left: 100px;
     transition: all 0.5s ease;
     width: calc(100% - 80px);
-    padding: 1.2rem;
+    padding: 0.1rem;
 }
 
 .error{
