@@ -119,6 +119,31 @@ class estudiante extends database_connect
        
     }
 
+    public function obtenerEstadoEstudiante($cedulaEstudiante)
+    {
+        // Actualizar la relación para el estudiante con el nuevo representante
+        $sql = "select activo
+                      FROM estudiante 
+                      WHERE cedula_estudiante = ?";
+        $result=$this->query($sql, [ $cedulaEstudiante]);
+        return $result;
+       
+    }
+    public function fetch_query($query)
+{
+    return $query->fetch(PDO::FETCH_ASSOC);
+}
+    public function actualizarEstadoEstudiante($cedulaEstudiante, $estado)
+    {
+        // Actualizar la relación para el estudiante con el nuevo representante
+        $sqlUpdate = "UPDATE `estudiante`
+                      SET activo = ?
+                      WHERE cedula_estudiante = ?";
+        $result=$this->query($sqlUpdate, [$estado, $cedulaEstudiante]);
+        return $result;
+       
+    }
+
     public function verificarEstudiante($cedula){
         $sql = "SELECT * FROM `estudiante` WHERE `cedula_estudiante` = ?";
         $resultado = $this->fetch_query($this->query($sql, [$cedula]));

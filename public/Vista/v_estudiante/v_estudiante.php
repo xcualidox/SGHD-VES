@@ -167,7 +167,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <h2 class="text-xl font-semibold mb-4" id="nombreEstudianteMostrar"></h2>
         
 
-        <details class="border border-teal-600 rounded-lg p-4 bg-teal-50 mt-4">
+        <details class="border border-teal-600 rounded-lg p-4 bg-teal-50 mt-4" open>
         <summary class="font-semibold cursor-pointer text-teal-700">Datos Estudiante</summary>
             <p id="DatosCompletosMostrarMas" class="mt-2 p-4 rounded-lg bg-white text-gray-800 shadow-inner"></p>
         </details>

@@ -825,10 +825,15 @@ function openModalMostrarMasDatos(event) {
           <span class="font-semibold">Año Escolar:</span>
           <span>${datos.ano }</span>
         </div>
-        <div class="w-full md:w-1/2">
-          <span class="font-semibold">Estado:</span>
-          <span>${datos.ano==1 ? "Inactivo": "Activo" }</span>
-        </div>
+     <div class="w-full md:w-1/2">
+            <span class="font-semibold">Estado:</span>
+            <span id="estado-${datos.cedula_estudiante}">
+                ${datos.activo == 0 ? "Inactivo" : "Activo"}
+            </span>
+            <button onclick="cambiarEstado('${datos.cedula_estudiante}')" class="ml-2 text-blue-600 ">
+                Cambiar estado
+            </button>
+            </div>
            <div class="w-full md:w-1/2">
           <span class="font-semibold">Direccion:</span>
           <span>${datos.direccion }</span>
@@ -870,6 +875,34 @@ function openModalMostrarMasDatos(event) {
     modalMostrarMas.classList.add('show');
     document.querySelector(".modal__Oscuro").style.display = "block";
 }
+
+function cambiarEstado(cedula) {
+    console.log("Cambiando estado de:", cedula);
+  
+    $.ajax({
+      url: '../../Control/c_estudianteEstado.php',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({ cedula }),
+      dataType: 'json',
+      success: function(response) {
+        if (response.success) {
+          // Cambia el texto en el span según el nuevo estado
+          const estadoSpan = document.getElementById(`estado-${cedula}`);
+          if (estadoSpan) {
+            estadoSpan.textContent = response.nuevo_estado == 0 ? "Inactivo" : "Activo";
+          }
+        } else {
+          alert('Error al cambiar el estado: ' + response.error);
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error('Error en la solicitud:', error);
+        console.log(xhr.responseText);
+        
+      }
+    });
+  }
 
 // Obtener el modal y el botón de cerrar por su ID
 
