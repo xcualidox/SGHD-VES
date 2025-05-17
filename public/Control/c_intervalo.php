@@ -3,6 +3,8 @@ require_once(__DIR__ . "/../Modelo/m_intervalo.php");
 
 	if (isset($_POST["ope"])) {
 		$operacion = $_POST["ope"];
+
+
 		switch ($operacion) {
 			case 'Incluir':
 				Registra();
@@ -30,7 +32,7 @@ require_once(__DIR__ . "/../Modelo/m_intervalo.php");
 function Registra()
 {
 	$objeto = new intervalo();
-	$objeto->setDatos($_POST["nom"]);
+	$objeto->setDatos($_POST["nom"],$_POST["horaInicio"],$_POST["horaFinal"]);
 	$objeto->incluye();
 	header("Location: ../Vista/Intervalo/v_intervalo.php");
 	
@@ -38,8 +40,10 @@ function Registra()
 
 function Modifica()
 {
+
+	
 	$objeto = new intervalo();
-	$objeto->setDatos($_POST["nom"]);
+	$objeto->setDatos($_POST["nom"],$_POST["horaInicio"],$_POST["horaFinal"]);
 	$objeto->modificar($_POST["origin"]);
 	header("Location: ../Vista/Intervalo/v_intervalo.php");
 }
@@ -53,6 +57,7 @@ function Elimina()
 function Disponi($disponibilidad)  {
 	$objeto = new intervalo();
 	$objeto->Disponibilidad($disponibilidad,$_POST["nom"]);
+
 	header("Location: ../Vista/Intervalo/v_intervalo.php");
 }
 

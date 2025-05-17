@@ -26,8 +26,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <div class="  bg-gray-100 rounded-full ">
             <img src="../../../images/icons/añadir.svg" class="w-10 filtro-verde" alt="Añadir" id="boton1" onclick="Mostrar()">
         </div>
-     
-       
+
        
     </div>
   
@@ -36,7 +35,9 @@ include_once('../v_Sidebar/v_Sidebar.php');
         <thead>
                 <tr>
                     <td>Intervalo</td>
-                    <td></td>
+                    <td>Hora Inicio</td>
+                    <td>Hora Final</td>
+                    <td>Acciones</td>
                 </tr>
               
             </thead>
@@ -50,7 +51,9 @@ include_once('../v_Sidebar/v_Sidebar.php');
             ?>
                 <tr>
                     <td><?php echo $fila["intervalo"]; ?> Minutos</td>
-                    <td>
+                        <td><?php echo $fila["hora_inicio"]; ?> </td>
+                     <td><?php echo $fila["hora_final"]; ?> </td>
+                    <td>  
 
                 <div class=" flex justify-center">
                     <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" 
@@ -105,6 +108,12 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <input type="text" id="nom" name="nom" maxlength="3" placeholder="Intervalo de tiempo para el Horario" class="formulario__input"> 
             <input type="hidden" name="ope" id='ope'>
             <input type="hidden" name="origin" id='origin'>
+                     <label for="horaInicio">Hora Inicio del Día:</label>
+                <input type="time" id="horaInicio" name="horaInicio" value="07:00">
+                <label for="hora">Hora Final del Día:</label>
+                <input type="time" id="horaFinal" name="horaFinal" value="12:50">
+                <br>
+                <br>
             <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button w-full">
            
         </form>

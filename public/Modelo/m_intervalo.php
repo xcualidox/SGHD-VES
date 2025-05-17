@@ -1,23 +1,26 @@
 <?php
 include_once("basedatos.php");
 class intervalo extends database_connect{
-    private $nom, $des, $dis;
-
-    function setDatos($nom){
+    private $nom,  $des, $dis;
+    private $hourFinal;
+    private $hourInicio;
+    function setDatos($nom,    $hourInicio,   $hourFinal,){
 		$this->nom=$nom;
+    $this->hourFinal=$hourFinal;
+     $this->hourInicio=$hourInicio;
 	  }
 
     function incluye(){
-        $sql= "insert into intervalo(intervalo, estado) values(?,'0')";
-		return $this->query($sql,$this->nom);
+        $sql = "INSERT INTO intervalo (intervalo, estado, hora_inicio,hora_final,) VALUES (?, '0', ?,?)";
+        return $this->query($sql, [$this->nom, $this->hourInicio,$this->hourFinal]);
     }
 
-    function modificar($origin){
-        $sql= "UPDATE `intervalo`
-                SET `intervalo`=?
-                WHERE `intervalo`=?";
-		return $this->query($sql, [$this->nom,$origin]);
-    }
+  function modificar($origin){
+    $sql = "UPDATE `intervalo`
+            SET `intervalo` = ?,  `hora_inicio` = ?,`hora_final` = ?
+            WHERE `intervalo` = ?";
+    return $this->query($sql, [$this->nom,$this->hourInicio, $this->hourFinal, $origin]);
+}
     
     function eliminar($origin) {
       $sql= "DELETE FROM `intervalo` WHERE `intervalo`=?";

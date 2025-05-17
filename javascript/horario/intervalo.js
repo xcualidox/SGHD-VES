@@ -79,12 +79,7 @@ function Enviar(valor){
             showToast("No puede dejar los campos vacios", false);
         }
 
-        else if (inp1 == dato1){
-          
-            
-            showToast("No puede dejar los mismos datos", false);
-        }
-
+   
         else{
             var nom = document.querySelector('#nom').value; 
 
