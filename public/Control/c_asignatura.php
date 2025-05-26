@@ -24,7 +24,7 @@ function Registra()
 {
 
 	$objeto = new asignatura();
-	$objeto->setDatos($_POST["cod"], $_POST["nom"]);
+	$objeto->setDatos($_POST["cod"], $_POST["nom"], json_decode($_POST["year"]));
 	$objeto->incluye();
 	header("Location: ../Vista/Asignatura/v_asignatura.php");
 	}
@@ -33,7 +33,7 @@ function Modifica()
 {
 
 	$objeto = new asignatura();
-	$objeto->setDatos($_POST["cod"], $_POST["nom"]);
+    $objeto->setDatos($_POST["cod"], $_POST["nom"], json_decode($_POST["year"]));
 	$objeto->modificar($_POST["origin"]);
 	header("Location: ../Vista/Asignatura/v_asignatura.php");
 }
