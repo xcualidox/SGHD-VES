@@ -3,6 +3,16 @@ include_once("../Modelo/horario.php");
 $objeto = new zona();
 $bloques = explode(",", $_POST["valores_horario"]);
 
+if(isset($_POST['pagina'])){
+    $pagina = $_POST['pagina'];
+}
+else{
+    $pagina = 1;
+}
+
+$resultados_por_pagina = 10;
+$offset = ($pagina-1)*$resultados_por_pagina;
+
 if ($_POST["id_intervalo"] != "undefined") {
     $intervalo = $_POST["id_intervalo"];
 } else {

@@ -37,12 +37,41 @@ class zona extends bdmysql{
       $sql= "SELECT * from asignatura";
       return $this->ejecutar($sql);
     }
-    function SelectAllHorario(){
-      $sql= "SELECT DISTINCT  ano_escolar.nombre, ano_seccion.ano, ano_seccion.seccion, horario_estudiante.codigo_a_escolar, horario_estudiante.codigo_a_y_seccion, intervalo.intervalo, horario_estudiante.receso
+    function SelectAllHorarioLEGACY(){
+      $sql= "SELECT DISTINCT
+      ano_escolar.nombre,
+      ano_seccion.ano,
+      ano_seccion.seccion,
+      horario_estudiante.codigo_a_escolar,
+      horario_estudiante.codigo_a_y_seccion,
+      intervalo.intervalo,
+      horario_estudiante.receso
+
       FROM horario_estudiante
       JOIN ano_escolar ON horario_estudiante.codigo_a_escolar = ano_escolar.codigo
       JOIN ano_seccion ON horario_estudiante.codigo_a_y_seccion = ano_seccion.codigo
       JOIN intervalo ON horario_estudiante.intervalo = intervalo.id";
+      return $this->ejecutar($sql);
+    }
+    function SelectAllHorario($limitRaw, $offsetRaw){
+      //Sanitizar los valores de entrada
+      $limit=intval($limitRaw);
+      $offset=intval($offsetRaw);
+
+      $sql="SELECT DISTINCT
+      personas.cedula,
+      CONCAT(personas.nombres,' ',personas.apellidos) AS nombre,
+      ano_escolar.nombre as ano_escolar,
+      intervalo.intervalo,
+      ano_escolar.codigo as ano_codigo
+
+            FROM horario_estudiante
+            JOIN ano_escolar ON horario_estudiante.codigo_a_escolar = ano_escolar.codigo
+            JOIN ano_seccion ON horario_estudiante.codigo_a_y_seccion = ano_seccion.codigo
+            JOIN intervalo ON horario_estudiante.intervalo = intervalo.id
+            JOIN personas ON horario_estudiante.profesor = personas.cedula
+            ORDER BY personas.cedula LIMIT ".$limit." OFFSET ".$offset;
+      
       return $this->ejecutar($sql);
     }
     function SelectAllProfesores(){
@@ -100,7 +129,11 @@ class zona extends bdmysql{
       WHERE codigo_a_escolar = '$ano_escolar' AND codigo_a_y_seccion = '$ano_seccion';";
       return $this->ejecutar($sql);
     }
-    function BloquesHorario($ano_escolar, $seccion) {
+    function BloquesHorario($cedulaRaw, $ano_escolarRaw) {
+
+      $cedula = intval($cedulaRaw);
+      $ano_escolar = intval($ano_escolarRaw);
+
       $sql = "SELECT aula.codigo, aula.nombre, asignatura.codigo, asignatura.nombre, 
                      horario_estudiante.codigo_dia, horario_estudiante.grupo, 
                      personas.cedula, personas.nombres, personas.apellidos,
@@ -109,8 +142,9 @@ class zona extends bdmysql{
               LEFT JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
               LEFT JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 
               LEFT JOIN personas ON horario_estudiante.profesor = personas.cedula
-              WHERE horario_estudiante.codigo_a_escolar = '$ano_escolar' 
-              AND horario_estudiante.codigo_a_y_seccion = '$seccion'";
+              LEFT JOIN ano_escolar ON horario_estudiante.codigo_a_escolar
+              WHERE personas.cedula = '$cedula'
+              AND ano_escolar.codigo = '$ano_escolar';";
       
       return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
     }

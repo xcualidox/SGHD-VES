@@ -68,7 +68,7 @@ else if(isset($_POST["anos_borrar"]) && isset($_POST["seccion_borrar"])){
     exit();
 }
 else {
-    $dato=$objeto->BloquesHorario($_POST["anos"],$_POST["seccion"]);
+    $dato=$objeto->BloquesHorario($_POST["cedula"],$_POST["ano_escolar"]);
     echo json_encode($dato);
     exit();
 }

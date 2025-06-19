@@ -61,24 +61,24 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
         <table class="fl-table">
             <thead>
                 <tr>
+                    <td>Cedula</td>
+                    <td>Nombre</td>
                     <td>Año Escolar</td>
-                    <td>Año</td>
-                    <td>Seccion</td>
                     <td>Acciones</td>
                 </tr>
             </thead>
             <tbody>
                 <?php while ($mostrar = mysqli_fetch_array($horario)) { ?>
                     <tr>
+                        <td><?php echo $mostrar["cedula"]; ?></td>
                         <td><?php echo $mostrar["nombre"]; ?></td>
-                        <td><?php echo $mostrar["ano"]; ?></td>
-                        <td><?php echo $mostrar["seccion"]; ?></td>
+                        <td><?php echo $mostrar["ano_escolar"]; ?></td>
                         <td>
 
                             <div class="flex justify-center items-center space-x-4">
                                 <?php if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador") {
                                     echo '<img src="../../../images/icons/papelera.svg" class="w-8 h-8 filtro-rojo cursor-pointer" alt="Borrar" title="Borrar" 
-                               onclick=\'EliminarHorario("' . $mostrar["codigo_a_escolar"] . '", "' . $mostrar["codigo_a_y_seccion"] . '")\'>';
+                               onclick=\'EliminarHorario("' . $mostrar["cedula"] . '", "' . $mostrar["ano_escolar"] . '")\'>';
                                 } ?>
 
                                 <?php
@@ -86,7 +86,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 
 
                                     echo '<img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar" 
-                                    onclick="ModificarBloques(\'' . $mostrar["codigo_a_escolar"] . '\', \'' . $mostrar["codigo_a_y_seccion"] . '\', \'' . $mostrar["nombre"] . '\', \'' . $mostrar["ano"] . $mostrar["seccion"] . '\', ' . $mostrar["intervalo"] . ', \'' . $mostrar["receso"] . '\')" />';
+                                    onclick="ModificarBloques(\'' . $mostrar["cedula"] . '\', \'' . $mostrar["ano_codigo"] . '\')" />';
                                 }
                                 ?>
 
@@ -94,7 +94,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 
 
 
-                                <a href='horario_pdf.php?codigo_escolar=<?php echo $mostrar["codigo_a_escolar"];
+                                <a href='horario_pdf.php?codigo_escolar=<?php echo $mostrar["ano_escolar"];
                                                                         ?>&codigo_seccion=<?php echo $mostrar["codigo_a_y_seccion"];
                         ?>&nombre=<?php echo $mostrar["nombre"]; ?>&ano=<?php echo $mostrar["ano"];
                                                     ?>&seccion=<?php echo $mostrar["seccion"]; ?>&intervalo=<?php echo $mostrar["intervalo"]; ?>&receso=<?php echo $mostrar["receso"]; ?>' target="_blank">

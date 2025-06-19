@@ -462,7 +462,7 @@ function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo,receso_ar
   var span= document.querySelector(".tabla_horario").querySelectorAll('span');
  console.log(span);
  
-  
+  nombre_seccion=''
   span[1].innerHTML= nombre_ano;
   span[3].innerHTML=nombre_seccion;
   for (let index = 0; index < array.length; index++) {
@@ -476,41 +476,17 @@ function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo,receso_ar
     
   }
 }
-function ModificarBloques(ano, seccion, nombre_ano, nombre_seccion, intervalo,receso) {
+function ModificarBloques(cedula, ano_escolar) {
 
-  document.getElementById('receso').value = receso;
-  CalcularHora(intervalo);
-  ano_seccion = ano;
-  seccion_array = seccion;
-  receso_array=receso;
-
-  console.log(receso_array);
-  
-
-
-
- 
-
-  
 
   $.ajax({
       url: '../../Control/horario_ajax.php',
       type: 'POST',
-      data: { anos: ano, seccion: seccion, receso: receso },
+      data: { cedula: cedula, ano_escolar: ano_escolar},
       success: function(response) {
           var datos = JSON.parse(response);
 
-
-          
-         
-
-          document.getElementById('ano').value = ano;
-          document.getElementById('seccion').value = seccion;
-          document.getElementById('receso').value = receso;
-         
-     
-
-          ModificarHorario(datos, nombre_ano, nombre_seccion,receso_array);
+          ModificarHorario(datos, ano_escolar);
       },
       error: function(xhr, status, error) {
           console.log(error);
@@ -666,8 +642,8 @@ function CalcularHora(intervalo, x) {
     // Comprobamos si es hora de receso
     if (horaInicial.getTime() === horaComparar.getTime()) {
       // Añadimos el bloque de receso
-      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>" + horaReceso + ":" + minutoReceso + " - " + (parseInt(horaReceso) + (minutoReceso >= 30 ? 1 : 0)) + ":" + ((minutoReceso + 30) % 60).toString().padStart(2, '0') + "</span>");
-      document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<p class='borrar' style='letter-spacing: 30px; font-size:50px; grid-column: 2/7; border:1px solid black; font-weight:bold; text-align:center; max-height:100px;'>RECESO</p>");
+      //document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<span class='hora borrar'>" + horaReceso + ":" + minutoReceso + " - " + (parseInt(horaReceso) + (minutoReceso >= 30 ? 1 : 0)) + ":" + ((minutoReceso + 30) % 60).toString().padStart(2, '0') + "</span>");
+      //document.querySelector('.tabla_horario').insertAdjacentHTML("beforeend", "<p class='borrar' style='letter-spacing: 30px; font-size:50px; grid-column: 2/7; border:1px solid black; font-weight:bold; text-align:center; max-height:100px;'>RECESO</p>");
 
       // Añadimos 30 minutos al receso
       horaInicial.setMinutes(horaInicial.getMinutes() + 30);
