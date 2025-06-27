@@ -3,33 +3,57 @@ include_once("../Modelo/horario.php");
 $objeto = new zona();
 $bloques = explode(",", $_POST["valores_horario"]);
 
-if(isset($_POST['pagina'])){
-    $pagina = $_POST['pagina'];
-}
-else{
-    $pagina = 1;
-}
+// Definición de la página
 
+// echo "<pre>";
+// echo "Contenido de \$_POST:\n";
+// var_dump($_POST);
+
+// if (isset($_POST["valores_horario"])) {
+//     $bloques = explode(",", $_POST["valores_horario"]);
+//     echo "\nContenido del array \$bloques (extraído de valores_horario):\n";
+//     var_dump($bloques);
+// } else {
+//     echo "\nAdvertencia: No se recibió valores_horario por POST.\n";
+// }
+// echo "</pre>";
+
+// // Puedes poner un die aquí para detener la ejecución si solo estás haciendo debug
+// die("Fin del vardump. Revisa los datos anteriores.");
+$pagina = isset($_POST['pagina']) ? $_POST['pagina'] : 1;
 $resultados_por_pagina = 10;
-$offset = ($pagina-1)*$resultados_por_pagina;
+$offset = ($pagina - 1) * $resultados_por_pagina;
 
-if ($_POST["id_intervalo"] != "undefined") {
-    $intervalo = $_POST["id_intervalo"];
-} else {
-    $resultado = $objeto->GetIntervalo($_POST["ano"], $_POST["seccion"]);
-    if (count($resultado) > 0) {
-        $intervalo = $resultado[0][0];
-    }
-}
 
-$objeto->ClearHorario($_POST["ano"], $_POST["seccion"]);
 
+// Validar y asignar $intervalo
+$intervalo = 45;
+// if (isset($_POST["id_intervalo"]) && $_POST["id_intervalo"] !== "undefined" && $_POST["id_intervalo"] !== "") {
+//     $intervalo = $_POST["id_intervalo"];
+// } else {
+//     $resultado = $objeto->GetIntervalo($_POST["ano"], $_POST["seccion"]);
+//     var_dump( $resultado );
+//      var_dump ($intervalo);   
+//     if (count($resultado) > 0) {
+//         $intervalo = $resultado[0][0];
+
+   
+//     } else {
+//         // Si no hay intervalo válido, detenemos el proceso
+//         die("Error: No se encontró un intervalo válido para el año y sección seleccionados.");
+//     }
+// }
+
+// Limpiar horario anterior
+$objeto->ClearHorario(18, ano_seccion: 22);
+
+// Procesar bloques si hay datos
 if (count($bloques) > 1) {
     for ($i = 0; $i < count($bloques); ) {
-        // Asignar valores de $_POST a variables
+        // Asignar valores
         $receso = $_POST['receso'];
-        $ano_escolar = $_POST["ano"];
-        $ano_seccion = $_POST["seccion"];
+        $ano_escolar = 18;
+        $ano_seccion = 22;
         $asginatura = $bloques[$i + 2];
         $aula = $bloques[$i + 1];
         $bloque = $bloques[$i];
@@ -37,26 +61,25 @@ if (count($bloques) > 1) {
         $profesor = $bloques[$i + 3];
         $id = $intervalo;
 
-        //Si la asignatura es válida entonces encerrarla en comillas para ejecutar correctamente el query
-        if ($asginatura!='null'){
-            $asginatura="'".$asginatura."'";
+        // Asegurarse de que la asignatura sea válida
+        if ($asginatura != 'null') {
+            $asginatura = "'".$asginatura."'";
         }
-  
-        
-        // Llamada a setDatos con las variables definidas
+
+        // Registrar horario
         $objeto->setDatos($receso, $ano_escolar, $ano_seccion, $asginatura, $aula, $bloque, $grupo, $profesor, $id);
         echo $objeto->Registrar_Horario();
 
         $i = $i + 5;
     }
-    require_once("c_bitacora.php");
-    //Busca los valores para la bitácora
-    $ano_array=$objeto->SelectAlgo('nombre','ano_escolar','codigo='.$ano_escolar);
-    $seccion_array=$objeto->SelectAlgo('*','ano_seccion','codigo='.$ano_seccion);
 
-    //Los saca directamente del array
-    $ano_bitacora=$ano_array[0][0];
-    $seccion_bitacora=$seccion_array[0][1].' '.$seccion_array[0][2];
+    // Bitácora
+    require_once("c_bitacora.php");
+    $ano_array = $objeto->SelectAlgo('nombre','ano_escolar','codigo='.$ano_escolar);
+    $seccion_array = $objeto->SelectAlgo('*','ano_seccion','codigo='.$ano_seccion);
+
+    $ano_bitacora = $ano_array[0][0];
+    $seccion_bitacora = $seccion_array[0][1].' '.$seccion_array[0][2];
 
     insertBitacora($_SESSION['username'], "insertar", 'Creó el horario para el año "'.$ano_bitacora.'" sección "'.$seccion_bitacora.'".');
 }
