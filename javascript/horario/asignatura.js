@@ -1,7 +1,7 @@
 var dato1="";
 var dato2="";
-
-function Modificar(codigo, nombre) {
+var dato3="";
+function Modificar(codigo, nombre, anos) {
     var div = document.querySelector('#form');
     var inputs = div.querySelectorAll('input');
     document.getElementById('boton1').style.display = 'block';
@@ -13,6 +13,8 @@ function Modificar(codigo, nombre) {
     
     dato1 = codigo;
     dato2 = nombre;
+    dato3 = anos;
+    materiaYearSelector.setSelectedYears(anos);
 
 }
 
@@ -28,8 +30,7 @@ function Eliminar(codigo) {
 function Enviar(valor) {
     var div = document.querySelector('#form');
     var inputs = div.querySelectorAll('input');
-
-
+    const years = materiaYearSelector.getSelectedYears();
     if (document.getElementById("ope").value == "") {
         document.pantalla.ope.value = valor;
     }
@@ -44,6 +45,8 @@ function Enviar(valor) {
             showToast("No puede dejar los campos vacios", false);
         } else if (cod.length > 10) {
             showToast("El codigo de la asignatura no puede tener mas de 3 letras", false);
+        } else if (years.length == 0) {
+            showToast("Debe asociar al menos un año escolar a la materia!", false);
         } else if (nom.length > 101) {
             showToast("El nombre de la asignatura es muy largo", false);
         } else {
@@ -54,7 +57,16 @@ function Enviar(valor) {
             var restM = rest.toUpperCase();
 
             var nom2 = primLM + restM;
-
+            // Crear el input hidden
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'year';
+            
+            // Convertir el array a JSON y asignarlo como valor
+            hiddenInput.value = JSON.stringify(years);
+            
+            // Agregar el input al formulario
+            document.getElementById('form').appendChild(hiddenInput);
             document.querySelector('#cod').value = cod2;
             document.querySelector('#nom').value = nom2;
             showToast("Los datos han sido introducidos exitosamente", true);
@@ -68,9 +80,13 @@ function Enviar(valor) {
 
         if (inp1 == "" || inp2 == "") {
             showToast("No puede dejar los campos vacios", false);
-        } else if (inp1 == dato1 && inp2 == dato2) {
+        } else if (inp1 == dato1 && inp2 == dato2 && years == dato3) {
             showToast("No puede dejar los mismos datos", false);
-        } else {
+        
+        }
+        else if (years.length == 0) {
+            showToast("Debe asociar al menos un año escolar a la materia!", false);}
+        else {
             var cod = document.querySelector('#cod').value;
             var nom = document.querySelector('#nom').value;
 
@@ -90,7 +106,16 @@ function Enviar(valor) {
                 document.querySelector('#cod').value = cod2;
                 document.querySelector('#nom').value = nom2;
 
+                // Crear el input hidden
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'year';
                 
+                // Convertir el array a JSON y asignarlo como valor
+                hiddenInput.value = JSON.stringify(years);
+                
+                // Agregar el input al formulario
+                document.getElementById('form').appendChild(hiddenInput);
 
                 showToast("Este dato ha sido modificado exitosamente", true);
                 document.getElementById('origin').value = dato1;
@@ -103,3 +128,4 @@ function Enviar(valor) {
         }
     }
 }
+

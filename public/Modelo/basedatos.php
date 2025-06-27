@@ -115,6 +115,7 @@ class database_connect{
                 return true;
                 
             } catch (PDOException $e) {
+                // echo $e;exit;
                 $this->connection->rollBack();
                 return false;
             }

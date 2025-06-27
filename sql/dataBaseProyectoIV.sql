@@ -2,8 +2,8 @@
 -- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 17-05-2025 a las 18:47:53
+-- Servidor: localhost
+-- Tiempo de generación: 26-05-2025 a las 02:15:15
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -97,7 +97,8 @@ INSERT INTO `asignatura` (`codigo`, `nombre`) VALUES
 ('OC', 'ORIENTACIÓN Y CONVIVENCIA'),
 ('PGCRP', 'PARTICIPACION  EN GRUPOS DE CREACIÓN, RECREACIÓN Y PRODUCCIÓN  '),
 ('QU', 'QUIMICA'),
-('TC', 'TRABAJO COMUNITARIO');
+('TC', 'TRABAJO COMUNITARIO'),
+('XD', 'XDD');
 
 -- --------------------------------------------------------
 
@@ -224,7 +225,8 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 (377, '2025-05-17 09:54:29', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
 (378, '2025-05-17 10:29:07', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
 (379, '2025-05-17 11:17:53', 29629080, 'eliminar', ' Eliminó al estudiante Arepa TEST(296290801) correctamente.', 'DESKTOP-UEKPGTH'),
-(380, '2025-05-17 14:38:44', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH');
+(380, '2025-05-17 14:38:44', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
+(381, '2025-05-25 18:38:13', 29629080, 'login', 'Ingresó al sistema.', 'xcualidox');
 
 -- --------------------------------------------------------
 
@@ -583,6 +585,26 @@ INSERT INTO `login` (`id`, `username`, `password`, `security_q_1`, `security_q_2
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `materia_ano`
+--
+
+CREATE TABLE `materia_ano` (
+  `id` int NOT NULL,
+  `codigo_materia` varchar(8) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `ano` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `materia_ano`
+--
+
+INSERT INTO `materia_ano` (`id`, `codigo_materia`, `ano`) VALUES
+(3, 'XD', 4),
+(4, 'XD', 5);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `mensualidad`
 --
 
@@ -925,6 +947,13 @@ ALTER TABLE `login`
   ADD UNIQUE KEY `username` (`username`);
 
 --
+-- Indices de la tabla `materia_ano`
+--
+ALTER TABLE `materia_ano`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `codigo_materia` (`codigo_materia`,`ano`);
+
+--
 -- Indices de la tabla `mensualidad`
 --
 ALTER TABLE `mensualidad`
@@ -1019,7 +1048,7 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=381;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=382;
 
 --
 -- AUTO_INCREMENT de la tabla `horario_estudiante`
@@ -1038,6 +1067,12 @@ ALTER TABLE `intervalo`
 --
 ALTER TABLE `login`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT de la tabla `materia_ano`
+--
+ALTER TABLE `materia_ano`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad`
@@ -1088,6 +1123,12 @@ ALTER TABLE `horario_estudiante`
 --
 ALTER TABLE `login`
   ADD CONSTRAINT `login_personas` FOREIGN KEY (`username`) REFERENCES `personas` (`cedula`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `materia_ano`
+--
+ALTER TABLE `materia_ano`
+  ADD CONSTRAINT `materia_ano_ibfk_1` FOREIGN KEY (`codigo_materia`) REFERENCES `asignatura` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `mensualidad`

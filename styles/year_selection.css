@@ -1,0 +1,143 @@
+/* Materia Year Component Styles - Prefix: materia_year */
+        
+        .materia_year__container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            /* border: 1px solid #e0e0e0; */
+            border-radius: 8px;
+            background-color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+        }
+        
+        .materia_year__label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #333333;
+        }
+        
+        .materia_year__select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: #ffffff;
+            color: #333333;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .materia_year__select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+        
+        .materia_year__select:hover {
+            border-color: #b0b0b0;
+        }
+        
+        .materia_year__selected-list {
+            margin-top: 16px;
+            padding: 0;
+        }
+        
+        .materia_year__selected-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #555555;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .materia_year__selected-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-height: 20px;
+        }
+        
+        .materia_year__tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            background-color: #e3f2fd;
+            color: #1976d2;
+            border: 1px solid #bbdefb;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            animation: materia_year__fadeIn 0.3s ease;
+        }
+        
+        .materia_year__tag-remove {
+            margin-left: 8px;
+            background: none;
+            border: none;
+            color: #1976d2;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            padding: 0;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+        }
+        
+        .materia_year__tag-remove:hover {
+            background-color: rgba(25, 118, 210, 0.1);
+        }
+        
+        .materia_year__empty-state {
+            color: #999999;
+            font-style: italic;
+            font-size: 13px;
+            padding: 8px 0;
+        }
+        
+        /* Animations */
+        @keyframes materia_year__fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .materia_year__container {
+                margin: 10px;
+                padding: 16px;
+            }
+            
+            .materia_year__select {
+                padding: 10px 12px;
+            }
+            
+            .materia_year__tag {
+                padding: 4px 8px;
+                font-size: 12px;
+            }
+        }
+        
+        /* Utility classes for easy customization */
+        .materia_year--compact .materia_year__container {
+            padding: 12px;
+        }
+        
+        .materia_year--large .materia_year__select {
+            padding: 16px 20px;
+            font-size: 16px;
+        }
