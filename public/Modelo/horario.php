@@ -29,6 +29,17 @@ class zona extends bdmysql{
       $sql= "SELECT * from ano_seccion";
       return $this->ejecutar($sql);
     }
+
+   function SelectAllDocente(){
+      $sql= " SELECT DISTINCT 
+      CONCAT(p.nombres, ' ', p.apellidos) AS nombre_completo,
+      pm.profesor AS cedula
+    FROM profesores_materias pm
+    JOIN personas p ON pm.profesor = p.cedula; ";
+      return $this->ejecutar($sql);
+    }
+
+
     function SelectAllAula(){
       $sql= "SELECT * from aula WHERE `disponibilidad`=1";
       return $this->ejecutar($sql);

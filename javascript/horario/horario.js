@@ -8,41 +8,39 @@ var ano_seccion="";
 var seccion_array="";
 
 var change="";
-function CrearHorario(intervalo,x) {
+function CrearHorario(intervalo, x) {
+  var select = document.querySelectorAll(".select");
 
-    var select=document.querySelectorAll(".select");
-    if (select[0].value!="" && select[1].value!="" && select[2].value!="") {
-      ano_seccion=select[0].value;
-      seccion_array=select[1].value;
-      receso=select[2].value;
-      console.log(receso);
- 
-    
-      
-      var span= document.querySelector(".tabla_horario").querySelectorAll('span');
-     
-      console.log(select[1].selectedIndex);
-      span[1].innerHTML= select[0].options[select[0].selectedIndex].innerText;
-      span[3].innerHTML=select[1].options[select[1].selectedIndex].innerText;
-      document.querySelector(".tabla_horario").style.display='grid';
-      document.querySelector('.guardar').style.display='block';
-      document.querySelector('.volver').style.display='block';
-      document.querySelector('.container_horario').style.display='none';
+  const anoEscolar = select[0].value;       // Código del año escolar
+  const docenteCedula = select[1].value;    // Cédula del docente
 
-    }
+  if (anoEscolar !== "" && docenteCedula !== "" ) {
+    console.log("Código año escolar:", anoEscolar);
+    console.log("Cédula del docente:", docenteCedula);
+
+    // También puedes obtener el texto visible de la opción seleccionada
+    const anoNombre = select[0].options[select[0].selectedIndex].innerText;
+    const docenteNombre = select[1].options[select[1].selectedIndex].innerText;
+
+    console.log("Nombre del año escolar:", anoNombre);
+    console.log("Nombre del docente:", docenteNombre);
+
+    var span = document.querySelector(".tabla_horario").querySelectorAll('span');
+    span[1].innerHTML = anoNombre;
+    span[3].innerHTML = docenteNombre;
+
+    document.querySelector(".tabla_horario").style.display = 'grid';
+    document.querySelector('.guardar').style.display = 'block';
+    document.querySelector('.volver').style.display = 'block';
+    document.querySelector('.container_horario').style.display = 'none';
+  } else {
+    showToast("Tiene que seleccionar año y sección", false);
+    submit.preventDefault(); // ⚠️ Este `submit` no está definido. Tal vez quieras usar `event.preventDefault()` si estás dentro de un evento.
+  }
 
 
-    else {  
-  
-      showToast("Tiene que selecionar año y seccion",false)
-      submit.preventDefault()
-   
-    }
-     document.getElementById("receso").value=receso;
-
-    CalcularHora(intervalo, x)
-
-    }
+  CalcularHora(intervalo, x);
+}
 
 function LimpiarBloqueVista() {
 
@@ -100,7 +98,7 @@ function EditarBloque(bloque) {
 
     let contenidobloque=bloque.children;
 
-    let seccion = document.getElementById("seccion").value;
+    // let seccion = document.getElementById("seccion").value;
 
     //Array donde se guardará los datos a usar en el formulario de modificar
     let datosbloque=[];
@@ -608,9 +606,9 @@ document.addEventListener('DOMContentLoaded', function() {
 function CalcularHora(intervalo, x) {
   id = x;
   intervalo;
-  const receso_array = document.querySelector("#receso").value;
+  // const receso_array = document.querySelector("#receso").value;
 
-  const [horaReceso, minutoReceso] = receso_array.split(':');
+  // const [horaReceso, minutoReceso] = receso_array.split(':');
   var contador = 1;
   var minutosAgregar = intervalo;
   var horaInicial = new Date();
@@ -626,7 +624,7 @@ function CalcularHora(intervalo, x) {
   // Establecemos la hora inicial y la hora de receso
 
   horaInicial.setHours(7, 0, 0, 0); // Hora de inicio del horario
-  horaComparar.setHours(parseInt(horaReceso), parseInt(minutoReceso), 0, 0); // Hora de receso
+  // horaComparar.setHours(parseInt(horaReceso), parseInt(minutoReceso), 0, 0); // Hora de receso
   horaEnd.setHours(17, 0, 0, 0); // Hora de fin del horario
 
   div = document.querySelector('.tabla_horario');

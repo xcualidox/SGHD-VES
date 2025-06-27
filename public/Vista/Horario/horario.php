@@ -23,6 +23,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
 $objeto = new query();
 $ano_escolar = $objeto->SelectAno_Escolar();
 $ano_seccion = $objeto->SelectAno_Seccion();
+$docente = $objeto->SelectDocente();
 $aula = $objeto->SelectAula();
 $aula2 = $objeto->SelectAula();
 $materia = $objeto->SelectAsignatura();
@@ -117,11 +118,11 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
     <div class='container_horario'>
         <div class='cerrar cerrar_div' style='left:730px;width:60px;'>X</div>
         <h2 style='text-align:center;'>Crear Horario</h2>
-        <p>Para crear el horario nececita ingresar el lapso, año y seccion para comenzar su creacion</p>
+        <p>Para crear el horario nececita ingresar el lapso, año y seccin para comenzar su creacion</p>
 
         <div class='input_container'>
 
-            <label for="lapso">Año Escolar</label>
+            <label for="lapso">Docente</label>
             <select name="ano" id="ano" class='select'>
                 <option value="">Seleccione</option>
                 <?php
@@ -134,12 +135,12 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
         </div>
         <div class='input_container'>
 
-            <label for="ano">Año y Seccion</label>
-            <select name="seccion" id="seccion" class='select'>
+            <label for="docenteCedula">Seleccione al docente</label>
+            <select name="docenteCedula" id="docenteCedula" class='select'>
                 <option value="">Seleccione</option>
                 <?php
-                while ($mostrar = mysqli_fetch_array($ano_seccion)) {
-                    echo "<option value='" . $mostrar["codigo"] . "'>" . $mostrar["ano"] . " " . $mostrar["seccion"] . "</option>";
+                while ($mostrar = mysqli_fetch_array($docente)) {
+                    echo "<option value='" . $mostrar["cedula"] . "'>" . $mostrar["nombre_completo"] ."</option>";
                 }
                 ?>
 
@@ -149,10 +150,9 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 
 
         </div>
-        <div class='input_container'>
-            <label for="receso">Receso</label>
-            <input type="time" id='receso' name='receso' class="select" value="08:20">
-        </div>
+
+
+    
 
         <input type="text" id='valores_horario' name='valores_horario' hidden>
         <input type="text" id='id_intervalo' name='id_intervalo' hidden>

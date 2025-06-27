@@ -8,6 +8,9 @@ class query extends zona {
     function SelectAno_Seccion() {
         return $this->SelectAllAno_Seccion();
     }
+   function SelectDocente() {
+        return $this->SelectAllDocente();
+    }
     function SelectAula() {
         return $this->SelectAllAula();
     }

@@ -801,6 +801,9 @@ function openPagoEspecificoModal(event) {
 function openModalMostrarMasDatos(event) {
     const datos = JSON.parse(event.target.getAttribute('data-datos'));
 
+    console.log('Datos año escolar ',datos);
+    
+
     document.getElementById('DatosCompletosMostrarMas').innerHTML = `
     <div class="bg-white rounded-xl shadow-md p-4 w-full">
       <div class="flex flex-wrap w-full gap-y-4">
