@@ -11,16 +11,20 @@
 
 
 .tabla_horario {
-    position: absolute;
-    
-    display: none;
-    grid-template-columns: 130px 200px 200px 200px 200px 200px;
-    top: 98%;
-    left: 50%;
-    height: 1350px;
-    transform: translate(-50%,-50%);
-    background-color: rgb(220, 220,220);
-    gap: .2px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+   margin-top: 5rem;
+  transform: translate(-50%, -50%);
+  display: none;
+  grid-template-columns: 130px repeat(5, 1fr);
+  width: 95%;
+  max-width: 1000px;
+  background-color: rgb(220, 220, 220);
+  gap: 1px;
+  border-collapse: collapse;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 10;
 }
 .registrar_materia {
     width: 300px;
@@ -32,6 +36,7 @@
     left: 50%;
     transform: translate(-50%,-50%);
     display: none;
+    z-index: 50000;
 }
 .registrar_materia button {
     text-align: center;
@@ -130,43 +135,46 @@
     font-weight: bold;
 }
 .tabla_horario div {
-    border: 1px solid black;
-    height: 90px;
-    background-color: rgb(230, 230, 230);
-    transition: .5s all ease;
-    cursor: pointer;
-    font-size: 14px;
-    padding: 5px;
+  border: 1px solid #999;
+    height: 100px;
+  background-color: #f2f2f2;
+  transition: 0.3s ease;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 6px;
+  overflow: hidden;
+  overflow-y: auto; /* Agrega scroll si se pasa del límite */
+
 }
+
 .contend {
     overflow: auto;
 }
 
 .tabla_horario .hora {
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    line-height: 90px;
-    height: 90px;
-    background-color: rgb(230, 230, 230);
-    transition: .5s all ease;
-    font-size: 22px;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #e8e8e8;
+    height: 100px;
+
 }
 
+
 .tabla_horario .break {
-    border: 1px solid black;
-    height: 60px;
-    background-color: rgb(230, 230, 230);
-    transition: .5s all ease;
-    font-size: 40px;
-    text-align: center;
-    grid-column: 1/7;
-    background-color:rgb(133, 96, 214);
-    color: white;
+  grid-column: 1 / 7;
+  height: 50px;
+  background-color: #855ed6;
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .tabla_horario div:hover {
-    background-color: rgb(194, 193, 193);
+  background-color: #e0e0e0;
 }
 select {
     height: 25px;

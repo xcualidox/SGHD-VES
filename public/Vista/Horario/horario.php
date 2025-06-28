@@ -35,6 +35,8 @@ $intervalo = $objeto->SelectIntervalo();
 while ($mostrar = mysqli_fetch_array($intervalo)) {
     $tiempo = $mostrar["intervalo"];
     $id = $mostrar["id"];
+    $hora_inicio = $mostrar["hora_inicio"];
+    $hora_final = $mostrar["hora_final"];
 }
 
 ?>
@@ -164,25 +166,26 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 
 </form>
 
-<div class='tabla_horario bg-slate-400 p-2' style=" grid-column-gap: -10px;">
-    <span class='titulos'>Lapso:</span>
-    <span style='grid-column:2/4;' class='titulos'></span>
-    <span class='titulos'>Seccion:</span>
-    <span style='grid-column:5/7;' class='titulos'></span>
-    <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;'>Hora</div>
-    <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;'>Lunes</div>
-    <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;'>Martes</div>
-    <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;'>Miercoles</div>
-    <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;'>Jueves</div>
-    <span style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;'>Viernes</span>
-</div>
+    <div class='tabla_horario bg-slate-400 p-2' style=" grid-column-gap: -10px;">
+        <span class='titulos'>Lapso:</span>
+        <span style='grid-column:2/4;' class='titulos'></span>
+        <span class='titulos'>Seccion:</span>
+        <span style='grid-column:5/7;' class='titulos'></span>
+        <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit; overflow-y: hidden;'>Hora</div>
+        <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;overflow-y: hidden;'>Lunes</div>
+        <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;overflow-y: hidden;'>Martes</div>
+        <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;overflow-y: hidden;'>Miercoles</div>
+        <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;overflow-y: hidden;'>Jueves</div>
+        <span style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;overflow-y: hidden;'>Viernes</span>
+    </div>
 
 </div>
 <div class='registrar_materia'>
     <div class='cerrar cerrar_bloque'>X</div>
-    <h3>Seleccione el Aula, Materia y Profesor</h3>
+    <h3>Seleccione el Aula y las seccion  </h3>
     <div class='checkmark_container' style='margin-top:10px;display:inline-block;'>
-        <input type="checkbox" name="dividir" id="dividir" onclick='CheckedGrupos(this)' style='cursor:pointer;'><label for="dividir" style='display:inline-block;margin-left:5px;cursor:pointer;'><b>Dividir en Grupos</b></label>
+        <input type="hidden" name="dividir" id="dividir" onclick='CheckedGrupos(this)' style='cursor:pointer;'>
+<label for="dividir" style='display:inline-block;margin-left:5px;cursor:pointer;'><b>Dividir en Grupos</b></label>
     </div>
     <h3 style='text-align:center; display:none;' class='grupo1'>GRUPO 1</h3>
     <div class='input_container' style='margin-top:5px;'>
@@ -263,7 +266,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 <script src="../../../javascript/libquery.js"></script>
 <script>
 
-    CalcularHora(<?php echo $tiempo ?>);
+CalcularHora(<?php echo $tiempo . ", '" . $id . "', '" . $hora_inicio . "', '" . $hora_final . "'"; ?>);
 </script>
 
 </html>

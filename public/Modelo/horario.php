@@ -90,7 +90,7 @@ class zona extends bdmysql{
       return $this->ejecutar($sql);
     }
     function SelectAllIntervalo(){
-      $sql= "SELECT intervalo, id from intervalo WHERE `estado`=1";
+      $sql= "SELECT intervalo, id,hora_inicio, hora_final from intervalo WHERE `estado`=1";
       return $this->ejecutar($sql);
     }
     function Registrar_Horario(){
