@@ -2,6 +2,22 @@
 include_once("../Modelo/horario.php"); 
 $objeto = new zona();
 $bloques = explode(",", $_POST["valores_horario"]);
+$cedulaProfesor = $_POST["docenteCedula"] ?? $_POST["CedulaDocenteModificar"];
+$anoEscolar = $_POST["ano"];
+
+
+
+
+//Descomentar para poder Debuguear al enviar el horario
+// echo '<pre>';
+// var_dump($_POST);
+// echo '</pre>';
+// exit();
+
+
+
+
+
 
 // Definición de la página
 
@@ -27,7 +43,7 @@ $offset = ($pagina - 1) * $resultados_por_pagina;
 
 
 // Validar y asignar $intervalo
-$intervalo = 45;
+$intervalo = 6;
 // if (isset($_POST["id_intervalo"]) && $_POST["id_intervalo"] !== "undefined" && $_POST["id_intervalo"] !== "") {
 //     $intervalo = $_POST["id_intervalo"];
 // } else {
@@ -45,21 +61,24 @@ $intervalo = 45;
 // }
 
 // Limpiar horario anterior
-$objeto->ClearHorario(18, ano_seccion: 22);
+$objeto->ClearHorario($ano_escolar, ano_seccion: 22);
 
 // Procesar bloques si hay datos
 if (count($bloques) > 1) {
     for ($i = 0; $i < count($bloques); ) {
         // Asignar valores
-        $receso = $_POST['receso'];
-        $ano_escolar = 18;
+        $ano_escolar = $anoEscolar;
         $ano_seccion = 22;
         $asginatura = $bloques[$i + 2];
         $aula = $bloques[$i + 1];
         $bloque = $bloques[$i];
         $grupo = $bloques[$i + 4];
-        $profesor = $bloques[$i + 3];
+        $profesor = $cedulaProfesor;
         $id = $intervalo;
+
+        echo '<pre>';
+        var_dump($id);
+        echo '</pre>';
 
         // Asegurarse de que la asignatura sea válida
         if ($asginatura != 'null') {
@@ -67,7 +86,7 @@ if (count($bloques) > 1) {
         }
 
         // Registrar horario
-        $objeto->setDatos($receso, $ano_escolar, $ano_seccion, $asginatura, $aula, $bloque, $grupo, $profesor, $id);
+        $objeto->setDatos($ano_escolar, $ano_seccion, $asginatura, $aula, $bloque, $grupo, $profesor, $id);
         echo $objeto->Registrar_Horario();
 
         $i = $i + 5;

@@ -6,6 +6,9 @@ var horaComparar = new Date();
 var id="";
 var ano_seccion="";
 var seccion_array="";
+let cedulaDocente;
+console.log('Cedula Docente',cedulaDocente);
+
 
 var change="";
 function CrearHorario(intervalo, horaInicio, horaFinal, x) {
@@ -21,6 +24,10 @@ function CrearHorario(intervalo, horaInicio, horaFinal, x) {
     console.log("Código año escolar:", anoEscolar);
     console.log("Cédula del docente:", docenteCedula);
 
+    cedulaDocente=docenteCedula;
+    console.log(cedulaDocente);
+    
+
     // También puedes obtener el texto visible de la opción seleccionada
     const anoNombre = select[0].options[select[0].selectedIndex].innerText;
     const docenteNombre = select[1].options[select[1].selectedIndex].innerText;
@@ -30,6 +37,7 @@ function CrearHorario(intervalo, horaInicio, horaFinal, x) {
 
     var span = document.querySelector(".tabla_horario").querySelectorAll('span');
     span[1].innerHTML = anoNombre;
+
     span[3].innerHTML = docenteNombre;
 
     document.querySelector(".tabla_horario").style.display = 'grid';
@@ -95,7 +103,12 @@ function EditarBloque(bloque) {
 
     LimpiarBloqueVista();
 
-    bloques=bloque.id;
+    bloques=bloque.id;  
+    const anoSeccion= document.getElementById("ano_seccionSelect").value;
+    console.log('Editar bloque ',bloque);
+    
+  console.log("Seccion Horario Docente ",anoSeccion);
+  
 
     let contenidobloque=bloque.children;
 
@@ -116,11 +129,10 @@ function EditarBloque(bloque) {
       }
 
     }
-
     console.log(datosbloque);
     document.querySelector('.registrar_materia').style.display='block';
     if (anos=="") {
-      enviarRequest(document.getElementById('ano').value, bloque.id, seccion);
+      // enviarRequest(document.getElementById('ano').value, bloque.id, seccion);
     }
     else {
       enviarRequest(anos, bloque.id, seccion);
@@ -129,7 +141,7 @@ function EditarBloque(bloque) {
     //Setear los input de los bloques
     let aulainput=document.getElementById('aula');
     let materiainput=document.getElementById('materia');
-    let profesorinput=document.getElementById('profesor');
+    let profesorinput=cedulaDocente;
 
     let aula2input=document.getElementById('aula2');
     let materia2input=document.getElementById('materia2');
@@ -147,7 +159,7 @@ function EditarBloque(bloque) {
       //Llenar el input de asignatura y buscar profesores
       //La funcion como ultimo parametro de ArrayMateria es para llenar el campo de profesor al terminar de ejecutarse la funcion
       materiainput.value = datosbloque[1][0];
-      ArrayMateria(materiainput, 'profesor','profesor2',function() {profesorinput.value=datosbloque[2][0]});
+      ArrayMateria(materiainput, cedulaDocente,'profesor2',function() {profesorinput.value=datosbloque[2][0]});
 
       aula2input.value=''
       materia2input.value=''
@@ -197,11 +209,13 @@ function EditarBloque(bloque) {
     else{
       aulainput.value = '';
       materiainput.value = '';
-      profesorinput.value = '';
+      profesorinput.value = cedulaDocente;
       aula2input.value = '';
       materia2input.value = '';
       profesor2input.value = '';
     }
+
+  
     
     DeshabilitarAulaGrupo();
 
@@ -209,14 +223,14 @@ function EditarBloque(bloque) {
 function RegistrarBloque() {
     var input=document.querySelector('#valores_horario');
     var aula=document.querySelector('#aula');
-    var profesor=document.querySelector('#profesor');
+    var profesor=cedulaDocente;
     var materia=document.querySelector('#materia');
     var aula2=document.querySelector('#aula2');
     var materia2=document.querySelector('#materia2');
     var profesor2=document.querySelector('#profesor2');
     if (aula.value!="" && materia.value!="" && profesor.value!="" && document.querySelector('#dividir').checked==false) {
         block='#'+bloques;
-        document.querySelector(block).innerHTML="<span style='font-weight: bold;'>Aula </span><b id='"+aula.value+"' style='font-weight: lighter;'>"+aula.options[aula.selectedIndex].innerText+"</b><br><span style='font-weight: bold;'>Materia </span><b id='"+materia.value+"' style='font-weight: lighter;'>"+materia.options[materia.selectedIndex].innerText+"</b><br><span style='font-weight: bold;'>Prof </span><b id='"+profesor.value+"' style='font-size:12px;font-weight: lighter;'>"+profesor.options[profesor.selectedIndex].innerText+"</b>";
+        document.querySelector(block).innerHTML="<span style='font-weight: bold;'>Aula </span><b id='"+aula.value+"' style='font-weight: lighter;'>"+aula.options[aula.selectedIndex].innerText+"</b><br><span style='font-weight: bold;'>Materia </span><b id='"+materia.value+"' style='font-weight: lighter;'>"+materia.options[materia.selectedIndex].innerText+"</b><br><span style='font-weight: bold;'>Prof </span><b id='"+profesor.value+"' style='font-size:12px;font-weight: lighter;'>"+"</b>";
         document.querySelector('.registrar_materia').style.display='none';
         aula.value="";
         materia.value="";
@@ -239,6 +253,11 @@ function RegistrarBloque() {
     console.log(input.value);
 }
 function GuardarHorario() {
+
+     document.getElementById('CedulaDocenteModificar').value=cedulaDocente;
+
+  
+
     var divs=document.querySelector('.tabla_horario').querySelectorAll('div');
     for (let index = 5; index < divs.length; index++) {
         b=divs[index].querySelectorAll('b');
@@ -310,8 +329,9 @@ function ClearHorario() {
     document.getElementById('aula2').value="";
     document.getElementById('materia').value="";
     document.getElementById('materia2').value="";
-    document.getElementById('profesor').value="";
-    document.getElementById('profesor2').value="";
+    // document.getElementById('profesor').value="";
+    // document.getElementById('profesor2').value="";
+   document.getElementById('anoSeccionSelect').value="";
     }
 
 function arrayDiff(arrayToFilter,arrayToRemove){
@@ -362,7 +382,7 @@ function enviarRequest(ano, bloque, seccion) {
           // Si deseas trabajar con los datos recibidos, puedes hacerlo aquí
           var datos = JSON.parse(response);
           
-          RecorrerProfesor(select,datos,select2);
+          // RecorrerProfesor(select,datos,select2);
           // Ahora puedes manipular la matriz de datos según tus necesidades
 
           if (typeof callback === 'function') {
@@ -378,9 +398,9 @@ function enviarRequest(ano, bloque, seccion) {
         }
       });
     }
-    else{
-      RecorrerProfesor(select,[],select2);
-    }
+    // else{
+    //   RecorrerProfesor(select,[],select2);
+    // }
   }
   function BorrarBloque() {
       $.ajax({
@@ -402,33 +422,35 @@ function enviarRequest(ano, bloque, seccion) {
       });
   }
 
-function RecorrerProfesor(profesor, array, profesor2) {
-  var x=0;
-  document.getElementById(profesor).value="";
-  console.log('arrayequisxd')
-  console.log(array[x]);
-  var opciones=document.getElementById(profesor).querySelectorAll('option');
+//FUNCION SELECCIONAR PROFESOR
 
-  if (array!='' && array.length > 0) {
-    for (let index = 0; index < opciones.length; index++) {
-      if (opciones[index].value==array[x] && document.getElementById(profesor2).value!=opciones[index].value) {
-        opciones[index].hidden=false;
-        x=x+1;
-        index=0;
-      }
-    }
-  }
+// function RecorrerProfesor(profesor, array, profesor2) {
+//   var x=0;
+//   // document.getElementById(profesor).value="";
+//   console.log('arrayequisxd')
+//   console.log(array[x]);
+//   var opciones=document.getElementById(profesor).querySelectorAll('option');
+
+//   if (array!='' && array.length > 0) {
+//     for (let index = 0; index < opciones.length; index++) {
+//       if (opciones[index].value==array[x] && document.getElementById(profesor2).value!=opciones[index].value) {
+//         opciones[index].hidden=false;
+//         x=x+1;
+//         index=0;
+//       }
+//     }
+//   }
   
-  else {
-    for (let index = 0; index < opciones.length; index++) {
-        if (opciones[index].value!="") {
-          opciones[index].hidden=true;
-        }
+//   else {
+//     for (let index = 0; index < opciones.length; index++) {
+//         if (opciones[index].value!="") {
+//           opciones[index].hidden=true;
+//         }
         
-      }
-    }
+//       }
+//     }
   
-}
+// }
 function EliminarHorario(ano, seccion) {
   // Mostrar confirmación antes de eliminar
   showConfirm("¿Está seguro de que desea eliminar este dato?", () => {
@@ -476,23 +498,27 @@ function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo,receso_ar
   }
 }
 function ModificarBloques(cedula, ano_escolar) {
-
+  // Asigna al select (opcional, visual)
+  document.getElementById('docenteCedula').value = cedula;
+  document.getElementById('ano').value = ano_escolar;
+  cedulaDocente = cedula;
 
   $.ajax({
-      url: '../../Control/horario_ajax.php',
-      type: 'POST',
-      data: { cedula: cedula, ano_escolar: ano_escolar},
-      success: function(response) {
-          var datos = JSON.parse(response);
-
-          ModificarHorario(datos, ano_escolar);
-      },
-      error: function(xhr, status, error) {
-          console.log(error);
-      }
+    url: '../../Control/horario_ajax.php',
+    type: 'POST',
+    data: { 
+      cedula: cedula,
+      ano_escolar: ano_escolar,
+      docenteCedula: cedula  // AÑADIDO aquí
+    },
+    success: function(response) {
+      var datos = JSON.parse(response);
+      ModificarHorario(datos, ano_escolar);
+    },
+    error: function(xhr, status, error) {
+      console.log(error);
+    }
   });
-
- 
 }
 
 function Volver() {
@@ -502,11 +528,9 @@ function Volver() {
     document.querySelector('.volver').style.display='none';
     document.querySelector('#ano').value='';
   
-
+    location.reload();
   
-    if (change=="change") {
-      location.reload();
-    }
+ 
 }
 
 function CheckedGrupos(check) {
@@ -553,8 +577,8 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('aula2').value="";
       document.getElementById('materia').value="";
       document.getElementById('materia2').value="";
-      document.getElementById('profesor').value="";
-      document.getElementById('profesor2').value="";
+      // document.getElementById('profesor').value="";
+      // document.getElementById('profesor2').value="";
       document.querySelector(".registrar_materia").style.display='none';
       document.querySelector("#dividir").checked=false;
       CheckedGrupos(document.querySelector("#dividir"));
@@ -563,44 +587,44 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.cerrar_div').addEventListener('click', function () {
       document.querySelector(".container_horario").style.display='none';
     });
-    document.getElementById('profesor').addEventListener('click', function () {
+    // document.getElementById('profesor').addEventListener('click', function () {
       
-    });
-    document.querySelector('#ano').addEventListener('click', function () {
-      document.getElementById('seccion').value="";
-      $.ajax({
-        url: '../../Control/horario_ajax.php',
-        type: 'POST',
-        data: { anos_crear: document.querySelector('#ano').value},
-        success: function(response) {
-          var x=0;
-          var select=document.getElementById('seccion');
-          for (let index = 0; index < select.options.length; index++) {
-            select.options[index].style.display='block';
-          }
-          // La solicitud se ha realizado con éxito
-          // Aquí puedes manejar la respuesta del servidor, que puede ser un JSON o cualquier otro formato
-          console.log(response);
-          // Si deseas trabajar con los datos recibidos, puedes hacerlo aquí
-          var datos = JSON.parse(response);
-          for (let index = 0; index < select.options.length; index++) {
-            if (datos.length>0 && x<datos.length) {
-              if (datos[x][0]==select.options[index].value) {
-                select.options[index].style.display='none';
-                x=x+1;
-                index=0;
-              }
-            }
+    // });
+    // document.querySelector('#ano').addEventListener('click', function () {
+    //   document.getElementById('seccion').value="";
+    //   $.ajax({
+    //     url: '../../Control/horario_ajax.php',
+    //     type: 'POST',
+    //     data: { anos_crear: document.querySelector('#ano').value},
+    //     success: function(response) {
+    //       var x=0;
+    //       var select=document.getElementById('seccion');
+    //       for (let index = 0; index < select.options.length; index++) {
+    //         select.options[index].style.display='block';
+    //       }
+    //       // La solicitud se ha realizado con éxito
+    //       // Aquí puedes manejar la respuesta del servidor, que puede ser un JSON o cualquier otro formato
+    //       console.log(response);
+    //       // Si deseas trabajar con los datos recibidos, puedes hacerlo aquí
+    //       var datos = JSON.parse(response);
+    //       for (let index = 0; index < select.options.length; index++) {
+    //         if (datos.length>0 && x<datos.length) {
+    //           if (datos[x][0]==select.options[index].value) {
+    //             select.options[index].style.display='none';
+    //             x=x+1;
+    //             index=0;
+    //           }
+    //         }
            
-          }
-          // Ahora puedes manipular la matriz de datos según tus necesidades
-        },
-        error: function(xhr, status, error) {
-          // Ocurrió un error al realizar la solicitud AJAX
-          console.log(error);
-        }
-      });
-    });
+    //       }
+    //       // Ahora puedes manipular la matriz de datos según tus necesidades
+    //     },
+    //     error: function(xhr, status, error) {
+    //       // Ocurrió un error al realizar la solicitud AJAX
+    //       console.log(error);
+    //     }
+    //   });
+    // });
 });
 
 

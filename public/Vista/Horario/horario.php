@@ -23,6 +23,9 @@ include_once('../v_Sidebar/v_Sidebar.php');
 $objeto = new query();
 $ano_escolar = $objeto->SelectAno_Escolar();
 $ano_seccion = $objeto->SelectAno_Seccion();
+
+$ano_seccionSelect= $objeto->SelectAno_SeccionHorarioController();
+
 $docente = $objeto->SelectDocente();
 $aula = $objeto->SelectAula();
 $aula2 = $objeto->SelectAula();
@@ -32,6 +35,8 @@ $horario = $objeto->SelectHorario();
 $profesores = $objeto->SelectProfesores();
 $profesores2 = $objeto->SelectProfesores();
 $intervalo = $objeto->SelectIntervalo();
+
+
 while ($mostrar = mysqli_fetch_array($intervalo)) {
     $tiempo = $mostrar["intervalo"];
     $id = $mostrar["id"];
@@ -136,7 +141,8 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
             </select>
         </div>
         <div class='input_container'>
-
+            
+            <input type="hidden" id="profesor">
             <label for="docenteCedula">Seleccione al docente</label>
             <select name="docenteCedula" id="docenteCedula" class='select'>
                 <option value="">Seleccione</option>
@@ -158,6 +164,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 
         <input type="text" id='valores_horario' name='valores_horario' hidden>
         <input type="text" id='id_intervalo' name='id_intervalo' hidden>
+        <input type="text" id='CedulaDocenteModificar' name='CedulaDocenteModificar' hidden>
 
 
         <button onclick='CrearHorario(<?php echo $tiempo . "," . $id ?>)' type='button'>Crear</button>
@@ -165,7 +172,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
     </div>
 
 </form>
-
+<div class="horario_wrapper"></div>
     <div class='tabla_horario bg-slate-400 p-2' style=" grid-column-gap: -10px;">
         <span class='titulos'>Lapso:</span>
         <span style='grid-column:2/4;' class='titulos'></span>
@@ -178,6 +185,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
         <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;overflow-y: hidden;'>Jueves</div>
         <span style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;overflow-y: hidden;'>Viernes</span>
     </div>
+</div>
 
 </div>
 <div class='registrar_materia'>
@@ -200,6 +208,17 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
         </select>
     </div>
     <div class='input_container' style='margin-top:5px;'>
+        <label for="">Año y Sección</label>
+      <select name="ano_seccionSelect" id="ano_seccionSelect" class='ano_seccionSelect'>
+             <option value="">Seleccione</option>
+            <?php
+            foreach ($ano_seccionSelect as $mostrarValue) {
+                echo "<option value='" . $mostrarValue["codigo"] . "'>" . $mostrarValue["nombresAnoSeccion"] . "</option>";
+            }
+            ?>
+        </select>
+    </div>
+    <div class='input_container' style='margin-top:5px;'>
         <label for="">Materia</label>
         <select name="materia" id="materia" onclick="ArrayMateria(this, 'profesor', 'profesor2')">
             <option value="">Seleccione</option>
@@ -210,17 +229,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
             ?>
         </select>
     </div>
-    <div class='input_container' style='margin-top:5px;'>
-        <label for="">Profesor</label>
-        <select name="profesor" id="profesor" class='select_profesor'>
-            <option value="">Selecione</option>
-            <?php
-            while ($mostrar = mysqli_fetch_array($profesores)) {
-                echo "<option value='" . $mostrar["cedula"] . "' hidden>" . $mostrar["nombres"] . " " . $mostrar["apellidos"] . "</option>";
-            }
-            ?>
-        </select>
-    </div>
+
     <span class='grupo2' style='display:none;'>
         <h3 style='text-align:center;'>GRUPO 2</h3>
         <div class='input_container' style='margin-top:5px;'>

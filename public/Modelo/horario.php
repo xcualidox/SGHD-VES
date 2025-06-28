@@ -3,8 +3,7 @@ include_once("basedatos.php");
 class zona extends bdmysql{
     private $receso,$ano_escolar, $ano_seccion, $asginatura, $aula, $bloque,$grupo,$profesor,$id;
 
-    function setDatos($receso,$ano_escolar, $ano_seccion, $asginatura, $aula, $bloque, $grupo, $profesor,$id){
-      $this->receso=$receso;
+    function setDatos($ano_escolar, $ano_seccion, $asginatura, $aula, $bloque, $grupo, $profesor,$id){
       $this->ano_escolar=$ano_escolar;
       $this->ano_seccion=$ano_seccion;
         $this->asginatura=$asginatura;
@@ -30,12 +29,33 @@ class zona extends bdmysql{
       return $this->ejecutar($sql);
     }
 
+ function SelectAllAno_SeccionHorario(){
+    $sql= "SELECT 
+      codigo, 
+      CONCAT(ano, ' - ', seccion) AS nombresAnoSeccion
+    FROM ano_seccion
+    ORDER BY 
+      CAST(REGEXP_SUBSTR(ano, '^[0-9]+') AS UNSIGNED),
+      seccion;";
+    
+    $result = $this->ejecutar($sql);
+
+    $data = [];
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+    return $data;
+}
+
    function SelectAllDocente(){
       $sql= " SELECT DISTINCT 
-      CONCAT(p.nombres, ' ', p.apellidos) AS nombre_completo,
-      pm.profesor AS cedula
-    FROM profesores_materias pm
-    JOIN personas p ON pm.profesor = p.cedula; ";
+  CONCAT(p.nombres, ' ', p.apellidos) AS nombre_completo,
+        pm.profesor AS cedula
+      FROM profesores_materias pm
+      JOIN personas p ON pm.profesor = p.cedula
+      LEFT JOIN horario_estudiante he ON he.profesor = pm.profesor
+      WHERE he.profesor IS NULL;
+";
       return $this->ejecutar($sql);
     }
 
@@ -93,10 +113,29 @@ class zona extends bdmysql{
       $sql= "SELECT intervalo, id,hora_inicio, hora_final from intervalo WHERE `estado`=1";
       return $this->ejecutar($sql);
     }
-    function Registrar_Horario(){
-        $sql= "INSERT INTO  horario_estudiante(codigo_a_escolar, codigo_a_y_seccion, codigo_asignatura, codigo_aula, codigo_dia, grupo, profesor, intervalo,receso) values('$this->ano_escolar','$this->ano_seccion', $this->asginatura, $this->aula, '$this->bloque', '$this->grupo', $this->profesor,'$this->id', '$this->receso')";
-		return $this->ejecutar($sql);
-    }
+   function Registrar_Horario(){
+    $sql = "INSERT INTO horario_estudiante(
+                codigo_a_escolar, 
+                codigo_a_y_seccion, 
+                codigo_asignatura, 
+                codigo_aula, 
+                codigo_dia, 
+                grupo, 
+                profesor, 
+                intervalo
+            ) VALUES (
+                '$this->ano_escolar',
+                '$this->ano_seccion',
+                $this->asginatura,
+                $this->aula,
+                '$this->bloque',
+                '$this->grupo',
+                $this->profesor,
+                '$this->id'
+            )";
+
+    return $this->ejecutar($sql);
+}
     function ListaMateriaPrefesor($materia) {
       $sql="SELECT DISTINCT profesores_materias.profesor FROM `profesores_materias` WHERE profesores_materias.materia='$materia'";
       return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM); 
