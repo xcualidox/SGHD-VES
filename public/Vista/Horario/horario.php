@@ -94,7 +94,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 
 
                                     echo '<img src="../../../images/icons/modificar.svg" class="w-8 h-8 filtro-azul cursor-pointer" alt="Modificar" title="Modificar" 
-                                    onclick="ModificarBloques(\'' . $mostrar["cedula"] . '\', \'' . $mostrar["ano_codigo"] . '\')" />';
+                                    onclick="ModificarBloques(\'' . $mostrar["cedula"] . '\', \'' . $mostrar["ano_codigo"] . '\',\'' . $mostrar["ano_escolar"] . '\',\'' . $mostrar["nombre"] . '\' )" />';
                                 }
                                 ?>
 
@@ -176,7 +176,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
     <div class='tabla_horario bg-slate-400 p-2' style=" grid-column-gap: -10px;">
         <span class='titulos'>Lapso:</span>
         <span style='grid-column:2/4;' class='titulos'></span>
-        <span class='titulos'>Seccion:</span>
+        <span class='titulos'>Docente:</span>
         <span style='grid-column:5/7;' class='titulos'></span>
         <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit; overflow-y: hidden;'>Hora</div>
         <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;overflow-y: hidden;'>Lunes</div>

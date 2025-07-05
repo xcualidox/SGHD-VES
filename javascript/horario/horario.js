@@ -475,17 +475,16 @@ function EliminarHorario(ano, seccion) {
   });
 }
 
-function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo,receso_array){
+function ModificarHorario(array, ano_codigo, nombre_ano, nombre_docente, intervalo,receso_array){
   ClearHorario();
   document.querySelector(".tabla_horario").style.display='grid';
   document.querySelector('.guardar').style.display='block';
   document.querySelector('.volver').style.display='block';
   var span= document.querySelector(".tabla_horario").querySelectorAll('span');
  console.log(span);
- 
-  nombre_seccion=''
   span[1].innerHTML= nombre_ano;
-  span[3].innerHTML=nombre_seccion;
+  span[1].dataset.ano_codigo= ano_codigo;
+  span[3].innerHTML=nombre_docente;
   for (let index = 0; index < array.length; index++) {
     if (array[index][5]==" " || array[index][5]=="") {
       document.querySelector('#'+array[index][4]).innerHTML="<span style='font-weight: bold;'>Aula </span><b id='"+array[index][0]+"' style='font-weight: lighter;'>"+array[index][1]+"</b><br><span style='font-weight: bold;'>Materia </span><b id='"+array[index][2]+"' style='font-weight: lighter;'>"+array[index][3]+"</b><br><span style='font-weight: bold;'>Prof </span><b id='"+array[index][6]+"' style='font-size:12px;font-weight: lighter;'>"+array[index][7]+" "+array[index][8]+"</b>";
@@ -497,10 +496,10 @@ function ModificarHorario(array, nombre_ano, nombre_seccion, intervalo,receso_ar
     
   }
 }
-function ModificarBloques(cedula, ano_escolar) {
+function ModificarBloques(cedula, ano_codigo, ano_escolar, nombre_docente) {
   // Asigna al select (opcional, visual)
   document.getElementById('docenteCedula').value = cedula;
-  document.getElementById('ano').value = ano_escolar;
+  document.getElementById('ano').value = ano_codigo;
   cedulaDocente = cedula;
 
   $.ajax({
@@ -508,12 +507,12 @@ function ModificarBloques(cedula, ano_escolar) {
     type: 'POST',
     data: { 
       cedula: cedula,
-      ano_escolar: ano_escolar,
+      ano_escolar: ano_codigo,
       docenteCedula: cedula  // AÑADIDO aquí
     },
     success: function(response) {
       var datos = JSON.parse(response);
-      ModificarHorario(datos, ano_escolar);
+      ModificarHorario(datos, ano_codigo, ano_escolar, nombre_docente);
     },
     error: function(xhr, status, error) {
       console.log(error);
