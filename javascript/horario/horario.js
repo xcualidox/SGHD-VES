@@ -132,10 +132,13 @@ function EditarBloque(bloque) {
     console.log(datosbloque);
     document.querySelector('.registrar_materia').style.display='block';
     if (anos=="") {
-      // enviarRequest(document.getElementById('ano').value, bloque.id, seccion);
+      let ano = document.getElementById('span_lapso').dataset.ano_codigo
+      let docente = document.getElementById('span_docente').dataset.cedula_docente;
+      enviarRequest(ano, bloque.id, docente);
     }
     else {
-      enviarRequest(anos, bloque.id, seccion);
+      let docente = document.getElementById('span_docente').dataset.cedula_docente;
+      enviarRequest(anos, bloque.id, docente);
     }
 
     //Setear los input de los bloques
@@ -343,11 +346,11 @@ function arrayDiff(arrayToFilter,arrayToRemove){
   return filteredArray = arrayToFilter.filter(element => !removeSet.has(element));
 }
 
-function enviarRequest(ano, bloque, seccion) {
+function enviarRequest(ano, bloque, docente) {
     $.ajax({
       url: '../../Control/horario_ajax.php',
       type: 'POST',
-      data: { anos: ano, bloques: bloque, seccion : seccion},
+      data: { anos: ano, bloques: bloque, docente : docente},
       success: function(response) {
         // La solicitud se ha realizado con éxito
         // Aquí puedes manejar la respuesta del servidor, que puede ser un JSON o cualquier otro formato
@@ -475,7 +478,7 @@ function EliminarHorario(ano, seccion) {
   });
 }
 
-function ModificarHorario(array, ano_codigo, nombre_ano, nombre_docente, intervalo,receso_array){
+function ModificarHorario(array, ano_codigo, nombre_ano, nombre_docente, cedula_docente){
   ClearHorario();
   document.querySelector(".tabla_horario").style.display='grid';
   document.querySelector('.guardar').style.display='block';
@@ -485,6 +488,8 @@ function ModificarHorario(array, ano_codigo, nombre_ano, nombre_docente, interva
   span[1].innerHTML= nombre_ano;
   span[1].dataset.ano_codigo= ano_codigo;
   span[3].innerHTML=nombre_docente;
+  span[3].dataset.cedula_docente= cedula_docente;
+  
   for (let index = 0; index < array.length; index++) {
     if (array[index][5]==" " || array[index][5]=="") {
       document.querySelector('#'+array[index][4]).innerHTML="<span style='font-weight: bold;'>Aula </span><b id='"+array[index][0]+"' style='font-weight: lighter;'>"+array[index][1]+"</b><br><span style='font-weight: bold;'>Materia </span><b id='"+array[index][2]+"' style='font-weight: lighter;'>"+array[index][3]+"</b><br><span style='font-weight: bold;'>Prof </span><b id='"+array[index][6]+"' style='font-size:12px;font-weight: lighter;'>"+array[index][7]+" "+array[index][8]+"</b>";
@@ -512,7 +517,7 @@ function ModificarBloques(cedula, ano_codigo, ano_escolar, nombre_docente) {
     },
     success: function(response) {
       var datos = JSON.parse(response);
-      ModificarHorario(datos, ano_codigo, ano_escolar, nombre_docente);
+      ModificarHorario(datos, ano_codigo, ano_escolar, nombre_docente, cedula);
     },
     error: function(xhr, status, error) {
       console.log(error);

@@ -175,9 +175,9 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 <div class="horario_wrapper"></div>
     <div class='tabla_horario bg-slate-400 p-2' style=" grid-column-gap: -10px;">
         <span class='titulos'>Lapso:</span>
-        <span style='grid-column:2/4;' class='titulos'></span>
+        <span style='grid-column:2/4;' class='titulos' id='span_lapso'></span>
         <span class='titulos'>Docente:</span>
-        <span style='grid-column:5/7;' class='titulos'></span>
+        <span style='grid-column:5/7;' class='titulos' id='span_docente'></span>
         <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit; overflow-y: hidden;'>Hora</div>
         <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;overflow-y: hidden;'>Lunes</div>
         <div style='height:40px;text-align:center;font-size:22px;background-color:#058671;color:white;cursor: inherit;overflow-y: hidden;'>Martes</div>

@@ -5,7 +5,7 @@ require_once("c_bitacora.php");
 $objeto = new zona();
 if (isset($_POST["bloques"])) {
     $dato=$objeto->VerificarAula($_POST["anos"],$_POST["bloques"]);
-    $mismaAula=$objeto->VerificarHorarioAula($_POST["anos"],$_POST["seccion"],$_POST['bloques']);
+    $mismaAula=$objeto->VerificarHorarioAula($_POST["anos"],$_POST["docente"],$_POST['bloques']);
 
     $datoAplanado=array_merge(...$dato);
     $mismaAulaAplanada=array_merge(...$mismaAula);

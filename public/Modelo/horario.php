@@ -156,8 +156,8 @@ class zona extends bdmysql{
         $sql= "SELECT `codigo_aula` FROM `horario_estudiante` WHERE `codigo_a_escolar`='$ano' AND `codigo_dia`='$bloque'";
 		    return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
     }
-    function VerificarHorarioAula($ano,$seccion,$bloque){
-        $sql= "SELECT `codigo_aula` FROM `horario_estudiante` WHERE `codigo_a_escolar`='$ano' AND `codigo_a_y_seccion`='$seccion' AND `codigo_dia`='$bloque'" ;
+    function VerificarHorarioAula($ano,$docente,$bloque){
+        $sql= "SELECT `codigo_aula` FROM `horario_estudiante` WHERE `codigo_a_escolar`='$ano' AND `codigo_dia`='$bloque' AND `profesor`='$docente'" ;
         return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
     }
     function VerificarAno($ano)  {
