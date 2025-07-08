@@ -205,7 +205,8 @@ include_once('../v_Sidebar/v_Sidebar.php');
             handleTagRemoval(event) {
                 if (event.target.classList.contains('materia_year__tag-remove')) {
                     const yearValue = event.target.dataset.year;
-                    this.removeYear(yearValue);
+                    
+                    this.removeYear(parseInt(yearValue));
                 }
             }
             
