@@ -140,10 +140,12 @@ function EditarBloque(bloque) {
       let ano = document.getElementById('span_lapso').dataset.ano_codigo
       let docente = document.getElementById('span_docente').dataset.cedula_docente;
       enviarRequest(ano, bloque.id, docente);
+      verificarSeccion(ano, bloque.id, docente);
     }
     else {
       let docente = document.getElementById('span_docente').dataset.cedula_docente;
       enviarRequest(anos, bloque.id, docente);
+      verificarSeccion(ano, bloque.id, docente);
     }
 
     //Setear los input de los bloques
@@ -334,6 +336,25 @@ function recorrerSelect(array) {
       // Puedes hacer algo más con cada opción aquí, como guardar los valores en un array o realizar alguna operación
     }
   }
+
+function recorrerSelectSeccion(array) {
+    //console.log('recorrerSelect:');
+    //console.log(array);
+    var select = document.getElementById("ano_seccionSelect");
+   var x=0;
+   for (var i = 0; i < select.options.length; i++) {
+    var opcion = select.options[i];
+    opcion.style.display="block";
+   }
+    for (var i = 0; i < select.options.length; i++) {
+      var opcion = select.options[i];
+      if (opcion.value==array[x]) {
+        opcion.style.display="none";
+        i=0;
+        x=x+1;
+      }
+    }
+  }
 function ClearHorario() {
   var divs=document.querySelector('.tabla_horario').querySelectorAll('div');
   for (let index = 5; index < divs.length; index++) {
@@ -374,6 +395,30 @@ function enviarRequest(ano, bloque, docente) {
         //console.log(datosxd);
         var datos = datosxd;
         recorrerSelect(datos);
+        datos = '';
+        // Ahora puedes manipular la matriz de datos según tus necesidades
+      },
+      error: function(xhr, status, error) {
+        // Ocurrió un error al realizar la solicitud AJAX
+        //console.log(error);
+      }
+    });
+  }
+
+  function verificarSeccion(ano, bloque, docente) {
+    $.ajax({
+      url: '../../Control/horario_ajax.php',
+      type: 'POST',
+      data: { anos: ano, bloque: bloque, docente : docente, verificarSeccion: true},
+      success: function(response) {
+        // La solicitud se ha realizado con éxito
+        // Aquí puedes manejar la respuesta del servidor, que puede ser un JSON o cualquier otro formato
+        // Si deseas trabajar con los datos recibidos, puedes hacerlo aquí
+        var datosxd = JSON.parse(response);
+        //console.log('enviarRequest: ');
+        //console.log(datosxd);
+        var datos = datosxd;
+        recorrerSelectSeccion(datos);
         datos = '';
         // Ahora puedes manipular la matriz de datos según tus necesidades
       },

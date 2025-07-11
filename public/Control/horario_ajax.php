@@ -3,6 +3,9 @@ include_once("../Modelo/horario.php");
 require_once("c_bitacora.php");
 
 $objeto = new zona();
+
+//Verificar Aula
+
 if (isset($_POST["bloques"])) {
     $dato=$objeto->VerificarAula($_POST["anos"],$_POST["bloques"]);
     $mismaAula=$objeto->VerificarHorarioAula($_POST["anos"],$_POST["docente"],$_POST['bloques']);
@@ -15,6 +18,27 @@ if (isset($_POST["bloques"])) {
     echo json_encode($dato_diff);
     exit();
 }
+
+//Verificar Sección
+
+else if(isset($_POST["verificarSeccion"])){
+
+    $anos=$_POST["anos"];
+    $docente=$_POST["docente"];
+    $bloques=$_POST["bloque"];
+
+    $dato=$objeto->VerificarSeccion($anos,$bloques);
+    $mismaSeccion=$objeto->VerificarHorarioSeccion($anos,$docente,$bloques);
+
+    $datoAplanado=array_merge(...$dato);
+    $mismaSeccionAplanada=array_merge(...$mismaSeccion);
+
+    $dato_diff=array_values(array_diff($datoAplanado,$mismaSeccionAplanada));
+
+    echo json_encode($dato_diff);
+    exit();
+}
+
 else if (isset($_POST["materia"])) {
     $array= array();
     $x=0;

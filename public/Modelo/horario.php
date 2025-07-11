@@ -164,6 +164,16 @@ class zona extends bdmysql{
       $sql= "SELECT DISTINCT `codigo_a_y_seccion` FROM `horario_estudiante` WHERE `codigo_a_escolar`='$ano'";
     return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM); 
     }
+    
+    function VerificarSeccion($ano,$bloque){
+      $sql="SELECT `codigo_a_y_seccion` FROM horario_estudiante WHERE horario_estudiante.codigo_a_escolar = '$ano' AND horario_estudiante.codigo_dia = '$bloque';";
+      return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
+    }
+
+    function VerificarHorarioSeccion($ano,$docente,$bloque){
+      $sql= "SELECT `codigo_a_y_seccion` FROM `horario_estudiante` WHERE `codigo_a_escolar`='$ano' AND `codigo_dia`='$bloque' AND `profesor`='$docente'" ;
+      return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
+    }
 
     function VerificarHorarioProfesor($ano,$seccion,$asignatura,$bloque){
       $sql= "SELECT `profesor` FROM `horario_estudiante` WHERE
@@ -180,7 +190,7 @@ class zona extends bdmysql{
       return $this->ejecutar($sql);
     }
     function BloquesHorario($cedulaRaw, $ano_escolarRaw) {
-
+    
       $cedula = intval($cedulaRaw);
       $ano_escolar = intval($ano_escolarRaw);
 
