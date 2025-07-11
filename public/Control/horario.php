@@ -8,6 +8,7 @@ $anoEscolar = $_POST["ano"];
 
 
 
+
 //Descomentar para poder Debuguear al enviar el horario
 // echo '<pre>';
 // var_dump($_POST);
@@ -61,14 +62,17 @@ $intervalo = 6;
 // }
 
 // Limpiar horario anterior
-$objeto->ClearHorario($ano_escolar, ano_seccion: 22);
+if (isset($_POST["seccion_solo"])) {
+    $anoSeccion = $_POST["seccion_solo"];
+    $objeto->ClearHorario($anoEscolar, $anoSeccion);
+}
 
 // Procesar bloques si hay datos
 if (count($bloques) > 1) {
     for ($i = 0; $i < count($bloques); ) {
         // Asignar valores
         $ano_escolar = $anoEscolar;
-        $ano_seccion = 22;
+        $ano_seccion = $bloques[$i + 3];
         $asginatura = $bloques[$i + 2];
         $aula = $bloques[$i + 1];
         $bloque = $bloques[$i];
@@ -77,7 +81,8 @@ if (count($bloques) > 1) {
         $id = $intervalo;
 
         echo '<pre>';
-        var_dump($id);
+        //var_dump($id);
+        //var_dump($bloques);
         echo '</pre>';
 
         // Asegurarse de que la asignatura sea válida

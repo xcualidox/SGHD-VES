@@ -187,12 +187,14 @@ class zona extends bdmysql{
       $sql = "SELECT aula.codigo, aula.nombre, asignatura.codigo, asignatura.nombre, 
                      horario_estudiante.codigo_dia, horario_estudiante.grupo, 
                      personas.cedula, personas.nombres, personas.apellidos,
-                     horario_estudiante.receso 
+                     horario_estudiante.codigo_a_y_seccion,
+                     CONCAT(ano_seccion.ano,' ',ano_seccion.seccion)
               FROM horario_estudiante
               LEFT JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
               LEFT JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 
               LEFT JOIN personas ON horario_estudiante.profesor = personas.cedula
-              LEFT JOIN ano_escolar ON horario_estudiante.codigo_a_escolar
+              LEFT JOIN ano_escolar ON horario_estudiante.codigo_a_escolar = ano_escolar.codigo
+              LEFT JOIN ano_seccion ON horario_estudiante.codigo_a_y_seccion = ano_seccion.codigo
               WHERE personas.cedula = '$cedula'
               AND ano_escolar.codigo = '$ano_escolar';";
       

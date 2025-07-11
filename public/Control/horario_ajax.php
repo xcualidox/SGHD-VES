@@ -45,6 +45,7 @@ else if (isset($_POST["materia"])) {
 else if(isset($_POST["ano_solo"])) {
     $dato=$objeto->BorrarBloque($_POST["ano_solo"],$_POST["block"],$_POST["seccion_solo"]);
     echo json_encode($dato);
+    //echo json_encode([$_POST["ano_solo"],$_POST["block"],$_POST["seccion_solo"]]);
     exit();
 }
 else if (isset($_POST["anos_crear"])) {
