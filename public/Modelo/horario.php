@@ -93,6 +93,8 @@ class zona extends bdmysql{
       JOIN intervalo ON horario_estudiante.intervalo = intervalo.id";
       return $this->ejecutar($sql);
     }
+
+
     function SelectAllHorario($limitRaw, $offsetRaw){
       //Sanitizar los valores de entrada
       $limit=intval($limitRaw);
@@ -228,7 +230,7 @@ class zona extends bdmysql{
       
       return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
     }
-    function BloquesHorarioPDF($ano_escolar, $seccion, $bloque) {
+    function BloquesHorarioPDFLegacy($ano_escolar, $seccion, $bloque) {
       $sql="SELECT aula.codigo, aula.nombre, asignatura.codigo,  asignatura.nombre, horario_estudiante.codigo_dia, horario_estudiante.grupo, personas.cedula, personas.nombres, personas.apellidos,  horario_estudiante.receso 
       FROM horario_estudiante
       LEFT JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
@@ -239,6 +241,47 @@ class zona extends bdmysql{
       AND horario_estudiante.codigo_dia='$bloque'";
       return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
     }
+
+   function BloquesHorarioPDF($cedula, $anoEscolar) {
+    $sql = "SELECT 
+        horario_estudiante.intervalo,
+        horario_estudiante.codigo_dia,
+        aula.nombre AS aula,
+        asignatura.nombre AS asignatura,
+        CONCAT(ano_seccion.ano,' ',ano_seccion.seccion) AS seccion
+    FROM horario_estudiante
+    LEFT JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
+    LEFT JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 
+    LEFT JOIN ano_seccion ON horario_estudiante.codigo_a_y_seccion = ano_seccion.codigo
+    WHERE horario_estudiante.profesor = '$cedula'
+      AND horario_estudiante.codigo_a_escolar = '$anoEscolar'";
+
+      return $this->ListAll($this->ejecutar($sql), MYSQLI_ASSOC);
+  }
+  function obtenerBloquesHorarioPDF() {
+      $sql = "SELECT * FROM intervalo WHERE estado = 1 LIMIT 1";
+      $intervaloActivo = $this->getRow($this->ejecutar($sql));
+
+      $bloques = [];
+      if ($intervaloActivo) {
+          $duracion = intval($intervaloActivo['intervalo']);
+          $inicio = new DateTime($intervaloActivo['hora_inicio']);
+          $fin = new DateTime($intervaloActivo['hora_final']);
+
+          while ($inicio < $fin) {
+              $inicioStr = $inicio->format('H:i');
+              $inicio->modify("+{$duracion} minutes");
+              $finStr = $inicio->format('H:i');
+
+              $bloques[] = "{$inicioStr}-{$finStr}";
+          }
+      }
+
+      return $bloques;
+  }
+  public function getRow($result, $type = MYSQLI_ASSOC) {
+      return $result->fetch_array($type);
+  }
     function modificar($origin){
         $sql= "UPDATE `ano_escolar`
                 SET `nombre`='$this->nom', `fecha_inicio`='$this->fecI', `fecha_fin`='$this->fechaF'

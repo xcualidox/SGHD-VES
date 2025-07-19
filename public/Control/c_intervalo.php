@@ -61,5 +61,27 @@ function Disponi($disponibilidad)  {
 	header("Location: ../Vista/Intervalo/v_intervalo.php");
 }
 
+ function obtenerBloquesHorarioPDF() {
+      $sql = "SELECT * FROM intervalo WHERE estado = 1 LIMIT 1";
+      $intervaloActivo = $this->getRow($this->ejecutar($sql));
+
+      $bloques = [];
+      if ($intervaloActivo) {
+          $duracion = intval($intervaloActivo['intervalo']);
+          $inicio = new DateTime($intervaloActivo['hora_inicio']);
+          $fin = new DateTime($intervaloActivo['hora_final']);
+
+          while ($inicio < $fin) {
+              $inicioStr = $inicio->format('H:i');
+              $inicio->modify("+{$duracion} minutes");
+              $finStr = $inicio->format('H:i');
+
+              $bloques[] = "{$inicioStr}-{$finStr}";
+          }
+      }
+
+      return $bloques;
+  }
+
 
 ?>
