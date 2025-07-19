@@ -100,12 +100,12 @@ if (count($bloques) > 1) {
     // Bitácora
     require_once("c_bitacora.php");
     $ano_array = $objeto->SelectAlgo('nombre','ano_escolar','codigo='.$ano_escolar);
-    $seccion_array = $objeto->SelectAlgo('*','ano_seccion','codigo='.$ano_seccion);
+    $seccion_array = $objeto->SelectAlgo('*','personas','cedula='.$cedulaProfesor);
 
     $ano_bitacora = $ano_array[0][0];
-    $seccion_bitacora = $seccion_array[0][1].' '.$seccion_array[0][2];
+    $profesor_bitacora = $seccion_array[0][1].' '.$seccion_array[0][2];
 
-    insertBitacora($_SESSION['username'], "insertar", 'Creó el horario para el año "'.$ano_bitacora.'" sección "'.$seccion_bitacora.'".');
+    insertBitacora($_SESSION['username'], "insertar", 'Creó/Actualizo el horario Del Docente"'.$profesor_bitacora.'" Del Año Escolar "'.$ano_bitacora.'".');
 }
 
 header("Location: ../Vista/Horario/horario.php");

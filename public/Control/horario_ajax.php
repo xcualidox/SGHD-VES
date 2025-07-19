@@ -80,15 +80,15 @@ else if (isset($_POST["anos_crear"])) {
 else if(isset($_POST["anos_borrar"]) && isset($_POST["seccion_borrar"])){
     $dato=$objeto->eliminar($_POST["anos_borrar"], $_POST["seccion_borrar"]);
 
-    //Busca los valores para la bitácora
-    $ano_array=$objeto->SelectAlgo('nombre','ano_escolar','codigo='.$_POST["anos_borrar"]);
-    $seccion_array=$objeto->SelectAlgo('*','ano_seccion','codigo='.$_POST["seccion_borrar"]);
+    //Busca los valores para la bitácora    
+    $ano_array=$objeto->SelectAlgo('nombre','ano_escolar','codigo='.$_POST["seccion_borrar"]); //Año escolar
+    $seccion_array=$objeto->SelectAlgo('*','personas','cedula='.$_POST["anos_borrar"]); //Profesor
 
     //Los saca directamente del array
     $ano_bitacora=$ano_array[0][0];
     $seccion_bitacora=$seccion_array[0][1].' '.$seccion_array[0][2];
 
-    insertBitacora($_SESSION['username'], "eliminar", 'Eliminó el horario del año "'.$ano_bitacora.'" sección "'.$seccion_bitacora.'".');
+    insertBitacora($_SESSION['username'], "eliminar", 'Eliminó el horario del Profesor "'.$seccion_bitacora.'" Del año escolar "'.$ano_bitacora.'".');
     echo json_encode($dato);
     exit();
 }
