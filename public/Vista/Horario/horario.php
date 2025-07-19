@@ -110,10 +110,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 
 
 
-                                <a href='horario_pdf.php?codigo_escolar=<?php echo $mostrar["ano_escolar"];
-                                                                        ?>&codigo_seccion=<?php echo $mostrar["codigo_a_y_seccion"];
-                        ?>&nombre=<?php echo $mostrar["nombre"]; ?>&ano=<?php echo $mostrar["ano"];
-                                                    ?>&seccion=<?php echo $mostrar["seccion"]; ?>&intervalo=<?php echo $mostrar["intervalo"]; ?>&receso=<?php echo $mostrar["receso"]; ?>' target="_blank">
+                                <a href='../pdf/horarioDocentePDF.php' target="_blank">
                                     <img src="../../../images/icons/pdf.svg" class="w-10 filtro-verde">
                                 </a>
                             </div>
