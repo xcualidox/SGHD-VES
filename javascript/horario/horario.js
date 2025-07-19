@@ -515,6 +515,9 @@ function enviarRequest(ano, bloque, docente) {
 // }
 function EliminarHorario(ano, seccion) {
   // Mostrar confirmación antes de eliminar
+
+  console.log("Eliminar Horario: ", ano, seccion);
+  
   showConfirm("¿Está seguro de que desea eliminar este dato?", () => {
     // Realiza la solicitud AJAX solo si se confirma
     $.ajax({
@@ -524,7 +527,7 @@ function EliminarHorario(ano, seccion) {
       success: function(response) {
         // La solicitud se ha realizado con éxito
         //console.log(response);
-        var datos = JSON.parse(response);
+        // var datos = JSON.parse(response);
         //console.log(datos);
         // Recargar la página para mostrar resultados
         location.reload();

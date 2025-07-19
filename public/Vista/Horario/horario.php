@@ -76,17 +76,25 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
                 </tr>
             </thead>
             <tbody>
-                <?php while ($mostrar = mysqli_fetch_array($horario)) { ?>
+                <?php while ($mostrar = mysqli_fetch_array($horario)) {
+                    //Para debuguear datos del horario
+                    // echo '<pre>';
+                    // var_dump($mostrar);
+                    // echo '</pre>'; 
+
+                    ?>
                     <tr>
                         <td><?php echo $mostrar["cedula"]; ?></td>
                         <td><?php echo $mostrar["nombre"]; ?></td>
                         <td><?php echo $mostrar["ano_escolar"]; ?></td>
+
+                    
                         <td>
 
                             <div class="flex justify-center items-center space-x-4">
                                 <?php if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador") {
                                     echo '<img src="../../../images/icons/papelera.svg" class="w-8 h-8 filtro-rojo cursor-pointer" alt="Borrar" title="Borrar" 
-                               onclick=\'EliminarHorario("' . $mostrar["cedula"] . '", "' . $mostrar["ano_escolar"] . '")\'>';
+                               onclick=\'EliminarHorario("' . $mostrar["cedula"] . '", "' . $mostrar["ano_codigo"] . '")\'>';
                                 } ?>
 
                                 <?php

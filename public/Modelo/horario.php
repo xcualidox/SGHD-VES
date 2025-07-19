@@ -247,7 +247,7 @@ class zona extends bdmysql{
     }
     
     function eliminar($ano, $seccion) {
-      $sql= "DELETE FROM `horario_estudiante` WHERE `codigo_a_escolar`='$ano' AND `codigo_a_y_seccion`='$seccion'";
+      $sql= "DELETE FROM `horario_estudiante` WHERE `profesor`='$ano' AND `codigo_a_escolar`='$seccion'";
 		return $this->ejecutar($sql);
     }
 }
