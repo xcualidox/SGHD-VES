@@ -249,6 +249,7 @@ class zona extends bdmysql{
         aula.nombre AS aula,
         asignatura.nombre AS asignatura,
         CONCAT(ano_seccion.ano,' ',ano_seccion.seccion) AS seccion
+
     FROM horario_estudiante
     LEFT JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
     LEFT JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 
