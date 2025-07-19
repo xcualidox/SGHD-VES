@@ -129,7 +129,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
 
         <div class='input_container'>
 
-            <label for="lapso">Docente</label>
+            <label for="lapso">Año Escolar</label>
             <select name="ano" id="ano" class='select'>
                 <option value="">Seleccione</option>
                 <?php
@@ -143,7 +143,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
         <div class='input_container'>
             
             <input type="hidden" id="profesor">
-            <label for="docenteCedula">Seleccione al docente</label>
+            <label for="docenteCedula">Docente</label>
             <select name="docenteCedula" id="docenteCedula" class='select'>
                 <option value="">Seleccione</option>
                 <?php
@@ -167,7 +167,7 @@ while ($mostrar = mysqli_fetch_array($intervalo)) {
         <input type="text" id='CedulaDocenteModificar' name='CedulaDocenteModificar' hidden>
 
 
-        <button onclick='CrearHorario(<?php echo $tiempo . "," . $id ?>)' type='button'>Crear</button>
+        <button onclick='CrearHorario()' type='button'>Crear</button>
 
     </div>
 

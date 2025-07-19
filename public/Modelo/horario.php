@@ -68,6 +68,15 @@ class zona extends bdmysql{
       $sql= "SELECT * from asignatura";
       return $this->ejecutar($sql);
     }
+    function SelectAsignaturaByAno($ano){
+      $sql= "SELECT DISTINCT
+              asignatura.codigo,
+              asignatura.nombre
+              from asignatura
+              LEFT JOIN materia_ano ON materia_ano.codigo_materia = asignatura.codigo
+              WHERE ano = $ano";
+      return $this->ejecutar($sql);
+    }
     function SelectAllHorarioLEGACY(){
       $sql= "SELECT DISTINCT
       ano_escolar.nombre,
@@ -136,7 +145,7 @@ class zona extends bdmysql{
 
     return $this->ejecutar($sql);
 }
-    function ListaMateriaPrefesor($materia) {
+    function ListaMateriaProfesor($materia) {
       $sql="SELECT DISTINCT profesores_materias.profesor FROM `profesores_materias` WHERE profesores_materias.materia='$materia'";
       return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM); 
     }
@@ -171,6 +180,15 @@ class zona extends bdmysql{
     }
 
     function VerificarHorarioSeccion($ano,$docente,$bloque){
+      $sql= "SELECT `codigo_a_y_seccion` FROM `horario_estudiante` WHERE `codigo_a_escolar`='$ano' AND `codigo_dia`='$bloque' AND `profesor`='$docente'" ;
+      return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
+    }
+
+    function VerificarMateria(){
+      $sql="SELECT LEFT(ano, 1) AS INITIAL, COUNT(*) AS COUNT FROM ano_seccion GROUP BY INITIAL ORDER BY initial";
+      return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
+    }
+    function VerificarHorarioMateria($ano,$docente,$bloque){
       $sql= "SELECT `codigo_a_y_seccion` FROM `horario_estudiante` WHERE `codigo_a_escolar`='$ano' AND `codigo_dia`='$bloque' AND `profesor`='$docente'" ;
       return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
     }

@@ -11,7 +11,7 @@ console.log('Cedula Docente',cedulaDocente);
 
 
 var change="";
-function CrearHorario(intervalo, horaInicio, horaFinal, x) {
+function CrearHorario() {
   var select = document.querySelectorAll(".select");
 
   //console.log("Esto es la X ",x);
@@ -39,6 +39,13 @@ function CrearHorario(intervalo, horaInicio, horaFinal, x) {
     span[1].innerHTML = anoNombre;
 
     span[3].innerHTML = docenteNombre;
+
+    // Enviar codigo del año escolar y cédula del docente a los span respectivos
+    // (Importante para el choque de aulas y secciones)
+
+    document.getElementById("span_lapso").dataset.ano_codigo = anoEscolar;
+    document.getElementById("span_docente").dataset.cedula_docente = docenteCedula;
+    
 
     document.querySelector(".tabla_horario").style.display = 'grid';
     document.querySelector('.guardar').style.display = 'block';
@@ -102,6 +109,7 @@ function DeshabilitarAulaGrupo() {
 }
 
 function EditarBloque(bloque) {
+  
     LimpiarBloqueVista();
     if(bloque.hasAttribute('data-codigo_seccion')){
       seccion_array = bloque.dataset.codigo_seccion;
@@ -109,15 +117,8 @@ function EditarBloque(bloque) {
     else{ seccion_array=''; }
     ano_seccion = document.querySelector('#span_lapso').dataset.ano_codigo;
     bloques=bloque.id;  
-    //console.log('Editar bloque ',bloque);
-    
-  //console.log("Seccion Horario Docente ",anoSeccion);
-  
 
     let contenidobloque=bloque.children;
-
-    //console.log(contenidobloque[7].dataset.codigo_seccion)
-    // let seccion = document.getElementById("seccion").value;
 
     //Array donde se guardará los datos a usar en el formulario de modificar
     let datosbloque=[];
@@ -134,7 +135,7 @@ function EditarBloque(bloque) {
       }
 
     }
-    //console.log(datosbloque);
+
     document.querySelector('.registrar_materia').style.display='block';
     if (anos=="") {
       let ano = document.getElementById('span_lapso').dataset.ano_codigo
@@ -162,8 +163,6 @@ function EditarBloque(bloque) {
     //Si hay datos y son menos de 4, es decir, sin grupo dividido
     if (datosbloque.length > 0 && datosbloque.length < 4){
 
-      //console.log('lol: ')
-      //console.log(datosbloque[0][0])
       aulainput.value = datosbloque[0][0];
 
       //Llenar el input de Seccion

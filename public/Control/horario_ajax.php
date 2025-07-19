@@ -42,7 +42,7 @@ else if(isset($_POST["verificarSeccion"])){
 else if (isset($_POST["materia"])) {
     $array= array();
     $x=0;
-    $dato=$objeto->ListaMateriaPrefesor($_POST["materia"]);
+    $dato=$objeto->ListaMateriaProfesor($_POST["materia"]);
 
     //Verifica si el bloque a modificar tiene el mismo profesor
     $mismoProfesor=$objeto->VerificarHorarioProfesor($_POST["ano_array"], $_POST["seccion"],$_POST["materia"],$_POST["block"]);
@@ -51,7 +51,7 @@ else if (isset($_POST["materia"])) {
     $datoFlat=array_merge(...$dato);
     $mismoProfesorFlat=array_merge(...$mismoProfesor);
 
-    for ($i=0; $i < count($dato); $i++) { 
+    for ($i=0; $i < count($dato); $i++) {
         $consulta=$objeto->ListaBloqueProfesor($_POST["block"], $dato[$i][0], $_POST["ano_array"]);
         if (count($consulta)==0) {
             $array[$x]=$dato[$i][0];
