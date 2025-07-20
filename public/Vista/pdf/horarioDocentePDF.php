@@ -18,9 +18,12 @@ $dompdf = new Dompdf();
 $headerHTML = generarMembreteHTML();
 $footerHTML = generarFooter();
 
+
 // Obtener bloques ya generados (como en JS)
 $bloques = $zonaModel->obtenerBloquesHorarioPDF(); // ["07:00-07:45", "07:45-08:30", ...]
 $horarioData = $zonaModel->BloquesHorarioPDF($cedula, $anoEscolar); // trae 'intervalo', 'codigo_dia', etc.
+
+$nombreProfesor = $horarioData[0]['nombreProfesor'];
 
 // Días abreviados → nombres
 $dias = [
@@ -31,6 +34,11 @@ $dias = [
     'V'  => 'Viernes'
 ];
 
+// echo '<pre>';
+// var_dump($horarioData);
+// echo '</pre>';
+
+// exit();
 // Inicializar el mapa: [bloque][dia] = contenido
 $horarioMap = [];
 
@@ -49,7 +57,7 @@ foreach ($horarioData as $fila) {
     if (!isset($dias[$diaAbrev])) continue;
 
     $contenido = htmlspecialchars($fila['asignatura']) . "<br>" .
-                 htmlspecialchars($fila['aula']) . "<br>" .
+                // htmlspecialchars($fila['aula']) . "<br>" .
                  htmlspecialchars($fila['seccion']);
 
     // Si ya hay contenido, concatenar
@@ -68,17 +76,17 @@ $css = '<style>
     }
     h2 {
         text-align: center;
-        margin-bottom: 20px;
+    
     }
     table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 10px;
-        font-size: 12px;
+        font-size: 10px;
     }
     table, th, td {
         border: 1px solid #ddd;
-        padding: 8px;
+        padding: 5px;
         text-align: center;
         vertical-align: middle;
     }
@@ -90,7 +98,7 @@ $css = '<style>
 
 $html = $headerHTML . $css;
 
-$html .= '<h2>Horario del Docente</h2>
+$html .= '<h2>Horario del Docente  '. htmlspecialchars($nombreProfesor) .' </h2>
 <table>
     <thead>
         <tr>
@@ -134,5 +142,5 @@ $footerText = $footerHTML['direccion'] . ' | ' . $footerHTML['telefono'] . ' | '
 $canvas->page_text(200, 580, $footerText, null, 8, array(0, 0, 0));
 
 // Mostrar PDF
-$dompdf->stream("Horario_Docente.pdf", array("Attachment" => false));
+$dompdf->stream("Horario_Docente_$nombreProfesor.pdf", array("Attachment" => false));
 ?>

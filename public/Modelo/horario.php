@@ -204,9 +204,9 @@ class zona extends bdmysql{
       return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
     }
 
-    function ClearHorario($ano_escolar, $ano_seccion) {
+    function ClearHorario($ano_escolar, $profesorCedula) {
       $sql="DELETE FROM `horario_estudiante`
-      WHERE codigo_a_escolar = '$ano_escolar' AND codigo_a_y_seccion = '$ano_seccion';";
+      WHERE codigo_a_escolar = '$ano_escolar' AND profesor = '$profesorCedula';";
       return $this->ejecutar($sql);
     }
     function BloquesHorario($cedulaRaw, $ano_escolarRaw) {
@@ -244,16 +244,17 @@ class zona extends bdmysql{
 
    function BloquesHorarioPDF($cedula, $anoEscolar) {
     $sql = "SELECT 
-        horario_estudiante.intervalo,
-        horario_estudiante.codigo_dia,
-        aula.nombre AS aula,
-        asignatura.nombre AS asignatura,
-        CONCAT(ano_seccion.ano,' ',ano_seccion.seccion) AS seccion
-
+    horario_estudiante.intervalo,
+    horario_estudiante.codigo_dia,
+    aula.nombre AS aula,
+    asignatura.nombre AS asignatura,
+        CONCAT(personas.nombres, ' ', personas.apellidos) AS nombreProfesor,
+        CONCAT(ano_seccion.ano, ' ', ano_seccion.seccion) AS seccion
     FROM horario_estudiante
     LEFT JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
     LEFT JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 
     LEFT JOIN ano_seccion ON horario_estudiante.codigo_a_y_seccion = ano_seccion.codigo
+    LEFT JOIN personas ON horario_estudiante.profesor = personas.cedula
     WHERE horario_estudiante.profesor = '$cedula'
       AND horario_estudiante.codigo_a_escolar = '$anoEscolar'";
 

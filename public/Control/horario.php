@@ -44,28 +44,26 @@ $offset = ($pagina - 1) * $resultados_por_pagina;
 
 
 // Validar y asignar $intervalo
-$intervalo = 6;
-// if (isset($_POST["id_intervalo"]) && $_POST["id_intervalo"] !== "undefined" && $_POST["id_intervalo"] !== "") {
-//     $intervalo = $_POST["id_intervalo"];
-// } else {
-//     $resultado = $objeto->GetIntervalo($_POST["ano"], $_POST["seccion"]);
-//     var_dump( $resultado );
-//      var_dump ($intervalo);   
-//     if (count($resultado) > 0) {
-//         $intervalo = $resultado[0][0];
+// $intervalo = 6;
+if (isset($_POST["id_intervalo"]) && $_POST["id_intervalo"] !== "undefined" && $_POST["id_intervalo"] !== "") {
+    $intervalo = $_POST["id_intervalo"];
+} else {
+    $resultado = $objeto->GetIntervalo($_POST["ano"], $_POST["seccion"]);
+    var_dump( $resultado );
+     var_dump ($intervalo);   
+    if (count($resultado) > 0) {
+        $intervalo = $resultado[0][0];
 
    
-//     } else {
-//         // Si no hay intervalo válido, detenemos el proceso
-//         die("Error: No se encontró un intervalo válido para el año y sección seleccionados.");
-//     }
-// }
+    } else {
+        // Si no hay intervalo válido, detenemos el proceso
+        die("Error: No se encontró un intervalo válido para el año y sección seleccionados.");
+    }
+}
 
 // Limpiar horario anterior
-if (isset($_POST["seccion_solo"])) {
-    $anoSeccion = $_POST["seccion_solo"];
-    $objeto->ClearHorario($anoEscolar, $anoSeccion);
-}
+$objeto->ClearHorario($anoEscolar, $cedulaProfesor);
+
 
 // Procesar bloques si hay datos
 if (count($bloques) > 1) {

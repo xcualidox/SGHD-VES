@@ -29,8 +29,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
             <table class="fl-table">
                 <thead>
     				<td >Año</td>
-    				<td >Seccion</td>
+    				<td >Sección</td>
+		                <td >Receso</td>
                     <td class=''> <a href="a_seccion_pdf.php">
+			    
                     <div class="flex justify-center ">
                         
                         <a href="a_seccion_pdf.php">
@@ -39,6 +41,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                   
                     </div>
                     </td>
+                     <td >Horario Año y Secciòn PDF</td>
     			</thead>
                 <tbody>
 
@@ -46,11 +49,18 @@ include_once('../v_Sidebar/v_Sidebar.php');
             include_once("../v_paginado/v_paginadoConsulta.php");
             //Variable de la Consulta del Paginado
             for ($i = 0; $i < count($resultado); $i++) {
+
+            // echo '<pre>';
+            // var_dump($resultado);
+            // echo '</pre>';
             ?>
 
                 <tr>
+
+    
     			    <td class="border px-4 py-2"><?php echo $resultado[$i]["ano"]?></td>
     			    <td class="border px-4 py-2"><?php echo $resultado[$i]["seccion"]?></td>
+                    <td class="border px-4 py-2"><?php echo $resultado[$i]["receso"]?></td>
                     <td class="">
 
 
@@ -59,10 +69,20 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     onclick='Eliminar(`<?php echo $resultado[$i]["ano"]; ?>`,`<?php echo $resultado[$i]["seccion"];?>`)' >
                     <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"
                     onclick='Modificar(`<?php echo $resultado[$i]["ano"]; ?>`,`<?php echo $resultado[$i]["seccion"];?>`)'  >
+
                 </div>
-                    
+
+  
+        
                   
                     </td>
+                    <td class="border px-4 py-2">
+                            <div class=" flex justify-center">
+                        <a href="../pdf/horarioDocentePDF.php?cedula=<?= $mostrar['codigo'] ?>&anoEscolar=<?= $mostrar['ano_codigo'] ?>" target="_blank">
+                    <img src="../../../images/icons/pdf.svg" class="w-10 filtro-verde" alt="PDF Horario">
+                </div>
+              </td>
+        
                     </tr>
                 <?php } ?>
             </tbody>
@@ -97,7 +117,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
     
             <br><br>
 
-                <label for="sec">Seccion: </label>
+                <label for="sec">Sección: </label>
                 <br>
                 <select name="sec" id="sec" class="t">
                     <option value="" hidden selected>Seccion del salon</option>

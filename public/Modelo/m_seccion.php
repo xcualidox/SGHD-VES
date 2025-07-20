@@ -25,7 +25,7 @@ class seccion extends database_connect{
     return $this->query($sql,[$origin,$origin2]);
     }
     function tabla($offset, $limit) {
-      $sql= "SELECT `ano`, `seccion` from ano_seccion LIMIT $offset,$limit";
+      $sql= "SELECT * from ano_seccion LIMIT $offset,$limit";
     return $this->fetch_all_query($this->query($sql,""));
     }
     function TotaldePagina() {

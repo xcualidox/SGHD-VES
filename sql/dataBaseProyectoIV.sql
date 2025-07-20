@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 28-06-2025 a las 21:33:10
+-- Tiempo de generación: 20-07-2025 a las 19:57:48
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -53,19 +53,20 @@ INSERT INTO `ano_escolar` (`codigo`, `nombre`, `fecha_inicio`, `fecha_fin`, `act
 CREATE TABLE `ano_seccion` (
   `codigo` int NOT NULL,
   `ano` varchar(4) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `seccion` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
+  `seccion` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `receso` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ano_seccion`
 --
 
-INSERT INTO `ano_seccion` (`codigo`, `ano`, `seccion`) VALUES
-(18, '1ero', 'U'),
-(19, '2do', 'U'),
-(20, '5to', 'U'),
-(21, '4to', 'U'),
-(22, '3ero', 'U');
+INSERT INTO `ano_seccion` (`codigo`, `ano`, `seccion`, `receso`) VALUES
+(18, '1ero', 'U', '08:20:00'),
+(19, '2do', 'U', '08:20:00'),
+(20, '5to', 'U', '09:00:00'),
+(21, '4to', 'U', '09:00:00'),
+(22, '3ero', 'U', '08:20:00');
 
 -- --------------------------------------------------------
 
@@ -268,7 +269,65 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 (421, '2025-06-28 17:14:23', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'DESKTOP-UEKPGTH'),
 (422, '2025-06-28 17:15:55', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'DESKTOP-UEKPGTH'),
 (423, '2025-06-28 17:27:59', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'DESKTOP-UEKPGTH'),
-(424, '2025-06-28 17:28:07', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'DESKTOP-UEKPGTH');
+(424, '2025-06-28 17:28:07', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'DESKTOP-UEKPGTH'),
+(425, '2025-07-13 19:09:20', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
+(426, '2025-07-13 19:14:39', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(427, '2025-07-13 19:14:59', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(428, '2025-07-13 19:15:25', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(429, '2025-07-13 19:15:43', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(430, '2025-07-13 19:17:27', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(431, '2025-07-13 19:18:55', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(432, '2025-07-13 19:22:03', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(433, '2025-07-13 19:22:16', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(434, '2025-07-13 19:22:56', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
+(435, '2025-07-13 19:23:08', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(436, '2025-07-13 19:26:44', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(437, '2025-07-13 19:26:48', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(438, '2025-07-13 19:26:59', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(439, '2025-07-14 20:19:14', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
+(440, '2025-07-14 20:19:34', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(441, '2025-07-18 21:27:49', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
+(442, '2025-07-19 09:28:30', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
+(443, '2025-07-19 09:49:46', 29629080, 'eliminar', 'Eliminó el horario del año \"\" sección \" \".', 'DESKTOP-UEKPGTH'),
+(444, '2025-07-19 09:52:05', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"2do U\".', 'DESKTOP-UEKPGTH'),
+(445, '2025-07-19 09:52:29', 29629080, 'eliminar', 'Eliminó el horario del año \"\" sección \" \".', 'DESKTOP-UEKPGTH'),
+(446, '2025-07-19 09:53:34', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"2do U\".', 'DESKTOP-UEKPGTH'),
+(447, '2025-07-19 09:55:14', 29629080, 'eliminar', 'Eliminó el horario del año \"\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(448, '2025-07-19 09:55:27', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"2do U\".', 'DESKTOP-UEKPGTH'),
+(449, '2025-07-19 09:55:51', 29629080, 'eliminar', 'Eliminó el horario del año \"\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(450, '2025-07-19 10:10:39', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(451, '2025-07-19 10:11:30', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(452, '2025-07-19 10:11:54', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(453, '2025-07-19 10:14:06', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(454, '2025-07-19 10:15:41', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(455, '2025-07-19 10:15:45', 29629080, 'eliminar', 'Eliminó el horario del año \"2024-2025\" sección \"EDUARDO GARCíA\".', 'DESKTOP-UEKPGTH'),
+(456, '2025-07-19 10:17:49', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
+(457, '2025-07-19 10:17:59', 29629080, 'eliminar', 'Eliminó el horario del Profesor \"EDUARDO GARCíA\" Del año escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(458, '2025-07-19 10:20:32', 29629080, 'insertar', 'Creó el horario Del Docente\"2024-2025\" sección \"EDUARDO GARCíA\".', 'DESKTOP-UEKPGTH'),
+(459, '2025-07-19 10:21:37', 29629080, 'insertar', 'Creó el horario Del Docente\"EDUARDO GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(460, '2025-07-19 10:46:28', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(461, '2025-07-19 10:46:37', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(462, '2025-07-19 10:46:44', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(463, '2025-07-19 11:34:19', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
+(464, '2025-07-19 12:46:27', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
+(465, '2025-07-19 13:06:42', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"EDUARDO GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(466, '2025-07-19 13:07:05', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(467, '2025-07-19 13:07:14', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"EDUARDO GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(468, '2025-07-19 13:07:23', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(469, '2025-07-19 14:29:49', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(470, '2025-07-19 14:33:19', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(471, '2025-07-19 14:33:33', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(472, '2025-07-19 14:36:32', 29629080, 'eliminar', 'Eliminó el horario del Profesor \"WILMER GARCíA\" Del año escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(473, '2025-07-19 14:36:58', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(474, '2025-07-19 14:37:15', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(475, '2025-07-19 14:48:10', 29629080, 'eliminar', 'Eliminó el horario del Profesor \"WILMER GARCíA\" Del año escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(476, '2025-07-19 14:50:11', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(477, '2025-07-20 13:19:24', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
+(478, '2025-07-20 13:28:17', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(479, '2025-07-20 13:28:47', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(480, '2025-07-20 13:35:34', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(481, '2025-07-20 13:46:22', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(482, '2025-07-20 13:46:31', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH');
 
 -- --------------------------------------------------------
 
@@ -326,7 +385,7 @@ CREATE TABLE `dolar` (
 --
 
 INSERT INTO `dolar` (`id`, `precio`) VALUES
-(1, 106.86);
+(1, 119.14);
 
 -- --------------------------------------------------------
 
@@ -377,101 +436,35 @@ CREATE TABLE `horario_estudiante` (
 --
 
 INSERT INTO `horario_estudiante` (`codigo`, `codigo_a_escolar`, `codigo_a_y_seccion`, `codigo_asignatura`, `codigo_aula`, `codigo_dia`, `grupo`, `profesor`, `intervalo`, `receso`) VALUES
-(5649, 18, 21, NULL, 28, 'B1MM', ' ', NULL, 6, ''),
-(5650, 18, 21, 'EF', 28, 'B1J', ' ', 5945762, 6, '09:00'),
-(5651, 18, 21, 'QU', 28, 'B1V', ' ', 14091761, 6, '09:00'),
-(5654, 18, 21, NULL, 28, 'B2MM', ' ', NULL, 6, '09:00'),
-(5655, 18, 21, 'EF', 28, 'B2J', ' ', 5945762, 6, '09:00'),
-(5656, 18, 21, 'QU', 28, 'B2V', ' ', 14091761, 6, '09:00'),
-(5658, 18, 21, 'EF', 28, 'B3J', ' ', 5945762, 6, '09:00'),
-(5659, 18, 21, 'QU', 28, 'B3V', ' ', 14091761, 6, '09:00'),
-(5665, 18, 21, 'CA', 28, 'B5L', ' ', 10143237, 6, '09:00'),
-(5666, 18, 21, NULL, 28, 'B5M', ' ', NULL, 6, '09:00'),
-(5669, 18, 21, 'CA', 28, 'B5V', ' ', 10143237, 6, '09:00'),
-(5670, 18, 21, 'CA', 28, 'B6L', ' ', 10143237, 6, '09:00'),
-(5671, 18, 21, 'FSN', 29, 'B6M', ' ', 5945762, 6, '09:00'),
-(5673, 18, 21, 'PGCRP', 28, 'B6J', ' ', 5945762, 6, '09:00'),
-(5674, 18, 21, 'CA', 28, 'B6V', ' ', 10143237, 6, '09:00'),
-(5675, 18, 21, 'OC', 28, 'B7L', ' ', 10143237, 6, '09:00'),
-(5676, 18, 21, 'FSN', 29, 'B7M', ' ', 5945762, 6, '09:00'),
-(5677, 18, 21, 'TC', 28, 'B7MM', ' ', 10143237, 6, '09:00'),
-(5678, 18, 21, 'PGCRP', 28, 'B7J', ' ', 5945762, 6, '09:00'),
-(5679, 18, 21, 'GHC', 28, 'B7V', ' ', 15214479, 6, '09:00'),
-(5680, 18, 21, 'OC', 28, 'B8L', ' ', 10143237, 6, '09:00'),
-(5681, 18, 21, 'GHC', 28, 'B8M', ' ', 15214479, 6, '09:00'),
-(5682, 18, 21, 'GHC', 32, 'B8MM', ' ', 15214479, 6, '09:00'),
-(5683, 18, 21, 'PGCRP', 28, 'B8J', ' ', 5945762, 6, '09:00'),
-(5684, 18, 21, 'GHC', 28, 'B8V', ' ', 15214479, 6, '09:00'),
-(5989, 18, 20, NULL, 29, 'B1M', ' ', NULL, 6, '09:00'),
-(5990, 18, 20, 'CT', 29, 'B1MM', ' ', 14091761, 6, '09:00'),
-(5992, 18, 20, 'EF', 29, 'B1V', ' ', 5945762, 6, '09:00'),
-(5993, 18, 20, 'CA', 29, 'B2L', ' ', 10143237, 6, '09:00'),
-(5994, 18, 20, NULL, 29, 'B2M', ' ', NULL, 6, '09:00'),
-(5995, 18, 20, 'CT', 29, 'B2MM', ' ', 14091761, 6, '09:00'),
-(5997, 18, 20, 'EF', 29, 'B2V', ' ', 5945762, 6, '09:00'),
-(5998, 18, 20, 'CA', 29, 'B3L', ' ', 10143237, 6, '09:00'),
-(6000, 18, 20, 'CA', 29, 'B3MM', ' ', 10143237, 6, '09:00'),
-(6002, 18, 20, 'EF', 29, 'B3V', ' ', 5945762, 6, '09:00'),
-(6003, 18, 20, 'OC', 29, 'B4L', ' ', 15214479, 6, '09:00'),
-(6004, 18, 20, 'FSN', 30, 'B4M', ' ', 5945762, 6, '09:00'),
-(6005, 18, 20, 'CA', 29, 'B4MM', ' ', 10143237, 6, '09:00'),
-(6006, 18, 20, 'GHC', 29, 'B4J', ' ', 15214479, 6, '09:00'),
-(6008, 18, 20, 'QU', 29, 'B5L', ' ', 14091761, 6, '09:00'),
-(6009, 18, 20, 'FSN', 30, 'B5M', ' ', 5945762, 6, '09:00'),
-(6010, 18, 20, NULL, 29, 'B5MM', ' ', NULL, 6, '09:00'),
-(6011, 18, 20, 'GHC', 29, 'B5J', ' ', 15214479, 6, '09:00'),
-(6012, 18, 20, 'GHC', 29, 'B5V', ' ', 15214479, 6, '09:00'),
-(6013, 18, 20, 'QU', 29, 'B6L', ' ', 14091761, 6, '09:00'),
-(6015, 18, 20, NULL, 29, 'B6MM', ' ', NULL, 6, '09:00'),
-(6016, 18, 20, 'PGCRP', 29, 'B6J', ' ', 10143237, 6, '09:00'),
-(6018, 18, 20, 'GHC', 29, 'B7L', ' ', 15214479, 6, '09:00'),
-(6020, 18, 20, 'QU', 29, 'B7MM', ' ', 14091761, 6, '09:00'),
-(6021, 18, 20, 'PGCRP', 29, 'B7J', ' ', 10143237, 6, '09:00'),
-(6023, 18, 20, 'GHC', 29, 'B8L', ' ', 15214479, 6, '09:00'),
-(6025, 18, 20, 'QU', 29, 'B8MM', ' ', 14091761, 6, '09:00'),
-(6026, 18, 20, 'PGCRP', 29, 'B8J', ' ', 10143237, 6, '09:00'),
-(6028, 18, 18, 'GHC', 25, 'B1M', ' ', 15214479, 6, '08:20'),
-(6030, 18, 18, 'AP', 25, 'B1J', ' ', 15214479, 6, '08:20'),
-(6032, 18, 18, 'GHC', 25, 'B2L', ' ', 15214479, 6, '08:20'),
-(6033, 18, 18, 'GHC', 25, 'B2M', ' ', 15214479, 6, '08:20'),
-(6035, 18, 18, 'AP', 25, 'B2J', ' ', 15214479, 6, '08:20'),
-(6038, 18, 18, 'CN', 25, 'B3M', ' ', NULL, 6, '08:20'),
-(6039, 18, 18, 'GHC', 25, 'B3MM', ' ', 15214479, 6, '08:20'),
-(6040, 18, 18, 'CA', 25, 'B3J', ' ', 10143237, 6, '08:20'),
-(6041, 18, 18, 'CA', 25, 'B3V', ' ', 10143237, 6, '08:20'),
-(6043, 18, 18, 'CN', 25, 'B4M', ' ', NULL, 6, '08:20'),
-(6044, 18, 18, 'GHC', 25, 'B4MM', ' ', 15214479, 6, '08:20'),
-(6045, 18, 18, 'CA', 25, 'B4J', ' ', 10143237, 6, '08:20'),
-(6046, 18, 18, 'CA', 25, 'B4V', ' ', 10143237, 6, '08:20'),
-(6048, 18, 18, 'AP', 25, 'B5M', ' ', 15214479, 6, '08:20'),
-(6049, 18, 18, 'TC', 25, 'B5MM', ' ', 10143237, 6, '08:20'),
-(6050, 18, 18, 'CA', 25, 'B5J', ' ', 10143237, 6, '08:20'),
-(6053, 18, 18, 'AP', 25, 'B6M', ' ', 15214479, 6, '08:20'),
-(6054, 18, 18, 'TC', 25, 'B6MM', ' ', 10143237, 6, '08:20'),
-(6056, 18, 18, 'EF', 25, 'B6V', ' ', 5945762, 6, '08:20'),
-(6057, 18, 18, 'AP', 25, 'B7M', ' ', 15214479, 6, '08:20'),
-(6058, 18, 18, 'CN', 25, 'B7MM', ' ', NULL, 6, '08:20'),
-(6060, 18, 18, 'EF', 25, 'B7V', ' ', 5945762, 6, '08:20'),
-(6061, 18, 18, 'CN', 28, 'B8MM', ' ', NULL, 6, '08:20'),
-(6063, 18, 18, 'EF', 25, 'B8V', ' ', 5945762, 6, '08:20'),
-(6128, 18, 19, 'TC', 26, 'B1M', ' ', 10143237, 6, '08:20'),
-(6129, 18, 19, 'GHC', 26, 'B1MM', ' ', 15214479, 6, '08:20'),
-(6131, 18, 19, 'AP', 26, 'B1V', ' ', 15214479, 6, '08:20'),
-(6133, 18, 19, 'TC', 26, 'B2M', ' ', 10143237, 6, '08:20'),
-(6134, 18, 19, 'GHC', 26, 'B2MM', ' ', 15214479, 6, '08:20'),
-(6136, 18, 19, 'AP', 26, 'B2V', ' ', 15214479, 6, '08:20'),
-(6137, 18, 19, 'GHC', 26, 'B3M', ' ', 15214479, 6, '08:20'),
-(6138, 18, 19, 'CA', 26, 'B4L', ' ', 10143237, 6, '08:20'),
-(6139, 18, 19, 'GHC', 26, 'B4M', ' ', 15214479, 6, '08:20'),
-(6141, 18, 19, 'EF', 26, 'B4J', ' ', 5945762, 6, '08:20'),
-(6142, 18, 19, 'CN', 26, 'B4V', ' ', 14091761, 6, '08:20'),
-(6143, 18, 19, 'AP', 26, 'B5L', ' ', 15214479, 6, '08:20'),
-(6145, 18, 19, 'CN', 26, 'B5MM', ' ', 14091761, 6, '08:20'),
-(6146, 18, 19, 'EF', 26, 'B5J', ' ', 5945762, 6, '08:20'),
-(6148, 18, 19, 'AP', 26, 'B6L', ' ', 15214479, 6, '08:20'),
-(6150, 18, 19, 'CN', 26, 'B6MM', ' ', 14091761, 6, '08:20'),
-(6156, 18, 19, 'CA', 26, 'B7V', ' ', 10143237, 6, '08:20'),
-(6160, 18, 19, 'CA', 26, 'B8V', ' ', 10143237, 6, '08:20');
+(6968, 18, 18, 'AP', 25, 'B1L', ' ', 5945762, 6, NULL),
+(6969, 18, 18, 'AP', 25, 'B1L', ' ', 5945762, 6, NULL),
+(6976, 18, 18, 'AP', 25, 'B1L', ' ', 5945762, 6, NULL),
+(6977, 18, 18, 'AP', 25, 'B1M', ' ', 5945762, 6, NULL),
+(6982, 18, 18, 'AP', 25, 'B1L', ' ', 5945762, 6, NULL),
+(6983, 18, 18, 'AP', 25, 'B1M', ' ', 5945762, 6, NULL),
+(6984, 18, 18, 'AP', 25, 'B2M', ' ', 5945762, 6, NULL),
+(7131, 18, 19, 'AP', 26, 'B1L', ' ', 10143237, 7, NULL),
+(7132, 18, 19, 'AP', 27, 'B1M', ' ', 10143237, 7, NULL),
+(7133, 18, 18, 'AP', 29, 'B1MM', ' ', 10143237, 7, NULL),
+(7134, 18, 18, 'BI', 25, 'B1V', ' ', 10143237, 7, NULL),
+(7135, 18, 18, 'AP', 25, 'B2L', ' ', 10143237, 7, NULL),
+(7136, 18, 19, 'BI', 26, 'B2M', ' ', 10143237, 7, NULL),
+(7137, 18, 19, 'CN', 26, 'B2MM', ' ', 10143237, 7, NULL),
+(7138, 18, 18, 'AP', 26, 'B2V', ' ', 10143237, 7, NULL),
+(7139, 18, 22, 'BI', 27, 'B3L', ' ', 10143237, 7, NULL),
+(7140, 18, 18, 'AP', 30, 'B3M', ' ', 10143237, 7, NULL),
+(7141, 18, 19, 'AP', 27, 'B3MM', ' ', 10143237, 7, NULL),
+(7142, 18, 18, 'AP', 25, 'B3V', ' ', 10143237, 7, NULL),
+(7143, 18, 18, 'CA', 31, 'B4J', ' ', 10143237, 7, NULL),
+(7144, 18, 18, 'AP', 26, 'B5M', ' ', 10143237, 7, NULL),
+(7145, 18, 19, 'AP', 26, 'B5V', ' ', 10143237, 7, NULL),
+(7146, 18, 18, 'AP', 25, 'B6M', ' ', 10143237, 7, NULL),
+(7147, 18, 18, 'AP', 25, 'B6MM', ' ', 10143237, 7, NULL),
+(7148, 18, 18, 'AP', 25, 'B6V', ' ', 10143237, 7, NULL),
+(7149, 18, 18, 'AP', 26, 'B7M', ' ', 10143237, 7, NULL),
+(7150, 18, 18, 'AP', 26, 'B7MM', ' ', 10143237, 7, NULL),
+(7151, 18, 18, 'AP', 25, 'B7V', ' ', 10143237, 7, NULL),
+(7152, 18, 18, 'AP', 26, 'B8J', ' ', 10143237, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -554,8 +547,7 @@ CREATE TABLE `materia_ano` (
 INSERT INTO `materia_ano` (`id`, `codigo_materia`, `ano`) VALUES
 (9, 'AP', 1),
 (10, 'AP', 2),
-(27, 'BI', 1),
-(28, 'BI', 2),
+(29, 'BI', 1),
 (13, 'FI', 4);
 
 -- --------------------------------------------------------
@@ -1003,13 +995,13 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=425;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=483;
 
 --
 -- AUTO_INCREMENT de la tabla `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6945;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7153;
 
 --
 -- AUTO_INCREMENT de la tabla `intervalo`
@@ -1027,7 +1019,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT de la tabla `materia_ano`
 --
 ALTER TABLE `materia_ano`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad`
