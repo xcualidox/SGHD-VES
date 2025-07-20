@@ -93,7 +93,7 @@
                             <i class="flex  justify-center  items-center ">
                                 <img src="../../../images/icons/seccion.svg" class="w-8  filtro-blanco">
                             </i>
-                            <span class="nav-item">Grado</span>
+                            <span class="nav-item">Año y Sección</span>
                         </a>
                     </li>
                     <li>

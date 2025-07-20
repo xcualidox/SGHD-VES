@@ -1,5 +1,7 @@
 var dato1="";
 var dato2="";
+var datoReceso="";
+
 
 
 
@@ -18,26 +20,36 @@ function Eliminar(ano, seccion) {
 
 }
 
-function Modificar(ano, seccion) {
-    var div=document.querySelector('#form');
-    var inputs1=div.querySelectorAll('#a');
-    var inputs2=div.querySelectorAll('#sec');
-    document.getElementById('boton1').style.display='block';
-    document.getElementById('boton2').style.display='none';
-    div.style.display='block';
-    inputs1[0].value=ano;
-    inputs2[0].value=seccion;
-    document.getElementById("ope").value='Modificar';
-    
-    dato1=ano;
-    dato2=seccion;
-    console.log(dato1);
+function Modificar(codigo, ano, seccion, receso) {
+    var div = document.querySelector('#form');
+    var inputs1 = div.querySelectorAll('#a');
+    var inputs2 = div.querySelectorAll('#sec');
+    var inputHorareceso = div.querySelectorAll('#horaReceso');
+
+    document.getElementById('boton1').style.display = 'block';
+    document.getElementById('boton2').style.display = 'none';
+    div.style.display = 'block';
+
+    inputs1[0].value = ano;
+    inputs2[0].value = seccion;
+    inputHorareceso[0].value = receso;
+
+    document.getElementById("ope").value = 'Modificar';
+    document.getElementById("codigo").value = codigo;
+
+    // Guardar valores originales para validación
+    dato1 = ano;
+    dato2 = seccion;
+    datoReceso = receso;
+
+    console.log(codigo);
 }
 
 function Enviar(valor){
     var div=document.querySelector('#form');
     var inputs1=div.querySelectorAll('#a');
     var inputs2=div.querySelectorAll('#sec');
+    var horaReceso = document.getElementById('horaReceso').value;
     console.log(dato1);
 
     if (document.getElementById("ope").value=="") {
@@ -50,8 +62,10 @@ function Enviar(valor){
 
         var a = document.getElementById('a').value;
         var sec = document.getElementById('sec').value;
+      
+ 
 
-        if(a == "" || sec == ""){
+        if(a == "" || sec == "" || horaReceso == ""){
         
 
             showToast("No puede dejar los campos vacios", false);
@@ -65,30 +79,19 @@ function Enviar(valor){
             
         }
     }
-    else if(x=="Modificar"){
+  else if (x == "Modificar") {
+    var inp1 = inputs1[0].value;
+    var inp2 = inputs2[0].value;
 
-        var inp1 = inputs1[0].value;
-        var inp2 = inputs2[0].value;
-
-        if(inp1 == "" || inp2 == ""){
-            showToast("No puede dejar los campos vacios",false);
-        }
-
-        else if (inp1 == dato1 && inp2 == dato2){
-            showToast("Los datos modificados no pueden quedar igual",true);
-        }
-
-        else{
-            var a = document.getElementById('a').value; 
-            var sec = document.getElementById('sec').value;
-
-            document.getElementById('origin').value=dato1;
-            document.getElementById('origin2').value=dato2;
-
-            showToast("Este dato ha sido modificado exitosamente",true);
-            setTimeout(() => {
-                div.submit();
-            }, 1000);
-        }
+    if (inp1 == "" || inp2 == "" || horaReceso == "") {
+        showToast("No puede dejar los campos vacíos", false);
+    } else if (inp1 == dato1 && inp2 == dato2 && horaReceso == datoReceso) {
+        showToast("Los datos modificados no pueden quedar igual", false);
+    } else {
+        showToast("Este dato ha sido modificado exitosamente", true);
+        setTimeout(() => {
+            div.submit();
+        }, 1000);
     }
+}
 }

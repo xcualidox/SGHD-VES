@@ -66,10 +66,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
 
                 <div class=" flex justify-center">
                     <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" 
-                    onclick='Eliminar(`<?php echo $resultado[$i]["ano"]; ?>`,`<?php echo $resultado[$i]["seccion"];?>`)' >
-                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"
-                    onclick='Modificar(`<?php echo $resultado[$i]["ano"]; ?>`,`<?php echo $resultado[$i]["seccion"];?>`)'  >
-
+                                       onclick='Eliminar(`<?php echo $resultado[$i]["codigo"]; ?>`, `<?php echo $resultado[$i]["ano"] . $resultado[$i]["seccion"]; ?>`)'
+                    >
+                  <img src="../../../images/icons/modificar.svg" class="w-10 filtro-azul" alt="Modificar" title="Modificar" id="boton1"
+    onclick='Modificar(`<?php echo $resultado[$i]["codigo"]; ?>`, `<?php echo $resultado[$i]["ano"]; ?>`,`<?php echo $resultado[$i]["seccion"];?>`,`<?php echo $resultado[$i]["receso"]; ?>`)'>
                 </div>
 
   
@@ -105,7 +105,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
             </div>
 
                 <label for="a">Año: </label>
-                <br>
+      
                 <select name="a" id="a" class="">
                     <option value="" hidden selected>Año del salon</option>
                     <option value="1ero">1er Año</option>
@@ -115,10 +115,10 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     <option value="5to">5to Año</option>
                 </select>
     
-            <br><br>
+            <br>
 
                 <label for="sec">Sección: </label>
-                <br>
+           
                 <select name="sec" id="sec" class="t">
                     <option value="" hidden selected>Seccion del salon</option>
                     <option value="U">U</option>
@@ -130,12 +130,19 @@ include_once('../v_Sidebar/v_Sidebar.php');
            
                     <br>
                     <br>
+                     <label for="horaReceso">Receso :</label>
+                <input type="time" id="horaReceso" name="horaReceso" >
+     
+                <br>
+         
              
 
                 <input type="hidden" name="ope" id='ope'>
                 <input type="hidden" name="origin" id='origin'>
                 <input type="hidden" name="origin2" id='origin2'>
-              
+                <input type="hidden" name="origin2" id='origin3'>
+              <input type="hidden" name="codigo" id="codigo" value="">
+
                 <input type="button" id="btn3" onclick="Enviar(this.value)" value="Incluir" class="table_button w-full">
               
             </form>

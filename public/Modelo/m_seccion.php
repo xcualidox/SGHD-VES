@@ -1,28 +1,29 @@
 <?php
 include_once("basedatos.php");
 class seccion extends database_connect{
-    private $a, $sec;
+    private $a, $sec,$horareceso;
 
-    function setDatos($a, $sec){
+    function setDatos($a, $sec,$horareceso){
 		$this->a=$a;
 		$this->sec=$sec;
+		$this->horareceso=$horareceso;
 	  }
 
     function incluye(){
-        $sql= "insert into ano_seccion(ano, seccion) values(?,?)";
-    return $this->query($sql,[$this->a,$this->sec]);
+        $sql= "insert into ano_seccion(ano, seccion,receso) values(?,?,?)";
+    return $this->query($sql,[$this->a,$this->sec,$this->horareceso]);
     }
 
-    function modificar($origin, $origin2){
-        $sql= "UPDATE `ano_seccion`
-                SET `ano`=?, `seccion`=?
-                WHERE `ano`=? AND `seccion`=?";
-		return $this->query($sql,[$this->a,$this->sec,$origin,$origin2]);
-    }
+function modificar($codigo) {
+    $sql = "UPDATE `ano_seccion`
+            SET `ano` = ?, `seccion` = ?, `receso` = ?
+            WHERE `codigo` = ?";
+    return $this->query($sql, [$this->a, $this->sec, $this->horareceso, $codigo]);
+}
     
     function eliminar($origin, $origin2) {
-      $sql= "DELETE FROM `ano_seccion` WHERE `ano`=? AND `seccion`=?";
-    return $this->query($sql,[$origin,$origin2]);
+      $sql= "DELETE FROM `ano_seccion` WHERE `codigo`=?";
+    return $this->query($sql,[$origin]);
     }
     function tabla($offset, $limit) {
       $sql= "SELECT * from ano_seccion LIMIT $offset,$limit";

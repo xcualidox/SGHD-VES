@@ -27,8 +27,13 @@ function Registra()
 	session_start();
 	$ano=$_POST["a"];
 	$seccion=$_POST["sec"];
+	$horaReceso=$_POST["horaReceso"];
+	// echo '<pre>';
+	// var_dump($_POST);
+	// echo '</pre>';
+	// exit();
 	$objeto = new seccion();
-	$objeto->setDatos($_POST["a"], $_POST["sec"]);
+	$objeto->setDatos($ano, $seccion, horareceso: $horaReceso);
 	$objeto->incluye();
 	require_once("c_bitacora.php");
     insertBitacora($_SESSION['username'], "insertar", "Agregó la sección ".$_POST["a"]."-".$_POST["sec"].".");
@@ -38,9 +43,18 @@ function Registra()
 function Modifica()
 {
 	session_start();
+	// echo '<pre>';
+	// var_dump($_POST);
+	// echo '</pre>';
+	// exit();
 	$objeto = new seccion();
-	$objeto->setDatos($_POST["a"], $_POST["sec"]);
-	$objeto->modificar($_POST["origin"], $_POST["origin2"]);
+    $objeto->setDatos($_POST["a"], $_POST["sec"], $_POST["horaReceso"]);
+
+    
+    // Modifica usando los valores originales
+	$objeto->modificar($_POST["codigo"]); // usamos solo el código
+
+    
 	require_once("c_bitacora.php");
     insertBitacora($_SESSION['username'], "modificar", "Modificó la sección ".$_POST["origin"]."-".$_POST["origin2"].".");
 	header("Location: ../Vista/seccion/v_seccion.php");
@@ -50,9 +64,14 @@ function Elimina()
 {	
 	session_start();
 	$objeto = new seccion();
+
+// 	echo '<pre>';
+// 	var_dump($_POST);
+// 	echo '</pre>';
+// exit();
 	$objeto->eliminar($_POST["origin"], $_POST["origin2"]);
 	require_once("c_bitacora.php");
-    insertBitacora($_SESSION['username'], "eliminar", "Eliminó la sección ".$_POST["origin"]."-".$_POST["origin2"].".");
+    insertBitacora($_SESSION['username'], "eliminar", "Eliminó la sección ".$_POST["origin2"].".");
 	header("Location: ../Vista/seccion/v_seccion.php");
 }
 ?>
