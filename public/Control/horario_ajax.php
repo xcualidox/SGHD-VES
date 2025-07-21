@@ -92,6 +92,32 @@ else if(isset($_POST["anos_borrar"]) && isset($_POST["seccion_borrar"])){
     echo json_encode($dato);
     exit();
 }
+////////////////////
+//BUSCAR MATERIAS///
+////////////////////
+
+else if (isset($_POST["buscarMaterias"])) {
+    $ano_codigo=$_POST["anos"];
+
+    if ($ano_codigo != '') {
+        $ano_codigo=$_POST["anos"];
+    }
+
+    else{
+        $ano_codigo='';
+    }
+
+    $docente=$_POST["docente"];
+
+    //este ano es 1ero, 2do, 3ero, 4to, 5to, etc. NO ES ANO ESCOLAR (2024-2025)
+    $ano= $objeto->SelectAlgo('ano','ano_seccion','codigo='.$ano_codigo)[0][0];
+
+    $dato=$objeto->SelectAsignaturaHorario($docente, $ano);
+
+    // "JSON_UNESCAPED_UNICODE" es para los acentos Xd
+    echo json_encode($dato, JSON_UNESCAPED_UNICODE);
+    exit();
+}
 else {
     $dato=$objeto->BloquesHorario($_POST["cedula"],$_POST["ano_escolar"]);
     echo json_encode($dato);

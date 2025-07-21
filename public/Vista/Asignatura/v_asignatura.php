@@ -46,10 +46,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 function convertirAnosAsociados($cadenaAnos) {
                     return array_map(
                         'intval',
-                        array_filter(
-                            explode(',', $cadenaAnos ?? ''),
-                            'is_numeric'
-                        )
+                            explode(',', $cadenaAnos ?? '')
                     );
                 }
                 //Variable de la Consulta del Paginado
@@ -66,7 +63,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
             </div>
                 <div class=" flex justify-center">
                     <img src="../../../images/icons/papelera.svg"  class="w-10  mr-10 filtro-rojo" alt="Borrar" title="Borrar" id="boton1" onclick='Eliminar(`<?php echo $resultado[$i]["codigo"]; ?>`)' >
-                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"onclick='Modificar(`<?php echo $resultado[$i]["codigo"]; ?>`,`<?php echo $resultado[$i]["nombre"];?>`, <?php echo json_encode(convertirAnosAsociados($resultado[$i]["anos_asociados"]));?>)' >
+                    <img src="../../../images/icons/modificar.svg"  class="w-10  filtro-azul " alt="Borrar" title="Modificar" id="boton1"onclick='Modificar(`<?php echo $resultado[$i]["codigo"]; ?>`,`<?php echo $resultado[$i]["nombre"];?>`, <?php echo json_encode(convertirAnosAsociados($resultado[$i]["anos_asociados"]));?>)'>
                 </div>
              
                    
