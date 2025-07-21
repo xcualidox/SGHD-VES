@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 20-07-2025 a las 19:57:48
+-- Tiempo de generación: 21-07-2025 a las 00:17:59
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -52,8 +52,8 @@ INSERT INTO `ano_escolar` (`codigo`, `nombre`, `fecha_inicio`, `fecha_fin`, `act
 
 CREATE TABLE `ano_seccion` (
   `codigo` int NOT NULL,
-  `ano` varchar(4) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `seccion` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `ano` enum('1ero','2do','3ero','4to','5to') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `seccion` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
   `receso` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -270,64 +270,35 @@ INSERT INTO `bitacora` (`id`, `fecha_hora`, `cedula`, `type`, `description`, `us
 (422, '2025-06-28 17:15:55', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'DESKTOP-UEKPGTH'),
 (423, '2025-06-28 17:27:59', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'DESKTOP-UEKPGTH'),
 (424, '2025-06-28 17:28:07', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'DESKTOP-UEKPGTH'),
-(425, '2025-07-13 19:09:20', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
-(426, '2025-07-13 19:14:39', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(427, '2025-07-13 19:14:59', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(428, '2025-07-13 19:15:25', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(429, '2025-07-13 19:15:43', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(430, '2025-07-13 19:17:27', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(431, '2025-07-13 19:18:55', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(432, '2025-07-13 19:22:03', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(433, '2025-07-13 19:22:16', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(434, '2025-07-13 19:22:56', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
-(435, '2025-07-13 19:23:08', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(436, '2025-07-13 19:26:44', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(437, '2025-07-13 19:26:48', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(438, '2025-07-13 19:26:59', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(439, '2025-07-14 20:19:14', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
-(440, '2025-07-14 20:19:34', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(441, '2025-07-18 21:27:49', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
-(442, '2025-07-19 09:28:30', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
-(443, '2025-07-19 09:49:46', 29629080, 'eliminar', 'Eliminó el horario del año \"\" sección \" \".', 'DESKTOP-UEKPGTH'),
-(444, '2025-07-19 09:52:05', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"2do U\".', 'DESKTOP-UEKPGTH'),
-(445, '2025-07-19 09:52:29', 29629080, 'eliminar', 'Eliminó el horario del año \"\" sección \" \".', 'DESKTOP-UEKPGTH'),
-(446, '2025-07-19 09:53:34', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"2do U\".', 'DESKTOP-UEKPGTH'),
-(447, '2025-07-19 09:55:14', 29629080, 'eliminar', 'Eliminó el horario del año \"\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(448, '2025-07-19 09:55:27', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"2do U\".', 'DESKTOP-UEKPGTH'),
-(449, '2025-07-19 09:55:51', 29629080, 'eliminar', 'Eliminó el horario del año \"\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(450, '2025-07-19 10:10:39', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(451, '2025-07-19 10:11:30', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(452, '2025-07-19 10:11:54', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(453, '2025-07-19 10:14:06', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(454, '2025-07-19 10:15:41', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(455, '2025-07-19 10:15:45', 29629080, 'eliminar', 'Eliminó el horario del año \"2024-2025\" sección \"EDUARDO GARCíA\".', 'DESKTOP-UEKPGTH'),
-(456, '2025-07-19 10:17:49', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'DESKTOP-UEKPGTH'),
-(457, '2025-07-19 10:17:59', 29629080, 'eliminar', 'Eliminó el horario del Profesor \"EDUARDO GARCíA\" Del año escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(458, '2025-07-19 10:20:32', 29629080, 'insertar', 'Creó el horario Del Docente\"2024-2025\" sección \"EDUARDO GARCíA\".', 'DESKTOP-UEKPGTH'),
-(459, '2025-07-19 10:21:37', 29629080, 'insertar', 'Creó el horario Del Docente\"EDUARDO GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(460, '2025-07-19 10:46:28', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(461, '2025-07-19 10:46:37', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(462, '2025-07-19 10:46:44', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(463, '2025-07-19 11:34:19', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
-(464, '2025-07-19 12:46:27', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
-(465, '2025-07-19 13:06:42', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"EDUARDO GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(466, '2025-07-19 13:07:05', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(467, '2025-07-19 13:07:14', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"EDUARDO GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(468, '2025-07-19 13:07:23', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(469, '2025-07-19 14:29:49', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(470, '2025-07-19 14:33:19', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(471, '2025-07-19 14:33:33', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(472, '2025-07-19 14:36:32', 29629080, 'eliminar', 'Eliminó el horario del Profesor \"WILMER GARCíA\" Del año escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(473, '2025-07-19 14:36:58', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(474, '2025-07-19 14:37:15', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(475, '2025-07-19 14:48:10', 29629080, 'eliminar', 'Eliminó el horario del Profesor \"WILMER GARCíA\" Del año escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(476, '2025-07-19 14:50:11', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(477, '2025-07-20 13:19:24', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
-(478, '2025-07-20 13:28:17', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(479, '2025-07-20 13:28:47', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(480, '2025-07-20 13:35:34', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(481, '2025-07-20 13:46:22', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
-(482, '2025-07-20 13:46:31', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH');
+(425, '2025-07-04 20:57:45', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(426, '2025-07-10 13:48:51', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(427, '2025-07-10 13:49:01', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(428, '2025-07-10 13:50:25', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(429, '2025-07-10 16:48:03', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(430, '2025-07-10 16:48:25', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(431, '2025-07-10 16:58:17', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(432, '2025-07-10 16:58:40', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(433, '2025-07-10 16:59:24', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(434, '2025-07-10 17:59:50', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(435, '2025-07-10 18:32:25', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(436, '2025-07-10 18:56:27', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(437, '2025-07-10 19:10:00', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(438, '2025-07-10 19:17:38', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(439, '2025-07-10 19:17:52', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(440, '2025-07-10 20:25:08', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(441, '2025-07-11 01:29:20', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(442, '2025-07-11 01:29:32', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(443, '2025-07-11 01:29:53', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(444, '2025-07-11 17:28:07', 29629080, 'login', 'Ingresó al sistema.', 'ZUHE2-PC'),
+(445, '2025-07-13 19:23:52', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"3ero U\".', 'ZUHE2-PC'),
+(446, '2025-07-13 19:26:31', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"1ero U\".', 'ZUHE2-PC'),
+(447, '2025-07-17 20:32:35', 29629080, 'insertar', 'Creó el horario para el año \"2024-2025\" sección \"2do U\".', 'ZUHE2-PC'),
+(448, '2025-07-17 21:56:47', 29629080, 'modificar', 'Cambió el PEMSUN del profesor 10143237.', 'ZUHE2-PC'),
+(449, '2025-07-17 21:56:47', 29629080, 'modificar', 'Cambió el PEMSUN del profesor 10143237.', 'ZUHE2-PC'),
+(450, '2025-07-20 20:10:11', 29629080, 'login', 'Ingresó al sistema.', 'DESKTOP-UEKPGTH'),
+(451, '2025-07-20 20:10:16', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"WILMER GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(452, '2025-07-20 20:10:29', 29629080, 'insertar', 'Creó/Actualizo el horario Del Docente\"EDUARDO GARCíA\" Del Año Escolar \"2024-2025\".', 'DESKTOP-UEKPGTH'),
+(453, '2025-07-20 20:13:42', 29629080, 'modificar', 'Modificó la sección -.', 'DESKTOP-UEKPGTH');
 
 -- --------------------------------------------------------
 
@@ -385,7 +356,7 @@ CREATE TABLE `dolar` (
 --
 
 INSERT INTO `dolar` (`id`, `precio`) VALUES
-(1, 119.14);
+(1, 106.86);
 
 -- --------------------------------------------------------
 
@@ -436,35 +407,9 @@ CREATE TABLE `horario_estudiante` (
 --
 
 INSERT INTO `horario_estudiante` (`codigo`, `codigo_a_escolar`, `codigo_a_y_seccion`, `codigo_asignatura`, `codigo_aula`, `codigo_dia`, `grupo`, `profesor`, `intervalo`, `receso`) VALUES
-(6968, 18, 18, 'AP', 25, 'B1L', ' ', 5945762, 6, NULL),
-(6969, 18, 18, 'AP', 25, 'B1L', ' ', 5945762, 6, NULL),
-(6976, 18, 18, 'AP', 25, 'B1L', ' ', 5945762, 6, NULL),
-(6977, 18, 18, 'AP', 25, 'B1M', ' ', 5945762, 6, NULL),
-(6982, 18, 18, 'AP', 25, 'B1L', ' ', 5945762, 6, NULL),
-(6983, 18, 18, 'AP', 25, 'B1M', ' ', 5945762, 6, NULL),
-(6984, 18, 18, 'AP', 25, 'B2M', ' ', 5945762, 6, NULL),
-(7131, 18, 19, 'AP', 26, 'B1L', ' ', 10143237, 7, NULL),
-(7132, 18, 19, 'AP', 27, 'B1M', ' ', 10143237, 7, NULL),
-(7133, 18, 18, 'AP', 29, 'B1MM', ' ', 10143237, 7, NULL),
-(7134, 18, 18, 'BI', 25, 'B1V', ' ', 10143237, 7, NULL),
-(7135, 18, 18, 'AP', 25, 'B2L', ' ', 10143237, 7, NULL),
-(7136, 18, 19, 'BI', 26, 'B2M', ' ', 10143237, 7, NULL),
-(7137, 18, 19, 'CN', 26, 'B2MM', ' ', 10143237, 7, NULL),
-(7138, 18, 18, 'AP', 26, 'B2V', ' ', 10143237, 7, NULL),
-(7139, 18, 22, 'BI', 27, 'B3L', ' ', 10143237, 7, NULL),
-(7140, 18, 18, 'AP', 30, 'B3M', ' ', 10143237, 7, NULL),
-(7141, 18, 19, 'AP', 27, 'B3MM', ' ', 10143237, 7, NULL),
-(7142, 18, 18, 'AP', 25, 'B3V', ' ', 10143237, 7, NULL),
-(7143, 18, 18, 'CA', 31, 'B4J', ' ', 10143237, 7, NULL),
-(7144, 18, 18, 'AP', 26, 'B5M', ' ', 10143237, 7, NULL),
-(7145, 18, 19, 'AP', 26, 'B5V', ' ', 10143237, 7, NULL),
-(7146, 18, 18, 'AP', 25, 'B6M', ' ', 10143237, 7, NULL),
-(7147, 18, 18, 'AP', 25, 'B6MM', ' ', 10143237, 7, NULL),
-(7148, 18, 18, 'AP', 25, 'B6V', ' ', 10143237, 7, NULL),
-(7149, 18, 18, 'AP', 26, 'B7M', ' ', 10143237, 7, NULL),
-(7150, 18, 18, 'AP', 26, 'B7MM', ' ', 10143237, 7, NULL),
-(7151, 18, 18, 'AP', 25, 'B7V', ' ', 10143237, 7, NULL),
-(7152, 18, 18, 'AP', 26, 'B8J', ' ', 10143237, 7, NULL);
+(7367, 18, 18, 'TC', 25, 'B5MM', ' ', 10143237, 7, NULL),
+(7368, 18, 18, 'AP', 26, 'B1M', ' ', 5945762, 7, NULL),
+(7369, 18, 19, 'AP', 26, 'B5MM', ' ', 5945762, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -537,18 +482,21 @@ INSERT INTO `login` (`id`, `username`, `password`, `security_q_1`, `security_q_2
 CREATE TABLE `materia_ano` (
   `id` int NOT NULL,
   `codigo_materia` varchar(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `ano` int NOT NULL
+  `ano` enum('1ero','2do','3ero','4to','5to') CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
+  `anoxd` bigint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `materia_ano`
 --
 
-INSERT INTO `materia_ano` (`id`, `codigo_materia`, `ano`) VALUES
-(9, 'AP', 1),
-(10, 'AP', 2),
-(29, 'BI', 1),
-(13, 'FI', 4);
+INSERT INTO `materia_ano` (`id`, `codigo_materia`, `ano`, `anoxd`) VALUES
+(64, 'AP', '1ero', 0),
+(65, 'AP', '2do', 0),
+(66, 'BI', '1ero', 0),
+(67, 'BI', '2do', 0),
+(83, 'CA', '1ero', 0),
+(86, 'CN', '1ero', 0);
 
 -- --------------------------------------------------------
 
@@ -742,7 +690,6 @@ INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
 (272, 10143237, 'OC'),
 (273, 10143237, 'PGCRP'),
 (274, 10143237, 'TC'),
-(275, 15214479, 'AP'),
 (276, 15214479, 'GHC'),
 (277, 15214479, 'OC'),
 (278, 15214479, 'PGCRP'),
@@ -762,7 +709,17 @@ INSERT INTO `profesores_materias` (`id`, `profesor`, `materia`) VALUES
 (292, 5945762, 'PGCRP'),
 (293, 5945762, 'TC'),
 (294, 14091761, 'CN'),
-(295, 15071661, 'CN');
+(295, 15071661, 'CN'),
+(297, 10143237, 'BI'),
+(298, 10143237, 'CT'),
+(299, 10143237, 'CN'),
+(300, 10143237, 'EF'),
+(301, 10143237, 'FI'),
+(302, 10143237, 'FSN'),
+(303, 10143237, 'GHC'),
+(304, 10143237, 'ILE'),
+(305, 10143237, 'MA'),
+(306, 10143237, 'QU');
 
 -- --------------------------------------------------------
 
@@ -828,7 +785,8 @@ ALTER TABLE `ano_escolar`
 -- Indices de la tabla `ano_seccion`
 --
 ALTER TABLE `ano_seccion`
-  ADD PRIMARY KEY (`codigo`);
+  ADD PRIMARY KEY (`codigo`),
+  ADD KEY `ano` (`ano`);
 
 --
 -- Indices de la tabla `asignatura`
@@ -898,7 +856,8 @@ ALTER TABLE `login`
 --
 ALTER TABLE `materia_ano`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `codigo_materia` (`codigo_materia`,`ano`);
+  ADD UNIQUE KEY `codigo_materia` (`codigo_materia`,`ano`) USING BTREE,
+  ADD KEY `ano` (`ano`);
 
 --
 -- Indices de la tabla `mensualidad`
@@ -995,13 +954,13 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=483;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=454;
 
 --
 -- AUTO_INCREMENT de la tabla `horario_estudiante`
 --
 ALTER TABLE `horario_estudiante`
-  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7153;
+  MODIFY `codigo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7370;
 
 --
 -- AUTO_INCREMENT de la tabla `intervalo`
@@ -1019,7 +978,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT de la tabla `materia_ano`
 --
 ALTER TABLE `materia_ano`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad`
@@ -1043,7 +1002,7 @@ ALTER TABLE `preguntas_seguridad`
 -- AUTO_INCREMENT de la tabla `profesores_materias`
 --
 ALTER TABLE `profesores_materias`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=297;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=307;
 
 --
 -- Restricciones para tablas volcadas
@@ -1075,6 +1034,7 @@ ALTER TABLE `login`
 -- Filtros para la tabla `materia_ano`
 --
 ALTER TABLE `materia_ano`
+  ADD CONSTRAINT `FK_materia_ano_ano_seccion` FOREIGN KEY (`ano`) REFERENCES `ano_seccion` (`ano`),
   ADD CONSTRAINT `materia_ano_ibfk_1` FOREIGN KEY (`codigo_materia`) REFERENCES `asignatura` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

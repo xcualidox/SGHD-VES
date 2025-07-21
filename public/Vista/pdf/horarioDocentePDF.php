@@ -28,8 +28,8 @@ $nombreProfesor = $horarioData[0]['nombreProfesor'];
 // Días abreviados → nombres
 $dias = [
     'L'  => 'Lunes',
-    'K'  => 'Martes',
-    'M'  => 'Miércoles',
+    'M'  => 'Martes',
+    'MM'  => 'Miércoles',
     'J'  => 'Jueves',
     'V'  => 'Viernes'
 ];
@@ -46,7 +46,7 @@ $horarioMap = [];
 foreach ($horarioData as $fila) {
     // "B1L", "B2V", etc.
     $codigo = $fila['codigo_dia']; // ejemplo: B1L
-    preg_match('/B(\d+)([A-Z]+)/', $codigo, $matches);
+    preg_match('/B(\d+)(MM|M|L|J|V)/', $codigo, $matches);
 
     if (!$matches) continue;
 
