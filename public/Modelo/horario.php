@@ -68,15 +68,19 @@ class zona extends bdmysql{
       $sql= "SELECT * from asignatura";
       return $this->ejecutar($sql);
     }
-    function SelectAsignaturaByAno($ano){
+    function SelectAsignaturaHorario($profesor,$ano){
       $sql= "SELECT DISTINCT
               asignatura.codigo,
               asignatura.nombre
-              from asignatura
+              FROM asignatura
+              LEFT JOIN profesores_materias ON profesores_materias.materia = asignatura.codigo
               LEFT JOIN materia_ano ON materia_ano.codigo_materia = asignatura.codigo
-              WHERE ano = $ano";
-      return $this->ejecutar($sql);
+              WHERE
+              profesores_materias.profesor = $profesor AND
+              materia_ano.ano = '$ano'";
+      return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
     }
+    
     function SelectAllHorarioLEGACY(){
       $sql= "SELECT DISTINCT
       ano_escolar.nombre,
