@@ -264,6 +264,26 @@ class zona extends bdmysql{
 
       return $this->ListAll($this->ejecutar($sql), MYSQLI_ASSOC);
   }
+
+function BloquesHorarioEstudiantePDF($codigoSeccion) {
+    $sql = "SELECT 
+        horario_estudiante.intervalo,
+        horario_estudiante.codigo_dia,
+        aula.nombre AS aula,
+        asignatura.nombre AS asignatura,
+        CONCAT(personas.nombres, ' ', personas.apellidos) AS nombreProfesor,
+        CONCAT(ano_seccion.ano, ' ', ano_seccion.seccion) AS seccion
+    FROM horario_estudiante
+    LEFT JOIN asignatura ON horario_estudiante.codigo_asignatura = asignatura.codigo
+    LEFT JOIN aula ON horario_estudiante.codigo_aula = aula.codigo 
+    LEFT JOIN ano_seccion ON horario_estudiante.codigo_a_y_seccion = ano_seccion.codigo
+    LEFT JOIN personas ON horario_estudiante.profesor = personas.cedula
+    LEFT JOIN ano_escolar ON horario_estudiante.codigo_a_escolar = ano_escolar.codigo
+    WHERE horario_estudiante.codigo_a_y_seccion=$codigoSeccion
+      AND ano_escolar.activo = 1";
+
+    return $this->ListAll($this->ejecutar($sql), MYSQLI_ASSOC);
+}
   function obtenerBloquesHorarioPDF() {
       $sql = "SELECT * FROM intervalo WHERE estado = 1 LIMIT 1";
       $intervaloActivo = $this->getRow($this->ejecutar($sql));
@@ -283,6 +303,44 @@ class zona extends bdmysql{
           }
       }
 
+      return $bloques;
+  }
+  function obtenerBloquesHorarioPDFEstudiante($receso = null) {
+          $sql = "SELECT * FROM intervalo WHERE estado = 1 LIMIT 1";
+    $result = $this->getRow($this->ejecutar($sql));
+
+    $bloques = [];
+    if ($result) {
+        $duracion = intval($result['intervalo']);
+        $inicio = new DateTime($result['hora_inicio']);
+        $fin = new DateTime($result['hora_final']);
+
+        $recesoDT = $receso ? new DateTime($receso) : null;
+
+        while ($inicio < $fin) {
+            $bloqueInicio = clone $inicio;
+            $inicio->modify("+{$duracion} minutes");
+            $bloqueFin = clone $inicio;
+
+            // Verifica si el receso está dentro del bloque actual
+            if ($recesoDT && $recesoDT >= $bloqueInicio && $recesoDT < $bloqueFin) {
+                // 1. Bloque antes del receso
+                if ($recesoDT > $bloqueInicio) {
+                    $bloques[] = $bloqueInicio->format('H:i') . '-' . $recesoDT->format('H:i');
+                }
+
+                // 2. Bloque de receso (puede ser de la misma duración que el intervalo, o personalizable)
+                $recesoFin = clone $recesoDT;
+                $recesoFin->modify("+{$duracion} minutes");
+                $bloques[] = "RECESO: " . $recesoDT->format('H:i') . '-' . $recesoFin->format('H:i');
+
+                // 3. Reajusta el inicio después del receso
+                $inicio = clone $recesoFin;
+            } else {
+                $bloques[] = $bloqueInicio->format('H:i') . '-' . $bloqueFin->format('H:i');
+            }
+        }
+    }
       return $bloques;
   }
   public function getRow($result, $type = MYSQLI_ASSOC) {

@@ -47,8 +47,6 @@ function Enviar(valor) {
             showToast("El codigo de la asignatura no puede tener mas de 3 letras", false);
         } else if (years.length == 0) {
             showToast("Debe asociar al menos un año escolar a la materia!", false);
-        } else if (nom.length > 101) {
-            showToast("El nombre de la asignatura es muy largo", false);
         } else {
             var cod2 = cod.toUpperCase();
             var primL = nom.charAt(0);
@@ -92,9 +90,7 @@ function Enviar(valor) {
 
             if (cod.length > 5) {
                 showToast("El codigo de la asignatura no puede tener mas de 3 letras", false);
-            } else if (nom.length > 25) {
-                showToast("El nombre de la asignatura es muy largo", false);
-            } else {
+            }  else {
                 var cod2 = cod.toUpperCase();
                 var primL = nom.charAt(0);
                 var primLM = primL.toUpperCase();

@@ -53,7 +53,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
             // echo '<pre>';
             // var_dump($resultado);
             // echo '</pre>';
-            ?>
+            // ?>
 
                 <tr>
 
@@ -78,7 +78,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                     </td>
                     <td class="border px-4 py-2">
                             <div class=" flex justify-center">
-                        <a href="../pdf/horarioDocentePDF.php?cedula=<?= $mostrar['codigo'] ?>&anoEscolar=<?= $mostrar['ano_codigo'] ?>" target="_blank">
+                        <a href="../pdf/horarioEstudiantePDF.php?codigoSeccion=<?= $resultado[$i]["codigo"] ?>&receso=<?= $resultado[$i]["receso"] ?>" target="_blank">
                     <img src="../../../images/icons/pdf.svg" class="w-10 filtro-verde" alt="PDF Horario">
                 </div>
               </td>
