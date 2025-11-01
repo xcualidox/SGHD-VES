@@ -344,7 +344,7 @@ thead {
     position: absolute;
     left: 45%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -40%);
     padding: 20px 30px;
     width: 400px;
     background: var(--color-background);
@@ -381,26 +381,27 @@ thead {
 }
 
 .formulario-extenso {
- 
-    box-sizing: border-box;
-    position: absolute;
-    left: 50%;
+    position: fixed;
     top: 50%;
-    transform: translate(-50%, -50%);
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centra en X y Y */
+
+    box-sizing: border-box;
     padding: 20px;
-    width: 90%; /* Aumentado para pantallas pequeñas */
-    max-width: 600px; /* Ajusta el ancho máximo */
+    width: 90%;
+    max-width: 600px;
+
     background: var(--color-background);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
     z-index: 4000;
     overflow-y: auto;
-    max-height: 80vh;
+
     opacity: 1;
-    transition: opacity .3s ease-in-out ;
-    @starting-style{
-        opacity:0
-      
+    transition: opacity .3s ease-in-out;
+    @starting-style {
+        opacity: 0;
     }
 }
 
@@ -650,29 +651,26 @@ img {
     height: auto; /* Evita distorsiones */
 }
 
- .modal__Nuevo {
-   
-    margin-top: 1rem;
-    min-width:70%;
- 
+.modal__Nuevo {
+    position: fixed; /* fijo respecto a la ventana */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* centra perfectamente */
+    
+    width: 70%; /* puedes ajustar según necesites */
+    max-width: 800px; /* opcional para no exceder pantalla */
+    padding: 20px;
+    border-radius: 8px;
     border: none;
     outline: none;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 100%;
-    position: absolute;
-    top: 80%;
-    left: 45%;
-    transform: translate(-50%, -50%);
     background-color: var(--color-background);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     z-index: 5000;
-    
 }
-
 .block {
     display: block;
 }

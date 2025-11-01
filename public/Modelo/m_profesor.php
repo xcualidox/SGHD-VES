@@ -59,14 +59,33 @@ class personas extends database_connect
     return $this->query($sql, [$cedulaencriptada, $cedula]);
   }
 
-  function eliminar($origin)
-  {
-    $sql =  "
-      DELETE FROM `personas` WHERE `cedula` = ?;
-      DELETE FROM `login` WHERE `username` = ?
-      ";
-    return $this->query($sql, [$origin, $origin]);
-  }
+function passwordEncrypt($pw) { return password_hash($pw, PASSWORD_DEFAULT); }
+function eliminar($origin)
+{
+    // Nueva contraseña por defecto
+    $defaultPassword = $this->passwordEncrypt($origin);
+
+    $sql = "
+        UPDATE personas
+        SET estado = CASE 
+                        WHEN estado = 1 THEN 0
+                        ELSE 1
+                     END
+        WHERE cedula = ?;
+
+        UPDATE login
+        SET 
+            estado = CASE 
+                        WHEN estado = 'active' THEN 'inactive'
+                        WHEN estado = 'inactive' THEN 'new'
+                        WHEN estado = 'new' THEN 'active'
+                     END,
+            password = ?
+        WHERE username = ?;
+    ";
+
+    return $this->query($sql, [$origin, $defaultPassword, $origin]);
+}
   function tabla($offset, $limit)
   {
     $sql = "SELECT personas.*, login.rol from `personas` JOIN `login` ON personas.cedula = login.username LIMIT $offset,$limit";

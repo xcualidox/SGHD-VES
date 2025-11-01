@@ -95,6 +95,7 @@ include_once('../v_Sidebar/v_Sidebar.php');
                 <tr>
                     <td>Cédula Estudiante</td>
                     <td>Nombre y Apellidos Estudiante </td>
+                <td>Año y Sección </td>
                     <td>Nombre y Apellido del Representante</td>
                     <td>Cédula Representante</td>
                     <td>Télefono</td>
@@ -259,14 +260,14 @@ include_once('../v_Sidebar/v_Sidebar.php');
             ?>
 
         </details>
-
-        <details>
+        <!-- Comentado meseses saldados -->
+        <!-- <details>
             <summary>Meses Saldados</summary>
             <?php
 
-            include("v_mesesSaldados.php");
+            // include("v_mesesSaldados.php");
             ?>
-        </details>
+        </details> -->
 
 
 

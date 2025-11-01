@@ -8,6 +8,7 @@ $estudiante = new estudiante();
 $anosEscolares = $estudiante->obtenerAnoEscolar();
 $anoSeccion = $estudiante->obtenerAnoSeccion();
 
+
 $resultados = [];  // Inicializar una variable vacía para los resultados
 
 
@@ -370,7 +371,9 @@ function generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$param
             $html .= "<tr>";
             $html .= "<td class='numeroCedula border px-4 py-2'>" . htmlspecialchars($dato['cedula_estudiante']) . "</td>";
             $html .= "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_estudiante']) . " " . htmlspecialchars($dato['apellidos_estudiante']) . "</td>";
+            $html .= "<td class='border px-4 py-2'>" . htmlspecialchars($dato['seccion']) . " " . "</td>";
             $html .= "<td class='border px-4 py-2'>" . htmlspecialchars($dato['nombres_representante']) . " " . htmlspecialchars($dato['apellidos_representante']) . "</td>";
+
             $html .= "<td class='numeroCedula border px-4 py-2'>" . htmlspecialchars($dato['cedula_representante']) . "</td>";
             $html .= "<td class='numeroCelular border px-4 py-2'>" . htmlspecialchars($dato['telefono']) . "</td>";
             
@@ -381,7 +384,7 @@ function generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$param
         
             // Si la sesión es de un admin, mostrar los botones de borrar y modificar
             if (isset($_SESSION["sesion"]) && $_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador"  ) {
-                $botonBorrar = "<img src='../../../images/icons/papelera.svg' class='w-8 h-8 filtro-rojo cursor-pointer' alt='Borrar' title='Borrar' onclick='EliminarEstudiante(".'"'.$dato['cedula_estudiante'].'"'.")'>";
+                // $botonBorrar = "<img src='../../../images/icons/papelera.svg' class='w-8 h-8 filtro-rojo cursor-pointer' alt='Borrar' title='Borrar' onclick='EliminarEstudiante(".'"'.$dato['cedula_estudiante'].'"'.")'>";
                 $botonModificar = "<img src='../../../images/icons/modificar.svg' class='w-8 h-8 filtro-azul cursor-pointer' title='Modificar' data-datos='" . htmlspecialchars(json_encode($dato), ENT_QUOTES, 'UTF-8') . "' onclick='llenarFormulario(this)'>";
             }
             else{
@@ -396,7 +399,7 @@ function generarTabla($resultados, $pagina_actual, $resultados_por_pagina,$param
             // Agregar los botones en el HTML
             $html .= "<td class='border px-4 py-2 text-center'>
                         <div class='flex justify-center items-center space-x-4'>
-                            $botonBorrar
+                
                        
                              <img src='../../../images/icons/pdf.svg' onclick=\"redirigirEstudiantePDF('" . $dato['cedula_estudiante'] . "')\" class='w-8 h-8 filtro-verde cursor-pointer' alt='PDF' title='PDF'>
                      

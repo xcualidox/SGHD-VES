@@ -41,40 +41,59 @@ class estudiante extends database_connect
         return $result;
     }
 
-    public function insertEstudiante($cedulaEstudianteActual, $cedulaEstudiante, $nombres, $apellidos, $anoSeccion, $anoEscolar, $cedulaRepresentante)
-    {
-        // Primero, verificar si el estudiante ya está registrado
-        $sql = "SELECT * FROM estudiante WHERE cedula_estudiante = ?";
-        $result = $this->query($sql, [$cedulaEstudianteActual]);
-    
-        if ($result) {
-            // Si el estudiante actual existe
-            if ($cedulaEstudianteActual !== $cedulaEstudiante) {
+public function insertEstudiante($cedulaEstudianteActual, $cedulaEstudiante, $nombres, $apellidos, $anoSeccion, $anoEscolar, $cedulaRepresentante)
+{
+    // Separar el texto anoSeccion en Año y Sección
+    $partes = explode(' ', $anoSeccion, 2);
+    $ano = $partes[0]; // "1ero"
+    $seccion = isset($partes[1]) ? $partes[1] : ''; // "A"
 
-                  // Eliminar la relación en 'representante-representado' antes de actualizar
-                 
-                // Si la cédula nueva es diferente, realizar la actualización de la cédula
-                $sqlUpdate = "UPDATE estudiante SET cedula_estudiante = ?, nombres = ?, apellidos = ?, ano = ?, seccion = ? WHERE cedula_estudiante = ?";
-                $this->query($sqlUpdate, [$cedulaEstudiante, $nombres, $apellidos, $anoEscolar, $anoSeccion, $cedulaEstudianteActual]);
-             
+    // Buscar ID del año y sección en la tabla ano_seccion
+    $sqlId = "SELECT MAX(codigo) as codigo 
+              FROM ano_seccion 
+              WHERE ano = ? AND seccion = ?";
+    $resultId = $this->query($sqlId, [$ano, $seccion]);
+    $rowId = $this->fetch_query($resultId);
 
-
-            } else {
-                // Si las cédulas son iguales, actualizar solo los datos
-                $sqlUpdate = "UPDATE estudiante SET nombres = ?, apellidos = ?, ano = ?, seccion = ? WHERE cedula_estudiante = ?";
-                $this->query($sqlUpdate, [$nombres, $apellidos, $anoEscolar, $anoSeccion, $cedulaEstudianteActual]);
-            }
-        } else {
-            // Si no se encuentra el estudiante actual, insertar el nuevo estudiante
-            if (!empty($cedulaEstudiante)) { // Verifica que la nueva cédula no esté vacía
-                $sqlInsert = "INSERT INTO estudiante (cedula_estudiante, nombres, apellidos, ano, seccion) VALUES (?, ?, ?, ?, ?)";
-                $this->query($sqlInsert, [$cedulaEstudiante, $nombres, $apellidos, $anoEscolar, $anoSeccion]);
-            } else {
-                // Manejo de error: Cédula nueva está vacía
-                throw new Exception("La cédula del nuevo estudiante no puede estar vacía.");
-            }
-        }
+    if (!$rowId || !$rowId['codigo']) {
+        throw new Exception("No existe el Año y Sección '$anoSeccion' en la tabla ano_seccion.");
     }
+
+    $codigoAnoSeccion = $rowId['codigo']; // ID que se usará como FK
+
+    // Revisar si el estudiante ya existe
+    $sql = "SELECT * FROM estudiante WHERE cedula_estudiante = ?";
+    $result = $this->query($sql, [$cedulaEstudianteActual]);
+
+    if ($result) {
+        if ($cedulaEstudianteActual !== $cedulaEstudiante) {
+            // UPDATE cuando cambia la cédula
+            $sqlUpdate = "UPDATE estudiante 
+                          SET cedula_estudiante = ?, nombres = ?, apellidos = ?, ano = ?, seccion = ?, cod_ano_seccion = ? 
+                          WHERE cedula_estudiante = ?";
+            $this->query($sqlUpdate, [$cedulaEstudiante, $nombres, $apellidos, $anoEscolar, $seccion, $codigoAnoSeccion, $cedulaEstudianteActual]);
+        } else {
+            // UPDATE normal
+            $sqlUpdate = "UPDATE estudiante 
+                          SET nombres = ?, apellidos = ?, ano = ?, seccion = ?, cod_ano_seccion = ? 
+                          WHERE cedula_estudiante = ?";
+            $this->query($sqlUpdate, [$nombres, $apellidos, $anoEscolar, $seccion, $codigoAnoSeccion, $cedulaEstudianteActual]);
+        }
+    } else {
+        // INSERT nuevo estudiante
+        $sqlInsert = "INSERT INTO estudiante (cedula_estudiante, nombres, apellidos, ano, seccion, cod_ano_seccion) 
+                      VALUES (?, ?, ?, ?, ?, ?)";
+        $this->query($sqlInsert, [$cedulaEstudiante, $nombres, $apellidos, $anoEscolar, $seccion, $codigoAnoSeccion]);
+    }
+
+    // Insertar relación con el representante si existe
+    if (!empty($cedulaRepresentante)) {
+        $sqlRep = "INSERT INTO `representante-representado` (cedula_estudiante, cedula_representante) 
+                   VALUES (?, ?)
+                   ON DUPLICATE KEY UPDATE cedula_representante = VALUES(cedula_representante)";
+        $this->query($sqlRep, [$cedulaEstudiante, $cedulaRepresentante]);
+    }
+}
 
     public function insertRepresentante($cedulaRepresentante, $nombres, $apellidos, $correo, $direccion, $telefono, $telefonoDomicilio)
     {

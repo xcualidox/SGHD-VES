@@ -61,7 +61,7 @@
             </div>
             <div class="formulario-extenso__row">
 
-                <div class="formulario-extenso__column">
+                <!-- <div class="formulario-extenso__column">
                     <label for="tCamisa">Talla Camisa </label>
                     <input type="input" name="tallaCamisa" id="tCamisa" class="formulario-extenso__input" autocomplete="off" placeholder="Talla Camisa" maxlength="70">
 
@@ -69,18 +69,17 @@
                 <div class="formulario-extenso__column">
                     <label for="tPantalon">Talla Pantalón</label>
                     <input type="input" name="tallaPantalon" id="tPantalon" class="formulario-extenso__input" autocomplete="off" placeholder="Talla Pantalón" maxlength="2">
-
-                </div>
+                </div> -->
             </div>
 
-            <div class="formulario-extenso__column">
+            <!-- <div class="formulario-extenso__column">
                     <label for="anoSeccion">Fecha de Nacimiento </label>
                     <input
                             type="date"
                             id="dateNacimiento"
                             name="trip-start"
                             />
-                </div>
+                </div> -->
         </div>
 
         <!-- Columna Derecha -->
@@ -143,14 +142,14 @@
                 </div>
             </div>
             <div class="formulario-extenso__row">
-                <div class="formulario-extenso__column">
+                <!-- <div class="formulario-extenso__column">
                     <label for="dTrabajo">Donde Trabaja: </label>
                     <input type="input" name="dTrabajo" id="dTrabajo" placeholder="Direccion Trabajo" autocomplete="off" class=" formulario-extenso__input" maxlength="80">
                 </div>
                 <div class="formulario-extenso__column">
                     <label for="autorizacion">Personas Autorizadas</label>
                     <input type="input" name="autorizacion" id="autorizacion" autocomplete="off" class=" formulario-extenso__input" placeholder="Para retirar al Menor" maxlength="80">
-                </div>
+                </div> -->
             </div>
         </div>
 
