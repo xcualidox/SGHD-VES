@@ -119,7 +119,17 @@
                             </i>
                             <span class="nav-item">Horario</span>
                         </a>
-                    </li>';
+                    </li>
+                   <li>
+                <a href="../v_importdata/importdata.php" title="Importador" target="_blank">
+                    <i class="flex justify-center items-center">
+                        <img src="../../../images/icons/importdata.svg" class="w-8 filtro-blanco">
+                    </i>
+                    <span class="nav-item">Importador</span>
+                </a>
+            </li>'
+
+        ;
                 }
 
 
