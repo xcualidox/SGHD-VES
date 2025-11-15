@@ -20,6 +20,8 @@ if (isset($_GET['idPago'])) {
 
 $obtenerPagosPDF=$pagos->obtenerPagos(['idPago' =>  $idpago ],1,0);
 
+
+
 // Generar el HTML para el encabezado y pie de página
 $headerHTML = generarMembreteHTML();
 $footerHTML = generarFooter();  // No es necesario pasar el canvas aquí
@@ -27,13 +29,16 @@ $reciboPago=$obtenerPagosPDF;
 // Agregar el texto del footer debajo del número de página
 $footerText = $footerHTML['direccion'] . ' | ' . $footerHTML['telefono'] ;
 
+
 if ($reciboPago[0]["tipo_pago"]=='bolivar') {
     $calculoDolar=  floatval($reciboPago[0]["dolarBCV"])*floatval($reciboPago[0]["monto"]) ;
+    $reciboPago[0]["tipo_pago"]='Bolivar Digital';
     $reciboPago[0]["monto"] = ' Bs ' .number_format($calculoDolar, 2) ;
+
 }
 else{
     $reciboPago[0]["monto"]= '$ '. $reciboPago[0]["monto"];
-}
+} 
 
 
 
@@ -43,7 +48,7 @@ else{
 $html =''.$headerHTML.'
 <div style="width: 100%; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; padding-left: 10px; font-family: Arial, sans-serif; font-size: 12px; color: #333;">
 
-    <h2 style="text-align: center;">Recibo de Pago #' . $reciboPago[0]["idPago"] . '</h2>
+    <h2 style="text-align: center;">Recibo de Pago N°' . $reciboPago[0]["idPago"] . '</h2>
  
    
     <p style="text-align: center;"><strong>Fecha de Registro:</strong> ' . $reciboPago[0]["fecha"] . '</p>
@@ -80,6 +85,8 @@ $html =''.$headerHTML.'
               <p><strong>Referencia:</strong> ' . $reciboPago[0]["referencia_id"] . '</p>
              <p><strong>Monto Pagado:</strong> ' . $reciboPago[0]["monto"]  . '</p>
                <p><strong>Nota de Pago:</strong> ' . $reciboPago[0]["detalles"] . '</p>
+               <p><strong>Tasa del Día:</strong> ' . $reciboPago[0]["dolarBCV"] . '</p>
+
         </div>
         
     </div>

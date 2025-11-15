@@ -657,8 +657,8 @@ img {
     left: 50%;
     transform: translate(-50%, -50%); /* centra perfectamente */
     
-    width: 70%; /* puedes ajustar según necesites */
-    max-width: 800px; /* opcional para no exceder pantalla */
+    width: 80%; /* puedes ajustar según necesites */
+    max-width: 1200px; /* opcional para no exceder pantalla */
     padding: 20px;
     border-radius: 8px;
     border: none;

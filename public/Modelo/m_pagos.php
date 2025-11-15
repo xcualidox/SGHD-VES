@@ -80,7 +80,23 @@ class pagos extends database_connect{
 
     public function obtenerPagos($parametros,$limit,$offset){
 
-        $sql='SELECT * from pagos WHERE 1=1';
+        $sql='SELECT pa.idPago,
+			pa.cedula_estudiante,
+			pa.cedula_representante,
+			pa.fecha,
+			pa.referencia_id,
+			pa.ano_escolar,
+			ms.mes,
+			pa.detalles,
+			pa.descuento,
+			pa.nombres_estudiante,
+            pa.nombres_representante,
+			pa.telefono,
+			pa.direccion,
+			pa.monto,
+			pa.tipo_pago,
+			pa.dolarBCV from pagos pa 
+			LEFT JOIN mensualidad ms ON pa.mes=ms.id WHERE 1=1';
         $parameters=[];
 
         //Recorrer cada parametro y añadirlo a la lista
