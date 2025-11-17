@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <title><?php echo htmlspecialchars($title); ?></title>
@@ -119,27 +119,36 @@
                             </i>
                             <span class="nav-item">Horario</span>
                         </a>
-                    </li>
-                   <li>
-                <a href="../v_importdata/importdata.php" title="Importador" target="_blank">
-                    <i class="flex justify-center items-center">
-                        <img src="../../../images/icons/importdata.svg" class="w-8 filtro-blanco">
-                    </i>
-                    <span class="nav-item">Importador</span>
-                </a>
-            </li>'
+                    </li>'
 
         ;
                 }
 
 
-                if ($_SESSION["sesion"] == "admin") {
-                    echo ' <li>
+                if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador") {
+                    echo '
+                <li>
                     <a href="../bitacora/v_bitacora.php" title="Historial de Sistema">
                         <i class="flex  justify-center  items-center ">
                             <img src="../../../images/icons/logs.svg" class="w-8  filtro-blanco">
                         </i>
                         <span class="nav-item">Historial</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../v_importdata/importdata.php" title="Importador">
+                        <i class="flex justify-center items-center">
+                            <img src="../../../images/icons/importdata.svg" class="w-8 filtro-blanco">
+                        </i>
+                        <span class="nav-item">Importador</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../backup/v_backup.php" title="Respaldo">
+                        <i class="flex  justify-center  items-center ">
+                            <img src="../../../images/icons/backup.svg" class="w-8  filtro-blanco">
+                        </i>
+                        <span class="nav-item">Respaldo</span>
                     </a>
                 </li>';
                 }
@@ -174,11 +183,6 @@
       </a>
     </li>
   </ul>
-</div>
-
-<!-- Main Content -->
-<div class="main-content" id="mainContent">
-  <!-- Aquí va tu contenido principal -->
 </div>
 
 <script>
