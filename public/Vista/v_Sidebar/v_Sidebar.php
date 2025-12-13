@@ -125,7 +125,7 @@
                 }
 
 
-                if ($_SESSION["sesion"] == "admin" || $_SESSION["sesion"] == "administrador") {
+                if ($_SESSION["sesion"] == "admin" ) {
                     echo '
                 <li>
                     <a href="../bitacora/v_bitacora.php" title="Historial de Sistema">
