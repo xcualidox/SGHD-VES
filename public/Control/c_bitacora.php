@@ -6,12 +6,20 @@ if ($_SESSION["sesion"])
 {
     require_once(dirname(__DIR__)."\Modelo\m_bitacora.php");
     // $bitacoraOp = $_POST["op"];
-
+    function obtenerIP() {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            return $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            return $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            return $_SERVER['REMOTE_ADDR'];
+        }
+    }
     function insertBitacora($username, $type, $description)
     {
         // Refactorizar instanciacion de la clase Bitacora
         $bitacora = new Bitacora();
-        $bitacora->setData($username, $type, $description, gethostname());
+        $bitacora->setData($username, $type, $description, gethostbyaddr(obtenerIP()));
         $bitacora->insertBitacora();
 
     }
