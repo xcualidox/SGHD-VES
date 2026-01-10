@@ -99,6 +99,11 @@ $css = '<style>
         text-align: center;
         vertical-align: middle;
     }
+ td {
+        white-space: normal;         /* permite saltos de línea */
+        word-wrap: break-word;       /* rompe palabras largas */
+        max-width: 150px;            /* ancho máximo por celda */
+    }
     th {
         background-color: #f2f2f2;
         font-weight: bold;
