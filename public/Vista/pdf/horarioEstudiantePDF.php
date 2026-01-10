@@ -19,6 +19,9 @@ $footerHTML = generarFooter();
 $bloques = $zonaModel->obtenerBloquesHorarioPDFEstudiante($recesoHora); // ["07:00-07:45", ...]
 $horarioData = $zonaModel->BloquesHorarioEstudiantePDF($codigoSeccion); // trae 'codigo_dia', 'asignatura', etc.
 
+$anoEscolar = $zonaModel->anoEscolarPDF();
+$anoEscolarTexto = $anoEscolar[0][1];
+
 $nombreSeccion = $horarioData[0]['seccion'] ?? '';
 
 // Días abreviados → nombres
@@ -38,7 +41,7 @@ foreach ($horarioData as $fila) {
         $bloque = (int)$matches[1];
         $diaAbrev = $matches[2];
         if (isset($dias[$diaAbrev])) {
-            $contenido = htmlspecialchars($fila['asignatura']) . "<br>" . htmlspecialchars($fila['seccion']);
+            $contenido = htmlspecialchars($fila['asignatura']) . "<br>" ;
             if (isset($horarioMap[$bloque][$diaAbrev])) {
                 $horarioMap[$bloque][$diaAbrev] .= "<hr>" . $contenido;
             } else {
@@ -74,6 +77,10 @@ $css = '<style>
     h2 {
         text-align: center;
     }
+ h3 {
+        text-align: center;
+  text-transform: uppercase;
+    }
     table {
         width: 100%;
         border-collapse: collapse;
@@ -101,7 +108,7 @@ $css = '<style>
 </style>';
 
 $html = $headerHTML . $css;
-$html .= '<h2>Horario de  ' . htmlspecialchars($nombreSeccion) . '</h2>';
+$html .= '<h3> AÑO ESCOLAR: '. htmlspecialchars($anoEscolarTexto) .'  | HORARIO —"' . htmlspecialchars($nombreSeccion) . '" </h3> ';
 
 $html .= '<table>
     <thead>
@@ -119,20 +126,31 @@ foreach ($bloques as $index => $rango) {
     $bloqueNumero = $index + 1;
 
     $html .= "<tr>";
-    $html .= "<td>$rango</td>";  // columna hora, muestra "07:00-07:45", o "RECESO: 08:20-09:05"
+    $rangoHora = str_ireplace('RECESO:', '', $rango);
+    $rangoHora = str_ireplace('RECESO', '', $rangoHora);
+    $rangoHora = trim($rangoHora);
 
-    // Detectar si este bloque es el receso por contenido, por ejemplo que el string contenga "RECESO"
+    $html .= "<td>$rangoHora</td>";
+
     if (stripos($rango, 'RECESO') !== false) {
-        // Si es receso, en todas las celdas de días poner "RECESO"
-        foreach ($dias as $diaAbrev => $diaNombre) {
-            $html .= '<td class="receso" style="font-weight:bold; font-style:italic; background:#fff3cd; text-align:center;">RECESO</td>';
-        }
+
+        $colspan = count($dias);
+
+        $html .= '<td class="receso" colspan="'.$colspan.'" 
+            style="font-weight:bold;
+                   font-style:italic;
+                   background:#fff3cd;
+                   text-align:center;">
+            RECESO
+        </td>';
+
     } else {
-        // No es receso, mostrar contenido normal
+
         foreach (array_keys($dias) as $diaAbrev) {
             $contenido = $horarioMap[$bloqueNumero][$diaAbrev] ?? '';
             $html .= "<td>$contenido</td>";
         }
+
     }
 
     $html .= "</tr>";

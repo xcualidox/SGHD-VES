@@ -13,69 +13,97 @@ $headerHTML = generarMembreteHTML();
 $footerHTML = generarFooter(); 
 $espacio = " ";
 
-$html = $headerHTML .'
+$html = $headerHTML . '
 <style>
-    body {
-        font-family: Arial, sans-serif;
-      
-    }
-    h1 {
-        color: #black;
-        text-align: center;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        background-color: #ffffff;
-    }
-    th {
-        background-color: #00796b;
-        color: #ffffff;
-        padding: 8px;
-        text-align: left;
-        text-align: center;
-    }
-    td {
-        border: 1px solid #058671;
-         max-width: 100px; 
-        color: black;
-        padding: 8px;
-    }
-    .email {
-        max-width: 150px; /* Limita el ancho */
-        word-wrap: break-word;
-    }
-  
-    .secondary {
-   
-        max-width: 150px; /* Limita el ancho  */
-        word-wrap: break-word;
-    }
+body {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: #000;
+}
+
+h1 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.table-container {
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #2f5597;
+    color: #ffffff;
+    padding: 8px;
+    text-align: center;
+    font-size: 11px;
+}
+
+td {
+    border: 1px solid #cfcfcf;
+    padding: 7px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 10px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f6fb;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.nombre {
+    text-align: left;
+}
+
+.direccion {
+    text-align: left;
+    max-width: 160px;
+    word-wrap: break-word;
+}
+
+.email {
+    max-width: 180px;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+.telefono {
+    white-space: nowrap;
+}
 </style>
 
-<h1>Lista de Profesores</h1>
+<h1>Listado General de Trabajadores</h1>
+
+<div class="table-container">
 <table>
     <thead>
         <tr>
-            <th>Cédula</th>
-            <th>Nombre Completo</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
+            <th style="width:12%;">Cédula</th>
+            <th style="width:20%;">Nombre Completo</th>
+            <th style="width:28%;">Dirección</th>
+            <th style="width:15%;">Teléfono</th>
+            <th style="width:25%;">Correo Electrónico</th>
         </tr>
     </thead>
     <tbody>';
-
 foreach ($profesores as $profesor) {
     $html .= '
-        <tr class="highlight">
-            <td>' . $profesor['cedula'] . '</td>
-            <td>' . $profesor['nombres']  . $espacio . $profesor['apellidos'] . '</td>
-        
-            <td class="secondary">' . $profesor['direccion'] . '</td>
-            <td>' . $profesor['telefono'] . '</td>
-            <td class="email">' . $profesor['correo'] . '</td>
-        </tr>';
+    <tr>
+        <td>' . $profesor['cedula'] . '</td>
+        <td class="nombre">' . $profesor['nombres'] . ' ' . $profesor['apellidos'] . '</td>
+        <td class="direccion">' . $profesor['direccion'] . '</td>
+        <td class="telefono">' . $profesor['telefono'] . '</td>
+        <td class="email">' . $profesor['correo'] . '</td>
+    </tr>';
 }
 
 $html .= '

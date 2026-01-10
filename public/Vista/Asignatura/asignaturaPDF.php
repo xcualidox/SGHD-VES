@@ -6,45 +6,45 @@ use Dompdf\Dompdf;
 
 $query = new query();
 $asignatura = $query->obtenerDatosAsignaturas();
-$espacio = " ";
 
 $html = '
 <style>
     body {
-        font-family: Arial, sans-serif;
-      
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        color: #333333;
+        margin: 20px;
     }
     h1 {
-        color: #black;
+        color: #00796b;
         text-align: center;
+        margin-bottom: 20px;
     }
     table {
         width: 100%;
         border-collapse: collapse;
         background-color: #ffffff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    th, td {
+        border: 1px solid #00796b;
+        padding: 10px;
+        text-align: center;
+        vertical-align: middle;
     }
     th {
         background-color: #00796b;
         color: #ffffff;
-        padding: 8px;
-        text-align: left;
-        text-align: center;
+        font-weight: bold;
     }
-    td {
-        border: 1px solid #058671;
-         max-width: 100px; 
-        color: black;
-        padding: 8px;
-        text:center;
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
     }
-    .email {
-        max-width: 150px; /* Limita el ancho */
-        word-wrap: break-word;
+    tr:hover {
+        background-color: #d9f2f2;
     }
-  
-    .secondary {
-   
-        max-width: 150px; /* Limita el ancho  */
+    .email, .secondary {
+        max-width: 180px;
         word-wrap: break-word;
     }
 </style>
@@ -53,18 +53,17 @@ $html = '
 <table>
     <thead>
         <tr>
-            <th>Codigo</th>
-            <th>AREAS   DE FORMACION</th>
+            <th>Código</th>
+            <th>Área de Formación</th>
         </tr>
     </thead>
     <tbody>';
 
 foreach ($asignatura as $asignaturas) {
     $html .= '
-        <tr class="highlight">
-            <td>' . $asignaturas['codigo'] . '</td>
-            <td>' . $asignaturas['nombre']  . '</td>
-        
+        <tr>
+            <td>' . htmlspecialchars($asignaturas['codigo']) . '</td>
+            <td>' . htmlspecialchars($asignaturas['nombre']) . '</td>
         </tr>';
 }
 
@@ -76,5 +75,5 @@ $dompdf = new Dompdf();
 $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'landscape');
 $dompdf->render();
-$dompdf->stream("lista_profesores.pdf", array("Attachment" => false));
+$dompdf->stream("lista_materias.pdf", array("Attachment" => false));
 ?>

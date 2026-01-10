@@ -7,6 +7,8 @@ $url="Location: ../Vista/Profesores_Materias/profesor_materia.php";
 $estado;
 $registro=false;
 
+
+
 if (isset($_POST["cedula"])) {
     // Si se recibe una cédula, selecciona las materias del profesor
     $dato = $operacion->SeleccionarMaterias($_POST["cedula"]);
@@ -28,6 +30,13 @@ if (isset($_POST["cedula"])) {
     
     //Verifica si el profesor al que se va a cambiar existe
     $verificacion2 = $operacion->VerificarProfesorPersona($cedula_nueva);
+
+   
+        // 👉 BORRADO TOTAL DESDE PAPELERA
+        if ($cedula_original != "" && $cedula_nueva == "" && $_POST["add"] == "") {
+            $operacion->Eliminar($cedula_original);
+            $registro = true;
+        }
 
     // Si 'profesor' y 'origin' son diferentes, realiza la modificación
     if ($cedula_nueva != $cedula_original) {
@@ -75,9 +84,16 @@ if (isset($_POST["cedula"])) {
             }
         }
 
-        $operacion->EliminarMaterias($cedula,$a_conservar);
+
+       if ($a_conservar == '') {
+        $operacion->Eliminar($cedula);
+        } else {
+            $operacion->EliminarMaterias($cedula,$a_conservar);
+        }
         echo $a_conservar;
         $registro=true;
+
+
     }
 
     // Si hay materias que agregar y el profesor existe

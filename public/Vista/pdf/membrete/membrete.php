@@ -32,58 +32,49 @@ function generarMembreteHTML()
     // Definir el HTML del membrete como un string
     $html = '
     <head>
-    <style>
-        /* Establecer la imagen de fondo centrada en todas las páginas */
-        @page {
-            margin: 100px 50px;
-        }
+  <style>
+@page {
+    margin: 70px 40px 60px 40px;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-       
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-            margin-top: 100px; /* Espacio para el encabezado */
-        }
+body {
+    font-family: Arial, sans-serif;
+    margin-top: 60px;
+}
 
-        header {
-            text-align: center;
-            position: fixed;
-            top: -60px;
-            width: 100%;
-            margin:0px;
-        }
-             img {
-            position: absolute;
-            left: 0;
-            top: 0;
-            max-width: 100px;
-            height: auto;
-        }
+header {
+    text-align: center;
+    position: fixed;
+    top: -40px;
+    width: 100%;
+}
 
-        footer {
-            text-align: center;
-            position: fixed;
-            bottom: -30px;
-            width: 100%;
-            font-size: 10px;
-            color: #000;
-        }
-        .header-container h3,
-        .header-container h4 {
-            margin: 0; /* Quita el margen de los elementos h3 y h4 */
-            padding: 0; /* Opcional: quita cualquier padding adicional */
-        }
-     .header-container h3{
-     
-            font-size:16px
-        }
-     .header-container h4{
-     
-            font-size:12px
-        }
-    </style>
+img {
+    position: absolute;
+    left: 0;
+    top: -10;
+    max-width: 80px;
+    height: auto;
+}
+
+footer {
+    text-align: center;
+    position: fixed;
+    bottom: -20px;
+    width: 100%;
+    font-size: 9px;
+}
+
+.header-container h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.header-container h4 {
+    margin: 0;
+    font-size: 11px;
+}
+</style>
   </head>
     <body>
         <header>

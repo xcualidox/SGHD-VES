@@ -236,13 +236,16 @@ function Modificar(cedula, array, nombres, apellidos) {
 
 function Eliminar(cedula) {
 
-    showConfirm('¿Está seguro de que desea eliminar este datos?',() =>{
+    showConfirm('¿Está seguro de que desea eliminar todas las materias de este profesor?', () => {
 
-        document.getElementById('origin').value=cedula;
-    
+        document.getElementById('origin').value = cedula;
+
+        document.getElementById('add').value = "";
+
         document.querySelector('#form').submit();
-        
+
     });
+
 }
 
 

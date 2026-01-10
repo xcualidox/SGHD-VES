@@ -21,7 +21,7 @@ class zona extends bdmysql{
     }
 
     function SelectAllAno_Escolar(){
-      $sql= "SELECT `codigo`, `nombre` from ano_escolar";
+      $sql= "SELECT `codigo`, `nombre` from ano_escolar where `activo`=1";
       return $this->ejecutar($sql);
     }
     function SelectAllAno_Seccion(){
@@ -243,6 +243,10 @@ class zona extends bdmysql{
       WHERE horario_estudiante.codigo_a_escolar='$ano_escolar' 
       AND horario_estudiante.codigo_a_y_seccion='$seccion'
       AND horario_estudiante.codigo_dia='$bloque'";
+      return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
+    }
+  function anoEscolarPDF() {
+      $sql="SELECT codigo, nombre from ano_escolar where activo=1";
       return $this->ListAll($this->ejecutar($sql), MYSQLI_NUM);
     }
 

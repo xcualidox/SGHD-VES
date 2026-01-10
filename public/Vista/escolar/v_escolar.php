@@ -30,9 +30,9 @@ include_once('../v_Sidebar/v_Sidebar.php');
                         
                     <div class="flex justify-center ">
                         
-                        <a href="a_escolar_pdf.php">
+                        <!-- <a href="a_escolar_pdf.php">
                             <img src="../../../images/icons/pdf.svg" class="w-10  filtro-blanco "  alt="Reporte" title="Reporte" id="boton1" >
-                        </a>
+                        </a> -->
                   
                     </div>
                     </td>

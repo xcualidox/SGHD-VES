@@ -22,6 +22,11 @@ $footerHTML = generarFooter();
 // Obtener bloques ya generados (como en JS)
 $bloques = $zonaModel->obtenerBloquesHorarioPDF(); // ["07:00-07:45", "07:45-08:30", ...]
 $horarioData = $zonaModel->BloquesHorarioPDF($cedula, $anoEscolar); // trae 'intervalo', 'codigo_dia', etc.
+$anoEscolar = $zonaModel->anoEscolarPDF();
+$anoEscolarTexto = $anoEscolar[0][1];
+
+
+
 
 $nombreProfesor = $horarioData[0]['nombreProfesor'];
 
@@ -78,6 +83,10 @@ $css = '<style>
         text-align: center;
     
     }
+   h3 {
+        text-align: center;
+    
+    }
     table {
         width: 100%;
         border-collapse: collapse;
@@ -98,7 +107,8 @@ $css = '<style>
 
 $html = $headerHTML . $css;
 
-$html .= '<h2>Horario del Docente  '. htmlspecialchars($nombreProfesor) .' </h2>
+$html .= '<h3>AÑO ESCOLAR:'. htmlspecialchars($anoEscolarTexto) .' | PROFESOR: '. htmlspecialchars($nombreProfesor) .' </h3>
+
 <table>
     <thead>
         <tr>
