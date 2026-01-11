@@ -180,117 +180,23 @@ include_once('../v_Sidebar/v_Sidebar.php');
     <div class="card">
       <h1>Gestión de backups</h1>
       <p class="subtitle">
-        Crea una nueva copia de seguridad o restaura una existente de la lista.
+        Crea una nueva copia de seguridad.
       </p>
 
       <div class="actions">
         <button class="btn-primary" id="createBackupBtn">
           ➕ Crear backup
         </button>
-        <button class="btn-secondary" id="refreshBtn">
-          🔄 Refrescar lista
+        <button class="btn-secondary" id="openFolderBtn" type="button">
+          📁 Abrir carpeta
         </button>
-      </div>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Fecha</th>
-            <th>Tamaño</th>
-            <th class="actions-cell">Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="backupsTableBody">
-          <!-- Filas generadas por JavaScript -->
-        </tbody>
-      </table>
-
-      <div class="empty" id="emptyState" style="display:none;">
-        Todavía no hay backups. Crea el primero con el botón superior.
-      </div>
-
-      <div class="status">
-        <span id="lastBackupLabel">Último backup: —</span>
-        <span class="badge" id="countLabel">0 backups</span>
       </div>
     </div>
   </div>
 
   <script>
-    // Lista de backups simulada (AQUÍ integras tu respuesta real de la BD / API)
-    let backups = [
-      {
-        id: "bkp_001",
-        name: "backup-2025-11-10_2300",
-        createdAt: "2025-11-10 23:00",
-        size: "1.2 GB"
-      },
-      {
-        id: "bkp_002",
-        name: "backup-2025-11-12_0800",
-        createdAt: "2025-11-12 08:00",
-        size: "720 MB"
-      }
-    ];
-
-    const tbody = document.getElementById("backupsTableBody");
-    const emptyState = document.getElementById("emptyState");
-    const lastBackupLabel = document.getElementById("lastBackupLabel");
-    const countLabel = document.getElementById("countLabel");
     const createBackupBtn = document.getElementById("createBackupBtn");
-    const refreshBtn = document.getElementById("refreshBtn");
-
-    function renderBackups() {
-      tbody.innerHTML = "";
-
-      if (!backups.length) {
-        emptyState.style.display = "block";
-        countLabel.textContent = "0 backups";
-        lastBackupLabel.textContent = "Último backup: —";
-        return;
-      }
-
-      emptyState.style.display = "none";
-
-      backups.forEach((bkp) => {
-        const tr = document.createElement("tr");
-
-        tr.innerHTML = `
-          <td>${bkp.name}</td>
-          <td>${bkp.createdAt}</td>
-          <td>${bkp.size}</td>
-          <td class="actions-cell">
-            <button class="btn-secondary btn-restore" data-id="${bkp.id}">
-              🔄 Restaurar
-            </button>
-          </td>
-        `;
-
-        tbody.appendChild(tr);
-      });
-
-      const last = backups[0];
-      lastBackupLabel.textContent = "Último backup: " + last.createdAt;
-      countLabel.textContent = backups.length + (backups.length === 1 ? " backup" : " backups");
-    }
-
-    // 👉 Aquí conectas tu lógica real de restauración
-    function restoreBackup(id) {
-      const backup = backups.find((b) => b.id === id);
-      if (!backup) return;
-
-      const yes = confirm(
-        "¿Restaurar el backup '" + backup.name + "'? \nSe sobrescribirá información actual."
-      );
-      if (!yes) return;
-
-      // ✅ Aquí llamas a tu API:
-      // fetch('/api/backups/' + id + '/restore', { method: 'POST' })
-      //   .then(...)
-
-      alert("Simulando restauración de: " + backup.name);
-    }
+    const openFolderBtn = document.getElementById("openFolderBtn");
 
     
     // 👉 Aquí conectas tu lógica real de creación de backups
@@ -324,25 +230,9 @@ include_once('../v_Sidebar/v_Sidebar.php');
     // Eventos
     createBackupBtn.addEventListener("click", createBackup);
 
-    refreshBtn.addEventListener("click", () => {
-      // Aquí puedes volver a consultar tu API y reemplazar el array `backups`.
-      // Ejemplo:
-      // fetch('/api/backups')
-      //   .then(r => r.json())
-      //   .then(data => { backups = data; renderBackups(); });
-
-      alert("Aquí iría la lógica para refrescar desde el servidor.");
+    openFolderBtn.addEventListener("click", () => {
+      window.location.href = "../../Control/c_backup_open_folder.php";
     });
-
-    tbody.addEventListener("click", (e) => {
-      const btn = e.target.closest(".btn-restore");
-      if (!btn) return;
-      const id = btn.dataset.id;
-      restoreBackup(id);
-    });
-
-    // Init
-    renderBackups();
   </script>
 </body>
 
