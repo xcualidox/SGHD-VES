@@ -136,11 +136,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="../v_importdata/importdata.php" title="Importador" target="_blank">
+                    <a href="../v_importdata/importdata.php" title="Importador">
                     <i class="flex justify-center items-center">
                         <img src="../../../images/icons/importdata.svg" class="w-8 filtro-blanco">
                     </i>
                     <span class="nav-item">Importador</span>
+                </a>
+                </li>
+                    <li>
+                    <a href="../manual/v_manual.php" title="Manual Usuario">
+                    <i class="flex justify-center items-center">
+                        <img src="../../../images/icons/manualuser.svg" class="w-8 filtro-blanco">
+                    </i>
+                    <span class="nav-item">Manuales</span>
                 </a>
                 </li>
                 <li>
